@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sales/core/constants/text_styles.dart';
 
 class OtpInputScreen extends StatefulWidget {
   List<TextEditingController> controllers;
@@ -49,7 +50,7 @@ class _OtpInputScreenState extends State<OtpInputScreen> {
                 maxLength: 1,
                 keyboardType: TextInputType.number,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: AppTextStyles.blackBoldText24,
                 decoration: InputDecoration(
                   counterText: '',
                   enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),

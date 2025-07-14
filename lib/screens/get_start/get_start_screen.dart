@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/routes/app_routes_name.dart';
 
 import '../../core/constants/colors.dart';
-import '../../providers/auth_provider/signup_provider.dart';
 
 class GetStartScreen extends StatelessWidget {
   const GetStartScreen({super.key});
@@ -11,7 +10,6 @@ class GetStartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final auth = Provider.of<AuthProvider>(context);
 
     return Scaffold(
       body: Stack(
@@ -32,11 +30,7 @@ class GetStartScreen extends StatelessWidget {
           Positioned(
             top: size.height * 0.3,
             left: size.width * 0.14,
-            child: Text(
-              textAlign: TextAlign.center,
-              'Bridging miles\n with\nmeaning',
-              style: TextStyle(fontSize: 40, color: Colors.white54, fontWeight: FontWeight.w600),
-            ),
+            child: Text(textAlign: TextAlign.center, 'Bridging miles\n with\nmeaning', style: AppTextStyles.white54BoldText40),
           ),
           // White card
           Positioned(

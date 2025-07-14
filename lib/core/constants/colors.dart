@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color primary = Color(0xFFFEEEEEE);
-  static const Color cardclip = Color(0xFFF9a9a9a);
-  static const Color redcolor = Color(0xFFF9e2a2f);
+  static const Color cardClip = Color(0xFFF9a9a9a);
+  static const Color redColor = Color(0xFFF9e2a2f);
   static const Color appBackColor = Colors.black;
   static const Color background = Colors.white;
   static const Color draft = Color(0xFFF9E2A2F);
@@ -14,6 +14,7 @@ class AppColors {
   static Color grey = const Color(0xFF2C2C2C);
   static Color backgroundColor = const Color(0xFFe2dede);
   static Color cardColor = const Color(0xFFefeded);
+  static Color cardmainColor = const Color(0xFFededed);
 }
 
 // class AppColors {

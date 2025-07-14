@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sales/core/constants/colors.dart';
+import 'package:sales/core/constants/spacing.dart';
+import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/core/widgets/terms_and_pravacy.dart';
 import 'package:sales/screens/otp_screen/widgets/otp_widgets.dart';
 
+import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/Custom_message_widget.dart';
-import '../../providers/otp_provider/CountdownProvider.dart';
+import '../../providers/otp_provider/countdown_provider.dart';
 import '../../routes/app_routes_name.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -34,7 +37,6 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final provider = Provider.of<CountdownProvider>(context);
 
     return GestureDetector(
       onTap: () {
@@ -59,10 +61,7 @@ class _OtpScreenState extends State<OtpScreen> {
             Positioned(
               top: size.height * 0.1,
               left: size.width * 0.05,
-              child: Text(
-                'Bridging miles with\nmeaning',
-                style: TextStyle(fontSize: 20, color: Colors.white70, fontWeight: FontWeight.w600),
-              ),
+              child: Text('Bridging miles with\nmeaning', style: AppTextStyles.white70BoldText20),
             ),
             // White card
             Align(
@@ -85,29 +84,26 @@ class _OtpScreenState extends State<OtpScreen> {
                         children: [
                           InkWell(
                             onTap: () {
-                              Navigator.of(context).pushNamed(AppRoutesName.home);
+                              Navigator.of(context).pushNamed(AppRoutesName.signup);
                             },
                             child: Container(
-                              decoration: BoxDecoration(color: AppColors.grey100, borderRadius: BorderRadius.all(Radius.circular(10))),
-                              child: Padding(padding: const EdgeInsets.all(15.0), child: Icon(Icons.arrow_back, size: 20)),
+                              decoration: BoxDecoration(color: AppColors.grey100, borderRadius: BorderRadius.all(Radius.circular(20))),
+                              child: Padding(padding: AppSpacing.allPadding16, child: Icon(Icons.arrow_back, size: 20)),
                             ),
                           ),
 
-                          Text('Enter your OTP here', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                          Text('Enter your OTP here', style: AppTextStyles.title16),
                           SizedBox(width: 6),
                         ],
                       ),
                       SizedBox(height: size.height * 0.025),
-                      Text('An OTP has been sent to +91 8521589658', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
+                      Text('An OTP has been sent to +91 8521589658', style: AppTextStyles.title16),
                       SizedBox(height: size.height * 0.025),
                       InkWell(
                         onTap: () {
                           Navigator.of(context).pushNamed(AppRoutesName.mobileNumberChangeScreen);
                         },
-                        child: Text(
-                          'Change Mobile number',
-                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.redcolor),
-                        ),
+                        child: Text('Change Mobile number', style: AppTextStyles.redBoldText14),
                       ),
 
                       SizedBox(height: size.height * 0.025),
@@ -115,29 +111,21 @@ class _OtpScreenState extends State<OtpScreen> {
                       OtpInputScreen(controllers: controllers),
                       SizedBox(height: size.height * 0.025),
                       // OTP Button
-                      Center(
-                        child: SizedBox(
-                          width: size.width * 0.45,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              String otp = controllers.map((controller) => controller.text).join();
-                              if (otp.length == 4) {
-                                Navigator.of(context).pushNamed(AppRoutesName.home);
-                                CustomSnackbar.show(context, message: "success", type: MessageType.success);
-                                print(otp);
-                              } else {
-                                CustomSnackbar.show(context, message: "Please Inter OTP", type: MessageType.error);
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.redcolor,
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-                            ),
-                            child: const Text('Submit'),
-                          ),
-                        ),
+                      CustomButton(
+                        colors: AppColors.redColor,
+                        text: 'Submit',
+                        onPressed: () {
+                          String otp = controllers.map((controller) => controller.text).join();
+                          if (otp.length == 4) {
+                            Navigator.of(context).pushNamed(AppRoutesName.home);
+                            CustomSnackbar.show(context, message: "success", type: MessageType.success);
+                            print(otp);
+                          } else {
+                            CustomSnackbar.show(context, message: "Please Inter OTP", type: MessageType.error);
+                          }
+                        },
                       ),
+
                       SizedBox(height: size.height * 0.025),
                       Row(
                         children: [
@@ -146,17 +134,18 @@ class _OtpScreenState extends State<OtpScreen> {
                           Expanded(child: Divider(color: Colors.grey)),
                         ],
                       ),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Resend OTP ",
-                              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: AppColors.redcolor),
+                      Consumer<CountdownProvider>(
+                        builder: (context, provider, child) {
+                          return Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text("Resend OTP ", style: AppTextStyles.appRedBoldText13),
+                                Text("in ${provider.remainingTime}s", style: AppTextStyles.blackBoldText13),
+                              ],
                             ),
-                            Text("in ${provider.remainingTime}s", style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-                          ],
-                        ),
+                          );
+                        },
                       ),
                       SizedBox(height: size.height * 0.025),
                       // Google Sign-in
@@ -164,7 +153,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         child: OutlinedButton.icon(
                           onPressed: () {},
                           icon: Icon(Icons.add),
-                          label: Padding(padding: const EdgeInsets.all(8.0), child: Image.asset("assets/images/googleSign.png")),
+                          label: Padding(padding: AppSpacing.allPadding8, child: Image.asset("assets/images/googleSign.png")),
                           style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14)),
                         ),
                       ),

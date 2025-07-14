@@ -3,6 +3,7 @@ import 'package:chat_bubbles/bubbles/bubble_special_one.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sales/core/constants/text_styles.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 import '../../../providers/support_provider/support_provider.dart';
@@ -25,12 +26,7 @@ class SupportContent extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     itemCount: messages.length,
                     itemBuilder: (context, index) {
-                      return BubbleSpecialOne(
-                        text: messages[index],
-                        isSender: true,
-                        color: Colors.grey.shade200,
-                        textStyle: const TextStyle(fontSize: 20, color: Colors.black87),
-                      );
+                      return BubbleSpecialOne(text: messages[index], isSender: true, color: Colors.grey.shade200, textStyle: AppTextStyles.black87Text20);
                     },
                   ),
           ),
@@ -52,9 +48,9 @@ class _PlaceholderWidget extends StatelessWidget {
         children: const [
           Icon(Icons.favorite, size: 80, color: Colors.blue),
           SizedBox(height: 16),
-          Text("Need a hand?", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+          Text("Need a hand?", style: AppTextStyles.title),
           SizedBox(height: 4),
-          Text("We're just a message away", style: TextStyle(color: Colors.grey)),
+          Text("We're just a message away", style: AppTextStyles.greyText),
         ],
       ),
     );
@@ -183,11 +179,11 @@ Widget buildBubble({required String message, required String time, required bool
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(message, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+              Text(message, style: AppTextStyles.blackBoldText13),
               const SizedBox(height: 4),
               Align(
                 alignment: Alignment.bottomRight,
-                child: Text(time, style: const TextStyle(fontSize: 10, color: Colors.grey)),
+                child: Text(time, style: AppTextStyles.greyText),
               ),
             ],
           ),

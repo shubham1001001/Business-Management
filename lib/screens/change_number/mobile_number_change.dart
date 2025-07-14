@@ -1,10 +1,14 @@
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sales/core/constants/text_styles.dart';
 
 import '../../core/constants/colors.dart';
+import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/Custom_message_widget.dart';
 import '../../core/widgets/app_header.dart';
+import '../../core/widgets/custom_input_field.dart';
+import '../../core/widgets/dropdown_widgets.dart';
+import '../../core/widgets/shimmer_widget_dropdown.dart';
 import '../../providers/auth_provider/number_change_provider/change_number_provider.dart';
 import '../../routes/app_routes_name.dart';
 
@@ -14,14 +18,16 @@ class MobileNumberChange extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final auth = Provider.of<ChangeNumberProvider>(context);
-
+    final auth = Provider.of<ChangeNumberProvider>(context, listen: false);
+    if (auth.countries.isEmpty) {
+      Future.microtask(() => auth.fetchCountries());
+    }
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: AppHeader(title: 'Change Number', endicon: false),
+        appBar: AppHeader(title: 'Change Number', endicon: false, backbutton: true),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -55,87 +61,115 @@ class MobileNumberChange extends StatelessWidget {
                   children: [
                     Text("Enter your phone number", style: TextStyle(fontSize: 18)),
                     SizedBox(height: size.height * 0.02),
-                    Text("+911234567890 is Your existing mobile number", style: TextStyle(color: AppColors.greyText, fontSize: 16)),
+                    Text("+911234567890 is Your existing mobile number", style: AppTextStyles.greyText17),
                   ],
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                  ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8)),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CountryCodePicker(
-                                closeIcon: Icon(Icons.clear),
-                                onChanged: (value) {
-                                  auth.updateCountryCode(value.code ?? '+91');
-                                },
-                                // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                                initialSelection: '+91',
-                                favorite: ['+91', 'bharat'],
-                                // optional. Shows only country name and flag
-                                showCountryOnly: false,
-                                // optional. Shows only country name and flag when popup is closed.
-                                showOnlyCountryWhenClosed: false,
-                                // optional. aligns the flag and the Text left
-                                alignLeft: false,
-                              ),
-                              Icon(Icons.arrow_drop_down),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: size.height * 0.025),
-                        // Mobile Input
-                        TextField(
-                          keyboardType: TextInputType.phone,
-                          onChanged: auth.updatePhone,
-                          decoration: InputDecoration(
-                            prefixText: '${auth.countryCode} ',
-                            hintText: 'Mobile number',
-                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                          ),
-                        ),
-                        SizedBox(height: size.height * 0.025),
-                        // OTP Button
-                        Center(
-                          child: SizedBox(
-                            width: size.width * 0.45,
-                            child: ElevatedButton(
+              Consumer<ChangeNumberProvider>(
+                builder: (context, provider, child) {
+                  return Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                      ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Flexible(
+                                  child: Consumer<ChangeNumberProvider>(
+                                    builder: (context, auth, _) {
+                                      final countries = auth.countries;
+                                      if (countries.isEmpty) {
+                                        return ShimmerDropdownPlaceholder(width: size.width, height: size.height);
+                                        ;
+                                      }
+                                      return CountryDropdown(
+                                        value: auth.countryCode,
+                                        countries: countries,
+                                        height: size.height,
+                                        width: size.width,
+                                        onChanged: (value) {
+                                          if (value != null) {
+                                            auth.updateCountryCode(value);
+                                          }
+                                        },
+                                      );
+                                    },
+                                  ),
+
+                                  // Consumer<ChangeNumberProvider>(
+                                  //   builder: (context, auth, _) {
+                                  //     final countries = auth.countries;
+                                  //     if (countries.isEmpty) {
+                                  //       return const Center(child: CircularProgressIndicator());
+                                  //     }
+                                  //
+                                  //     return CountryDropdown(
+                                  //       value: auth.countryCode,
+                                  //       countries: countries,
+                                  //       height: size.height,
+                                  //       width: size.width,
+                                  //       onChanged: (value) {
+                                  //         if (value != null) {
+                                  //           auth.updateCountryCode(value);
+                                  //         }
+                                  //       },
+                                  //     );
+                                  //   },
+                                  // ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: size.height * 0.025),
+                            // Mobile Input
+                            CustomInputField(
+                              isEditable: true,
+                              keyboardType: TextInputType.phone,
+                              hintText: 'Mobile number',
+                              prefixText: provider.countryCode,
+                              isRequired: true, //
+                              errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number',
+                              onChanged: provider.updatePhone,
+                            ),
+                            // TextField(
+                            //   keyboardType: TextInputType.phone,
+                            //   onChanged: provider.updatePhone,
+                            //   decoration: InputDecoration(
+                            //     prefixText: '${provider.countryCode} ',
+                            //     hintText: 'Mobile number',
+                            //     errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number',
+                            //     enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                            //     border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                            //   ),
+                            // ),
+                            SizedBox(height: size.height * 0.025),
+                            // OTP Button
+                            CustomButton(
+                              colors: AppColors.redColor,
+                              text: 'Get OTP',
                               onPressed: () {
-                                if (auth.phone.length >= 10) {
-                                  print("${{auth.countryCode}}$auth.phone");
-                                  Navigator.of(context).pushNamed(AppRoutesName.changeNumberOtpscreen, arguments: auth.phone);
+                                if (provider.phone.length >= 10) {
+                                  Navigator.of(context).pushNamed(AppRoutesName.changeNumberOtpscreen, arguments: provider.phone);
                                   CustomSnackbar.show(context, message: "Sent OTP", type: MessageType.success);
                                 } else {
                                   CustomSnackbar.show(context, message: "Please Inter Mobile Number", type: MessageType.error);
                                 }
                               },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.redcolor,
-                                padding: const EdgeInsets.symmetric(vertical: 16),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-                              ),
-                              child: const Text('Get OTP'),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             ],
           ),

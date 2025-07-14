@@ -9,4 +9,15 @@ class AppRoutesName {
   static const String changeNumberOtpscreen = '/changeNumberOtp';
   static const String emaiChangeScreen = '/emaiChangeScreen';
   static const String emailChangeScreenOtp = '/emailChangeScreenOtp';
+  static const String ProfileInformations = '/profileInformations';
+  static const String subscriptionPlanScreen = '/subscriptionPlanScreen';
+  static const String venderDetailScreen = '/venderDetailScreen';
+  static const String tripSummaryScreen = '/tripSummaryScreen';
+  static const String purchaseBillOverviewScreen = '/purchaseBillOverviewScreen';
+  static const String addStaffScreen = '/addStaffScreen';
+  static const String vehicleOverviewScreen = '/vehicleOverviewScreen';
+  static const String venderListScreen = '/venderListScreen';
+  static const String itemListScreen = '/itemListScreen';
+  static const String addItemScreen = '/addItemScreen';
+  static const String accountSummaryScreen = '/accountSummaryScreen';
 }

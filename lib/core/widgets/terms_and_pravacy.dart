@@ -13,12 +13,12 @@ class TermsAndPravacy extends StatelessWidget {
           children: [
             TextSpan(
               text: 'Terms and condition',
-              style: TextStyle(color: AppColors.redcolor, decoration: TextDecoration.underline),
+              style: TextStyle(color: AppColors.redColor, decoration: TextDecoration.underline),
             ),
             TextSpan(text: '   |   '),
             TextSpan(
               text: 'Privacy policy',
-              style: TextStyle(color: AppColors.redcolor, decoration: TextDecoration.underline),
+              style: TextStyle(color: AppColors.redColor, decoration: TextDecoration.underline),
             ),
           ],
         ),
