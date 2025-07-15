@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sales/screens/otp_screen/otp_screen.dart';
 
+import '../screens/account_details/account_details_screen.dart';
+import '../screens/account_overview/account_overview_screen.dart';
 import '../screens/account_summary/account_summary_screen.dart';
 import '../screens/add_staf/add_staf_screen.dart';
 import '../screens/change_number/change_number_otp.dart';
@@ -51,6 +53,10 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => VenderListScreen());
       case AppRoutesName.accountSummaryScreen:
         return MaterialPageRoute(builder: (_) => AccountSummaryScreen());
+      case AppRoutesName.accountOverviewScreen:
+        return MaterialPageRoute(builder: (_) => AccountOverviewScreen());
+      case AppRoutesName.accountDetailsScreen:
+        return MaterialPageRoute(builder: (_) => AccountDetailsScreen());
       default:
         return MaterialPageRoute(builder: (_) => NavigationWrapper());
     }

@@ -117,7 +117,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         onPressed: () {
                           String otp = controllers.map((controller) => controller.text).join();
                           if (otp.length == 4) {
-                            Navigator.of(context).pushNamed(AppRoutesName.home);
+                            Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesName.home, (route) => false);
                             CustomSnackbar.show(context, message: "success", type: MessageType.success);
                             print(otp);
                           } else {

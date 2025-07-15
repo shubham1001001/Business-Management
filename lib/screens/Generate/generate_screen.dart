@@ -52,7 +52,7 @@ class GenerateBottomSheet extends StatelessWidget {
               itemBuilder: (context, pageIndex) {
                 final pageItems = pages[pageIndex];
                 int crossAxisCount = 5;
-                double childAspectRatio = 0.7;
+                double childAspectRatio = 0.9;
 
                 if (screenWidth >= 600 && screenWidth < 900) {
                   // Tablet (portrait)
@@ -63,39 +63,37 @@ class GenerateBottomSheet extends StatelessWidget {
                   crossAxisCount = 5;
                   childAspectRatio = 1.6;
                 }
-                return Flexible(
-                  child: GridView.count(
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 5,
-                    childAspectRatio: childAspectRatio, //isLandscape ? 1.5 : 0.7,
-                    crossAxisCount: crossAxisCount,
-                    physics: NeverScrollableScrollPhysics(),
-                    children: pageItems.map((item) {
-                      return GestureDetector(
-                        onTap: () {
-                          // context.read<GenerateProvider>().select(item['label'].toString(), context);
+                return GridView.count(
+                  mainAxisSpacing: 15,
+                  crossAxisSpacing: 5,
+                  childAspectRatio: childAspectRatio, //isLandscape ? 1.5 : 0.7,
+                  crossAxisCount: crossAxisCount,
+                  physics: NeverScrollableScrollPhysics(),
+                  children: pageItems.map((item) {
+                    return GestureDetector(
+                      onTap: () {
+                        // context.read<GenerateProvider>().select(item['label'].toString(), context);
 
-                          if (item['label'].toString() == 'Vendor') {
-                            Navigator.pop(context);
-                            Navigator.of(context).pushNamed(AppRoutesName.venderListScreen);
-                          }
-                          if (item['label'].toString() == 'Staff') {
-                            Navigator.pop(context);
-                            Navigator.of(context).pushNamed(AppRoutesName.addStaffScreen);
-                          }
-                          if (item['label'].toString() == 'Vehicle') {
-                            // Navigator.pop(context);
-                            Navigator.of(context).pushNamed(AppRoutesName.vehicleOverviewScreen);
-                          }
-                          if (item['label'].toString() == 'Account') {
-                            // Navigator.pop(context);
-                            Navigator.of(context).pushNamed(AppRoutesName.accountSummaryScreen);
-                          }
-                        },
-                        child: GenerateCart(icon: item['icon'].toString(), label: item['label'].toString()),
-                      );
-                    }).toList(),
-                  ),
+                        if (item['label'].toString() == 'Vendor') {
+                          Navigator.pop(context);
+                          Navigator.of(context).pushNamed(AppRoutesName.venderListScreen);
+                        }
+                        if (item['label'].toString() == 'Staff') {
+                          Navigator.pop(context);
+                          Navigator.of(context).pushNamed(AppRoutesName.addStaffScreen);
+                        }
+                        if (item['label'].toString() == 'Vehicle') {
+                          // Navigator.pop(context);
+                          Navigator.of(context).pushNamed(AppRoutesName.vehicleOverviewScreen);
+                        }
+                        if (item['label'].toString() == 'Account') {
+                          // Navigator.pop(context);
+                          Navigator.of(context).pushNamed(AppRoutesName.accountSummaryScreen);
+                        }
+                      },
+                      child: GenerateCart(icon: item['icon'].toString(), label: item['label'].toString()),
+                    );
+                  }).toList(),
                 );
               },
             ),

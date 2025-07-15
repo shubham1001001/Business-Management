@@ -76,7 +76,7 @@ class AddItemScreen extends StatelessWidget {
                         isEditable: false,
                         keyboardType: TextInputType.number,
                         hintText: provider.itemName,
-                        prefixText: 'INR - display view only no input',
+                        prefixText: '',
                         isRequired: true,
                         errorText: null,
                         onChanged: provider.updatePrice,

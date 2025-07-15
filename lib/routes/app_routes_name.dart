@@ -20,4 +20,6 @@ class AppRoutesName {
   static const String itemListScreen = '/itemListScreen';
   static const String addItemScreen = '/addItemScreen';
   static const String accountSummaryScreen = '/accountSummaryScreen';
+  static const String accountOverviewScreen = '/accountOverviewScreen';
+  static const String accountDetailsScreen = '/accountDetailsScreen';
 }

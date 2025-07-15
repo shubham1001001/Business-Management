@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sales/core/constants/text_styles.dart';
+import 'package:sales/routes/app_routes_name.dart';
 
 import '../../core/constants/colors.dart';
 import '../../models/account_summry_model.dart';
@@ -39,11 +40,11 @@ class AccountSummaryScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [Icon(Icons.open_in_new, color: AppColors.redColor)],
                     ),
-                    _buildSection('Assets', provider.assets, isMobile, "Debit", "Credit", size.height, size.width),
+                    _buildSection('Assets', provider.assets, isMobile, "Debit", "Credit", size.height, size.width, context),
                     const SizedBox(height: 16),
-                    _buildSection('Liabilities', provider.liabilities, isMobile, '', '', size.height, size.width),
+                    _buildSection('Liabilities', provider.liabilities, isMobile, '', '', size.height, size.width, context),
                     const SizedBox(height: 16),
-                    _buildSection('Income', provider.income, isMobile, '', '', size.height, size.width),
+                    _buildSection('Income', provider.income, isMobile, '', '', size.height, size.width, context),
                     SizedBox(height: size.height * 0.04),
                   ],
                 ),
@@ -55,7 +56,7 @@ class AccountSummaryScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSection(String title, List<AccountSummaryItem> items, bool isMobile, Debit, Credit, size, width) {
+  Widget _buildSection(String title, List<AccountSummaryItem> items, bool isMobile, Debit, Credit, size, width, context) {
     double totalDebit = items.fold(0, (sum, item) => sum + item.debit);
     double totalCredit = items.fold(0, (sum, item) => sum + item.credit);
 
@@ -99,22 +100,27 @@ class AccountSummaryScreen extends StatelessWidget {
             ],
           ),
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Padding(
-                padding: EdgeInsets.only(top: size * 0.07),
-                child: Container(
-                  height: 30, //size * 0.05,
-                  width: 30, //width * 0.06,
-                  decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(17)),
-                  child: Icon(Icons.arrow_forward_ios_rounded, size: 15), //size * 0.02
+        InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, AppRoutesName.accountOverviewScreen);
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.only(top: size * 0.07),
+                  child: Container(
+                    height: 30, //size * 0.05,
+                    width: 30, //width * 0.06,
+                    decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(17)),
+                    child: Icon(Icons.arrow_forward_ios_rounded, size: 15), //size * 0.02
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );
