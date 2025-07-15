@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sales/providers/account_details_provider.dart';
-import 'package:sales/providers/account_overview/account_overview_provider.dart';
 import 'package:sales/providers/account_summary_provider/account_summary_provider.dart';
 import 'package:sales/providers/add_item_provider/add_item_proivder.dart';
 import 'package:sales/providers/add_staf/add_staf_provider.dart';
@@ -56,8 +54,6 @@ void main() {
         ChangeNotifierProvider(create: (_) => ItemListProvider()),
         ChangeNotifierProvider(create: (_) => AddItemProvider()),
         ChangeNotifierProvider(create: (_) => AccountSummaryProvider()),
-        ChangeNotifierProvider(create: (_) => AccountOverviewProvider()),
-        ChangeNotifierProvider(create: (_) => AccountDetailsProvider()),
       ],
       child: const MyApp(),
     ),
@@ -77,7 +73,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppColors.accent, primary: AppColors.primary),
         appBarTheme: const AppBarTheme(backgroundColor: AppColors.primary, foregroundColor: AppColors.appBackColor),
       ),
-      initialRoute: AppRoutesName.home,
+      initialRoute: AppRoutesName.getStart,
       onGenerateRoute: AppRoutes.generateRoute,
     );
   }
