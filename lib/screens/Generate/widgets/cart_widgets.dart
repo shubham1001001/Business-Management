@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
 import '../../../core/constants/colors.dart';
-import '../../../core/constants/spacing.dart';
 
 class GenerateCart extends StatelessWidget {
   final String icon;
@@ -25,10 +24,10 @@ class GenerateCart extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.cardColor,
             borderRadius: BorderRadius.circular(8),
-            boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
+            boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 0))],
           ),
           child: Padding(
-            padding: AppSpacing.allPadding8,
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -39,7 +38,7 @@ class GenerateCart extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: screen.height * 0.01),
+        // SizedBox(height: screen.height * 0.002),
         Text(label, textAlign: TextAlign.center, style: AppTextStyles.textSize11),
       ],
     );

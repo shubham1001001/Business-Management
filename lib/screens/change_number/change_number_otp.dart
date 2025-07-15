@@ -111,7 +111,7 @@ class _OtpScreenState extends State<ChangeNumberOtp> {
                         onPressed: () {
                           String otp = controllers.map((controller) => controller.text).join();
                           if (otp.length == 4) {
-                            Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesName.home, (route) => false);
+                            Navigator.of(context).pushNamed(AppRoutesName.home);
                             CustomSnackbar.show(context, message: "success", type: MessageType.success);
                             print(otp);
                           } else {
