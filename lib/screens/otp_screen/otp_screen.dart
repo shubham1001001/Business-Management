@@ -87,17 +87,17 @@ class _OtpScreenState extends State<OtpScreen> {
                               Navigator.of(context).pushNamed(AppRoutesName.signup);
                             },
                             child: Container(
-                              decoration: BoxDecoration(color: AppColors.grey100, borderRadius: BorderRadius.all(Radius.circular(20))),
+                              decoration: BoxDecoration(color: AppColors.grey100, borderRadius: BorderRadius.all(AppSpacing.rRadius20)),
                               child: Padding(padding: AppSpacing.allPadding16, child: Icon(Icons.arrow_back, size: 20)),
                             ),
                           ),
 
-                          Text('Enter your OTP here', style: AppTextStyles.title16),
-                          SizedBox(width: 6),
+                          Text('Enter your OTP here', style: AppTextStyles.title),
+                          AppSpacing.extraSmallHeight,
                         ],
                       ),
                       SizedBox(height: size.height * 0.025),
-                      Text('An OTP has been sent to +91 8521589658', style: AppTextStyles.title16),
+                      Text('An OTP has been sent to +91 8521589658', style: AppTextStyles.blackBoldText15),
                       SizedBox(height: size.height * 0.025),
                       InkWell(
                         onTap: () {

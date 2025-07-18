@@ -5,6 +5,11 @@ import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/routes/app_routes_name.dart';
 import 'package:shimmer/shimmer.dart';
 
+<<<<<<< Updated upstream
+=======
+import '../../core/constants/spacing.dart';
+import '../../core/widgets/text_scale_widgets.dart';
+>>>>>>> Stashed changes
 import '../../providers/account_overview/account_overview_provider.dart';
 
 class AccountOverviewScreen extends StatefulWidget {
@@ -24,6 +29,11 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+<<<<<<< Updated upstream
+=======
+    final screenWidth = size.width;
+    final bool isSmallScreen = screenWidth < 360;
+>>>>>>> Stashed changes
 
     return Scaffold(
       appBar: AppBar(
@@ -34,6 +44,7 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
       body: Consumer<AccountOverviewProvider>(
         builder: (context, provider, _) {
           return Padding(
+<<<<<<< Updated upstream
             padding: EdgeInsets.all(size.width * 0.04),
             child: CustomScrollView(
               slivers: [
@@ -50,6 +61,45 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                 const SliverToBoxAdapter(child: SizedBox(height: 10)),
 
                 // Shimmer or List
+=======
+            padding: EdgeInsets.all(screenWidth * 0.04),
+            child: CustomScrollView(
+              slivers: [
+                // Table Header
+                SliverToBoxAdapter(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: Text(
+                          "Assets",
+                          style: AppTextStyles.backBoldText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          "Debit",
+                          style: AppTextStyles.backBoldText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          "Credit",
+                          style: AppTextStyles.backBoldText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SliverToBoxAdapter(child: AppSpacing.smallHeight10),
+
+                // Loading Shimmer or Content
+>>>>>>> Stashed changes
                 if (provider.isLoading)
                   SliverList(delegate: SliverChildBuilderDelegate((_, index) => Column(children: List.generate(4, (_) => _shimmerRow())), childCount: 3))
                 else
@@ -65,12 +115,29 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                         children: [
                           Row(
                             children: [
+<<<<<<< Updated upstream
                               Expanded(flex: 4, child: Text(category, style: AppTextStyles.titleListTile)),
                               Expanded(flex: 2, child: Text(debitTotal.toStringAsFixed(0))),
                               const Expanded(flex: 2, child: Text("00.00")),
                             ],
                           ),
                           const SizedBox(height: 5),
+=======
+                              Expanded(
+                                flex: 4,
+                                child: Text(
+                                  category,
+                                  style: AppTextStyles.titleListTile.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
+                              ),
+                              Expanded(flex: 2, child: Text(debitTotal.toStringAsFixed(0), overflow: TextOverflow.ellipsis, maxLines: 1)),
+                              const Expanded(flex: 2, child: Text("00.00", overflow: TextOverflow.ellipsis, maxLines: 1)),
+                            ],
+                          ),
+                          AppSpacing.extraSmallHeight,
+>>>>>>> Stashed changes
                           ...items.map(
                             (item) => Padding(
                               padding: const EdgeInsets.symmetric(vertical: 10),
@@ -80,22 +147,61 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                                 },
                                 child: Row(
                                   children: [
+<<<<<<< Updated upstream
                                     Expanded(flex: 4, child: Text(item.name, style: AppTextStyles.blueText)),
                                     Expanded(flex: 2, child: Text(item.debit.toStringAsFixed(0), style: AppTextStyles.appRedText)),
                                     Expanded(flex: 2, child: Text(item.credit.toStringAsFixed(2), style: AppTextStyles.appRedText)),
+=======
+                                    Expanded(
+                                      flex: 4,
+                                      child: Text(
+                                        item.name,
+                                        style: AppTextStyles.blueText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                        item.debit.toStringAsFixed(0),
+                                        style: AppTextStyles.appRedText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                        item.credit.toStringAsFixed(2),
+                                        style: AppTextStyles.appRedText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                      ),
+                                    ),
+>>>>>>> Stashed changes
                                   ],
                                 ),
                               ),
                             ),
                           ),
+<<<<<<< Updated upstream
                           const SizedBox(height: 10),
+=======
+                          AppSpacing.smallHeight10,
+>>>>>>> Stashed changes
                         ],
                       );
                     }, childCount: provider.categorizedData.length),
                   ),
 
+<<<<<<< Updated upstream
                 // Divider under totals
                 const SliverToBoxAdapter(child: SizedBox(height: 8)),
+=======
+                // Divider
+                const SliverToBoxAdapter(child: AppSpacing.mediumWidth),
+>>>>>>> Stashed changes
                 if (!provider.isLoading)
                   SliverToBoxAdapter(
                     child: Row(
@@ -105,13 +211,20 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                       ],
                     ),
                   ),
+<<<<<<< Updated upstream
                 const SliverToBoxAdapter(child: SizedBox(height: 4)),
 
                 // Total row
+=======
+                SliverToBoxAdapter(child: AppSpacing.extraSmallWidth),
+
+                // Totals
+>>>>>>> Stashed changes
                 if (!provider.isLoading)
                   SliverToBoxAdapter(
                     child: Row(
                       children: [
+<<<<<<< Updated upstream
                         const Expanded(flex: 4, child: Text("Total", style: AppTextStyles.backBoldText)),
                         Expanded(flex: 2, child: Text(provider.totalDebit.toStringAsFixed(0), style: AppTextStyles.backBoldText)),
                         Expanded(flex: 2, child: Text(provider.totalCredit.toStringAsFixed(2), style: AppTextStyles.backBoldText)),
@@ -119,6 +232,29 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                     ),
                   ),
                 const SliverToBoxAdapter(child: SizedBox(height: 20)),
+=======
+                        Expanded(
+                          flex: 4,
+                          child: Text(
+                            "Total",
+                            style: AppTextStyles.backBoldText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Text(provider.totalDebit.toStringAsFixed(0), style: AppTextStyles.backBoldText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60))),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Text(provider.totalCredit.toStringAsFixed(2), style: AppTextStyles.backBoldText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60))),
+                        ),
+                      ],
+                    ),
+                  ),
+                SliverToBoxAdapter(child: AppSpacing.mediumHeight),
+>>>>>>> Stashed changes
               ],
             ),
           );
@@ -136,9 +272,15 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
         child: Row(
           children: [
             Expanded(flex: 4, child: Container(height: 14, color: Colors.white)),
+<<<<<<< Updated upstream
             const SizedBox(width: 8),
             Expanded(flex: 2, child: Container(height: 14, color: Colors.white)),
             const SizedBox(width: 8),
+=======
+            AppSpacing.mediumWidth,
+            Expanded(flex: 2, child: Container(height: 14, color: Colors.white)),
+            AppSpacing.mediumWidth,
+>>>>>>> Stashed changes
             Expanded(flex: 2, child: Container(height: 14, color: Colors.white)),
           ],
         ),

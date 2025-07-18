@@ -20,6 +20,16 @@ class AppRoutesName {
   static const String itemListScreen = '/itemListScreen';
   static const String addItemScreen = '/addItemScreen';
   static const String accountSummaryScreen = '/accountSummaryScreen';
+<<<<<<< Updated upstream
   static const String accountOverviewScreen = '/accountOverviewScreen';
   static const String accountDetailsScreen = '/accountDetailsScreen';
+=======
+  static const String addAccountScreen = '/addAccountScreen';
+  static const String itemCreateScreen = '/itemcCeateScreen';
+  static const String pricingPreferenceScreen = '/pricingPreferenceScreen';
+  static const String accountOverviewScreen = '/accountOverviewScreen';
+  static const String accountDetailsScreen = '/accountDetailsScreen';
+  static const String addVehicleScreen = '/AddVehicleScreen';
+  static const String vendorTimelineScreen = '/vendorTimelineScreen';
+>>>>>>> Stashed changes
 }

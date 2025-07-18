@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
+import 'package:sales/routes/app_routes_name.dart';
 import 'package:sales/screens/vehicle_overview/vehicle_card_widgets.dart';
 
 import '../../providers/vehicle_overview_provider.dart';
@@ -20,9 +21,9 @@ class VehicleOverviewScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, AppRoutesName.addVehicleScreen);
             },
-            child: const Text('Add Vehicle', style: AppTextStyles.appBarRedText),
+            child: const Text('Add Vehicle', style: AppTextStyles.appRedText18),
           ),
         ],
       ),

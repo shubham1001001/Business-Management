@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+<<<<<<< Updated upstream
 import 'package:sales/providers/account_details_provider.dart';
+=======
+import 'package:sales/providers/account_details/account_details_provider.dart';
+>>>>>>> Stashed changes
 import 'package:sales/providers/account_overview/account_overview_provider.dart';
 import 'package:sales/providers/account_summary_provider/account_summary_provider.dart';
+import 'package:sales/providers/add_account/add_account_provider.dart';
 import 'package:sales/providers/add_item_provider/add_item_proivder.dart';
 import 'package:sales/providers/add_staf/add_staf_provider.dart';
+import 'package:sales/providers/add_vehicle/add_vehicle_provider.dart';
 import 'package:sales/providers/auth_provider/email_provider/email_provider.dart';
 import 'package:sales/providers/auth_provider/number_change_provider/change_number_provider.dart';
 import 'package:sales/providers/auth_provider/signup_provider.dart';
 import 'package:sales/providers/generate_provider/generate_provider.dart';
 import 'package:sales/providers/home_provider/home_provider.dart';
 import 'package:sales/providers/home_provider/home_tab_provider.dart';
+import 'package:sales/providers/item_create/item_create_provider.dart';
 import 'package:sales/providers/item_list_provider/item_list_provider.dart';
 import 'package:sales/providers/nav_provider.dart';
 import 'package:sales/providers/otp_provider/countdown_provider.dart';
+import 'package:sales/providers/pricing_preference/pricing_preference_provider.dart';
 import 'package:sales/providers/profile_information_provider/profile_information_provider.dart';
 import 'package:sales/providers/purchase_bill_overview/purchase_bill_overview_provider.dart';
 import 'package:sales/providers/record_provider.dart';
@@ -23,6 +31,7 @@ import 'package:sales/providers/tab_provider/tab_provider.dart';
 import 'package:sales/providers/trip_provider/trip_provider.dart';
 import 'package:sales/providers/vehicle_overview_provider.dart';
 import 'package:sales/providers/vender_list_provider/vender_list_provider.dart';
+import 'package:sales/providers/vendor_comment_timeline/vendor_comment_timeline_provider.dart';
 import 'package:sales/routes/app_routes_name.dart';
 
 import 'core/constants/colors.dart';
@@ -56,8 +65,18 @@ void main() {
         ChangeNotifierProvider(create: (_) => ItemListProvider()),
         ChangeNotifierProvider(create: (_) => AddItemProvider()),
         ChangeNotifierProvider(create: (_) => AccountSummaryProvider()),
+<<<<<<< Updated upstream
         ChangeNotifierProvider(create: (_) => AccountOverviewProvider()),
         ChangeNotifierProvider(create: (_) => AccountDetailsProvider()),
+=======
+        ChangeNotifierProvider(create: (_) => AddAccountProvider()),
+        ChangeNotifierProvider(create: (_) => AccountOverviewProvider()),
+        ChangeNotifierProvider(create: (_) => AccountDetailsProvider()),
+        ChangeNotifierProvider(create: (_) => ItemCreateProvider()),
+        ChangeNotifierProvider(create: (_) => PricingPreferenceProvider()),
+        ChangeNotifierProvider(create: (_) => AddVehicleProvider()),
+        ChangeNotifierProvider(create: (_) => VendorCommentTimelineProvider()),
+>>>>>>> Stashed changes
       ],
       child: const MyApp(),
     ),

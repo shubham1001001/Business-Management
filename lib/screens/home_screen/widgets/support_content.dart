@@ -3,9 +3,11 @@ import 'package:chat_bubbles/bubbles/bubble_special_one.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sales/core/constants/colors.dart';
 import 'package:sales/core/constants/text_styles.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
+import '../../../core/constants/spacing.dart';
 import '../../../providers/support_provider/support_provider.dart';
 
 class SupportContent extends StatelessWidget {
@@ -23,7 +25,7 @@ class SupportContent extends StatelessWidget {
             child: messages.isEmpty
                 ? const _PlaceholderWidget()
                 : ListView.builder(
-                    padding: const EdgeInsets.all(16),
+                    padding: AppSpacing.allPadding16,
                     itemCount: messages.length,
                     itemBuilder: (context, index) {
                       return BubbleSpecialOne(text: messages[index], isSender: true, color: Colors.grey.shade200, textStyle: AppTextStyles.black87Text20);
@@ -45,11 +47,11 @@ class _PlaceholderWidget extends StatelessWidget {
     return SizedBox.expand(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Icon(Icons.favorite, size: 80, color: Colors.blue),
-          SizedBox(height: 16),
+        children: [
+          Image.asset("assets/icons/heart_icon.png"),
+          AppSpacing.mediumHeight16,
           Text("Need a hand?", style: AppTextStyles.title),
-          SizedBox(height: 4),
+          AppSpacing.extraSmallHeight,
           Text("We're just a message away", style: AppTextStyles.greyText),
         ],
       ),
@@ -120,41 +122,53 @@ class _ChatInputFieldState extends State<_ChatInputField> {
       child: Row(
         children: [
           Expanded(
-            child: TextField(
-              controller: _controller,
-              onSubmitted: (_) => _sendMessage(context),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                hintText: "Type to chat",
-                filled: true,
-                fillColor: Colors.grey.shade100,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide.none),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: AppSpacing.kSmallRadius,
+                border: Border.all(color: Colors.grey.shade400),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _controller,
+                      onSubmitted: (_) => _sendMessage(context),
+                      decoration: InputDecoration(
+                        hintStyle: AppTextStyles.greyText,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        hintText: "Type to chat",
+                        border: OutlineInputBorder(borderSide: BorderSide.none),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 3),
+                  IconButton(
+                    icon: const Icon(Icons.attach_file, color: AppColors.redColor),
+                    onPressed: () async {
+                      final result = await FilePicker.platform.pickFiles();
+
+                      if (result != null && result.files.isNotEmpty) {
+                        final pickedFile = result.files.first;
+
+                        // ✅ For demonstration: send file name as message
+                        context.read<SupportProvider>().sendMessage("📎 File attached: ${pickedFile.name}");
+
+                        // Optional: show file path or content
+                        print("Picked file: ${pickedFile.path}");
+                      } else {
+                        // User canceled the picker
+                      }
+                    },
+                  ),
+                ],
               ),
             ),
           ),
-          const SizedBox(width: 3),
-          IconButton(
-            icon: const Icon(Icons.attach_file, color: Colors.red),
-            onPressed: () async {
-              final result = await FilePicker.platform.pickFiles();
 
-              if (result != null && result.files.isNotEmpty) {
-                final pickedFile = result.files.first;
-
-                // ✅ For demonstration: send file name as message
-                context.read<SupportProvider>().sendMessage("📎 File attached: ${pickedFile.name}");
-
-                // Optional: show file path or content
-                print("Picked file: ${pickedFile.path}");
-              } else {
-                // User canceled the picker
-              }
-            },
-          ),
-
-          const SizedBox(width: 4),
+          const SizedBox(width: 6),
           CircleAvatar(
-            backgroundColor: Colors.red,
+            backgroundColor: AppColors.redColor,
             child: IconButton(
               icon: Icon(_isListening ? Icons.mic : Icons.mic_none, color: Colors.white),
               onPressed: _listen,
@@ -180,7 +194,7 @@ Widget buildBubble({required String message, required String time, required bool
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(message, style: AppTextStyles.blackBoldText13),
-              const SizedBox(height: 4),
+              AppSpacing.extraSmallHeight,
               Align(
                 alignment: Alignment.bottomRight,
                 child: Text(time, style: AppTextStyles.greyText),

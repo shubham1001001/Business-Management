@@ -24,7 +24,8 @@ class GenerateBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final screenWidth = size.width;
-
+    final screenHeight = size.height;
+    final isLandscape = screenWidth > screenHeight;
     List<List<Map<String, String>>> pages = [];
     for (int i = 0; i < items.length; i += 10) {
       pages.add(items.sublist(i, (i + 10 > items.length) ? items.length : i + 10));
@@ -43,7 +44,7 @@ class GenerateBottomSheet extends StatelessWidget {
 
           // PageView with 2-row layout
           SizedBox(
-            height: size.height * 0.35,
+            height: isLandscape ? size.height * 0.5 : size.height * 0.35,
             child: PageView.builder(
               scrollDirection: Axis.horizontal,
               controller: controller,
@@ -72,6 +73,7 @@ class GenerateBottomSheet extends StatelessWidget {
                   children: pageItems.map((item) {
                     return GestureDetector(
                       onTap: () {
+<<<<<<< Updated upstream
                         // context.read<GenerateProvider>().select(item['label'].toString(), context);
 
                         if (item['label'].toString() == 'Vendor') {
@@ -89,6 +91,16 @@ class GenerateBottomSheet extends StatelessWidget {
                         if (item['label'].toString() == 'Account') {
                           // Navigator.pop(context);
                           Navigator.of(context).pushNamed(AppRoutesName.accountSummaryScreen);
+=======
+                        final routeMap = {'Vendor': AppRoutesName.venderListScreen, 'Staff': AppRoutesName.addStaffScreen, 'Vehicle': AppRoutesName.vehicleOverviewScreen, 'Account': AppRoutesName.accountSummaryScreen, 'Item': AppRoutesName.itemCreateScreen};
+
+                        final label = item['label'].toString();
+                        final route = routeMap[label];
+
+                        if (route != null) {
+                          Navigator.pop(context); // only if needed
+                          Navigator.of(context).pushNamed(route);
+>>>>>>> Stashed changes
                         }
                       },
                       child: GenerateCart(icon: item['icon'].toString(), label: item['label'].toString()),

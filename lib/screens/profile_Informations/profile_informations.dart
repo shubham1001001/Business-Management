@@ -63,7 +63,7 @@ class ProfileInformations extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [Text(label, style: AppTextStyles.textSize13)],
           ),
-          const SizedBox(height: 6),
+          AppSpacing.smallHeight10,
           CustomInputField(
             isEditable: false,
             keyboardType: TextInputType.phone,
@@ -93,7 +93,7 @@ class ProfileInformations extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [Text(label, style: AppTextStyles.textSize13)],
           ),
-          const SizedBox(height: 6),
+          AppSpacing.smallHeight10,
           CustomInputField(
             isEditable: isEditable,
             keyboardType: TextInputType.text,
@@ -129,7 +129,7 @@ class ProfileInformations extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 6),
+          AppSpacing.smallHeight10,
           Consumer<ProfileInformationProvider>(
             builder: (context, provider, child) {
               return CustomInputField(

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
+<<<<<<< Updated upstream
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/spacing.dart';
+=======
+import '../../../core/widgets/custom_decorations.dart';
+>>>>>>> Stashed changes
 
 class GenerateCart extends StatelessWidget {
   final String icon;
@@ -20,6 +24,7 @@ class GenerateCart extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
+<<<<<<< Updated upstream
           // width: isLandscape ? screen.width * 0.3 : screen.width * 0.14,
           // height: isLandscape ? screen.height * 0.5 : screen.height * 0.08,
           decoration: BoxDecoration(
@@ -37,6 +42,17 @@ class GenerateCart extends StatelessWidget {
                 // SizedBox(height: screen.height * 0.001),
               ],
             ),
+=======
+          width: isLandscape ? screen.width * 0.07 : screen.width * 0.12,
+          height: isLandscape ? screen.width * 0.07 : screen.width * 0.12,
+          decoration: CustomDecorations.cardBoxDecoration,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(icon, fit: BoxFit.fitWidth), //
+            ],
+>>>>>>> Stashed changes
           ),
         ),
         SizedBox(height: screen.height * 0.01),

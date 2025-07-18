@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/screens/home_screen/widgets/quick_link_scrollView.dart';
 import 'package:sales/screens/home_screen/widgets/sales_info_widget.dart';
 
@@ -32,10 +33,10 @@ class DashboardContent extends StatelessWidget {
           SizedBox(height: size.height * 0.018),
 
           Container(
-            padding: const EdgeInsets.all(15),
+            padding: AppSpacing.allPadding16,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black12),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: AppSpacing.kMediumRadius10,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

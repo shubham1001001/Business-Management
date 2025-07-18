@@ -33,7 +33,7 @@ class AddStaffScreen extends StatelessWidget {
       body: Stack(
         children: [
           SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
+            padding: AppSpacing.allPadding16,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -54,12 +54,12 @@ class AddStaffScreen extends StatelessWidget {
                                   width: 100,
                                   decoration: BoxDecoration(
                                     border: Border.all(color: Colors.grey),
-                                    borderRadius: BorderRadius.circular(8),
+                                    borderRadius: AppSpacing.kMediumRadius,
                                     color: Colors.white,
                                   ),
                                   child: provider.profileImage != null
                                       ? ClipRRect(
-                                          borderRadius: BorderRadius.circular(8),
+                                          borderRadius: AppSpacing.kMediumRadius,
                                           child: Image.file(provider.profileImage!, fit: BoxFit.cover),
                                         )
                                       : Column(
@@ -73,17 +73,17 @@ class AddStaffScreen extends StatelessWidget {
                               );
                             },
                           ),
-                          const SizedBox(width: 12),
+                          AppSpacing.smallWidth10,
                           Expanded(
                             child: DottedBorder(
                               dashPattern: [10, 10],
                               // [dot size, space]
                               color: Colors.grey,
                               borderType: BorderType.RRect,
-                              radius: const Radius.circular(8),
+                              radius: AppSpacing.rMediumRadius,
                               strokeWidth: 1.5,
                               child: Container(
-                                padding: const EdgeInsets.all(12),
+                                padding: AppSpacing.allPadding8,
                                 width: double.infinity,
                                 color: Colors.grey.shade100,
                                 child: const Text(
@@ -103,14 +103,14 @@ class AddStaffScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      AppSpacing.mediumHeight,
 
                       // Staff name
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text('Staff name', style: AppTextStyles.greyBoldW500Text),
-                          const SizedBox(height: 6),
+                          AppSpacing.extraSmallHeight,
 
                           Consumer<AddStafProvider>(
                             builder: (context, provider, child) {
@@ -129,14 +129,14 @@ class AddStaffScreen extends StatelessWidget {
                         ],
                       ),
 
-                      const SizedBox(height: 16),
+                      AppSpacing.mediumHeight16,
 
                       // Mobile number
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text('Mobile Number', style: AppTextStyles.greyBoldW500Text),
-                          const SizedBox(height: 6),
+                          AppSpacing.extraSmallHeight,
 
                           Consumer<AddStafProvider>(
                             builder: (context, provider, child) {
@@ -155,14 +155,14 @@ class AddStaffScreen extends StatelessWidget {
                         ],
                       ),
 
-                      const SizedBox(height: 16),
+                      AppSpacing.mediumHeight16,
 
                       // Address
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text('Address', style: AppTextStyles.greyBoldW500Text),
-                          const SizedBox(height: 6),
+                          AppSpacing.extraSmallHeight,
 
                           Consumer<AddStafProvider>(
                             builder: (context, provider, child) {
@@ -185,7 +185,7 @@ class AddStaffScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 24),
+                AppSpacing.largeHeight,
 
                 // Employee Type Dropdown
                 Container(
@@ -195,7 +195,7 @@ class AddStaffScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text('Employee Type', style: AppTextStyles.greyBoldW500Text),
-                      const SizedBox(height: 6),
+                      AppSpacing.extraSmallHeight,
 
                       Consumer<AddStafProvider>(
                         builder: (context, provider, child) {
@@ -221,7 +221,7 @@ class AddStaffScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 24),
+                AppSpacing.largeHeight,
               ],
             ),
           ),
@@ -234,18 +234,8 @@ class AddStaffScreen extends StatelessWidget {
                 children: [
                   Flexible(
                     child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.grey, textColor: Colors.black, colors: Colors.white),
-                    // OutlinedButton(
-                    //   style: OutlinedButton.styleFrom(
-                    //     side: const BorderSide(color: Colors.black, width: 1.5), // black border with 1.5 width
-                    //     shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(8), // optional rounded corners
-                    //     ),
-                    //   ),
-                    //   onPressed:
-                    //   child: const Text('', style: TextStyle(color: Colors.black)),
-                    // ),
                   ),
-                  const SizedBox(width: 12),
+                  AppSpacing.smallWidth10,
                   Consumer<AddStafProvider>(
                     builder: (context, provider, child) {
                       return Flexible(
@@ -264,21 +254,6 @@ class AddStaffScreen extends StatelessWidget {
                           textColor: Colors.white,
                         ),
                       );
-
-                      //   Expanded(
-                      //   child: ElevatedButton(
-                      //     style: ElevatedButton.styleFrom(
-                      //       backgroundColor: AppColors.redColor,
-                      //       shape: RoundedRectangleBorder(
-                      //         borderRadius: BorderRadius.circular(8), // optional rounded corners
-                      //       ),
-                      //     ),
-                      //     onPressed: () {
-                      //
-                      //     },
-                      //     child: const Text('Submit'),
-                      //   ),
-                      // );
                     },
                   ),
                 ],

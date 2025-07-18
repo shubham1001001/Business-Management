@@ -21,7 +21,7 @@ class QuickLink extends StatelessWidget {
         // height: isLandscape ? screen.height * 0.35 : screen.height * 0.10,
         decoration: BoxDecoration(
           color: AppColors.cardColor,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: AppSpacing.kMediumRadius10,
           boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
         ),
         child: Padding(

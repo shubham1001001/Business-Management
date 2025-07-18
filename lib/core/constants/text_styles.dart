@@ -37,4 +37,10 @@ class AppTextStyles {
   static const white54BoldText40 = TextStyle(fontSize: 40, color: Colors.white54, fontWeight: FontWeight.w600);
   static const blackBoldText15 = TextStyle(fontSize: 15, fontWeight: FontWeight.w600);
   static const appRedText18 = TextStyle(color: AppColors.redColor, fontSize: 18);
+<<<<<<< Updated upstream
+=======
+  static const appBlackText18 = TextStyle(fontSize: 18);
+  static const blueText = TextStyle(color: Colors.blue);
+  static const boldText = TextStyle(fontWeight: FontWeight.bold);
+>>>>>>> Stashed changes
 }

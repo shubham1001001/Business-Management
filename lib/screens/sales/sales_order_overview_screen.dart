@@ -128,7 +128,7 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 12),
+                                  AppSpacing.smallHeight10,
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -154,7 +154,7 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                      SizedBox(width: 5),
+                                      AppSpacing.extraSmallWidth,
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
@@ -164,7 +164,7 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                               order.status,
                                               style: TextStyle(color: statusColor, fontWeight: FontWeight.bold),
                                             ),
-                                          const SizedBox(width: 10),
+                                          AppSpacing.smallHeight10,
                                           if (order.status == 'Draft')
                                             OutlinedButton(
                                               onPressed: () {},

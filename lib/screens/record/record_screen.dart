@@ -59,7 +59,7 @@ class RecordScreen extends StatelessWidget {
                   height: isLandscape ? screenHeight * 0.4 : screenHeight * 0.15,
                   decoration: BoxDecoration(
                     color: AppColors.background,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: AppSpacing.kSmallRadius,
                     boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
                   ),
                   child: SizedBox(
@@ -68,7 +68,7 @@ class RecordScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       itemCount: tabs.length,
-                      separatorBuilder: (_, __) => const SizedBox(width: 20),
+                      separatorBuilder: (_, __) => AppSpacing.mediumWidth,
                       itemBuilder: (context, index) {
                         final double buttonSize = screenWidth * 0.11;
                         final tab = tabs[index].title;
@@ -84,7 +84,7 @@ class RecordScreen extends StatelessWidget {
                                 decoration: BoxDecoration(color: isSelected ? AppColors.redColor : Colors.grey.shade200, borderRadius: BorderRadius.circular(8)),
                                 child: Padding(padding: const EdgeInsets.only(left: 5, top: 8), child: tabs[index].Images),
                               ),
-                              const SizedBox(height: 4),
+                              AppSpacing.extraSmallHeight,
                               Text(tabs[index].title, style: AppTextStyles.titleListTile),
                             ],
                           ),
@@ -113,7 +113,7 @@ class RecordScreen extends StatelessWidget {
                                 Navigator.of(context).pushNamed(AppRoutesName.purchaseBillOverviewScreen);
                               }
                             },
-                            child: Padding(padding: const EdgeInsets.all(5.0), child: buildCard(item)),
+                            child: Padding(padding: AppSpacing.allPadding5, child: buildCard(item)),
                           );
                         }).toList(),
                       ),
@@ -129,7 +129,7 @@ class RecordScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(provider.selectedTab == "Expenses" ? "Overview" : "${provider.selectedTab} List", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                          const SizedBox(height: 12),
+                          AppSpacing.smallHeight10,
                           // Sub Filter Chips
                           Row(
                             children: [
@@ -194,7 +194,7 @@ class RecordScreen extends StatelessWidget {
                                                   child: Icon(item.icon, size: 32, color: Colors.grey),
                                                 ),
                                               ),
-                                              const SizedBox(width: 12),
+                                              AppSpacing.smallWidth10,
                                               Expanded(
                                                 child: Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -247,7 +247,7 @@ class RecordScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.primary,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: AppSpacing.kSmallRadius,
         boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
       ),
       padding: AppSpacing.allPadding12,
@@ -255,7 +255,7 @@ class RecordScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(item.title, style: AppTextStyles.title16),
-          const SizedBox(height: 4),
+          AppSpacing.extraSmallHeight,
           Text("${item.count} items", style: AppTextStyles.greyText),
           const Spacer(),
           Align(

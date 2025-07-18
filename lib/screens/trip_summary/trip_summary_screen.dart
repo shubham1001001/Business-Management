@@ -4,6 +4,7 @@ import 'package:sales/core/constants/colors.dart';
 import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
+import '../../core/widgets/custom_dropdown_widget.dart';
 import '../../providers/trip_provider/trip_provider.dart';
 
 class TripSummaryScreen extends StatelessWidget {
@@ -27,15 +28,12 @@ class TripSummaryScreen extends StatelessWidget {
               children: [
                 Container(
                   decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: BorderRadius.circular(15)),
-                  width: size.width * 0.43,
+                  width: size.width * 0.4,
                   child: Padding(
                     padding: AppSpacing.allPadding5,
-                    child: DropdownButtonFormField<String>(
+                    child: CustomDropdown<String>(
+                      isExpanded: false,
                       value: provider.selectedMonth,
-                      isDense: true,
-                      isExpanded: true,
-                      icon: Icon(Icons.keyboard_arrow_down),
-                      decoration: const InputDecoration(border: UnderlineInputBorder(borderSide: BorderSide.none)),
                       items: provider.months.map((month) => DropdownMenuItem(value: month, child: Text(month))).toList(),
                       onChanged: (value) {
                         if (value != null) {
@@ -45,7 +43,7 @@ class TripSummaryScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                AppSpacing.mediumHeight16,
                 Text('10 Unit', style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500)),
                 const Text('Total vehicle', style: AppTextStyles.greyText),
                 const Divider(height: 32),
@@ -53,23 +51,23 @@ class TripSummaryScreen extends StatelessWidget {
                 _buildMetricRow('Total revenue', '\$ 1200.80'),
                 _buildMetricRow('Average fuel efficiency', '5km / lit'),
                 _buildMetricRow('Idle vehicles', '02 unit'),
-                const SizedBox(height: 16),
+                AppSpacing.mediumHeight16,
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: AppColors.redColor, padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12), elevation: 4),
                   onPressed: () {},
                   child: const Text('View vehicle summary'),
                 ),
-                const SizedBox(height: 16),
+                AppSpacing.mediumHeight16,
                 Expanded(
                   child: ListView.separated(
                     itemCount: provider.vehicleList.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 12),
+                    separatorBuilder: (_, __) => AppSpacing.smallHeight10,
                     itemBuilder: (context, index) {
                       final vehicle = provider.vehicleList[index];
                       return Container(
                         decoration: BoxDecoration(
                           color: Colors.grey[100],
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: AppSpacing.kMediumRadius10,
                           border: Border.all(color: Colors.grey.shade300),
                         ),
                         padding: AppSpacing.allPadding12,
@@ -84,7 +82,7 @@ class TripSummaryScreen extends StatelessWidget {
                               ],
                             ),
                             Text(vehicle.driverName, style: AppTextStyles.greyText),
-                            const SizedBox(height: 6),
+                            AppSpacing.extraSmallHeight,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [

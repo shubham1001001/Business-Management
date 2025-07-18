@@ -47,10 +47,7 @@ class SignupScreen extends StatelessWidget {
                 Positioned(
                   top: size.height * 0.1,
                   left: size.width * 0.05,
-                  child: const Text(
-                    'Bridging miles with\nmeaning',
-                    style: TextStyle(fontSize: 20, color: Colors.white70, fontWeight: FontWeight.w600),
-                  ),
+                  child: const Text('Bridging miles with\nmeaning', style: AppTextStyles.white70BoldText20),
                 ),
 
                 // Main form

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sales/core/constants/colors.dart';
 import 'package:sales/core/constants/spacing.dart';
+import 'package:sales/core/constants/text_styles.dart';
+import 'package:sales/routes/app_routes_name.dart';
+
+import '../../core/widgets/delete_confirmation_dialog_widget.dart';
 
 class VenderDetailScreen extends StatelessWidget {
   const VenderDetailScreen({super.key});
@@ -23,7 +27,7 @@ class VenderDetailScreen extends StatelessWidget {
               padding: AppSpacing.allPadding16,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: AppSpacing.kMediumRadius,
                 color: AppColors.cardmainColor,
               ),
               child: Row(
@@ -37,8 +41,8 @@ class VenderDetailScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [const Text('Vendor name', style: TextStyle(color: AppColors.redColor, fontSize: 20))],
                       ),
-                      Text("+91 8152369874", style: const TextStyle(fontSize: 16)),
-                      const SizedBox(height: 15),
+                      Text("+91 8152369874", style: AppTextStyles.textSize16),
+                      AppSpacing.mediumHeight16,
                       const Text('Payable', style: TextStyle(color: AppColors.greyText)),
                       Row(
                         children: [
@@ -53,7 +57,45 @@ class VenderDetailScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(children: [Icon(Icons.edit_outlined), const SizedBox(width: 20), Icon(Icons.delete_outlined), const SizedBox(width: 20), Icon(Icons.more_vert)]),
+                      Row(
+                        children: [
+                          Icon(Icons.edit_outlined),
+                          AppSpacing.largeWidth,
+                          InkWell(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (_) => DeleteConfirmationDialog(onConfirm: () {}),
+                              );
+                            },
+                            child: Icon(Icons.delete_outlined),
+                          ),
+                          AppSpacing.largeWidth,
+                          InkWell(
+                            onTap: () async {
+                              final selected = await showMenu<String>(
+                                context: context,
+                                position: RelativeRect.fromLTRB(1000, 170, 10, 100), // Adjust based on screen size
+                                items: [_buildMenuItem('comment', Icons.comment, 'Comment'), _buildMenuItem('statement', Icons.receipt_long, 'Customer statement'), _buildMenuItem('lorem1', Icons.public, 'Lorem ipsum'), _buildMenuItem('lorem2', Icons.public, 'Lorem ipsum')],
+                              );
+
+                              // ✅ Check for null
+                              if (selected != null) {
+                                switch (selected) {
+                                  case 'comment':
+                                    Navigator.pushNamed(context, AppRoutesName.vendorTimelineScreen);
+                                    break;
+                                  case 'statement':
+                                    // Handle statement
+                                    break;
+                                  // etc.
+                                }
+                              }
+                            },
+                            child: Icon(Icons.more_vert),
+                          ),
+                        ],
+                      ),
                       SizedBox(height: size.height * 0.04),
                       // const Text('Outstanding', style: TextStyle(color: AppColors.greyText)),
                       Row(
@@ -87,6 +129,19 @@ class VenderDetailScreen extends StatelessWidget {
   }
 }
 
+PopupMenuItem<String> _buildMenuItem(String value, IconData icon, String title) {
+  return PopupMenuItem<String>(
+    value: value,
+    child: Row(
+      children: [
+        Icon(icon, size: 18),
+        const SizedBox(width: 12),
+        Flexible(child: Text(title, overflow: TextOverflow.ellipsis)),
+      ],
+    ),
+  );
+}
+
 class _PaymentItem extends StatelessWidget {
   final String title;
   final String amount;
@@ -98,8 +153,8 @@ class _PaymentItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: const TextStyle(fontSize: 16)),
-        const SizedBox(height: 4),
+        Text(title, style: AppTextStyles.textSize16),
+        AppSpacing.extraSmallHeight,
         RichText(
           text: TextSpan(
             style: const TextStyle(color: Colors.black),

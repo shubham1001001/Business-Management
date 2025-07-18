@@ -34,7 +34,7 @@ class EmailChangeScreen extends StatelessWidget {
               Center(
                 child: Column(
                   children: [
-                    Text("Enter your Email ID", style: TextStyle(fontSize: 18)),
+                    Text("Enter your Email ID", style: AppTextStyles.appBlackText18),
                     SizedBox(height: size.height * 0.02),
                     Text("is Your Current Email ID", style: AppTextStyles.greyText17),
                   ],

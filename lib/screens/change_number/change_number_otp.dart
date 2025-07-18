@@ -81,13 +81,13 @@ class _OtpScreenState extends State<ChangeNumberOtp> {
                               Navigator.of(context).pushNamed(AppRoutesName.home);
                             },
                             child: Container(
-                              decoration: BoxDecoration(color: AppColors.grey100, borderRadius: BorderRadius.all(Radius.circular(10))),
+                              decoration: BoxDecoration(color: AppColors.grey100, borderRadius: BorderRadius.all(AppSpacing.rMediumRadius10)),
                               child: Padding(padding: AppSpacing.allPadding16, child: Icon(Icons.arrow_back, size: 20)),
                             ),
                           ),
 
                           Text('Enter your OTP here', style: AppTextStyles.title16),
-                          SizedBox(width: 6),
+                          AppSpacing.extraSmallWidth,
                         ],
                       ),
                       SizedBox(height: size.height * 0.025),

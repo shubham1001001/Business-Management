@@ -20,7 +20,7 @@ class ItemListScreen extends StatelessWidget {
         backgroundColor: AppColors.primary,
         elevation: 1,
 
-        title: Text("Item list", style: TextStyle(fontSize: 20)),
+        title: Text("Item list", style: AppTextStyles.black87Text20),
         actions: [
           TextButton(
             onPressed: () {
@@ -66,7 +66,7 @@ class ItemListScreen extends StatelessWidget {
                         }).toList(),
                       ),
                     ),
-                    Padding(padding: const EdgeInsets.all(8.0), child: Image.asset("assets/icons/Vector (3).png")),
+                    Padding(padding: AppSpacing.allPadding8, child: Image.asset("assets/icons/Vector (3).png")),
                   ],
                 ),
               );
@@ -122,7 +122,7 @@ class ItemListScreen extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-                                        SizedBox(width: 10),
+                                        AppSpacing.smallWidth10,
                                         Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
@@ -132,7 +132,7 @@ class ItemListScreen extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    const SizedBox(height: 12),
+                                    AppSpacing.smallWidth10,
                                   ],
                                 ),
                               ),

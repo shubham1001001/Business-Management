@@ -5,6 +5,7 @@ import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/screens/home_screen/widgets/dashboard_content.dart';
 import 'package:sales/screens/home_screen/widgets/support_content.dart';
 
+import '../../core/constants/spacing.dart';
 import '../../core/widgets/text_scale_widgets.dart';
 import '../../providers/home_provider/home_tab_provider.dart';
 
@@ -30,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("L company name", style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 75))),
-        actions: const [Icon(Icons.notifications_none), SizedBox(width: 16)],
+        actions: [const Icon(Icons.notifications_none), AppSpacing.mediumWidth16],
         elevation: 0,
         backgroundColor: AppColors.backgroundColor,
         foregroundColor: Colors.black,
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: size.height * 0.02),
-            Row(children: [buildTab(context, 0, "Dashboard"), const SizedBox(width: 20), buildTab(context, 1, "Support")]),
+            Row(children: [buildTab(context, 0, "Dashboard"), AppSpacing.largeHeight, buildTab(context, 1, "Support")]),
             SizedBox(height: size.height * 0.017),
 
             /// Use Expanded to contain scrollable content
