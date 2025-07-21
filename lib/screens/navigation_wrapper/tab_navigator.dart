@@ -3,6 +3,7 @@ import 'package:sales/routes/app_routes_name.dart';
 import 'package:sales/screens/profile_Informations/profile_informations.dart';
 
 import '../add_item/add_item_screen.dart';
+import '../expense_details/expense_details_screen.dart';
 import '../home_screen/home_screen.dart';
 import '../item_list/item_list_screen.dart';
 import '../more/more_screen.dart';
@@ -80,6 +81,9 @@ class TabNavigator extends StatelessWidget {
             break;
           case AppRoutesName.addItemScreen:
             builder = (_) => AddItemScreen();
+            break;
+          case AppRoutesName.expenseDetailsScreen:
+            builder = (_) => ExpenseDetailsScreen();
             break;
           case '/vehicleOverviewScreen':
             builder = (_) => VehicleOverviewScreen();

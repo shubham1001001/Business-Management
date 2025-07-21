@@ -4,6 +4,7 @@ import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
 import '../../core/constants/colors.dart';
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../core/widgets/custom_input_field.dart';
 import '../../providers/profile_information_provider/profile_information_provider.dart';
 
@@ -19,7 +20,14 @@ class ProfileInformations extends StatelessWidget {
         actions: [
           Consumer<ProfileInformationProvider>(
             builder: (context, provider, _) {
-              return IconButton(icon: const Icon(Icons.edit), onPressed: provider.toggleFirstNameEditing);
+              return InkWell(
+                onTap: () => provider.toggleFirstNameEditing,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: SvgPictureWidgets(svgString: "assets/svg_icons/edit_icon.svg", color: AppColors.appBlackColor, size: 20.0),
+                ),
+              );
+              IconButton(icon: const Icon(Icons.edit), onPressed: provider.toggleFirstNameEditing);
             },
           ),
         ],
@@ -63,7 +71,7 @@ class ProfileInformations extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [Text(label, style: AppTextStyles.textSize13)],
           ),
-          const SizedBox(height: 6),
+          AppSpacing.smallHeight10,
           CustomInputField(
             isEditable: false,
             keyboardType: TextInputType.phone,
@@ -93,7 +101,7 @@ class ProfileInformations extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [Text(label, style: AppTextStyles.textSize13)],
           ),
-          const SizedBox(height: 6),
+          AppSpacing.smallHeight10,
           CustomInputField(
             isEditable: isEditable,
             keyboardType: TextInputType.text,
@@ -129,7 +137,7 @@ class ProfileInformations extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 6),
+          AppSpacing.smallHeight10,
           Consumer<ProfileInformationProvider>(
             builder: (context, provider, child) {
               return CustomInputField(

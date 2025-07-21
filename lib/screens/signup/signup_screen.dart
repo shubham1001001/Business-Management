@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sales/core/constants/colors.dart';
+import 'package:sales/core/constants/svg_picture_widgets.dart';
 import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/core/widgets/terms_and_pravacy.dart';
 
@@ -35,9 +36,9 @@ class SignupScreen extends StatelessWidget {
               children: [
                 // Background image
                 SizedBox(
-                  height: size.height,
+                  height: size.height * 0.50,
                   width: size.width,
-                  child: Image.network("https://images.unsplash.com/photo-1536152470836-b943b246224c?w=500&auto=format&fit=crop&q=60", fit: BoxFit.cover),
+                  child: Image.asset("assets/images/signup_background.jpg", fit: BoxFit.cover),
                 ),
 
                 // Overlay
@@ -47,10 +48,7 @@ class SignupScreen extends StatelessWidget {
                 Positioned(
                   top: size.height * 0.1,
                   left: size.width * 0.05,
-                  child: const Text(
-                    'Bridging miles with\nmeaning',
-                    style: TextStyle(fontSize: 20, color: Colors.white70, fontWeight: FontWeight.w600),
-                  ),
+                  child: Column(children: [Text('Bridging miles with\nmeaning', style: AppTextStyles.heading1FontStyleText)]),
                 ),
 
                 // Main form
@@ -69,11 +67,11 @@ class SignupScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Row(
+                          Row(
                             children: [
-                              Icon(Icons.all_inclusive, size: 20),
-                              SizedBox(width: 6),
-                              Text('Company Name', style: AppTextStyles.title16),
+                              SvgPictureWidgets(svgString: "assets/svg_icons/company_icons_svg.svg", size: 18.0),
+                              AppSpacing.extraSmallWidth,
+                              Text('Company Name', style: AppTextStyles.openSansFontStyleTextW400),
                             ],
                           ),
 
@@ -94,7 +92,7 @@ class SignupScreen extends StatelessWidget {
                                 width: size.width,
                                 onChanged: (value) {
                                   if (value != null) {
-                                    auth.updateCountryCode(value);
+                                    auth.updateCountryCode(value.toString());
                                   }
                                 },
                               );
@@ -144,11 +142,15 @@ class SignupScreen extends StatelessWidget {
 
                           /// Google Sign-in
                           Center(
-                            child: OutlinedButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(Icons.add),
-                              label: Padding(padding: AppSpacing.allPadding8, child: Image.asset("assets/images/googleSign.png")),
-                              style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SvgPictureWidgets(svgString: "assets/svg_icons/google_icon_svg.svg", size: 30.0),
+                                AppSpacing.smallWidth10,
+                                Text("Sign in with Google", style: AppTextStyles.blackBoldText15),
+                              ],
                             ),
                           ),
 

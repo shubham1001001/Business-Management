@@ -5,8 +5,11 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
+import '../../core/constants/svg_picture_widgets.dart';
+import '../../core/widgets/custom_date_picker.dart';
+import '../../core/widgets/custom_dropdown_widget.dart';
 import '../../core/widgets/delete_confirmation_dialog_widget.dart';
-import '../../providers/account_details_provider.dart';
+import '../../providers/account_details/account_details_provider.dart';
 
 class AccountDetailsScreen extends StatefulWidget {
   const AccountDetailsScreen({super.key});
@@ -74,10 +77,9 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.white,
                               ),
-                              child: DropdownButton<TransactionFilter>(
-                                isDense: false,
+
+                              child: CustomDropdown<TransactionFilter>(
                                 isExpanded: false,
-                                underline: const SizedBox(),
                                 value: provider.selectedFilter,
                                 items: dropItem,
                                 onChanged: (filter) {
@@ -87,7 +89,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                             ),
                           ),
 
-                          const SizedBox(height: 8),
+                          AppSpacing.smallHeight,
 
                           // Custom Date Picker Row
                           if (provider.selectedFilter == TransactionFilter.custom)
@@ -97,22 +99,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                                 Expanded(
                                   child: InkWell(
                                     onTap: () async {
-                                      //    final picked = await showDatePicker(context: context, initialDate: provider.customFromDate ?? DateTime.now(), firstDate: DateTime(2020), lastDate: DateTime(2100));
-                                      final picked = await showDatePicker(
-                                        context: context,
-                                        initialDate: provider.customFromDate ?? DateTime.now(),
-                                        firstDate: DateTime(2020),
-                                        lastDate: DateTime(2100),
-                                        builder: (context, child) {
-                                          return Theme(
-                                            data: Theme.of(context).copyWith(
-                                              colorScheme: ColorScheme.light(primary: AppColors.redColor, onPrimary: Colors.white, onSurface: Colors.black),
-                                              textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(foregroundColor: AppColors.redColor)),
-                                            ),
-                                            child: child!,
-                                          );
-                                        },
-                                      );
+                                      final picked = await CustomDatePicker.show(context: context, initialDate: provider.customFromDate ?? DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
 
                                       if (picked != null && provider.customToDate != null) {
                                         provider.setCustomRange(picked, provider.customToDate!);
@@ -132,22 +119,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                                 Expanded(
                                   child: InkWell(
                                     onTap: () async {
-                                      final picked = await showDatePicker(
-                                        context: context,
-                                        initialDate: provider.customToDate ?? DateTime.now(),
-                                        firstDate: DateTime(2020),
-                                        lastDate: DateTime(2100),
-                                        builder: (context, child) {
-                                          return Theme(
-                                            data: Theme.of(context).copyWith(
-                                              colorScheme: ColorScheme.light(primary: AppColors.redColor, onPrimary: Colors.white, onSurface: Colors.black),
-                                              textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(foregroundColor: AppColors.redColor)),
-                                            ),
-                                            child: child!,
-                                          );
-                                        },
-                                      );
-                                      // showDatePicker(context: context, initialDate: provider.customToDate ?? DateTime.now(), firstDate: DateTime(2020), lastDate: DateTime(2100));
+                                      final picked = await CustomDatePicker.show(context: context, initialDate: provider.customToDate ?? DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
 
                                       if (picked != null && provider.customFromDate != null) {
                                         provider.setCustomRange(provider.customFromDate!, picked);
@@ -157,7 +129,9 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                                      decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8)),
+
+                                      decoration: BoxDecoration(border: Border.all(), borderRadius: AppSpacing.kMediumRadius),
+
                                       child: Row(children: [const Icon(Icons.calendar_today, size: 18), const SizedBox(width: 6), Text(provider.customToDate != null ? "${provider.customToDate!.day.toString().padLeft(2, '0')}.${provider.customToDate!.month.toString().padLeft(2, '0')}.${provider.customToDate!.year}" : "To")]),
                                     ),
                                   ),
@@ -170,7 +144,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                   ),
                 ),
 
-                const SliverToBoxAdapter(child: SizedBox(height: 8)),
+                const SliverToBoxAdapter(child: AppSpacing.smallHeight),
 
                 //  Table Header
                 const SliverToBoxAdapter(
@@ -182,7 +156,8 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                     ],
                   ),
                 ),
-                const SliverToBoxAdapter(child: SizedBox(height: 4)),
+
+                SliverToBoxAdapter(child: AppSpacing.extraSmallHeight),
 
                 // List or Shimmer
                 provider.isLoading
@@ -242,9 +217,10 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                 ],
               ),
             ),
-            const SizedBox(width: 8),
+
+            AppSpacing.smallWidth,
             Expanded(flex: 2, child: Container(height: 14, color: Colors.white)),
-            const SizedBox(width: 8),
+            AppSpacing.smallWidth,
             Expanded(flex: 2, child: Container(height: 14, color: Colors.white)),
           ],
         ),
@@ -257,7 +233,9 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
       padding: AppSpacing.allPadding16,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(8),
+
+        borderRadius: AppSpacing.kMediumRadius,
+
         color: AppColors.cardmainColor,
       ),
       child: Column(
@@ -274,9 +252,10 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
               ),
               Row(
                 children: [
-                  const SizedBox(width: 20),
+                  AppSpacing.mediumHeight,
+
                   IconButton(
-                    icon: const Icon(Icons.delete_outline),
+                    icon: Image.asset("assets/icons/delete_icon2.png", width: 20),
                     onPressed: () {
                       showDialog(
                         context: context,
@@ -288,8 +267,10 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                       );
                     },
                   ),
-                  const SizedBox(width: 20),
-                  Icon(Icons.edit_outlined),
+
+                  AppSpacing.mediumHeight,
+
+                  SvgPictureWidgets(svgString: "assets/svg_icons/edit_icon.svg", color: AppColors.appBlackColor, size: 20.0),
                 ],
               ),
             ],
@@ -304,7 +285,9 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
     return Center(
       child: Card(
         elevation: 6,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+
+        shape: RoundedRectangleBorder(borderRadius: AppSpacing.kSmallRadius),
+
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.15, vertical: 12),
           child: Column(

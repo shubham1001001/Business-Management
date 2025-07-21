@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/spacing.dart';
+import '../../../core/constants/svg_picture_widgets.dart';
 import '../../../core/widgets/text_scale_widgets.dart';
 
 class BalanceCard extends StatelessWidget {
@@ -28,11 +29,16 @@ class BalanceCard extends StatelessWidget {
         children: [
           Flexible(
             flex: 2,
-            child: Image.asset(icon, width: screen.width * 0.09, fit: BoxFit.contain),
+            child: SizedBox(
+              width: screen.width * 0.09,
+              height: screen.height * 0.05,
+              child: SvgPictureWidgets(svgString: icon),
+              // Image.asset(icon, fit: BoxFit.contain),
+            ),
           ),
           const Spacer(),
           Flexible(
-            child: Text(label, style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 30))),
+            child: Text(label, style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 40))),
           ),
           Flexible(
             child: Text(

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/routes/app_routes_name.dart';
 
 import '../../core/constants/colors.dart';
+import '../../core/constants/svg_picture_widgets.dart';
+import '../../core/widgets/text_scale_widgets.dart';
 import '../../models/account_summry_model.dart';
 import '../../providers/account_summary_provider/account_summary_provider.dart';
 
@@ -20,8 +23,10 @@ class AccountSummaryScreen extends StatelessWidget {
         title: const Text('Account Summary'),
         actions: [
           TextButton(
-            onPressed: () {},
-            child: const Text('Add Account', style: AppTextStyles.appRedText),
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutesName.addAccountScreen);
+            },
+            child: const Text('Add Account', style: AppTextStyles.appBarRedBoldText),
           ),
         ],
       ),
@@ -31,19 +36,20 @@ class AccountSummaryScreen extends StatelessWidget {
           builder: (context, provider, _) {
             return Container(
               padding: EdgeInsets.all(size.width * 0.030),
-              decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: BorderRadius.circular(10)),
+              decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: AppSpacing.kMediumRadius10),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [Icon(Icons.open_in_new, color: AppColors.redColor)],
+                      children: [SvgPictureWidgets(svgString: "assets/svg_icons/share_icon_svg.svg", size: 25.0)],
                     ),
                     _buildSection('Assets', provider.assets, isMobile, "Debit", "Credit", size.height, size.width, context),
-                    const SizedBox(height: 16),
+
+                    AppSpacing.mediumHeight16,
                     _buildSection('Liabilities', provider.liabilities, isMobile, '', '', size.height, size.width, context),
-                    const SizedBox(height: 16),
+                    AppSpacing.mediumHeight16,
                     _buildSection('Income', provider.income, isMobile, '', '', size.height, size.width, context),
                     SizedBox(height: size.height * 0.04),
                   ],
@@ -68,11 +74,24 @@ class AccountSummaryScreen extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text(title, style: AppTextStyles.backBoldText),
+                  Text(
+                    title,
+                    style: TextStyle(color: AppColors.appBlackColor, fontWeight: FontWeight.bold, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                  ), //
                   SizedBox(width: width * 0.37),
                   // Expanded(flex: 2, child: Text('')),
-                  Expanded(child: Text(Debit, style: AppTextStyles.backBoldText)),
-                  Expanded(child: Text(Credit, style: AppTextStyles.backBoldText)),
+                  Expanded(
+                    child: Text(
+                      Debit,
+                      style: TextStyle(color: AppColors.appBlackColor, fontWeight: FontWeight.bold, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      Credit,
+                      style: TextStyle(color: AppColors.appBlackColor, fontWeight: FontWeight.bold, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: size * 0.01),
@@ -81,10 +100,29 @@ class AccountSummaryScreen extends StatelessWidget {
               ...items.map(
                 (e) => Row(
                   children: [
-                    Expanded(flex: 2, child: Text(e.title)),
-                    Expanded(child: Text(e.debit.toStringAsFixed(2))),
                     Expanded(
-                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text(e.credit.toStringAsFixed(2))]),
+                      flex: 2,
+                      child: Text(
+                        e.title,
+                        style: TextStyle(color: AppColors.appBlackColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        e.debit.toStringAsFixed(2),
+                        style: TextStyle(color: AppColors.appBlackColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
+                      ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            e.credit.toStringAsFixed(2),
+                            style: TextStyle(color: AppColors.appBlackColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -93,8 +131,18 @@ class AccountSummaryScreen extends StatelessWidget {
               Row(
                 children: [
                   const Expanded(flex: 2, child: SizedBox()),
-                  Expanded(child: Text(totalDebit.toStringAsFixed(2), style: AppTextStyles.appRedBoldText)),
-                  Expanded(child: Text(totalCredit.toStringAsFixed(2), style: AppTextStyles.appRedBoldText)),
+                  Expanded(
+                    child: Text(
+                      totalDebit.toStringAsFixed(2),
+                      style: TextStyle(color: AppColors.appBlackColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      totalCredit.toStringAsFixed(2),
+                      style: TextStyle(color: AppColors.appBlackColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -104,23 +152,7 @@ class AccountSummaryScreen extends StatelessWidget {
           onTap: () {
             Navigator.pushNamed(context, AppRoutesName.accountOverviewScreen);
           },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: Padding(
-                  padding: EdgeInsets.only(top: size * 0.07),
-                  child: Container(
-                    height: 30, //size * 0.05,
-                    width: 30, //width * 0.06,
-                    decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(17)),
-                    child: Icon(Icons.arrow_forward_ios_rounded, size: 15), //size * 0.02
-                  ),
-                ),
-              ),
-            ],
-          ),
+          child: SvgPictureWidgets(svgString: "assets/svg_icons/right_arrow_icon_svg.svg", size: 25.0),
         ),
       ],
     );

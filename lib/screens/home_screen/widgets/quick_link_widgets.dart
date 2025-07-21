@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sales/core/constants/spacing.dart';
 
 import '../../../core/constants/colors.dart';
+import '../../../core/constants/svg_picture_widgets.dart';
 import '../../../core/widgets/text_scale_widgets.dart';
 
 class QuickLink extends StatelessWidget {
@@ -21,7 +22,7 @@ class QuickLink extends StatelessWidget {
         // height: isLandscape ? screen.height * 0.35 : screen.height * 0.10,
         decoration: BoxDecoration(
           color: AppColors.cardColor,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: AppSpacing.kMediumRadius10,
           boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
         ),
         child: Padding(
@@ -30,8 +31,7 @@ class QuickLink extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(icon),
-              isLandscape ? SizedBox(height: 0) : SizedBox(height: icon == "assets/icons/q5.png" ? 0 : 6),
+              SvgPictureWidgets(svgString: icon, size: 40.0),
               SizedBox(height: screen.height * 0.03),
               Text(
                 label,

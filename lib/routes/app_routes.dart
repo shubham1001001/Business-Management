@@ -4,19 +4,24 @@ import 'package:sales/screens/otp_screen/otp_screen.dart';
 import '../screens/account_details/account_details_screen.dart';
 import '../screens/account_overview/account_overview_screen.dart';
 import '../screens/account_summary/account_summary_screen.dart';
+import '../screens/add_account/add_account_screen.dart';
 import '../screens/add_staf/add_staf_screen.dart';
+import '../screens/add_vehicle/add_vehicle_screen.dart';
 import '../screens/change_number/change_number_otp.dart';
 import '../screens/change_number/mobile_number_change.dart';
 import '../screens/email_change_screen/email_change_screen.dart';
 import '../screens/email_change_screen/email_change_screen_otp.dart';
 import '../screens/get_start/get_start_screen.dart';
+import '../screens/item_create/item_create_screen.dart';
 import '../screens/navigation_wrapper/navigation_wrapper.dart';
+import '../screens/pricing_preference/pricing_preference_screen.dart';
 import '../screens/record/record_screen.dart';
 import '../screens/report/report_screen.dart';
 import '../screens/signup/signup_screen.dart';
 import '../screens/vehicle_overview/vehicle_overview_screen.dart';
 import '../screens/vender_details/vender_detail_screen.dart';
 import '../screens/vender_list/vender_list_screen.dart';
+import '../screens/vendor_comment_timeline/vendor_comment_timeline_screen.dart';
 import 'app_routes_name.dart';
 
 class AppRoutes {
@@ -53,10 +58,21 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => VenderListScreen());
       case AppRoutesName.accountSummaryScreen:
         return MaterialPageRoute(builder: (_) => AccountSummaryScreen());
+      case AppRoutesName.addAccountScreen:
+        return MaterialPageRoute(builder: (_) => AddAccountScreen());
       case AppRoutesName.accountOverviewScreen:
         return MaterialPageRoute(builder: (_) => AccountOverviewScreen());
       case AppRoutesName.accountDetailsScreen:
         return MaterialPageRoute(builder: (_) => AccountDetailsScreen());
+      case AppRoutesName.itemCreateScreen:
+        return MaterialPageRoute(builder: (_) => ItemCreateScreen());
+      case AppRoutesName.pricingPreferenceScreen:
+        return MaterialPageRoute(builder: (_) => PricingPreferenceScreen());
+      case AppRoutesName.addVehicleScreen:
+        return MaterialPageRoute(builder: (_) => AddVehicleScreen());
+      case AppRoutesName.vendorTimelineScreen:
+        return MaterialPageRoute(builder: (_) => VendorTimelineScreen());
+
       default:
         return MaterialPageRoute(builder: (_) => NavigationWrapper());
     }

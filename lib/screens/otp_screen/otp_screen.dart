@@ -6,6 +6,7 @@ import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/core/widgets/terms_and_pravacy.dart';
 import 'package:sales/screens/otp_screen/widgets/otp_widgets.dart';
 
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/Custom_message_widget.dart';
 import '../../providers/otp_provider/countdown_provider.dart';
@@ -47,13 +48,9 @@ class _OtpScreenState extends State<OtpScreen> {
           children: [
             // Background image
             SizedBox(
-              height: size.height,
+              height: size.height * 0.50,
               width: size.width,
-              child: Image.network("https://images.unsplash.com/photo-1536152470836-b943b246224c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG5hdHVyZSUyMHZzJTIwbnVydHVyZXxlbnwwfHwwfHx8MA%3D%3D", fit: BoxFit.cover),
-              // Image.asset(
-              //   'assets/images/bg.jpg', // Use your image path
-              //   fit: BoxFit.cover,
-              // ),
+              child: Image.asset("assets/images/signup_background.jpg", fit: BoxFit.cover),
             ),
             // Dark overlay
             Container(width: size.width, height: size.height, color: Colors.black.withOpacity(0.4)),
@@ -61,7 +58,7 @@ class _OtpScreenState extends State<OtpScreen> {
             Positioned(
               top: size.height * 0.1,
               left: size.width * 0.05,
-              child: Text('Bridging miles with\nmeaning', style: AppTextStyles.white70BoldText20),
+              child: Text('Bridging miles with\nmeaning', style: AppTextStyles.heading1FontStyleText),
             ),
             // White card
             Align(
@@ -86,18 +83,15 @@ class _OtpScreenState extends State<OtpScreen> {
                             onTap: () {
                               Navigator.of(context).pushNamed(AppRoutesName.signup);
                             },
-                            child: Container(
-                              decoration: BoxDecoration(color: AppColors.grey100, borderRadius: BorderRadius.all(Radius.circular(20))),
-                              child: Padding(padding: AppSpacing.allPadding16, child: Icon(Icons.arrow_back, size: 20)),
-                            ),
+                            child: SvgPictureWidgets(svgString: "assets/svg_icons/back_button_svg.svg", size: 50.0),
                           ),
 
-                          Text('Enter your OTP here', style: AppTextStyles.title16),
-                          SizedBox(width: 6),
+                          Text('Enter your OTP here', style: AppTextStyles.title),
+                          AppSpacing.extraSmallHeight,
                         ],
                       ),
                       SizedBox(height: size.height * 0.025),
-                      Text('An OTP has been sent to +91 8521589658', style: AppTextStyles.title16),
+                      Text('An OTP has been sent to +91 8521589658', style: AppTextStyles.blackBoldText15),
                       SizedBox(height: size.height * 0.025),
                       InkWell(
                         onTap: () {
@@ -150,11 +144,15 @@ class _OtpScreenState extends State<OtpScreen> {
                       SizedBox(height: size.height * 0.025),
                       // Google Sign-in
                       Center(
-                        child: OutlinedButton.icon(
-                          onPressed: () {},
-                          icon: Icon(Icons.add),
-                          label: Padding(padding: AppSpacing.allPadding8, child: Image.asset("assets/images/googleSign.png")),
-                          style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SvgPictureWidgets(svgString: "assets/svg_icons/google_icon_svg.svg", size: 30.0),
+                            AppSpacing.smallWidth10,
+                            Text("Sign in with Google", style: AppTextStyles.blackBoldText15),
+                          ],
                         ),
                       ),
                       SizedBox(height: size.height * 0.025),

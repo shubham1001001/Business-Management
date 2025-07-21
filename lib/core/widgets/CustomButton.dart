@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/text_styles.dart';
+
 class CustomButton extends StatelessWidget {
   final String text;
   final double widthFactor;
@@ -19,6 +21,7 @@ class CustomButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
+            textStyle: AppTextStyles.customButtonTextStyle,
             backgroundColor: colors,
             padding: EdgeInsets.symmetric(vertical: verticalPadding),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),

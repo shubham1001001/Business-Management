@@ -59,7 +59,7 @@ class RecordScreen extends StatelessWidget {
                   height: isLandscape ? screenHeight * 0.4 : screenHeight * 0.15,
                   decoration: BoxDecoration(
                     color: AppColors.background,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: AppSpacing.kSmallRadius,
                     boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
                   ),
                   child: SizedBox(
@@ -68,7 +68,7 @@ class RecordScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       itemCount: tabs.length,
-                      separatorBuilder: (_, __) => const SizedBox(width: 20),
+                      separatorBuilder: (_, __) => AppSpacing.mediumWidth,
                       itemBuilder: (context, index) {
                         final double buttonSize = screenWidth * 0.11;
                         final tab = tabs[index].title;
@@ -84,7 +84,7 @@ class RecordScreen extends StatelessWidget {
                                 decoration: BoxDecoration(color: isSelected ? AppColors.redColor : Colors.grey.shade200, borderRadius: BorderRadius.circular(8)),
                                 child: Padding(padding: const EdgeInsets.only(left: 5, top: 8), child: tabs[index].Images),
                               ),
-                              const SizedBox(height: 4),
+                              AppSpacing.extraSmallHeight,
                               Text(tabs[index].title, style: AppTextStyles.titleListTile),
                             ],
                           ),
@@ -113,7 +113,7 @@ class RecordScreen extends StatelessWidget {
                                 Navigator.of(context).pushNamed(AppRoutesName.purchaseBillOverviewScreen);
                               }
                             },
-                            child: Padding(padding: const EdgeInsets.all(5.0), child: buildCard(item)),
+                            child: Padding(padding: AppSpacing.allPadding5, child: buildCard(item)),
                           );
                         }).toList(),
                       ),
@@ -129,7 +129,7 @@ class RecordScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(provider.selectedTab == "Expenses" ? "Overview" : "${provider.selectedTab} List", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                          const SizedBox(height: 12),
+                          AppSpacing.smallHeight10,
                           // Sub Filter Chips
                           Row(
                             children: [
@@ -151,7 +151,7 @@ class RecordScreen extends StatelessWidget {
                                 }).toList(),
                               ),
                               Spacer(),
-                              Padding(padding: const EdgeInsets.all(8.0), child: Image.asset("assets/icons/Vector (3).png")),
+                              Padding(padding: AppSpacing.allPadding8, child: Image.asset("assets/icons/Vector (3).png")),
                             ],
                           ),
                           SizedBox(height: screenHeight * 0.026),
@@ -164,48 +164,62 @@ class RecordScreen extends StatelessWidget {
                                 final item = provider.listItems[index];
                                 return Padding(
                                   padding: const EdgeInsets.all(3.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: AppColors.cardClip,
-                                      borderRadius: BorderRadius.only(bottomRight: Radius.circular(12), topRight: Radius.circular(12), topLeft: Radius.circular(15), bottomLeft: Radius.circular(12)),
-                                      border: Border.all(color: Colors.grey),
-                                    ),
+                                  child: InkWell(
+                                    onTap: () {
+                                      final routeMap = {
+                                        "Expenses": AppRoutesName.expenseDetailsScreen,
+                                        // "case": AppRoutesName.caseDetailsScreen,
+                                        // "bank": AppRoutesName.bankDetailsScreen,
+                                      };
 
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.only(bottomRight: Radius.circular(12), topRight: Radius.circular(12), topLeft: Radius.circular(1), bottomLeft: Radius.circular(1)),
-                                          border: Border.all(color: Colors.white),
-                                        ),
-                                        child: Padding(
-                                          padding: AppSpacing.allPadding16,
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  color: AppColors.grey100,
-                                                  borderRadius: BorderRadius.circular(20),
-                                                  border: Border.all(color: Colors.white),
+                                      final route = routeMap[provider.selectedTab];
+                                      if (route != null) {
+                                        Navigator.pushNamed(context, route);
+                                      }
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: AppColors.cardClip,
+                                        borderRadius: BorderRadius.only(bottomRight: Radius.circular(12), topRight: Radius.circular(12), topLeft: Radius.circular(15), bottomLeft: Radius.circular(12)),
+                                        border: Border.all(color: Colors.grey),
+                                      ),
+
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 10),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.only(bottomRight: Radius.circular(12), topRight: Radius.circular(12), topLeft: Radius.circular(1), bottomLeft: Radius.circular(1)),
+                                            border: Border.all(color: Colors.white),
+                                          ),
+                                          child: Padding(
+                                            padding: AppSpacing.allPadding16,
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    color: AppColors.grey100,
+                                                    borderRadius: BorderRadius.circular(20),
+                                                    border: Border.all(color: Colors.white),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: AppSpacing.allPadding8,
+                                                    child: Icon(item.icon, size: 32, color: Colors.grey),
+                                                  ),
                                                 ),
-                                                child: Padding(
-                                                  padding: AppSpacing.allPadding8,
-                                                  child: Icon(item.icon, size: 32, color: Colors.grey),
+                                                AppSpacing.smallWidth10,
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(item.title, style: AppTextStyles.titleListTile),
+                                                      Text("${item.count} items", style: AppTextStyles.subtitleGrey),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                              const SizedBox(width: 12),
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(item.title, style: AppTextStyles.titleListTile),
-                                                    Text("${item.count} items", style: AppTextStyles.subtitleGrey),
-                                                  ],
-                                                ),
-                                              ),
-                                              const Icon(Icons.more_vert),
-                                            ],
+                                                const Icon(Icons.more_vert),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -247,7 +261,7 @@ class RecordScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.primary,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: AppSpacing.kSmallRadius,
         boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
       ),
       padding: AppSpacing.allPadding12,
@@ -255,7 +269,7 @@ class RecordScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(item.title, style: AppTextStyles.title16),
-          const SizedBox(height: 4),
+          AppSpacing.extraSmallHeight,
           Text("${item.count} items", style: AppTextStyles.greyText),
           const Spacer(),
           Align(

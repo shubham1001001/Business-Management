@@ -25,7 +25,7 @@ class VenderListScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, AppRoutesName.addVehicleScreen);
             },
             child: Text("Add Vendor", style: AppTextStyles.appBarRedBoldText),
           ),

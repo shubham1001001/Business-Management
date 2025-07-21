@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
-import '../../../core/constants/colors.dart';
-import '../../../core/constants/spacing.dart';
+import '../../../core/constants/svg_picture_widgets.dart';
+import '../../../core/widgets/custom_decorations.dart';
 
 class GenerateCart extends StatelessWidget {
   final String icon;
@@ -17,29 +18,29 @@ class GenerateCart extends StatelessWidget {
     final screenHeight = screen.height;
     final isLandscape = screenWidth > screenHeight;
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          // width: isLandscape ? screen.width * 0.3 : screen.width * 0.14,
-          // height: isLandscape ? screen.height * 0.5 : screen.height * 0.08,
-          decoration: BoxDecoration(
-            color: AppColors.cardColor,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
-          ),
-          child: Padding(
-            padding: AppSpacing.allPadding8,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(icon), // width: screen.width * 0.07
-                // SizedBox(height: screen.height * 0.001),
-              ],
-            ),
+          width: isLandscape ? screen.width * 0.06 : screen.width * 0.14,
+          height: isLandscape ? screen.width * 0.06 : screen.width * 0.14,
+          decoration: CustomDecorations.cardBoxDecoration,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: AppSpacing.allPadding5,
+                child: label != "Item"
+                    ? label != "Alert"
+                          ? SvgPictureWidgets(svgString: icon, size: 30.0)
+                          : Image.asset(icon)
+                    : Image.asset(icon),
+              ),
+              // Image.asset(icon, fit: BoxFit.fitWidth), //
+            ],
           ),
         ),
-        SizedBox(height: screen.height * 0.01),
+        AppSpacing.extraSmallHeight,
+        // SizedBox(height: screen.height * 0.01),
         Text(label, textAlign: TextAlign.center, style: AppTextStyles.textSize11),
       ],
     );

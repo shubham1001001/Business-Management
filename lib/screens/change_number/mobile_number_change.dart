@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
 import '../../core/constants/colors.dart';
@@ -59,7 +60,7 @@ class MobileNumberChange extends StatelessWidget {
               Center(
                 child: Column(
                   children: [
-                    Text("Enter your phone number", style: TextStyle(fontSize: 18)),
+                    Text("Enter your phone number", style: AppTextStyles.appBlackText18),
                     SizedBox(height: size.height * 0.02),
                     Text("+911234567890 is Your existing mobile number", style: AppTextStyles.greyText17),
                   ],
@@ -72,9 +73,9 @@ class MobileNumberChange extends StatelessWidget {
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                        borderRadius: BorderRadius.vertical(top: AppSpacing.rRadius20),
                       ),
                       child: SingleChildScrollView(
                         child: Column(
@@ -98,7 +99,8 @@ class MobileNumberChange extends StatelessWidget {
                                         width: size.width,
                                         onChanged: (value) {
                                           if (value != null) {
-                                            auth.updateCountryCode(value);
+                                            print(value);
+                                            auth.updateCountryCode(value.toString());
                                           }
                                         },
                                       );

@@ -72,7 +72,7 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
               return Expanded(
                 child: ListView.builder(
                   itemCount: provider.filteredOrders.length,
-                  padding: const EdgeInsets.all(12),
+                  padding: AppSpacing.allPadding12,
                   itemBuilder: (context, index) {
                     final order = provider.filteredOrders[index];
                     final statusColor = order.status == 'Draft' ? AppColors.redColor : AppColors.redColor;
@@ -123,7 +123,7 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 12),
+                                  AppSpacing.smallHeight10,
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -149,7 +149,7 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
                                       //       ),
                                       //     ],
                                       //   ),
-                                      SizedBox(width: 5),
+                                      AppSpacing.extraSmallWidth,
                                       // Row(
                                       //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       //
