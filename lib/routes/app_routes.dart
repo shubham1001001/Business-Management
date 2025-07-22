@@ -17,6 +17,7 @@ import '../screens/navigation_wrapper/navigation_wrapper.dart';
 import '../screens/pricing_preference/pricing_preference_screen.dart';
 import '../screens/record/record_screen.dart';
 import '../screens/report/report_screen.dart';
+import '../screens/set_distance/set_distance_screen.dart';
 import '../screens/signup/signup_screen.dart';
 import '../screens/vehicle_overview/vehicle_overview_screen.dart';
 import '../screens/vender_details/vender_detail_screen.dart';
@@ -72,6 +73,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => AddVehicleScreen());
       case AppRoutesName.vendorTimelineScreen:
         return MaterialPageRoute(builder: (_) => VendorTimelineScreen());
+      case AppRoutesName.setDistanceScreen:
+        return MaterialPageRoute(builder: (_) => SetDistanceScreen());
 
       default:
         return MaterialPageRoute(builder: (_) => NavigationWrapper());

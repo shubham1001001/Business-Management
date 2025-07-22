@@ -4,6 +4,7 @@ import 'package:sales/core/constants/text_styles.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../core/widgets/custom_input_field.dart';
 import '../../core/widgets/custom_outline_button.dart';
 import '../../providers/add_vehicle/add_vehicle_provider.dart';
@@ -68,7 +69,7 @@ class AddVehicleScreen extends StatelessWidget {
                 // Employee Type Dropdown
                 Container(
                   padding: AppSpacing.allPadding16,
-                  decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: BorderRadius.circular(12)),
+                  decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: AppSpacing.kSmallRadius),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -78,7 +79,7 @@ class AddVehicleScreen extends StatelessWidget {
                           AppSpacing.smallWidth10,
                           Row(
                             children: [
-                              Icon(Icons.date_range_outlined),
+                              SvgPictureWidgets(svgString: "assets/svg_icons/date_icon_svg.svg", size: 20.0),
                               AppSpacing.extraSmallWidth,
                               Text("12.02.2025", style: AppTextStyles.appRedText),
                             ],

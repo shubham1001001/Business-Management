@@ -5,7 +5,9 @@ import 'package:sales/providers/account_overview/account_overview_provider.dart'
 import 'package:sales/providers/account_summary_provider/account_summary_provider.dart';
 import 'package:sales/providers/add_account/add_account_provider.dart';
 import 'package:sales/providers/add_item_provider/add_item_proivder.dart';
+import 'package:sales/providers/add_purchase/add_purchase_provider.dart';
 import 'package:sales/providers/add_staf/add_staf_provider.dart';
+import 'package:sales/providers/add_transportation/add_transportation_provider.dart';
 import 'package:sales/providers/add_vehicle/add_vehicle_provider.dart';
 import 'package:sales/providers/auth_provider/email_provider/email_provider.dart';
 import 'package:sales/providers/auth_provider/number_change_provider/change_number_provider.dart';
@@ -22,6 +24,7 @@ import 'package:sales/providers/pricing_preference/pricing_preference_provider.d
 import 'package:sales/providers/profile_information_provider/profile_information_provider.dart';
 import 'package:sales/providers/purchase_bill_overview/purchase_bill_overview_provider.dart';
 import 'package:sales/providers/record_provider.dart';
+import 'package:sales/providers/set_distance/set_distance_provider.dart';
 import 'package:sales/providers/subscription_plan_provider/Subscription_plan_provider.dart';
 import 'package:sales/providers/support_provider/support_provider.dart';
 import 'package:sales/providers/tab_provider/tab_provider.dart';
@@ -70,6 +73,9 @@ void main() {
         ChangeNotifierProvider(create: (_) => AddVehicleProvider()),
         ChangeNotifierProvider(create: (_) => VendorCommentTimelineProvider()),
         ChangeNotifierProvider(create: (_) => ExpenseDetailProvider()),
+        ChangeNotifierProvider(create: (_) => AddTransportationProvider()),
+        ChangeNotifierProvider(create: (_) => AddPurchaseProvider()),
+        ChangeNotifierProvider(create: (_) => SetDistanceProvider()),
       ],
       child: const MyApp(),
     ),

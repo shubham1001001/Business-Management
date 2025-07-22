@@ -5,6 +5,7 @@ import 'package:sales/screens/pricing_preference/widgets/bottom_select_sheet_wid
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../core/widgets/custom_date_picker.dart';
 import '../../core/widgets/custom_input_field.dart';
 import '../../core/widgets/custom_outline_button.dart';
@@ -65,14 +66,16 @@ class PricingPreferenceScreen extends StatelessWidget {
                           if (date != null) provider.setDate(date);
                         },
                         child: Container(
+                          height: 55,
                           padding: AppSpacing.allPadding12,
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black),
                             borderRadius: AppSpacing.kLargeRadius,
                           ),
                           child: Row(
                             children: [
-                              const Icon(Icons.calendar_month, size: 18),
+                              SvgPictureWidgets(svgString: "assets/svg_icons/date_icon_svg.svg", size: 20.0),
                               AppSpacing.smallWidth,
                               Text(provider.selectedDate != null ? "${provider.selectedDate!.day.toString().padLeft(2, '0')}.${provider.selectedDate!.month.toString().padLeft(2, '0')}.${provider.selectedDate!.year}" : "Select date", style: const TextStyle(color: Colors.grey)),
                             ],

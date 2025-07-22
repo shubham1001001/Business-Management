@@ -16,6 +16,7 @@ class AppSpacing {
   static final BorderRadius kMediumRadius10 = BorderRadius.circular(10);
   static final BorderRadius kMediumRadius = BorderRadius.circular(8);
   static final BorderRadius kLargeRadius = BorderRadius.circular(5);
+  static final BorderRadius kChipRadius = BorderRadius.circular(17);
 
   //BorderRadius
 

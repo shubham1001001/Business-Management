@@ -4,7 +4,7 @@ class PricingPreferenceProvider with ChangeNotifier {
   String? selectedVendor;
   String selectedUnit = 'Unit';
   DateTime? selectedDate;
-  String sellingPrice = 'INR 1000 - once inputted';
+  String sellingPrice = 'INR';
   String purchasePrice = 'INR';
   String openingQty = 'Qty';
 

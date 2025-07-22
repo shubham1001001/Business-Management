@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sales/core/constants/spacing.dart';
+import 'package:sales/routes/app_routes_name.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/text_styles.dart';
@@ -24,7 +25,7 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, AppRoutesName.addPurchaseScreen);
             },
             child: Text("+ Add", style: AppTextStyles.appBarRedBoldText),
           ),

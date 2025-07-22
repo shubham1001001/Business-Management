@@ -8,7 +8,7 @@ import 'package:sales/core/widgets/terms_and_pravacy.dart';
 import '../../core/constants/spacing.dart';
 import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/Custom_message_widget.dart';
-import '../../core/widgets/custom_input_field.dart';
+import '../../core/widgets/custom_textfield_numder.dart';
 import '../../core/widgets/dropdown_widgets.dart';
 import '../../core/widgets/shimmer_widget_dropdown.dart';
 import '../../providers/auth_provider/signup_provider.dart';
@@ -91,6 +91,7 @@ class SignupScreen extends StatelessWidget {
                                 height: size.height,
                                 width: size.width,
                                 onChanged: (value) {
+                                  print(value);
                                   if (value != null) {
                                     auth.updateCountryCode(value.toString());
                                   }
@@ -102,15 +103,7 @@ class SignupScreen extends StatelessWidget {
                           SizedBox(height: size.height * 0.025),
 
                           /// Mobile Number Field
-                          CustomInputField(
-                            isEditable: true,
-                            keyboardType: TextInputType.phone,
-                            hintText: 'Mobile number',
-                            prefixText: provider.countryCode,
-                            isRequired: true, //
-                            errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number',
-                            onChanged: provider.updatePhone,
-                          ),
+                          MobileNumberField(errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number', onChanged: provider.updatePhone),
                           SizedBox(height: size.height * 0.035),
 
                           /// Get OTP Button
@@ -154,7 +147,7 @@ class SignupScreen extends StatelessWidget {
                             ),
                           ),
 
-                          SizedBox(height: size.height * 0.025),
+                          SizedBox(height: size.height * 0.06),
 
                           /// Terms and Privacy
                           const TermsAndPravacy(),

@@ -134,7 +134,7 @@ class _OtpScreenState extends State<OtpScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text("Resend OTP ", style: AppTextStyles.appRedBoldText13),
+                                Text("Resend OTP ", style: AppTextStyles.appLightRedBoldText),
                                 Text("in ${provider.remainingTime}s", style: AppTextStyles.blackBoldText13),
                               ],
                             ),
@@ -155,7 +155,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(height: size.height * 0.025),
+                      SizedBox(height: size.height * 0.05),
                       TermsAndPravacy(),
                     ],
                   ),

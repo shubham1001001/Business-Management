@@ -15,7 +15,7 @@ class AppTextStyles {
   static const appBarBlackBoldText = TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'OpenSans');
   static const appBarRedText = TextStyle(color: AppColors.redColor, fontFamily: 'OpenSans');
   static const backText = TextStyle(color: Colors.black, fontFamily: 'OpenSans');
-  static const greyText = TextStyle(color: Colors.grey, fontFamily: 'OpenSans');
+  static const greyText = TextStyle(fontWeight: FontWeight.w400, color: Colors.grey, fontFamily: 'OpenSans');
   static const backBoldText = TextStyle(color: AppColors.appBlackColor, fontWeight: FontWeight.bold, fontFamily: 'OpenSans');
   static const greyBoldText = TextStyle(color: AppColors.greyText, fontWeight: FontWeight.bold, fontFamily: 'OpenSans');
   static const greyBoldText20 = TextStyle(color: AppColors.greyText, fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'OpenSans');
@@ -27,6 +27,7 @@ class AppTextStyles {
   static const appRedText = TextStyle(color: AppColors.redColor, fontFamily: 'OpenSans');
   static const appRedBoldText = TextStyle(color: AppColors.redColor, fontWeight: FontWeight.bold, fontFamily: 'OpenSans');
   static const appRedBoldText13 = TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: AppColors.redColor, fontFamily: 'OpenSans');
+  static final appLightRedBoldText = TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.red.shade200, fontFamily: 'OpenSans');
   static const redBoldText = TextStyle(color: AppColors.redColor, fontWeight: FontWeight.bold, fontFamily: 'OpenSans');
   static const textSize13 = TextStyle(fontSize: 13, fontFamily: 'OpenSans');
   static const textSize11 = TextStyle(fontSize: 11, fontFamily: 'OpenSans');
@@ -51,10 +52,14 @@ class AppTextStyles {
     textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black),
   );
   static final customButtonTextStyle = GoogleFonts.openSans(textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600));
+  static final customButtonTextWhiteStyle = GoogleFonts.openSans(
+    color: Colors.white,
+    textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+  );
   static final heading1FontStyleText = GoogleFonts.openSans(
     textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: Color(0xFF655C4A)),
   );
   static final robotoFontStyleText = GoogleFonts.roboto(
-    textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: AppColors.redColor, decoration: TextDecoration.underline),
+    textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: AppColors.redColor),
   );
 }

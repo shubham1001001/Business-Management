@@ -118,16 +118,23 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           const Text("Total amount", style: AppTextStyles.backBoldText),
-                                          Text("₹100", style: AppTextStyles.backText),
+                                          Text.rich(
+                                            TextSpan(
+                                              children: [
+                                                TextSpan(text: "₹", style: AppTextStyles.greyText20),
+                                                TextSpan(text: " 100", style: AppTextStyles.greyBoldText),
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       ),
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.end,
-                                        children: [Text(DateFormat('dd.MM.yyyy').format(order.date), style: AppTextStyles.greyText12)],
+                                        children: [Text(DateFormat('dd.MM.yyyy').format(order.date), style: AppTextStyles.greyBoldText)],
                                       ),
                                     ],
                                   ),
-                                  AppSpacing.largeHeight,
+                                  AppSpacing.largeHeight40,
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -142,7 +149,7 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                                 TextSpan(text: "₹", style: AppTextStyles.greyText20),
                                                 TextSpan(
                                                   text: " ${order.balance}",
-                                                  style: TextStyle(color: balanceColor, fontWeight: FontWeight.bold),
+                                                  style: TextStyle(color: balanceColor, fontWeight: FontWeight.bold, fontSize: 15),
                                                 ),
                                               ],
                                             ),

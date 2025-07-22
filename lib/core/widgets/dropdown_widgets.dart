@@ -1,5 +1,6 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:sales/core/constants/spacing.dart';
 
 import '../../models/country_model.dart';
 
@@ -15,13 +16,13 @@ class CountryDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(5)),
-      width: width * 0.35,
+      decoration: BoxDecoration(border: Border.all(), borderRadius: AppSpacing.kLargeRadius),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          CountryCodePicker(onChanged: onChanged, initialSelection: '+91', showCountryOnly: false, showOnlyCountryWhenClosed: false, alignLeft: false),
-          Expanded(child: Icon(Icons.keyboard_arrow_down)),
+          CountryCodePicker(onChanged: onChanged, initialSelection: '+91', showCountryOnly: false, showOnlyCountryWhenClosed: true, alignLeft: false),
+          Icon(Icons.keyboard_arrow_down, size: 30),
+          AppSpacing.extraSmallWidth,
         ],
       ),
     );

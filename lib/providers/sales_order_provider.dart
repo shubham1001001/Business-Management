@@ -8,9 +8,7 @@ class SalesOrderProvider with ChangeNotifier {
   final List<SalesOrder> _orders = [
     SalesOrder(customerName: 'Balan KP', totalAmount: 100250, balance: 33002, status: 'Draft', date: DateTime(2025, 2, 12)), //
     SalesOrder(customerName: 'Balan KP', totalAmount: 1000, balance: 100, status: 'Sold', date: DateTime(2025, 2, 12)),
-    SalesOrder(customerName: 'Balan KP', totalAmount: 1000, balance: 350, status: 'Pending', date: DateTime(2025, 2, 12)),
-    SalesOrder(customerName: 'Balan KP', totalAmount: 1000, balance: 570, status: 'Closed', date: DateTime(2025, 2, 12)),
-    SalesOrder(customerName: 'Balan KP', totalAmount: 1000, balance: 2770, status: 'Closed', date: DateTime(2025, 2, 12)),
+    SalesOrder(customerName: 'Balan KP', totalAmount: 1000, balance: 200, status: 'Sold', date: DateTime(2025, 2, 12)),
   ];
 
   List<SalesOrder> get filteredOrders {

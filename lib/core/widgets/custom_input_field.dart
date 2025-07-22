@@ -17,6 +17,7 @@ class CustomInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      cursorColor: Colors.black,
       maxLines: maxLines,
       enabled: isEditable,
       controller: controller,

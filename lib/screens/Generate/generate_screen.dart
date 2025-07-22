@@ -73,7 +73,7 @@ class GenerateBottomSheet extends StatelessWidget {
                   children: pageItems.map((item) {
                     return GestureDetector(
                       onTap: () {
-                        final routeMap = {'Vendor': AppRoutesName.venderListScreen, 'Staff': AppRoutesName.addStaffScreen, 'Vehicle': AppRoutesName.vehicleOverviewScreen, 'Account': AppRoutesName.accountSummaryScreen, 'Item': AppRoutesName.itemCreateScreen};
+                        final routeMap = {'Point': AppRoutesName.setDistanceScreen, 'Vendor': AppRoutesName.venderListScreen, 'Staff': AppRoutesName.addStaffScreen, 'Vehicle': AppRoutesName.vehicleOverviewScreen, 'Account': AppRoutesName.accountSummaryScreen, 'Item': AppRoutesName.itemCreateScreen};
 
                         final label = item['label'].toString();
                         final route = routeMap[label];

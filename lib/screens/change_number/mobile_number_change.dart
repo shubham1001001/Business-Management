@@ -7,14 +7,14 @@ import '../../core/constants/colors.dart';
 import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/Custom_message_widget.dart';
 import '../../core/widgets/app_header.dart';
-import '../../core/widgets/custom_input_field.dart';
+import '../../core/widgets/custom_textfield_numder.dart';
 import '../../core/widgets/dropdown_widgets.dart';
 import '../../core/widgets/shimmer_widget_dropdown.dart';
 import '../../providers/auth_provider/number_change_provider/change_number_provider.dart';
 import '../../routes/app_routes_name.dart';
 
 class MobileNumberChange extends StatelessWidget {
-  MobileNumberChange({Key? key}) : super(key: key);
+  const MobileNumberChange({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -106,52 +106,11 @@ class MobileNumberChange extends StatelessWidget {
                                       );
                                     },
                                   ),
-
-                                  // Consumer<ChangeNumberProvider>(
-                                  //   builder: (context, auth, _) {
-                                  //     final countries = auth.countries;
-                                  //     if (countries.isEmpty) {
-                                  //       return const Center(child: CircularProgressIndicator());
-                                  //     }
-                                  //
-                                  //     return CountryDropdown(
-                                  //       value: auth.countryCode,
-                                  //       countries: countries,
-                                  //       height: size.height,
-                                  //       width: size.width,
-                                  //       onChanged: (value) {
-                                  //         if (value != null) {
-                                  //           auth.updateCountryCode(value);
-                                  //         }
-                                  //       },
-                                  //     );
-                                  //   },
-                                  // ),
                                 ),
                               ],
                             ),
                             SizedBox(height: size.height * 0.025),
-                            // Mobile Input
-                            CustomInputField(
-                              isEditable: true,
-                              keyboardType: TextInputType.phone,
-                              hintText: 'Mobile number',
-                              prefixText: provider.countryCode,
-                              isRequired: true, //
-                              errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number',
-                              onChanged: provider.updatePhone,
-                            ),
-                            // TextField(
-                            //   keyboardType: TextInputType.phone,
-                            //   onChanged: provider.updatePhone,
-                            //   decoration: InputDecoration(
-                            //     prefixText: '${provider.countryCode} ',
-                            //     hintText: 'Mobile number',
-                            //     errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number',
-                            //     enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                            //     border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                            //   ),
-                            // ),
+                            MobileNumberField(errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number', onChanged: provider.updatePhone),
                             SizedBox(height: size.height * 0.025),
                             // OTP Button
                             CustomButton(
