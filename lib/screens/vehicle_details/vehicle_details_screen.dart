@@ -31,6 +31,7 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
     final statusBarHeight = MediaQuery.of(context).padding.top;
     final usableHeight = screenHeight - appBarHeight - statusBarHeight;
     return Scaffold(
+      backgroundColor: AppColors.redColor,
       appBar: AppBar(
         title: const Text("Vehicle Details", style: AppTextStyles.appBarWhiteText),
         backgroundColor: AppColors.redColor,
@@ -81,157 +82,167 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: AppSpacing.allPadding16,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: AppSpacing.kRadius25,
-                      border: Border.all(color: Colors.black),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ChoiceChip(
-                          label: const Text("Trip "),
-                          showCheckmark: false,
-                          padding: EdgeInsets.symmetric(horizontal: media.width * 0.14, vertical: media.height * 0.01),
-                          selected: provider.isTripSelected,
-                          onSelected: (val) => provider.toggleTab(true),
-                          selectedColor: AppColors.redColor,
-                          backgroundColor: Colors.transparent,
-                          labelStyle: TextStyle(color: provider.isTripSelected ? Colors.white : AppColors.appBlackColor, fontWeight: FontWeight.w500),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: AppSpacing.kChipRadius,
-                            side: BorderSide(color: Colors.white),
-                          ),
-                        ),
-                        SizedBox(width: media.width * 0.06),
-                        ChoiceChip(
-                          label: const Text("Vehicle"),
-                          showCheckmark: false,
-                          padding: EdgeInsets.symmetric(horizontal: media.width * 0.14, vertical: media.height * 0.01),
-                          selected: !provider.isTripSelected,
-                          onSelected: (val) => provider.toggleTab(false),
-                          selectedColor: AppColors.redColor,
-                          backgroundColor: Colors.transparent,
-                          labelStyle: TextStyle(color: !provider.isTripSelected ? Colors.white : AppColors.appBlackColor, fontWeight: FontWeight.w500),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            side: BorderSide(color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
                   ),
-                ),
-                SizedBox(height: media.height * 0.01),
-                Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsGeometry.only(left: 16),
-                      child: Container(
-                        width: 98,
-                        height: 40,
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: provider.selectedFilter,
-                            items: const [
-                              DropdownMenuItem(value: "Today", child: Text("Today")),
-                              DropdownMenuItem(value: "Week", child: Text("Week")),
-                              DropdownMenuItem(value: "Month", child: Text("Month")),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: AppSpacing.allPadding16,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: AppSpacing.kRadius25,
+                            border: Border.all(color: Colors.black),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ChoiceChip(
+                                label: const Text("Trip "),
+                                showCheckmark: false,
+                                padding: EdgeInsets.symmetric(horizontal: media.width * 0.14, vertical: media.height * 0.01),
+                                selected: provider.isTripSelected,
+                                onSelected: (val) => provider.toggleTab(true),
+                                selectedColor: AppColors.redColor,
+                                backgroundColor: Colors.transparent,
+                                labelStyle: TextStyle(color: provider.isTripSelected ? Colors.white : AppColors.appBlackColor, fontWeight: FontWeight.w500),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: AppSpacing.kChipRadius,
+                                  side: BorderSide(color: Colors.white),
+                                ),
+                              ),
+                              SizedBox(width: media.width * 0.06),
+                              ChoiceChip(
+                                label: const Text("Vehicle"),
+                                showCheckmark: false,
+                                padding: EdgeInsets.symmetric(horizontal: media.width * 0.14, vertical: media.height * 0.01),
+                                selected: !provider.isTripSelected,
+                                onSelected: (val) => provider.toggleTab(false),
+                                selectedColor: AppColors.redColor,
+                                backgroundColor: Colors.transparent,
+                                labelStyle: TextStyle(color: !provider.isTripSelected ? Colors.white : AppColors.appBlackColor, fontWeight: FontWeight.w500),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  side: BorderSide(color: Colors.white),
+                                ),
+                              ),
                             ],
-                            onChanged: (val) {
-                              if (val != null) provider.setFilter(val);
-                            },
-                            icon: const Icon(Icons.keyboard_arrow_down),
-                            isExpanded: true,
-                            style: AppTextStyles.backBoldText,
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const Divider(height: 1),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text("RXX BB 40080050", style: AppTextStyles.backText),
-                      SvgPictureWidgets(svgString: "assets/svg_icons/download_icon.svg", color: AppColors.redColor),
-                    ],
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("12.02.2025 - 12.02.2025", style: TextStyle(fontSize: 12)),
-                  ),
-                ),
-                SizedBox(height: media.height * 0.038),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Container(
-                    width: media.width * 0.93,
-                    height: media.height * 0.06,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(color: AppColors.headerTitleColor, borderRadius: BorderRadius.circular(5)),
-                    child: Row(
-                      children: const [
-                        Expanded(
-                          child: Text("Delivery point", style: TextStyle(fontWeight: FontWeight.bold)),
+                      SizedBox(height: media.height * 0.01),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsGeometry.only(left: 16),
+                            child: Container(
+                              width: 98,
+                              height: 40,
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String>(
+                                  value: provider.selectedFilter,
+                                  items: const [
+                                    DropdownMenuItem(value: "Today", child: Text("Today")),
+                                    DropdownMenuItem(value: "Week", child: Text("Week")),
+                                    DropdownMenuItem(value: "Month", child: Text("Month")),
+                                  ],
+                                  onChanged: (val) {
+                                    if (val != null) provider.setFilter(val);
+                                  },
+                                  icon: const Icon(Icons.keyboard_arrow_down),
+                                  isExpanded: true,
+                                  style: AppTextStyles.backBoldText,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Divider(height: 1),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text("RXX BB 40080050", style: AppTextStyles.backText),
+                            SvgPictureWidgets(svgString: "assets/svg_icons/download_icon.svg", color: AppColors.redColor),
+                          ],
                         ),
-                        Text("Amount", style: TextStyle(fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                  ),
-                ),
-                const Divider(),
-                SizedBox(
-                  height: usableHeight * 0.5,
-                  child: provider.isLoading
-                      ? const ShimmerLoader()
-                      : ListView.builder(
-                          itemCount: provider.tripList.length,
-                          itemBuilder: (context, index) {
-                            final item = provider.tripList[index];
-                            return Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("12.02.2025 - 12.02.2025", style: TextStyle(fontSize: 12)),
+                        ),
+                      ),
+                      SizedBox(height: media.height * 0.038),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Container(
+                          width: media.width * 0.93,
+                          height: media.height * 0.06,
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(color: AppColors.headerTitleColor, borderRadius: BorderRadius.circular(5)),
+                          child: Row(
+                            children: const [
+                              Expanded(
+                                child: Text("Delivery point", style: TextStyle(fontWeight: FontWeight.bold)),
+                              ),
+                              Text("Amount", style: TextStyle(fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const Divider(),
+                      SizedBox(
+                        height: usableHeight * 0.5,
+                        child: provider.isLoading
+                            ? const ShimmerLoader()
+                            : ListView.builder(
+                                itemCount: provider.tripList.length,
+                                itemBuilder: (context, index) {
+                                  final item = provider.tripList[index];
+                                  return Column(
                                     children: [
-                                      Flexible(
-                                        flex: 6,
-                                        child: Text(item.deliveryPoint, textAlign: TextAlign.left, style: AppTextStyles.greyBoldText),
-                                      ),
-                                      Flexible(
-                                        flex: 4,
-                                        child: Text.rich(
-                                          TextSpan(
-                                            children: [
-                                              TextSpan(text: "₹ ", style: AppTextStyles.black87Text20),
-                                              TextSpan(text: "${item.amount}", style: AppTextStyles.backText),
-                                            ],
-                                          ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Flexible(
+                                              flex: 6,
+                                              child: Text(item.deliveryPoint, textAlign: TextAlign.left, style: AppTextStyles.greyBoldText),
+                                            ),
+                                            Flexible(
+                                              flex: 4,
+                                              child: Text.rich(
+                                                TextSpan(
+                                                  children: [
+                                                    TextSpan(text: "₹ ", style: AppTextStyles.black87Text20),
+                                                    TextSpan(text: "${item.amount}", style: AppTextStyles.backText),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
+                                      const Divider(height: 0, thickness: 1, indent: 17, endIndent: 17, color: Colors.grey),
                                     ],
-                                  ),
-                                ),
-                                const Divider(height: 0, thickness: 1, indent: 17, endIndent: 17, color: Colors.grey),
-                              ],
-                            );
-                          },
-                        ),
+                                  );
+                                },
+                              ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
