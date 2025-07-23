@@ -5,6 +5,7 @@ import 'package:sales/core/constants/text_styles.dart';
 
 import '../../core/constants/spacing.dart';
 import '../../core/widgets/CustomButton.dart';
+import '../../core/widgets/custom_dropdown_widget.dart';
 import '../../core/widgets/custom_input_field.dart';
 import '../../providers/add_item_provider/add_item_proivder.dart';
 
@@ -25,7 +26,7 @@ class AddItemScreen extends StatelessWidget {
                 padding: AppSpacing.allPadding16,
                 child: Container(
                   padding: AppSpacing.allPadding16,
-                  decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: BorderRadius.circular(12)),
+                  decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: AppSpacing.kSmallRadius),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -50,16 +51,36 @@ class AddItemScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 _buildLabel("Unit"),
-                                DropdownButtonFormField<String>(
-                                  value: provider.unit,
-                                  decoration: _inputDecoration(),
-                                  items: ['nos', 'kg', 'ltr', 'box'].map((unit) {
-                                    return DropdownMenuItem(value: unit, child: Text(unit));
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    if (value != null) provider.updateUnit(value);
-                                  },
+                                Container(
+                                  height: 58, // Smaller height
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    borderRadius: AppSpacing.kMediumRadius10,
+                                    color: Colors.white,
+                                  ),
+                                  child: CustomDropdown<String>(
+                                    isExpanded: true,
+                                    value: provider.unit,
+                                    items: ['nos', 'kg', 'ltr', 'box'].map((unit) {
+                                      return DropdownMenuItem(value: unit, child: Text(unit));
+                                    }).toList(),
+                                    onChanged: (value) {
+                                      if (value != null) provider.updateUnit(value);
+                                    },
+                                  ),
                                 ),
+                                // DropdownButtonFormField<String>(
+                                //   value: provider.unit,
+                                //   decoration: _inputDecoration(),
+                                //   items: ['nos', 'kg', 'ltr', 'box'].map((unit) {
+                                //     return DropdownMenuItem(value: unit, child: Text(unit));
+                                //   }).toList(),
+                                //   onChanged: (value) {
+                                //     if (value != null) provider.updateUnit(value);
+                                //   },
+                                // ),
                               ],
                             ),
                           ),
@@ -112,7 +133,7 @@ class AddItemScreen extends StatelessWidget {
       hintText: hintText,
       filled: true,
       fillColor: Colors.white,
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+      border: OutlineInputBorder(borderRadius: AppSpacing.kMediumRadius),
       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
     );
   }

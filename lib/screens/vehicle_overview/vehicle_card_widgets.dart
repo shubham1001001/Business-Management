@@ -40,13 +40,13 @@ class VehicleCard extends StatelessWidget {
                     Row(
                       children: [
                         const Icon(Icons.fiber_manual_record, size: 10, color: Colors.grey),
-                        const SizedBox(width: 4),
+                        AppSpacing.extraSmallWidth,
                         Text(vehicle.distance, style: AppTextStyles.textSize13),
                       ],
                     ),
                   ],
                 ),
-                const SizedBox(height: 6),
+                AppSpacing.extraSmallWidth,
                 Row(
                   children: [
                     SizedBox(
@@ -59,7 +59,7 @@ class VehicleCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 6),
+                AppSpacing.extraSmallWidth,
                 Row(
                   children: [
                     SizedBox(

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
-import '../../core/constants/colors.dart';
-import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/Custom_message_widget.dart';
 import '../../core/widgets/app_header.dart';
-import '../../core/widgets/custom_input_field.dart';
+import '../../core/widgets/custom_auth_button.dart';
+import '../../core/widgets/custom_textfield_numder.dart';
 import '../../core/widgets/dropdown_widgets.dart';
 import '../../core/widgets/shimmer_widget_dropdown.dart';
 import '../../providers/auth_provider/number_change_provider/change_number_provider.dart';
 import '../../routes/app_routes_name.dart';
 
 class MobileNumberChange extends StatelessWidget {
-  MobileNumberChange({Key? key}) : super(key: key);
+  const MobileNumberChange({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class MobileNumberChange extends StatelessWidget {
               Center(
                 child: Column(
                   children: [
-                    Text("Enter your phone number", style: TextStyle(fontSize: 18)),
+                    Text("Enter your phone number", style: AppTextStyles.appBlackText18),
                     SizedBox(height: size.height * 0.02),
                     Text("+911234567890 is Your existing mobile number", style: AppTextStyles.greyText17),
                   ],
@@ -72,9 +72,9 @@ class MobileNumberChange extends StatelessWidget {
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                        borderRadius: BorderRadius.vertical(top: AppSpacing.rRadius20),
                       ),
                       child: SingleChildScrollView(
                         child: Column(
@@ -98,71 +98,32 @@ class MobileNumberChange extends StatelessWidget {
                                         width: size.width,
                                         onChanged: (value) {
                                           if (value != null) {
-                                            auth.updateCountryCode(value);
+                                            print(value);
+                                            auth.updateCountryCode(value.toString());
                                           }
                                         },
                                       );
                                     },
                                   ),
-
-                                  // Consumer<ChangeNumberProvider>(
-                                  //   builder: (context, auth, _) {
-                                  //     final countries = auth.countries;
-                                  //     if (countries.isEmpty) {
-                                  //       return const Center(child: CircularProgressIndicator());
-                                  //     }
-                                  //
-                                  //     return CountryDropdown(
-                                  //       value: auth.countryCode,
-                                  //       countries: countries,
-                                  //       height: size.height,
-                                  //       width: size.width,
-                                  //       onChanged: (value) {
-                                  //         if (value != null) {
-                                  //           auth.updateCountryCode(value);
-                                  //         }
-                                  //       },
-                                  //     );
-                                  //   },
-                                  // ),
                                 ),
                               ],
                             ),
                             SizedBox(height: size.height * 0.025),
-                            // Mobile Input
-                            CustomInputField(
-                              isEditable: true,
-                              keyboardType: TextInputType.phone,
-                              hintText: 'Mobile number',
-                              prefixText: provider.countryCode,
-                              isRequired: true, //
-                              errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number',
-                              onChanged: provider.updatePhone,
-                            ),
-                            // TextField(
-                            //   keyboardType: TextInputType.phone,
-                            //   onChanged: provider.updatePhone,
-                            //   decoration: InputDecoration(
-                            //     prefixText: '${provider.countryCode} ',
-                            //     hintText: 'Mobile number',
-                            //     errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number',
-                            //     enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                            //     border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                            //   ),
-                            // ),
+                            MobileNumberField(errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number', onChanged: provider.updatePhone),
                             SizedBox(height: size.height * 0.025),
                             // OTP Button
-                            CustomButton(
-                              colors: AppColors.redColor,
-                              text: 'Get OTP',
-                              onPressed: () {
-                                if (provider.phone.length >= 10) {
-                                  Navigator.of(context).pushNamed(AppRoutesName.changeNumberOtpscreen, arguments: provider.phone);
-                                  CustomSnackbar.show(context, message: "Sent OTP", type: MessageType.success);
-                                } else {
-                                  CustomSnackbar.show(context, message: "Please Inter Mobile Number", type: MessageType.error);
-                                }
-                              },
+                            Center(
+                              child: CustomAuthButton(
+                                text: "Get OTP",
+                                onTap: () {
+                                  if (provider.phone.length >= 10) {
+                                    Navigator.of(context).pushNamed(AppRoutesName.changeNumberOtpscreen, arguments: provider.phone);
+                                    CustomSnackbar.show(context, message: "Sent OTP", type: MessageType.success);
+                                  } else {
+                                    CustomSnackbar.show(context, message: "Please Inter Mobile Number", type: MessageType.error);
+                                  }
+                                },
+                              ),
                             ),
                           ],
                         ),

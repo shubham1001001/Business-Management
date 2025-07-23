@@ -5,6 +5,7 @@ import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
 import '../../core/constants/colors.dart';
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../providers/sales_order_provider.dart';
 
 class SalesOrderOverviewScreen extends StatelessWidget {
@@ -62,7 +63,7 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                         }).toList(),
                       ),
                     ),
-                    Icon(Icons.info_outline_rounded, size: 30),
+                    SvgPictureWidgets(svgString: "assets/svg_icons/info_icon.svg", color: AppColors.appBlackColor, size: 26.0),
                   ],
                 ),
               );
@@ -77,7 +78,8 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                   padding: AppSpacing.allPadding12,
                   itemBuilder: (context, index) {
                     final order = provider.filteredOrders[index];
-                    final statusColor = order.status == 'Draft' ? AppColors.redColor : Colors.green;
+                    final statusColor = order.status == 'Draft' ? AppColors.warningRedColor : Colors.green;
+                    final balanceColor = order.status == 'Sold' || order.status == 'Draft' ? AppColors.warningRedColor : Colors.green;
 
                     return Padding(
                       padding: AppSpacing.allPadding8,
@@ -116,19 +118,23 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           const Text("Total amount", style: AppTextStyles.backBoldText),
-                                          Text("₹100", style: AppTextStyles.backText),
+                                          Text.rich(
+                                            TextSpan(
+                                              children: [
+                                                TextSpan(text: "₹", style: AppTextStyles.greyText20),
+                                                TextSpan(text: " 100", style: AppTextStyles.greyBoldText),
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       ),
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.end,
-                                        children: [
-                                          Text("0001", style: AppTextStyles.greyText12),
-                                          Text(DateFormat('dd.MM.yyyy').format(order.date), style: AppTextStyles.greyText12),
-                                        ],
+                                        children: [Text(DateFormat('dd.MM.yyyy').format(order.date), style: AppTextStyles.greyBoldText)],
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 12),
+                                  AppSpacing.largeHeight40,
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -137,10 +143,24 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           const Text("Customer balance ", style: AppTextStyles.backBoldText),
-                                          Text(
-                                            "₹${order.balance}",
-                                            style: TextStyle(color: statusColor, fontWeight: FontWeight.bold),
+                                          Text.rich(
+                                            TextSpan(
+                                              children: [
+                                                TextSpan(text: "₹", style: AppTextStyles.greyText20),
+                                                TextSpan(
+                                                  text: " ${order.balance}",
+                                                  style: TextStyle(color: balanceColor, fontWeight: FontWeight.bold, fontSize: 15),
+                                                ),
+                                              ],
+                                            ),
                                           ),
+                                          // Text(
+                                          //  ,
+                                          //   style: TextStyle(color: balanceColor, fontWeight: FontWeight.bold),
+                                          // ),  Text(
+                                          //   "₹${order.balance}",
+                                          //   style: TextStyle(color: balanceColor, fontWeight: FontWeight.bold),
+                                          // ),
                                         ],
                                       ),
                                       if (order.status == 'Draft')
@@ -154,7 +174,7 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                      SizedBox(width: 5),
+                                      AppSpacing.extraSmallWidth,
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
@@ -164,12 +184,12 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                               order.status,
                                               style: TextStyle(color: statusColor, fontWeight: FontWeight.bold),
                                             ),
-                                          const SizedBox(width: 10),
+                                          AppSpacing.smallHeight10,
                                           if (order.status == 'Draft')
                                             OutlinedButton(
                                               onPressed: () {},
                                               style: OutlinedButton.styleFrom(
-                                                foregroundColor: AppColors.appBackColor, // text/icon color
+                                                foregroundColor: AppColors.appBlackColor, // text/icon color
                                                 side: const BorderSide(color: Colors.grey), // 👈 outline color
                                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
                                                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),

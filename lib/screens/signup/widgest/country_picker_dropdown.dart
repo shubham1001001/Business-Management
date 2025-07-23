@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sales/core/constants/spacing.dart';
 
 import '../../../providers/auth_provider/signup_provider.dart';
 
@@ -19,7 +20,7 @@ class CountryPickerDropdown extends StatelessWidget {
         return DropdownButtonFormField<String>(
           value: auth.countryCode,
           decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+            border: OutlineInputBorder(borderRadius: AppSpacing.kMediumRadius),
             contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: MediaQuery.of(context).size.height * 0.015),
           ),
           items: countries.map((country) {

@@ -4,6 +4,7 @@ import 'package:sales/core/constants/colors.dart';
 import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/providers/subscription_plan_provider/Subscription_plan_provider.dart';
 
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/text_scale_widgets.dart';
 
@@ -24,9 +25,9 @@ class SubscriptionPlanScreen extends StatelessWidget {
             padding: EdgeInsets.only(right: 16),
             child: Row(
               children: [
-                Icon(Icons.info_outline, color: AppColors.redColor),
+                SvgPictureWidgets(svgString: "assets/svg_icons/info_icon.svg", color: AppColors.redColor, size: 20.0),
                 SizedBox(width: 4),
-                Text('Plan info', style: AppTextStyles.appBarRedText),
+                Text('Plan info', style: AppTextStyles.appBarRedBoldText),
               ],
             ),
           ),

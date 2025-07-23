@@ -4,7 +4,9 @@ class AppColors {
   static const Color primary = Color(0xFFFEEEEEE);
   static const Color cardClip = Color(0xFFF9a9a9a);
   static const Color redColor = Color(0xFFF9e2a2f);
-  static const Color appBackColor = Colors.black;
+  static const Color lightAppRedColor = Color(0xFFFFCDD2);
+  static const Color warningRedColor = Colors.red;
+  static const Color appBlackColor = Colors.black;
   static const Color background = Colors.white;
   static const Color draft = Color(0xFFF9E2A2F);
   static const Color sold = Colors.green;
@@ -15,6 +17,8 @@ class AppColors {
   static Color backgroundColor = const Color(0xFFe2dede);
   static Color cardColor = const Color(0xFFefeded);
   static Color cardmainColor = const Color(0xFFededed);
+  static Color playButtonColor = const Color(0xFFD9D9D9);
+  static Color headerTitleColor = const Color(0xFFDFD8D8);
 }
 
 // class AppColors {

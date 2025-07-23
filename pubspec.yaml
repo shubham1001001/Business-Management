@@ -43,6 +43,11 @@ dependencies:
   image_picker: ^1.1.2
   dotted_border: ^2.0.0
   shimmer: ^3.0.0
+  flutter_svg: ^2.2.0
+  google_fonts: ^6.2.1
+  audio_waveform_view: ^1.0.0
+  country_pickers: ^3.0.1
+
 
 
 
@@ -73,6 +78,7 @@ flutter:
     - assets/
     - assets/icons/
     - assets/images/
+    - assets/svg_icons/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -86,17 +92,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/Open_Sans/static/OpenSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Open_Sans/static/OpenSans-SemiBold.ttf
+          weight: 600
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

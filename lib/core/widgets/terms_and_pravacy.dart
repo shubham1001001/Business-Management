@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-
-import '../constants/colors.dart';
+import 'package:sales/core/constants/text_styles.dart';
 
 class TermsAndPravacy extends StatelessWidget {
   const TermsAndPravacy({Key? key}) : super(key: key);
@@ -11,15 +10,9 @@ class TermsAndPravacy extends StatelessWidget {
       child: Text.rich(
         TextSpan(
           children: [
-            TextSpan(
-              text: 'Terms and condition',
-              style: TextStyle(color: AppColors.redColor, decoration: TextDecoration.underline),
-            ),
+            TextSpan(text: 'Terms and condition', style: AppTextStyles.robotoFontStyleText),
             TextSpan(text: '   |   '),
-            TextSpan(
-              text: 'Privacy policy',
-              style: TextStyle(color: AppColors.redColor, decoration: TextDecoration.underline),
-            ),
+            TextSpan(text: 'Privacy policy', style: AppTextStyles.robotoFontStyleText),
           ],
         ),
         textAlign: TextAlign.center,

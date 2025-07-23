@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sales/core/constants/colors.dart';
+import 'package:sales/core/constants/svg_picture_widgets.dart';
 import 'package:sales/screens/navigation_wrapper/tab_navigator.dart';
 
 import '../../providers/tab_provider/tab_provider.dart';
@@ -38,19 +40,35 @@ class NavigationWrapper extends StatelessWidget {
               TabNavigator(tabName: 'More', navigatorKey: navigatorKeys['More']!),
             ],
           ),
+
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentIndex,
             type: BottomNavigationBarType.fixed,
             showUnselectedLabels: true,
-            selectedItemColor: Colors.red,
+            selectedItemColor: AppColors.redColor,
             unselectedItemColor: Colors.black87,
             onTap: (index) => tabProvider.changeTab(index, context, () => _showGenerateBottomSheet(context)),
             items: [
-              BottomNavigationBarItem(icon: Icon(tab == "Home" ? Icons.home : Icons.home_outlined), label: 'Home'),
-              BottomNavigationBarItem(icon: Icon(tab == "Report" ? Icons.insert_chart : Icons.insert_chart_outlined), label: 'Report'),
-              BottomNavigationBarItem(icon: Icon(tab == "Generate" ? Icons.add_circle : Icons.add_circle_outline), label: 'Generate'),
-              BottomNavigationBarItem(icon: Icon(tab == "Record" ? Icons.dns_rounded : Icons.dns_outlined), label: 'Record'),
-              BottomNavigationBarItem(icon: Icon(tab == "More" ? Icons.more : Icons.more_outlined), label: 'More'),
+              BottomNavigationBarItem(
+                icon: tab == "Home" ? SvgPictureWidgets(svgString: "assets/svg_icons/home_icon_fill.svg", color: AppColors.redColor) : SvgPictureWidgets(svgString: "assets/svg_icons/home_icon.svg", color: AppColors.appBlackColor),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: tab == "Report" ? SvgPictureWidgets(svgString: "assets/svg_icons/report_icon_fill.svg", color: AppColors.redColor) : SvgPictureWidgets(svgString: "assets/svg_icons/report_icon.svg", color: AppColors.appBlackColor),
+                label: 'Report',
+              ),
+              BottomNavigationBarItem(
+                icon: tab == "Generate" ? SvgPictureWidgets(svgString: "assets/svg_icons/generate_icon_fill.svg", color: AppColors.redColor) : SvgPictureWidgets(svgString: "assets/svg_icons/generate_icon.svg", color: AppColors.appBlackColor),
+                label: 'Generate',
+              ),
+              BottomNavigationBarItem(
+                icon: tab == "Record" ? SvgPictureWidgets(svgString: "assets/svg_icons/record_icon.svg", color: AppColors.redColor) : SvgPictureWidgets(svgString: "assets/svg_icons/record_icon_svg2.svg", color: AppColors.appBlackColor),
+                label: 'Record',
+              ),
+              BottomNavigationBarItem(
+                icon: tab == "More" ? SvgPictureWidgets(svgString: "assets/svg_icons/more_icon_fill.svg", color: AppColors.redColor) : SvgPictureWidgets(svgString: "assets/svg_icons/more_icon.svg", color: AppColors.appBlackColor),
+                label: 'More',
+              ),
             ],
           ),
         );

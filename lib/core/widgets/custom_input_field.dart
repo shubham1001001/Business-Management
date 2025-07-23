@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/text_styles.dart';
+
 class CustomInputField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType keyboardType;
@@ -15,12 +17,14 @@ class CustomInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      cursorColor: Colors.black,
       maxLines: maxLines,
       enabled: isEditable,
       controller: controller,
       keyboardType: keyboardType,
       onChanged: onChanged,
       decoration: InputDecoration(
+        hintStyle: AppTextStyles.greyText,
         hintText: isRequired ? "$hintText" : hintText,
         prefix: Text(prefixText ?? 'test', style: TextStyle(color: Colors.black)),
         errorText: errorText,

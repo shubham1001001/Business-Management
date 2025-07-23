@@ -3,10 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/providers/auth_provider/email_provider/email_provider.dart';
 
-import '../../core/constants/colors.dart';
-import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/Custom_message_widget.dart';
 import '../../core/widgets/app_header.dart';
+import '../../core/widgets/custom_auth_button.dart';
 import '../../core/widgets/custom_input_field.dart';
 import '../../routes/app_routes_name.dart';
 
@@ -34,7 +33,7 @@ class EmailChangeScreen extends StatelessWidget {
               Center(
                 child: Column(
                   children: [
-                    Text("Enter your Email ID", style: TextStyle(fontSize: 18)),
+                    Text("Enter your Email ID", style: AppTextStyles.appBlackText18),
                     SizedBox(height: size.height * 0.02),
                     Text("is Your Current Email ID", style: AppTextStyles.greyText17),
                   ],
@@ -81,18 +80,19 @@ class EmailChangeScreen extends StatelessWidget {
 
                         SizedBox(height: size.height * 0.025),
                         // OTP Button
-                        CustomButton(
-                          colors: AppColors.redColor,
-                          text: 'Get OTP',
-                          onPressed: () {
-                            final auth = Provider.of<EmailProvider>(context, listen: false);
-                            if (auth.emailError == null) {
-                              CustomSnackbar.show(context, message: "Sent OTP", type: MessageType.success);
-                              Navigator.of(context).pushNamed(AppRoutesName.emailChangeScreenOtp, arguments: auth.email);
-                            } else {
-                              CustomSnackbar.show(context, message: "Please Inter Valid Email", type: MessageType.error);
-                            }
-                          },
+                        Center(
+                          child: CustomAuthButton(
+                            text: "Get OTP",
+                            onTap: () {
+                              final auth = Provider.of<EmailProvider>(context, listen: false);
+                              if (auth.emailError == null) {
+                                CustomSnackbar.show(context, message: "Sent OTP", type: MessageType.success);
+                                Navigator.of(context).pushNamed(AppRoutesName.emailChangeScreenOtp, arguments: auth.email);
+                              } else {
+                                CustomSnackbar.show(context, message: "Please Inter Valid Email", type: MessageType.error);
+                              }
+                            },
+                          ),
                         ),
                       ],
                     ),

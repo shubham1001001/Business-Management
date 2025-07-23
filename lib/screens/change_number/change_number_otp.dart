@@ -5,9 +5,9 @@ import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/screens/otp_screen/widgets/otp_widgets.dart';
 
-import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/Custom_message_widget.dart';
 import '../../core/widgets/app_header.dart';
+import '../../core/widgets/custom_auth_button.dart';
 import '../../providers/otp_provider/countdown_provider.dart';
 import '../../routes/app_routes_name.dart';
 
@@ -81,13 +81,13 @@ class _OtpScreenState extends State<ChangeNumberOtp> {
                               Navigator.of(context).pushNamed(AppRoutesName.home);
                             },
                             child: Container(
-                              decoration: BoxDecoration(color: AppColors.grey100, borderRadius: BorderRadius.all(Radius.circular(10))),
+                              decoration: BoxDecoration(color: AppColors.grey100, borderRadius: BorderRadius.all(AppSpacing.rMediumRadius10)),
                               child: Padding(padding: AppSpacing.allPadding16, child: Icon(Icons.arrow_back, size: 20)),
                             ),
                           ),
 
                           Text('Enter your OTP here', style: AppTextStyles.title16),
-                          SizedBox(width: 6),
+                          AppSpacing.extraSmallWidth,
                         ],
                       ),
                       SizedBox(height: size.height * 0.025),
@@ -105,19 +105,20 @@ class _OtpScreenState extends State<ChangeNumberOtp> {
                       OtpInputScreen(controllers: controllers),
                       SizedBox(height: size.height * 0.025),
                       // OTP Button
-                      CustomButton(
-                        colors: AppColors.redColor,
-                        text: 'Submit',
-                        onPressed: () {
-                          String otp = controllers.map((controller) => controller.text).join();
-                          if (otp.length == 4) {
-                            Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesName.home, (route) => false);
-                            CustomSnackbar.show(context, message: "success", type: MessageType.success);
-                            print(otp);
-                          } else {
-                            CustomSnackbar.show(context, message: "Please Inter OTP", type: MessageType.error);
-                          }
-                        },
+                      Center(
+                        child: CustomAuthButton(
+                          text: "Submit",
+                          onTap: () {
+                            String otp = controllers.map((controller) => controller.text).join();
+                            if (otp.length == 4) {
+                              Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesName.home, (route) => false);
+                              CustomSnackbar.show(context, message: "success", type: MessageType.success);
+                              print(otp);
+                            } else {
+                              CustomSnackbar.show(context, message: "Please Inter OTP", type: MessageType.error);
+                            }
+                          },
+                        ),
                       ),
 
                       SizedBox(height: size.height * 0.025),

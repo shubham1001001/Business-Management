@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sales/core/constants/colors.dart';
+import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/core/widgets/app_header.dart';
 import 'package:sales/screens/otp_screen/widgets/otp_widgets.dart';
 
-import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/Custom_message_widget.dart';
+import '../../core/widgets/custom_auth_button.dart';
 import '../../providers/otp_provider/countdown_provider.dart';
 import '../../routes/app_routes_name.dart';
 
@@ -61,9 +62,9 @@ class _OtpScreenState extends State<EmailChangeScreenOtp> {
                 width: double.infinity,
                 height: size.height * 0.6,
                 padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                  borderRadius: BorderRadius.vertical(top: AppSpacing.rRadius20),
                 ),
                 child: SingleChildScrollView(
                   child: Column(
@@ -78,13 +79,13 @@ class _OtpScreenState extends State<EmailChangeScreenOtp> {
                               Navigator.of(context).pushNamed(AppRoutesName.home);
                             },
                             child: Container(
-                              decoration: BoxDecoration(color: AppColors.grey100, borderRadius: BorderRadius.all(Radius.circular(10))),
-                              child: Padding(padding: const EdgeInsets.all(15.0), child: Icon(Icons.arrow_back, size: 20)),
+                              decoration: BoxDecoration(color: AppColors.grey100, borderRadius: BorderRadius.all(AppSpacing.rMediumRadius10)),
+                              child: Padding(padding: AppSpacing.allPadding16, child: Icon(Icons.arrow_back, size: 20)),
                             ),
                           ),
 
                           Text('Enter your OTP here', style: AppTextStyles.title16),
-                          SizedBox(width: 6),
+                          AppSpacing.extraSmallWidth,
                         ],
                       ),
                       SizedBox(height: size.height * 0.025),
@@ -102,19 +103,20 @@ class _OtpScreenState extends State<EmailChangeScreenOtp> {
                       OtpInputScreen(controllers: controllers),
                       SizedBox(height: size.height * 0.025),
                       // OTP Button
-                      CustomButton(
-                        colors: AppColors.redColor,
-                        text: 'Submit',
-                        onPressed: () {
-                          String otp = controllers.map((controller) => controller.text).join();
-                          if (otp.length == 4) {
-                            Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesName.home, (route) => false);
-                            CustomSnackbar.show(context, message: "success", type: MessageType.success);
-                            print(otp);
-                          } else {
-                            CustomSnackbar.show(context, message: "Please Inter OTP", type: MessageType.error);
-                          }
-                        },
+                      Center(
+                        child: CustomAuthButton(
+                          text: "Submit",
+                          onTap: () {
+                            String otp = controllers.map((controller) => controller.text).join();
+                            if (otp.length == 4) {
+                              Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesName.home, (route) => false);
+                              CustomSnackbar.show(context, message: "success", type: MessageType.success);
+                              print(otp);
+                            } else {
+                              CustomSnackbar.show(context, message: "Please Inter OTP", type: MessageType.error);
+                            }
+                          },
+                        ),
                       ),
 
                       SizedBox(height: size.height * 0.025),
@@ -131,10 +133,7 @@ class _OtpScreenState extends State<EmailChangeScreenOtp> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(
-                                  "Resend OTP ",
-                                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: AppColors.redColor),
-                                ),
+                                Text("Resend OTP ", style: AppTextStyles.appRedBoldText13),
                                 Text("in ${provider.remainingTime}s", style: AppTextStyles.blackBoldText13),
                               ],
                             ),

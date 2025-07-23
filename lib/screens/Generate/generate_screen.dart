@@ -9,22 +9,23 @@ class GenerateBottomSheet extends StatelessWidget {
   GenerateBottomSheet({super.key});
   final items = [
     {'label': 'Item', 'icon': "assets/icons/g1.png"},
-    {'label': 'Account', 'icon': "assets/icons/g2.png"},
-    {'label': 'Vehicle', 'icon': "assets/icons/g3.png"},
-    {'label': 'Unit', 'icon': "assets/icons/g04.png"},
-    {'label': 'Vendor', 'icon': "assets/icons/g5.png"}, //
-    {'label': 'Customer', 'icon': "assets/icons/g6.png"},
-    {'label': 'Warehouse', 'icon': "assets/icons/g7.png"},
-    {'label': 'Point', 'icon': "assets/icons/g8.png"},
+    {'label': 'Account', 'icon': "assets/svg_icons/generate_account_icon.svg"},
+    {'label': 'Vehicle', 'icon': "assets/svg_icons/generate_vehicle_icon.svg"},
+    {'label': 'Unit', 'icon': "assets/svg_icons/generate_unit_icon.svg"},
+    {'label': 'Vendor', 'icon': "assets/svg_icons/generate_vendor_icon.svg"}, //
+    {'label': 'Customer', 'icon': "assets/svg_icons/generate_customer_icon.svg"},
+    {'label': 'Warehouse', 'icon': "assets/svg_icons/generate_warehouse_icon.svg"},
+    {'label': 'Point', 'icon': "assets/svg_icons/generate_point_icon.svg"},
     {'label': 'Alert', 'icon': "assets/icons/g9.png"},
-    {'label': 'Staff', 'icon': "assets/icons/g10.png"},
+    {'label': 'Staff', 'icon': "assets/svg_icons/generate_staff_icon.svg"},
     // Add more if needed
   ];
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final screenWidth = size.width;
-
+    final screenHeight = size.height;
+    final isLandscape = screenWidth > screenHeight;
     List<List<Map<String, String>>> pages = [];
     for (int i = 0; i < items.length; i += 10) {
       pages.add(items.sublist(i, (i + 10 > items.length) ? items.length : i + 10));
@@ -43,7 +44,7 @@ class GenerateBottomSheet extends StatelessWidget {
 
           // PageView with 2-row layout
           SizedBox(
-            height: size.height * 0.35,
+            height: isLandscape ? size.height * 0.5 : size.height * 0.35,
             child: PageView.builder(
               scrollDirection: Axis.horizontal,
               controller: controller,
@@ -72,23 +73,14 @@ class GenerateBottomSheet extends StatelessWidget {
                   children: pageItems.map((item) {
                     return GestureDetector(
                       onTap: () {
-                        // context.read<GenerateProvider>().select(item['label'].toString(), context);
+                        final routeMap = {'Point': AppRoutesName.setDistanceScreen, 'Vendor': AppRoutesName.venderListScreen, 'Staff': AppRoutesName.addStaffScreen, 'Vehicle': AppRoutesName.vehicleOverviewScreen, 'Account': AppRoutesName.accountSummaryScreen, 'Item': AppRoutesName.itemCreateScreen};
 
-                        if (item['label'].toString() == 'Vendor') {
-                          Navigator.pop(context);
-                          Navigator.of(context).pushNamed(AppRoutesName.venderListScreen);
-                        }
-                        if (item['label'].toString() == 'Staff') {
-                          Navigator.pop(context);
-                          Navigator.of(context).pushNamed(AppRoutesName.addStaffScreen);
-                        }
-                        if (item['label'].toString() == 'Vehicle') {
-                          // Navigator.pop(context);
-                          Navigator.of(context).pushNamed(AppRoutesName.vehicleOverviewScreen);
-                        }
-                        if (item['label'].toString() == 'Account') {
-                          // Navigator.pop(context);
-                          Navigator.of(context).pushNamed(AppRoutesName.accountSummaryScreen);
+                        final label = item['label'].toString();
+                        final route = routeMap[label];
+
+                        if (route != null) {
+                          Navigator.pop(context); // only if needed
+                          Navigator.of(context).pushNamed(route);
                         }
                       },
                       child: GenerateCart(icon: item['icon'].toString(), label: item['label'].toString()),

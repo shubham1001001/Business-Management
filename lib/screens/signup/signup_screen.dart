@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sales/core/constants/colors.dart';
+import 'package:sales/core/constants/svg_picture_widgets.dart';
 import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/core/widgets/terms_and_pravacy.dart';
 
 import '../../core/constants/spacing.dart';
-import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/Custom_message_widget.dart';
-import '../../core/widgets/custom_input_field.dart';
+import '../../core/widgets/custom_auth_button.dart';
+import '../../core/widgets/custom_textfield_numder.dart';
 import '../../core/widgets/dropdown_widgets.dart';
 import '../../core/widgets/shimmer_widget_dropdown.dart';
 import '../../providers/auth_provider/signup_provider.dart';
@@ -35,9 +35,9 @@ class SignupScreen extends StatelessWidget {
               children: [
                 // Background image
                 SizedBox(
-                  height: size.height,
+                  height: size.height * 0.50,
                   width: size.width,
-                  child: Image.network("https://images.unsplash.com/photo-1536152470836-b943b246224c?w=500&auto=format&fit=crop&q=60", fit: BoxFit.cover),
+                  child: Image.asset("assets/images/signup_background.jpg", fit: BoxFit.cover),
                 ),
 
                 // Overlay
@@ -47,10 +47,7 @@ class SignupScreen extends StatelessWidget {
                 Positioned(
                   top: size.height * 0.1,
                   left: size.width * 0.05,
-                  child: const Text(
-                    'Bridging miles with\nmeaning',
-                    style: TextStyle(fontSize: 20, color: Colors.white70, fontWeight: FontWeight.w600),
-                  ),
+                  child: Column(children: [Text('Bridging miles with\nmeaning', style: AppTextStyles.heading1FontStyleText)]),
                 ),
 
                 // Main form
@@ -69,11 +66,11 @@ class SignupScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Row(
+                          Row(
                             children: [
-                              Icon(Icons.all_inclusive, size: 20),
-                              SizedBox(width: 6),
-                              Text('Company Name', style: AppTextStyles.title16),
+                              SvgPictureWidgets(svgString: "assets/svg_icons/company_icons_svg.svg", size: 18.0),
+                              AppSpacing.extraSmallWidth,
+                              Text('Company Name', style: AppTextStyles.openSansFontStyleTextW400),
                             ],
                           ),
 
@@ -93,8 +90,9 @@ class SignupScreen extends StatelessWidget {
                                 height: size.height,
                                 width: size.width,
                                 onChanged: (value) {
+                                  print(value);
                                   if (value != null) {
-                                    auth.updateCountryCode(value);
+                                    auth.updateCountryCode(value.toString());
                                   }
                                 },
                               );
@@ -104,29 +102,22 @@ class SignupScreen extends StatelessWidget {
                           SizedBox(height: size.height * 0.025),
 
                           /// Mobile Number Field
-                          CustomInputField(
-                            isEditable: true,
-                            keyboardType: TextInputType.phone,
-                            hintText: 'Mobile number',
-                            prefixText: provider.countryCode,
-                            isRequired: true, //
-                            errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number',
-                            onChanged: provider.updatePhone,
-                          ),
+                          MobileNumberField(errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number', onChanged: provider.updatePhone),
                           SizedBox(height: size.height * 0.035),
 
                           /// Get OTP Button
-                          CustomButton(
-                            colors: AppColors.redColor,
-                            text: 'Get OTP',
-                            onPressed: () {
-                              if (provider.isPhoneValid) {
-                                Navigator.of(context).pushNamed(AppRoutesName.optScreen);
-                                CustomSnackbar.show(context, message: "Sent OTP", type: MessageType.success);
-                              } else {
-                                CustomSnackbar.show(context, message: "Please enter a valid mobile number", type: MessageType.error);
-                              }
-                            },
+                          Center(
+                            child: CustomAuthButton(
+                              text: "Get OTP",
+                              onTap: () {
+                                if (provider.isPhoneValid) {
+                                  Navigator.of(context).pushNamed(AppRoutesName.optScreen);
+                                  CustomSnackbar.show(context, message: "Sent OTP", type: MessageType.success);
+                                } else {
+                                  CustomSnackbar.show(context, message: "Please enter a valid mobile number", type: MessageType.error);
+                                }
+                              },
+                            ),
                           ),
 
                           SizedBox(height: size.height * 0.04),
@@ -144,15 +135,19 @@ class SignupScreen extends StatelessWidget {
 
                           /// Google Sign-in
                           Center(
-                            child: OutlinedButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(Icons.add),
-                              label: Padding(padding: AppSpacing.allPadding8, child: Image.asset("assets/images/googleSign.png")),
-                              style: OutlinedButton.styleFrom(padding: const EdgeInsets.symmetric(vertical: 14)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SvgPictureWidgets(svgString: "assets/svg_icons/google_icon_svg.svg", size: 30.0),
+                                AppSpacing.smallWidth10,
+                                Text("Sign in with Google", style: AppTextStyles.blackBoldText15),
+                              ],
                             ),
                           ),
 
-                          SizedBox(height: size.height * 0.025),
+                          SizedBox(height: size.height * 0.06),
 
                           /// Terms and Privacy
                           const TermsAndPravacy(),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sales/core/constants/spacing.dart';
+import 'package:sales/routes/app_routes_name.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/text_styles.dart';
@@ -24,7 +25,7 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, AppRoutesName.addPurchaseScreen);
             },
             child: Text("+ Add", style: AppTextStyles.appBarRedBoldText),
           ),
@@ -72,7 +73,7 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
               return Expanded(
                 child: ListView.builder(
                   itemCount: provider.filteredOrders.length,
-                  padding: const EdgeInsets.all(12),
+                  padding: AppSpacing.allPadding12,
                   itemBuilder: (context, index) {
                     final order = provider.filteredOrders[index];
                     final statusColor = order.status == 'Draft' ? AppColors.redColor : AppColors.redColor;
@@ -123,7 +124,7 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 12),
+                                  AppSpacing.smallHeight10,
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -149,7 +150,7 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
                                       //       ),
                                       //     ],
                                       //   ),
-                                      SizedBox(width: 5),
+                                      AppSpacing.extraSmallWidth,
                                       // Row(
                                       //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       //

@@ -13,12 +13,13 @@ class QuickLinkScrollView extends StatelessWidget {
     final screenHeight = size.height;
     final isLandscape = screenWidth > screenHeight;
     final items = [
-      {'label': 'Sale order', 'icon': "assets/icons/Sales var.png"},
-      {'label': 'Item', 'icon': "assets/icons/q1.png"},
-      {'label': 'Day book', 'icon': "assets/icons/q2.png"},
-      {'label': 'Customer', 'icon': "assets/icons/q3.png"},
-      {'label': 'Rent', 'icon': "assets/icons/q4.png"},
-      {'label': 'Trip', 'icon': "assets/icons/q5.png"},
+      {'label': 'Sale order', 'icon': "assets/svg_icons/dashboard_sale_order.svg"},
+      {'label': 'Customer', 'icon': "assets/svg_icons/dashboard_customer_icon.svg"},
+      {'label': 'Item', 'icon': "assets/svg_icons/dashboard_item_icon.svg"},
+      {'label': 'Rent', 'icon': "assets/svg_icons/dashboard_rent_icon.svg"},
+      {'label': 'Day book', 'icon': "assets/svg_icons/dashboard_day_book.svg"},
+
+      {'label': 'Trip', 'icon': "assets/svg_icons/dashboard_trip_icon.svg"},
     ];
 
     // Group into columns with 2 items each
@@ -42,11 +43,12 @@ class QuickLinkScrollView extends StatelessWidget {
                 children: columnItems.map((item) {
                   return GestureDetector(
                     onTap: () {
+                      final routeMap = {'Item': AppRoutesName.itemListScreen, 'Trip': AppRoutesName.tripSummaryScreen, 'Sale order': AppRoutesName.addTransportationScreen};
+
                       final label = item['label'];
-                      if (label == 'Item') {
-                        Navigator.of(context).pushNamed(AppRoutesName.itemListScreen);
-                      } else if (label == 'Trip') {
-                        Navigator.of(context).pushNamed(AppRoutesName.tripSummaryScreen);
+                      final route = routeMap[label];
+                      if (route != null) {
+                        Navigator.of(context).pushNamed(route);
                       }
                     },
                     child: Padding(
