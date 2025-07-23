@@ -103,7 +103,7 @@ class _SetDistanceScreenState extends State<SetDistanceScreen> {
         return Container(
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black),
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: AppSpacing.kRadius25,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

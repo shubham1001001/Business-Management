@@ -44,7 +44,7 @@ class MobileNumberField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Colors.blue),
+          borderSide: BorderSide(color: Colors.grey),
         ),
         filled: true,
         fillColor: Colors.white,

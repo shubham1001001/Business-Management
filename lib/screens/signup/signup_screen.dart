@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sales/core/constants/colors.dart';
 import 'package:sales/core/constants/svg_picture_widgets.dart';
 import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/core/widgets/terms_and_pravacy.dart';
 
 import '../../core/constants/spacing.dart';
-import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/Custom_message_widget.dart';
+import '../../core/widgets/custom_auth_button.dart';
 import '../../core/widgets/custom_textfield_numder.dart';
 import '../../core/widgets/dropdown_widgets.dart';
 import '../../core/widgets/shimmer_widget_dropdown.dart';
@@ -107,17 +106,18 @@ class SignupScreen extends StatelessWidget {
                           SizedBox(height: size.height * 0.035),
 
                           /// Get OTP Button
-                          CustomButton(
-                            colors: AppColors.redColor,
-                            text: 'Get OTP',
-                            onPressed: () {
-                              if (provider.isPhoneValid) {
-                                Navigator.of(context).pushNamed(AppRoutesName.optScreen);
-                                CustomSnackbar.show(context, message: "Sent OTP", type: MessageType.success);
-                              } else {
-                                CustomSnackbar.show(context, message: "Please enter a valid mobile number", type: MessageType.error);
-                              }
-                            },
+                          Center(
+                            child: CustomAuthButton(
+                              text: "Get OTP",
+                              onTap: () {
+                                if (provider.isPhoneValid) {
+                                  Navigator.of(context).pushNamed(AppRoutesName.optScreen);
+                                  CustomSnackbar.show(context, message: "Sent OTP", type: MessageType.success);
+                                } else {
+                                  CustomSnackbar.show(context, message: "Please enter a valid mobile number", type: MessageType.error);
+                                }
+                              },
+                            ),
                           ),
 
                           SizedBox(height: size.height * 0.04),

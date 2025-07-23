@@ -3,10 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
-import '../../core/constants/colors.dart';
-import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/Custom_message_widget.dart';
 import '../../core/widgets/app_header.dart';
+import '../../core/widgets/custom_auth_button.dart';
 import '../../core/widgets/custom_textfield_numder.dart';
 import '../../core/widgets/dropdown_widgets.dart';
 import '../../core/widgets/shimmer_widget_dropdown.dart';
@@ -113,17 +112,18 @@ class MobileNumberChange extends StatelessWidget {
                             MobileNumberField(errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number', onChanged: provider.updatePhone),
                             SizedBox(height: size.height * 0.025),
                             // OTP Button
-                            CustomButton(
-                              colors: AppColors.redColor,
-                              text: 'Get OTP',
-                              onPressed: () {
-                                if (provider.phone.length >= 10) {
-                                  Navigator.of(context).pushNamed(AppRoutesName.changeNumberOtpscreen, arguments: provider.phone);
-                                  CustomSnackbar.show(context, message: "Sent OTP", type: MessageType.success);
-                                } else {
-                                  CustomSnackbar.show(context, message: "Please Inter Mobile Number", type: MessageType.error);
-                                }
-                              },
+                            Center(
+                              child: CustomAuthButton(
+                                text: "Get OTP",
+                                onTap: () {
+                                  if (provider.phone.length >= 10) {
+                                    Navigator.of(context).pushNamed(AppRoutesName.changeNumberOtpscreen, arguments: provider.phone);
+                                    CustomSnackbar.show(context, message: "Sent OTP", type: MessageType.success);
+                                  } else {
+                                    CustomSnackbar.show(context, message: "Please Inter Mobile Number", type: MessageType.error);
+                                  }
+                                },
+                              ),
                             ),
                           ],
                         ),

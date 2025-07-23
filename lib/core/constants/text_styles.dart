@@ -13,6 +13,8 @@ class AppTextStyles {
   static const small = TextStyle(fontSize: 12, fontFamily: 'OpenSans');
   static const appBarRedBoldText = TextStyle(color: AppColors.redColor, fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'OpenSans');
   static const appBarBlackBoldText = TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'OpenSans');
+  static const appBarBlackText = TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'OpenSans');
+  static const appBarWhiteText = TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'OpenSans');
   static const appBarRedText = TextStyle(color: AppColors.redColor, fontFamily: 'OpenSans');
   static const backText = TextStyle(color: Colors.black, fontFamily: 'OpenSans');
   static const greyText = TextStyle(fontWeight: FontWeight.w400, color: Colors.grey, fontFamily: 'OpenSans');
@@ -33,12 +35,16 @@ class AppTextStyles {
   static const textSize11 = TextStyle(fontSize: 11, fontFamily: 'OpenSans');
   static const white70BoldText20 = TextStyle(fontSize: 20, color: Colors.white70, fontWeight: FontWeight.w600, fontFamily: 'OpenSans');
   static const redBoldText14 = TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.redColor, fontFamily: 'OpenSans');
+  static const white60BoldText14 = TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white60, fontFamily: 'OpenSans');
+  static const whiteBoldText14 = TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white, fontFamily: 'OpenSans');
   static const blackBoldText13 = TextStyle(fontSize: 13, fontWeight: FontWeight.bold, fontFamily: 'OpenSans');
   static const blackBoldText24 = TextStyle(fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'OpenSans');
   static const black87Text20 = TextStyle(fontSize: 20, color: Colors.black87, fontFamily: 'OpenSans');
-  static const blueBoldText = TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontFamily: 'OpenSans');
+  static const blueBoldText = TextStyle(color: Colors.indigo, fontWeight: FontWeight.bold, fontFamily: 'OpenSans');
   static const blueText = TextStyle(color: Colors.blue, fontFamily: 'OpenSans');
   static const white54BoldText40 = TextStyle(fontSize: 40, color: Colors.white54, fontWeight: FontWeight.w600, fontFamily: 'OpenSans');
+  static const whiteTextW400 = TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w400, fontFamily: 'OpenSans');
+  static const whiteTextSemiBold20 = TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w600, fontFamily: 'OpenSans');
   static const blackBoldText15 = TextStyle(fontSize: 15, fontWeight: FontWeight.w600, fontFamily: 'OpenSans');
   static const appRedText18 = TextStyle(color: AppColors.redColor, fontSize: 18, fontFamily: 'OpenSans');
   static const appBlackText18 = TextStyle(fontSize: 18, fontFamily: 'OpenSans');

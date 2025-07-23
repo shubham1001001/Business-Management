@@ -31,4 +31,5 @@ class AppRoutesName {
   static const String addTransportationScreen = '/addTransportationScreen';
   static const String addPurchaseScreen = '/addPurchaseScreen';
   static const String setDistanceScreen = '/setDistanceScreen';
+  static const String vehicleDetailsScreen = '/vehicleDetailsScreen';
 }

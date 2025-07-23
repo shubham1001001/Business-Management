@@ -18,6 +18,7 @@ class AppColors {
   static Color cardColor = const Color(0xFFefeded);
   static Color cardmainColor = const Color(0xFFededed);
   static Color playButtonColor = const Color(0xFFD9D9D9);
+  static Color headerTitleColor = const Color(0xFFDFD8D8);
 }
 
 // class AppColors {

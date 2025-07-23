@@ -29,6 +29,7 @@ import 'package:sales/providers/subscription_plan_provider/Subscription_plan_pro
 import 'package:sales/providers/support_provider/support_provider.dart';
 import 'package:sales/providers/tab_provider/tab_provider.dart';
 import 'package:sales/providers/trip_provider/trip_provider.dart';
+import 'package:sales/providers/vehicle_details/vehicle_details_provider.dart';
 import 'package:sales/providers/vehicle_overview_provider.dart';
 import 'package:sales/providers/vender_list_provider/vender_list_provider.dart';
 import 'package:sales/providers/vendor_comment_timeline/vendor_comment_timeline_provider.dart';
@@ -76,6 +77,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => AddTransportationProvider()),
         ChangeNotifierProvider(create: (_) => AddPurchaseProvider()),
         ChangeNotifierProvider(create: (_) => SetDistanceProvider()),
+        ChangeNotifierProvider(create: (_) => VehicleDetailsProvider()),
       ],
       child: const MyApp(),
     ),

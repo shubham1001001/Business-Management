@@ -6,8 +6,8 @@ import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/core/widgets/app_header.dart';
 import 'package:sales/screens/otp_screen/widgets/otp_widgets.dart';
 
-import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/Custom_message_widget.dart';
+import '../../core/widgets/custom_auth_button.dart';
 import '../../providers/otp_provider/countdown_provider.dart';
 import '../../routes/app_routes_name.dart';
 
@@ -103,19 +103,20 @@ class _OtpScreenState extends State<EmailChangeScreenOtp> {
                       OtpInputScreen(controllers: controllers),
                       SizedBox(height: size.height * 0.025),
                       // OTP Button
-                      CustomButton(
-                        colors: AppColors.redColor,
-                        text: 'Submit',
-                        onPressed: () {
-                          String otp = controllers.map((controller) => controller.text).join();
-                          if (otp.length == 4) {
-                            Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesName.home, (route) => false);
-                            CustomSnackbar.show(context, message: "success", type: MessageType.success);
-                            print(otp);
-                          } else {
-                            CustomSnackbar.show(context, message: "Please Inter OTP", type: MessageType.error);
-                          }
-                        },
+                      Center(
+                        child: CustomAuthButton(
+                          text: "Submit",
+                          onTap: () {
+                            String otp = controllers.map((controller) => controller.text).join();
+                            if (otp.length == 4) {
+                              Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesName.home, (route) => false);
+                              CustomSnackbar.show(context, message: "success", type: MessageType.success);
+                              print(otp);
+                            } else {
+                              CustomSnackbar.show(context, message: "Please Inter OTP", type: MessageType.error);
+                            }
+                          },
+                        ),
                       ),
 
                       SizedBox(height: size.height * 0.025),

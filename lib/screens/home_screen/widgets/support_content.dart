@@ -145,7 +145,11 @@ class _ChatInputFieldState extends State<_ChatInputField> {
                   ),
                   const SizedBox(width: 3),
                   IconButton(
-                    icon: const Icon(Icons.attach_file, color: AppColors.redColor),
+                    icon: Transform.rotate(
+                      angle: -5.5708, // -45 degrees in radians (negative for counterclockwise)
+                      child: Icon(Icons.attach_file, color: AppColors.redColor),
+                    ),
+
                     onPressed: () async {
                       final result = await FilePicker.platform.pickFiles();
 

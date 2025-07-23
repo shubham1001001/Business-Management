@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sales/core/constants/colors.dart';
 import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/core/widgets/terms_and_pravacy.dart';
 import 'package:sales/screens/otp_screen/widgets/otp_widgets.dart';
 
 import '../../core/constants/svg_picture_widgets.dart';
-import '../../core/widgets/CustomButton.dart';
 import '../../core/widgets/Custom_message_widget.dart';
+import '../../core/widgets/custom_auth_button.dart';
 import '../../providers/otp_provider/countdown_provider.dart';
 import '../../routes/app_routes_name.dart';
 
@@ -105,10 +104,9 @@ class _OtpScreenState extends State<OtpScreen> {
                       OtpInputScreen(controllers: controllers),
                       SizedBox(height: size.height * 0.025),
                       // OTP Button
-                      CustomButton(
-                        colors: AppColors.redColor,
-                        text: 'Submit',
-                        onPressed: () {
+                      CustomAuthButton(
+                        text: "Submit",
+                        onTap: () {
                           String otp = controllers.map((controller) => controller.text).join();
                           if (otp.length == 4) {
                             Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesName.home, (route) => false);
@@ -121,13 +119,6 @@ class _OtpScreenState extends State<OtpScreen> {
                       ),
 
                       SizedBox(height: size.height * 0.025),
-                      Row(
-                        children: [
-                          Expanded(child: Divider(color: Colors.grey)),
-                          Padding(padding: EdgeInsets.symmetric(horizontal: 10), child: Text('OR')),
-                          Expanded(child: Divider(color: Colors.grey)),
-                        ],
-                      ),
                       Consumer<CountdownProvider>(
                         builder: (context, provider, child) {
                           return Center(

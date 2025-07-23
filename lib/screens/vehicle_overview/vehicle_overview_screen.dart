@@ -49,7 +49,12 @@ class VehicleOverviewScreen extends StatelessWidget {
                       final vehicle = provider.filteredVehicles[index];
                       return Padding(
                         padding: AppSpacing.allPadding5,
-                        child: VehicleCard(vehicle: vehicle),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, AppRoutesName.vehicleDetailsScreen);
+                          },
+                          child: VehicleCard(vehicle: vehicle),
+                        ),
                       );
                     },
                   ),
