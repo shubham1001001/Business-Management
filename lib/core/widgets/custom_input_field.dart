@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sales/core/constants/colors.dart';
+import 'package:sales/core/constants/spacing.dart';
 
 import '../constants/text_styles.dart';
 
@@ -26,10 +28,18 @@ class CustomInputField extends StatelessWidget {
       decoration: InputDecoration(
         hintStyle: AppTextStyles.greyText,
         hintText: isRequired ? "$hintText" : hintText,
-        prefix: Text(prefixText ?? 'test', style: TextStyle(color: Colors.black)),
+        prefix: Text(prefixText ?? 'test', style: const TextStyle(color: Colors.black)),
         errorText: errorText,
-        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+        contentPadding: const EdgeInsets.symmetric(vertical: 13, horizontal: 12),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: AppColors.textFieldBorderColor),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: AppColors.textFieldBorderColor, width: 1.5),
+        ),
+        border: OutlineInputBorder(borderRadius: AppSpacing.kMediumRadius),
         fillColor: Colors.white,
         filled: true,
       ),

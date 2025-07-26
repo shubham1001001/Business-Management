@@ -16,7 +16,7 @@ class AddVehicleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Add Vehicle")),
+      appBar: AppBar(title: const Text("Add Vehicle", style: AppTextStyles.appBarBlackText)),
       body: Consumer<AddVehicleProvider>(
         builder: (context, provider, _) {
           return SingleChildScrollView(
@@ -179,7 +179,7 @@ class AddVehicleScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Flexible(
-                          child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.grey, textColor: Colors.black, colors: Colors.white),
+                          child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.black, textColor: Colors.black, colors: Colors.white),
                         ),
                         AppSpacing.smallWidth10,
                         Flexible(
@@ -193,7 +193,7 @@ class AddVehicleScreen extends StatelessWidget {
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
                               }
                             },
-                            borderColor: Colors.grey,
+
                             textColor: Colors.white,
                           ),
                         ),
@@ -232,7 +232,7 @@ Widget _buildSelectField(BuildContext context, String title, String? value, List
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
+        border: Border.all(color: AppColors.textFieldBorderColor),
         borderRadius: AppSpacing.kMediumRadius10,
         color: Colors.white,
       ),

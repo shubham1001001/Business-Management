@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/constants/text_styles.dart';
+
 class VendorMoreMenu extends StatelessWidget {
   const VendorMoreMenu({super.key});
 
@@ -7,7 +9,7 @@ class VendorMoreMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Vendor Details"),
+        title: Text("Vendor Details", style: AppTextStyles.appBarBlackText),
         actions: [
           IconButton(
             icon: const Icon(Icons.more_vert),

@@ -29,37 +29,40 @@ class QuickLinkScrollView extends StatelessWidget {
     }
 
     return SizedBox(
+      width: double.infinity,
       height: isLandscape ? size.height * 0.85 : size.height * 0.35,
-
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 3),
-        child: Row(
-          children: columns.map((columnItems) {
-            return Padding(
-              padding: const EdgeInsets.only(right: 12),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: columnItems.map((item) {
-                  return GestureDetector(
-                    onTap: () {
-                      final routeMap = {'Item': AppRoutesName.itemListScreen, 'Trip': AppRoutesName.tripSummaryScreen, 'Sale order': AppRoutesName.addTransportationScreen};
+        child: Padding(
+          padding: const EdgeInsets.only(left: 4),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: columns.map((columnItems) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 14),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: columnItems.map((item) {
+                    return GestureDetector(
+                      onTap: () {
+                        final routeMap = {'Item': AppRoutesName.itemListScreen, 'Trip': AppRoutesName.tripSummaryScreen, 'Sale order': AppRoutesName.addTransportationScreen};
 
-                      final label = item['label'];
-                      final route = routeMap[label];
-                      if (route != null) {
-                        Navigator.of(context).pushNamed(route);
-                      }
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: QuickLink(icon: item['icon'].toString(), label: item['label'].toString()),
-                    ),
-                  );
-                }).toList(),
-              ),
-            );
-          }).toList(),
+                        final label = item['label'];
+                        final route = routeMap[label];
+                        if (route != null) {
+                          Navigator.of(context).pushNamed(route);
+                        }
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 14),
+                        child: QuickLink(icon: item['icon'].toString(), label: item['label'].toString()),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );

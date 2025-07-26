@@ -15,7 +15,7 @@ class ProfileInformations extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile Information'),
+        title: const Text('Profile Information', style: AppTextStyles.appBarBlackText),
         leading: const BackButton(),
         actions: [
           Consumer<ProfileInformationProvider>(

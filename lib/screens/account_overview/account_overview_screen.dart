@@ -6,6 +6,7 @@ import 'package:sales/routes/app_routes_name.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../core/constants/spacing.dart';
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../core/widgets/text_scale_widgets.dart';
 import '../../providers/account_overview/account_overview_provider.dart';
 
@@ -32,9 +33,14 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Account Overview"),
+        title: const Text("Account Overview", style: AppTextStyles.appBarBlackText),
         leading: const BackButton(),
-        actions: [Padding(padding: const EdgeInsets.only(right: 20), child: Image.asset("assets/icons/download_icons_b.png"))],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: SvgPictureWidgets(svgString: "assets/svg_icons/download_icon_svg.svg", size: 26.0),
+          ),
+        ],
       ),
       body: Consumer<AccountOverviewProvider>(
         builder: (context, provider, _) {
@@ -109,14 +115,6 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                         children: [
                           Row(
                             children: [
-                              // <<<<<<< Updated upstream
-                              //                               Expanded(flex: 4, child: Text(category, style: AppTextStyles.titleListTile)),
-                              //                               Expanded(flex: 2, child: Text(debitTotal.toStringAsFixed(0))),
-                              //                               const Expanded(flex: 2, child: Text("00.00")),
-                              //                             ],
-                              //                           ),
-                              //                           const SizedBox(height: 5),
-                              // =======
                               Expanded(
                                 flex: 4,
                                 child: Text(
@@ -141,13 +139,9 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                                 },
                                 child: Row(
                                   children: [
-                                    // <<<<<<< Updated upstream
-                                    //                                     Expanded(flex: 4, child: Text(item.name, style: AppTextStyles.blueText)),
-                                    //                                     Expanded(flex: 2, child: Text(item.debit.toStringAsFixed(0), style: AppTextStyles.appRedText)),
-                                    //                                     Expanded(flex: 2, child: Text(item.credit.toStringAsFixed(2), style: AppTextStyles.appRedText)),
-                                    // =======
+                                    Expanded(flex: 1, child: Text("")),
                                     Expanded(
-                                      flex: 4,
+                                      flex: 9,
                                       child: Text(
                                         item.name,
                                         style: AppTextStyles.blueText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
@@ -156,7 +150,7 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                                       ),
                                     ),
                                     Expanded(
-                                      flex: 2,
+                                      flex: 5,
                                       child: Text(
                                         item.debit.toStringAsFixed(0),
                                         style: AppTextStyles.appRedText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
@@ -165,7 +159,7 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                                       ),
                                     ),
                                     Expanded(
-                                      flex: 2,
+                                      flex: 5,
                                       child: Text(
                                         item.credit.toStringAsFixed(2),
                                         style: AppTextStyles.appRedText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
@@ -178,19 +172,13 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                               ),
                             ),
                           ),
-                          // <<<<<<< Updated upstream
-                          //                           const SizedBox(height: 10),
-                          // =======
+
                           AppSpacing.smallHeight10,
                         ],
                       );
                     }, childCount: provider.categorizedData.length),
                   ),
 
-                // <<<<<<< Updated upstream
-                //                 // Divider under totals
-                //                 const SliverToBoxAdapter(child: SizedBox(height: 8)),
-                // =======
                 // Divider
                 const SliverToBoxAdapter(child: AppSpacing.mediumWidth),
 
@@ -203,11 +191,7 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                       ],
                     ),
                   ),
-                // <<<<<<< Updated upstream
-                //                 const SliverToBoxAdapter(child: SizedBox(height: 4)),
-                //
-                //                 // Total row
-                // =======
+
                 SliverToBoxAdapter(child: AppSpacing.extraSmallWidth),
 
                 // Totals
@@ -215,15 +199,6 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                   SliverToBoxAdapter(
                     child: Row(
                       children: [
-                        // <<<<<<< Updated upstream
-                        //                         const Expanded(flex: 4, child: Text("Total", style: AppTextStyles.backBoldText)),
-                        //                         Expanded(flex: 2, child: Text(provider.totalDebit.toStringAsFixed(0), style: AppTextStyles.backBoldText)),
-                        //                         Expanded(flex: 2, child: Text(provider.totalCredit.toStringAsFixed(2), style: AppTextStyles.backBoldText)),
-                        //                       ],
-                        //                     ),
-                        //                   ),
-                        //                 const SliverToBoxAdapter(child: SizedBox(height: 20)),
-                        // =======
                         Expanded(
                           flex: 4,
                           child: Text(

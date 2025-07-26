@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
@@ -23,6 +24,10 @@ class GetStartScreen extends StatelessWidget {
             //   'assets/images/bg.jpg', // Use your image path
             //   fit: BoxFit.cover,
             // ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SvgPicture.asset('assets/svg_icons/warning.svg', width: 24, height: 24, fit: BoxFit.contain, color: Colors.white),
           ),
           // Dark overlay
           Container(width: size.width, height: size.height, color: Colors.black.withOpacity(0.4)),
@@ -97,13 +102,52 @@ class GetStartScreen extends StatelessWidget {
                       child: Container(
                         width: 218,
                         height: 41,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF2E2E2E), // Dark gray button color
-                          borderRadius: AppSpacing.kLargeRadius,
+                        child: Stack(
+                          children: [
+                            // Gradient background with rounded corners
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: AppSpacing.kLargeRadius,
+                                gradient: LinearGradient(
+                                  begin: Alignment(-1.0, -1.0), // Left-Center-Top
+                                  end: Alignment(-1.0, 1.0),
+                                  colors: [
+                                    Colors.grey.shade800,
+                                    Color(0xFF3A3A3A), //Color(0xFF3A3A3A), // Lighter at top (20%)
+                                    Color(0xFF2E2E2E), // Full dark at bottom
+                                  ],
+                                  stops: [0.1, 0.2, 1.0],
+                                ),
+                              ),
+                            ),
+                            // Inner shadow using blend mode
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: AppSpacing.kLargeRadius,
+                                boxShadow: const [BoxShadow(color: Colors.black26, offset: Offset(2, 4), blurRadius: 5, spreadRadius: 0)],
+                              ),
+                              foregroundDecoration: BoxDecoration(
+                                borderRadius: AppSpacing.kLargeRadius,
+                                gradient: const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.black12, Colors.transparent]),
+                              ),
+                            ),
+                            // Button label centered
+                            Center(child: Text('Get start', style: AppTextStyles.customButtonTextWhiteStyle)),
+                          ],
                         ),
-                        child: Text('Get start', style: AppTextStyles.customButtonTextWhiteStyle),
                       ),
+
+                      // Container(
+                      //   width: 218,
+                      //   height: 41,
+                      //   alignment: Alignment.center,
+                      //   decoration: BoxDecoration(
+                      //     color: const Color(0xFF2E2E2E), // Dark gray button color
+                      //     borderRadius: AppSpacing.kLargeRadius,
+                      //     boxShadow:
+                      //   ),
+                      //   child: Text('Get start', style: AppTextStyles.customButtonTextWhiteStyle),
+                      // ),
                     ),
                   ),
                   // Center(

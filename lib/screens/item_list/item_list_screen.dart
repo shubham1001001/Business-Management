@@ -4,6 +4,7 @@ import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
 import '../../core/constants/colors.dart';
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../providers/item_list_provider/item_list_provider.dart';
 import '../../routes/app_routes_name.dart';
 
@@ -20,7 +21,7 @@ class ItemListScreen extends StatelessWidget {
         backgroundColor: AppColors.primary,
         elevation: 1,
 
-        title: Text("Item list", style: AppTextStyles.black87Text20),
+        title: Text("Item list", style: AppTextStyles.appBarBlackText),
         actions: [
           TextButton(
             onPressed: () {
@@ -66,7 +67,10 @@ class ItemListScreen extends StatelessWidget {
                         }).toList(),
                       ),
                     ),
-                    Padding(padding: AppSpacing.allPadding8, child: Image.asset("assets/icons/Vector (3).png")),
+                    Padding(
+                      padding: AppSpacing.allPadding8,
+                      child: SvgPictureWidgets(size: 25.0, svgString: "assets/svg_icons/filter_v.svg"),
+                    ),
                   ],
                 ),
               );

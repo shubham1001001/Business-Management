@@ -20,7 +20,7 @@ class AccountSummaryScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Account Summary'),
+        title: const Text('Account Summary', style: AppTextStyles.appBarBlackText18),
         actions: [
           TextButton(
             onPressed: () {

@@ -26,8 +26,8 @@ class _AudioWaveformWidgetState extends State<AudioWaveformWidget> {
   Widget build(BuildContext context) {
     final provider = Provider.of<ExpenseDetailProvider>(context);
     return Container(
-      width: 360,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(color: const Color(0xFFF4F4F4), borderRadius: BorderRadius.circular(18)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -63,7 +63,7 @@ class _AudioWaveformWidgetState extends State<AudioWaveformWidget> {
               child: Stack(
                 children: [
                   SvgPictureWidgets(svgString: "assets/svg_icons/play_ring.svg", size: 24.0),
-                  Positioned(left: 0, right: 0, top: 3, child: Icon(Icons.play_arrow, color: Colors.red, size: 17)),
+                  Positioned(left: 0, right: 0, top: 3, child: Icon(Icons.play_arrow, color: AppColors.redColor, size: 17)),
                 ],
               ),
             ),

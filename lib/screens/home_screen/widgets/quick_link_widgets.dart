@@ -15,31 +15,28 @@ class QuickLink extends StatelessWidget {
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
     final isLandscape = screen.width > screen.height;
-    return Padding(
-      padding: AppSpacing.allPadding5,
-      child: Container(
-        width: screen.width * 0.25,
-        // height: isLandscape ? screen.height * 0.35 : screen.height * 0.10,
-        decoration: BoxDecoration(
-          color: AppColors.cardColor,
-          borderRadius: AppSpacing.kMediumRadius10,
-          boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
-        ),
-        child: Padding(
-          padding: AppSpacing.allPadding16,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPictureWidgets(svgString: icon, size: 40.0),
-              SizedBox(height: screen.height * 0.03),
-              Text(
-                label,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 40)),
-              ),
-            ],
-          ),
+    return Container(
+      width: screen.width * 0.28,
+      // height: isLandscape ? screen.height * 0.35 : screen.height * 0.10,
+      decoration: BoxDecoration(
+        color: AppColors.cardColor,
+        borderRadius: AppSpacing.kMediumRadius10,
+        boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
+      ),
+      child: Padding(
+        padding: AppSpacing.allPadding12,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPictureWidgets(svgString: icon, size: 40.0),
+            SizedBox(height: screen.height * 0.03),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 40), fontWeight: FontWeight.w600, fontFamily: 'OpenSans'),
+            ),
+          ],
         ),
       ),
     );

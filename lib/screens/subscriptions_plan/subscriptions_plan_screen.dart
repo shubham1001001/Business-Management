@@ -18,7 +18,7 @@ class SubscriptionPlanScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Subscription Plan'),
+        title: const Text('Subscription Plan', style: AppTextStyles.appBarBlackText),
         leading: const BackButton(),
         actions: const [
           Padding(

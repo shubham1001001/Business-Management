@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sales/core/constants/spacing.dart';
 
 import '../constants/text_styles.dart';
 
@@ -27,7 +28,7 @@ class CustomOutlinedButton extends StatelessWidget {
             foregroundColor: textColor,
             padding: EdgeInsets.symmetric(vertical: verticalPadding),
             side: BorderSide(color: borderColor),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+            shape: RoundedRectangleBorder(borderRadius: AppSpacing.kMediumRadius),
           ),
           child: Text(text, style: AppTextStyles.customButtonTextStyle),
         ),

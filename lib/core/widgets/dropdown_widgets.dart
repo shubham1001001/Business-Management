@@ -16,11 +16,26 @@ class CountryDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 40,
       decoration: BoxDecoration(border: Border.all(), borderRadius: AppSpacing.kLargeRadius),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          CountryCodePicker(onChanged: onChanged, initialSelection: '+91', showCountryOnly: false, showOnlyCountryWhenClosed: true, alignLeft: false),
+          CountryCodePicker(
+            padding: EdgeInsetsGeometry.all(0),
+            boxDecoration: BoxDecoration(
+              border: Border.all(color: Colors.black),
+              borderRadius: AppSpacing.kLargeRadius,
+            ),
+            flagWidth: 20,
+            onChanged: onChanged,
+            initialSelection: '+91',
+            showCountryOnly: false,
+            showOnlyCountryWhenClosed: true,
+            alignLeft: false,
+            textStyle: TextStyle(fontSize: 15, color: Colors.black), // 👈 Set font size here
+          ),
+
           Icon(Icons.keyboard_arrow_down, size: 30),
           AppSpacing.extraSmallWidth,
         ],

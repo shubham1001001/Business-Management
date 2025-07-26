@@ -17,7 +17,10 @@ class AddItemScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Add Item"), leading: const BackButton()),
+      appBar: AppBar(
+        title: const Text("Add Item", style: AppTextStyles.appBarBlackText),
+        leading: const BackButton(),
+      ),
       body: Consumer<AddItemProvider>(
         builder: (context, provider, child) {
           return LayoutBuilder(
@@ -52,11 +55,11 @@ class AddItemScreen extends StatelessWidget {
                               children: [
                                 _buildLabel("Unit"),
                                 Container(
-                                  height: 58, // Smaller height
+                                  height: 50, // Smaller height
                                   width: double.infinity,
                                   padding: const EdgeInsets.symmetric(horizontal: 8),
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
+                                    border: Border.all(color: AppColors.textFieldBorderColor),
                                     borderRadius: AppSpacing.kMediumRadius10,
                                     color: Colors.white,
                                   ),

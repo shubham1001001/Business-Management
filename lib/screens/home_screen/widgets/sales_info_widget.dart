@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:sales/core/constants/spacing.dart';
 
 import '../../../core/constants/text_styles.dart';
 
@@ -12,7 +13,8 @@ class SalesInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(title),
+        Text(title, style: AppTextStyles.boldText),
+        AppSpacing.smallHeight10,
         Text(amount, style: AppTextStyles.blueBoldText),
       ],
     );

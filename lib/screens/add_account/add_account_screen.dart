@@ -32,7 +32,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
     final size = MediaQuery.of(context).size;
     final isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
     return Scaffold(
-      appBar: AppBar(title: const Text('Add Account')),
+      appBar: AppBar(title: const Text('Add Account', style: AppTextStyles.appBarBlackText)),
       body: InkWell(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -200,7 +200,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                       child: Row(
                         children: [
                           Flexible(
-                            child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.grey, textColor: Colors.black, colors: Colors.white),
+                            child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.black, textColor: Colors.black, colors: Colors.white),
                           ),
                           AppSpacing.smallWidth10,
                           Consumer<AddStafProvider>(
@@ -217,7 +217,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
                                     }
                                   },
-                                  borderColor: Colors.grey,
+
                                   textColor: Colors.white,
                                 ),
                               );

@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text("L company name", style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 75))),
         actions: [
-          const SvgPictureWidgets(svgString: "assets/svg_icons/notification_icon.svg", color: AppColors.appBlackColor),
+          const SvgPictureWidgets(svgString: "assets/svg_icons/noti_2.svg", color: AppColors.appBlackColor, size: 25.0),
           AppSpacing.mediumWidth16,
         ],
         elevation: 0,
@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         foregroundColor: Colors.black,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Row(
             children: [
-              index == 0 ? SvgPictureWidgets(svgString: "assets/svg_icons/dashboard_icon.svg", color: AppColors.appBlackColor) : SvgPicture.string(IconsSvgString.supportIcon, width: 23, height: 23),
+              index == 0 ? SvgPictureWidgets(svgString: "assets/svg_icons/dashboard_icon.svg", color: AppColors.appBlackColor) : SvgPicture.string(IconsSvgString.supportIcon, width: 16, height: 16),
               const SizedBox(width: 4),
               Text(label, style: isSelected ? AppTextStyles.title16 : AppTextStyles.textSize16),
             ],

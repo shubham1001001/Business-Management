@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sales/routes/app_routes_name.dart';
-import 'package:sales/screens/item_create/widgets/bottom_select_sheet_widget.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -9,6 +8,7 @@ import '../../core/constants/text_styles.dart';
 import '../../core/widgets/custom_input_field.dart';
 import '../../core/widgets/custom_outline_button.dart';
 import '../../providers/item_create/item_create_provider.dart';
+import '../pricing_preference/widgets/bottom_select_sheet_widget.dart';
 
 class ItemCreateScreen extends StatelessWidget {
   const ItemCreateScreen({super.key});
@@ -18,7 +18,7 @@ class ItemCreateScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Create")),
+      appBar: AppBar(title: const Text("Create", style: AppTextStyles.appBarBlackText)),
       body: Consumer<ItemCreateProvider>(
         builder: (context, provider, _) {
           return SingleChildScrollView(
@@ -38,15 +38,17 @@ class ItemCreateScreen extends StatelessWidget {
                       Text('Item name', style: AppTextStyles.greyBoldW500Text),
                       AppSpacing.extraSmallHeight,
                       // Item Name
-                      CustomInputField(
-                        controller: provider.itemNameController,
-                        isEditable: true,
-                        keyboardType: TextInputType.text,
-                        hintText: 'Item name',
-                        prefixText: "",
-                        isRequired: true, //
-                        errorText: provider.itemNameError,
-                        onChanged: provider.validateForm,
+                      SizedBox(
+                        child: CustomInputField(
+                          controller: provider.itemNameController,
+                          isEditable: true,
+                          keyboardType: TextInputType.text,
+                          hintText: 'Item name',
+                          prefixText: "",
+                          isRequired: true, //
+                          errorText: provider.itemNameError,
+                          onChanged: provider.validateForm,
+                        ),
                       ),
                       AppSpacing.smallHeight10,
                       Text('Unit', style: AppTextStyles.greyBoldW500Text),
@@ -77,35 +79,35 @@ class ItemCreateScreen extends StatelessWidget {
                 ),
                 AppSpacing.mediumWidth,
                 AppSpacing.smallHeight10,
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    color: Colors.white,
-                    padding: AppSpacing.allPadding16,
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.grey, textColor: Colors.black, colors: Colors.white),
-                        ),
-                        AppSpacing.smallWidth10,
-                        Flexible(
-                          child: CustomOutlinedButton(
-                            colors: AppColors.redColor,
-                            text: "Submit",
-                            onPressed: () {
-                              if (provider.isValid) {
-                                provider.submitForm();
-                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Item added successfully")));
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
-                              }
-                            },
-                            borderColor: Colors.grey,
-                            textColor: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
+              ],
+            ),
+          );
+        },
+      ),
+      bottomNavigationBar: Consumer<ItemCreateProvider>(
+        builder: (context, provider, child) {
+          return Container(
+            color: Colors.white,
+            padding: AppSpacing.allPadding16,
+            child: Row(
+              children: [
+                Flexible(
+                  child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.black, textColor: Colors.black, colors: Colors.white),
+                ),
+                AppSpacing.smallWidth10,
+                Flexible(
+                  child: CustomOutlinedButton(
+                    colors: AppColors.redColor,
+                    text: "Submit",
+                    onPressed: () {
+                      if (provider.isValid) {
+                        provider.submitForm();
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Item added successfully")));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
+                      }
+                    },
+                    textColor: Colors.white,
                   ),
                 ),
               ],
@@ -132,7 +134,7 @@ class ItemCreateScreen extends StatelessWidget {
           context: context,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           isScrollControlled: true,
-          builder: (_) => BottomSelectSheetItem(title: title, options: options, onSelect: onSelected),
+          builder: (_) => BottomSelectSheetPricing(title: title, options: options, onSelect: onSelected),
         );
       },
       child: Container(

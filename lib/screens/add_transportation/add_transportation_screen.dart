@@ -15,7 +15,7 @@ class AddTransportationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Add Transportation")),
+      appBar: AppBar(title: const Text("Add Transportation", style: AppTextStyles.appBarBlackText)),
       body: Consumer<AddTransportationProvider>(
         builder: (context, provider, _) {
           return SingleChildScrollView(
@@ -48,15 +48,18 @@ class AddTransportationScreen extends StatelessWidget {
                       AppSpacing.smallHeight10,
                       Text("Rent", style: AppTextStyles.greyBoldW500Text),
                       AppSpacing.smallHeight10,
-                      CustomInputField(
-                        controller: provider.rentAmountController,
-                        isEditable: true,
-                        keyboardType: TextInputType.text,
-                        hintText: 'Rent amount',
-                        prefixText: "",
-                        isRequired: true, //
-                        errorText: null,
-                        onChanged: (value) {},
+                      SizedBox(
+                        height: 49,
+                        child: CustomInputField(
+                          controller: provider.rentAmountController,
+                          isEditable: true,
+                          keyboardType: TextInputType.text,
+                          hintText: 'Rent amount',
+                          prefixText: "",
+                          isRequired: true, //
+                          errorText: null,
+                          onChanged: (value) {},
+                        ),
                       ),
                     ],
                   ),
@@ -78,7 +81,7 @@ class AddTransportationScreen extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
                         }
                       },
-                      borderColor: Colors.grey,
+
                       textColor: Colors.white,
                     ),
                   ),
@@ -103,12 +106,12 @@ Widget _buildSelectField(BuildContext context, String title, String? value, List
       );
     },
     child: Container(
-      height: 58, // Smaller height
+      height: 50, // Smaller height
       width: double.infinity,
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
+        border: Border.all(color: AppColors.textFieldBorderColor),
         borderRadius: AppSpacing.kMediumRadius10,
         color: Colors.white,
       ),

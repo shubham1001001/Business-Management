@@ -36,7 +36,7 @@ class TabNavigator extends StatelessWidget {
         rootScreen = const ReportScreen();
         break;
       case 'Record':
-        rootScreen = SalesOrderOverviewScreen();
+        rootScreen = RecordScreen();
         break;
       case 'Generate':
         rootScreen = SizedBox();
@@ -59,7 +59,7 @@ class TabNavigator extends StatelessWidget {
             builder = (_) => rootScreen;
             break;
           case '/details':
-            builder = (_) => RecordScreen();
+            builder = (_) => SalesOrderOverviewScreen();
             break;
           case AppRoutesName.ProfileInformations:
             builder = (_) => ProfileInformations();

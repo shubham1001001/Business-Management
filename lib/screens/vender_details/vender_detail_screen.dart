@@ -69,7 +69,7 @@ class VenderDetailScreen extends StatelessWidget {
                                 builder: (_) => DeleteConfirmationDialog(onConfirm: () {}),
                               );
                             },
-                            child: Image.asset("assets/icons/delete_icon2.png", width: 20),
+                            child: SvgPictureWidgets(svgString: "assets/svg_icons/delete_svg_icon.svg", size: 20.0),
                           ),
                           AppSpacing.largeWidth,
                           InkWell(

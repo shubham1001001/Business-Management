@@ -16,7 +16,7 @@ class TripSummaryScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Trip Summary'),
+        title: const Text('Trip Summary', style: AppTextStyles.appBarBlackText),
         leading: const BackButton(),
         actions: [IconButton(icon: Image.asset("assets/icons/downloadIcon.png"), onPressed: () {})],
       ),

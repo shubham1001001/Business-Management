@@ -5,6 +5,8 @@ import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/routes/app_routes_name.dart';
 import 'package:sales/screens/vehicle_overview/vehicle_card_widgets.dart';
 
+import '../../core/constants/colors.dart';
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../providers/vehicle_overview_provider.dart';
 
 class VehicleOverviewScreen extends StatelessWidget {
@@ -17,7 +19,7 @@ class VehicleOverviewScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Vehicle Overview'),
+        title: const Text('Vehicle Overview', style: AppTextStyles.appBarBlackText),
         actions: [
           TextButton(
             onPressed: () {
@@ -33,12 +35,30 @@ class VehicleOverviewScreen extends StatelessWidget {
             padding: EdgeInsets.all(screenWidth * 0.027),
             child: Column(
               children: [
-                TextField(
-                  onChanged: provider.setSearchQuery,
-                  decoration: InputDecoration(
-                    hintText: 'Search terms',
-                    suffixIcon: Image.asset("assets/icons/Vector (3).png"),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: TextField(
+                    onChanged: provider.setSearchQuery,
+                    decoration: InputDecoration(
+                      hintStyle: AppTextStyles.textSize13,
+                      hintText: 'Search terms',
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(14),
+                        child: SvgPictureWidgets(svgString: "assets/svg_icons/filter_v.svg", size: 10.0),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 13, horizontal: 12),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: AppSpacing.kMediumRadius,
+                        borderSide: BorderSide(color: AppColors.textFieldBorderColor),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: AppSpacing.kMediumRadius,
+                        borderSide: BorderSide(color: AppColors.textFieldBorderColor, width: 1.5),
+                      ),
+                      border: OutlineInputBorder(borderRadius: AppSpacing.kMediumRadius),
+                      fillColor: Colors.white,
+                      filled: true,
+                    ),
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.03),

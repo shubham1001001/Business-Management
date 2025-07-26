@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sales/core/constants/spacing.dart';
+import 'package:sales/core/constants/text_styles.dart';
 
 import '../../../core/constants/colors.dart';
+import '../../../core/widgets/custom_input_field.dart';
 import '../../../providers/pricing_preference/pricing_preference_provider.dart';
 
 class BottomSelectSheetPricing extends StatelessWidget {
@@ -33,22 +35,65 @@ class BottomSelectSheetPricing extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-                    ElevatedButton(
-                      onPressed: () {
+                    Text(title, style: AppTextStyles.appBlackTextW40018),
+                    InkWell(
+                      onTap: () {
                         Navigator.pop(context);
                       },
-                      style: ElevatedButton.styleFrom(backgroundColor: AppColors.redColor),
-                      child: const Text("Apply"),
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: 70,
+                        height: 34,
+                        decoration: BoxDecoration(color: AppColors.redColor, borderRadius: AppSpacing.kMediumRadius),
+                        child: const Text("Done", style: AppTextStyles.whiteBoldText14),
+                      ),
                     ),
                   ],
                 ),
-                AppSpacing.smallHeight10,
+                AppSpacing.mediumHeight16,
 
                 // Search bar
-                TextField(
-                  decoration: InputDecoration(hintText: "Select $title here", prefixIcon: const Icon(Icons.search), border: const OutlineInputBorder()),
+                Container(
+                  alignment: Alignment.center,
+                  height: 47,
+                  child: CustomInputField(isEditable: true, keyboardType: TextInputType.text, hintText: "Search ${title.toLowerCase()}", prefixText: "", isRequired: true, errorText: null, onChanged: (value) {}),
                 ),
+                AppSpacing.smallHeight10,
+                Offstage(
+                  offstage: title != "Vendor",
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(Icons.add, size: 20, color: AppColors.redColor),
+                      SizedBox(width: 4),
+                      Text("Add a ${title.toLowerCase()}", style: AppTextStyles.appRedTextW60018),
+                    ],
+                  ),
+                ),
+                // SizedBox(
+                //   height: 47,
+                //   child: TextField(
+                //     cursorColor: Colors.black,
+                //     decoration: InputDecoration(
+                //       hintStyle: AppTextStyles.greyText,
+                //       hintText: "Select $title here",
+                //       prefixIcon: const Icon(Icons.search),
+                //       contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+                //       enabledBorder: OutlineInputBorder(
+                //         borderRadius: AppSpacing.kLargeRadius,
+                //         borderSide: BorderSide(color: AppColors.textFieldBorderColor),
+                //       ),
+                //       focusedBorder: OutlineInputBorder(
+                //         borderRadius: AppSpacing.kLargeRadius,
+                //         borderSide: BorderSide(color: AppColors.textFieldBorderColor, width: 1.5),
+                //       ),
+                //       border: OutlineInputBorder(borderRadius: AppSpacing.kLargeRadius),
+                //       fillColor: Colors.white,
+                //       filled: true,
+                //     ),
+                //   ),
+                // ),
                 AppSpacing.smallHeight10,
 
                 // List of options
@@ -61,6 +106,7 @@ class BottomSelectSheetPricing extends StatelessWidget {
 
                       return ListTile(
                         title: Text(
+                          textAlign: TextAlign.start,
                           item,
                           style: TextStyle(color: isSelected ? AppColors.redColor : Colors.black, fontWeight: isSelected ? FontWeight.bold : FontWeight.normal),
                         ),

@@ -31,7 +31,10 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
     final dropItem = [DropdownMenuItem(value: TransactionFilter.today, child: Text("Today")), DropdownMenuItem(value: TransactionFilter.thisWeek, child: Text("This Week")), DropdownMenuItem(value: TransactionFilter.thisMonth, child: Text("This Month")), DropdownMenuItem(value: TransactionFilter.custom, child: Text("Custom"))];
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Account Details"), leading: const BackButton()),
+      appBar: AppBar(
+        title: const Text("Account Details", style: AppTextStyles.appBarBlackText),
+        leading: const BackButton(),
+      ),
       body: Consumer<AccountDetailsProvider>(
         builder: (context, provider, _) {
           return Padding(
@@ -55,11 +58,14 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text("Transaction", style: AppTextStyles.title),
-                      Padding(padding: const EdgeInsets.only(right: 20), child: Image.asset("assets/icons/download_icons_b.png")),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: SvgPictureWidgets(svgString: "assets/svg_icons/download_icon_svg.svg", size: 26.0),
+                      ),
                     ],
                   ),
                 ),
-                const SliverToBoxAdapter(child: SizedBox(height: 5)),
+                const SliverToBoxAdapter(child: AppSpacing.mediumHeight16),
                 SliverToBoxAdapter(
                   child: Consumer<AccountDetailsProvider>(
                     builder: (context, provider, _) {
@@ -176,6 +182,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(tx.name),
+                                      AppSpacing.extraSmallHeight,
                                       Text(tx.date, style: AppTextStyles.textSize11),
                                     ],
                                   ),
@@ -247,6 +254,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('Lorem ipsum', style: AppTextStyles.blackBoldText15),
+                  AppSpacing.extraSmallHeight,
                   Text("12.02.2025", style: AppTextStyles.textSize16),
                 ],
               ),
@@ -255,7 +263,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                   AppSpacing.mediumHeight,
 
                   IconButton(
-                    icon: Image.asset("assets/icons/delete_icon2.png", width: 20),
+                    icon: SvgPictureWidgets(svgString: "assets/svg_icons/delete_svg_icon.svg", size: 22.0),
                     onPressed: () {
                       showDialog(
                         context: context,
@@ -268,7 +276,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                     },
                   ),
 
-                  AppSpacing.mediumHeight,
+                  AppSpacing.largeWidth24,
 
                   SvgPictureWidgets(svgString: "assets/svg_icons/edit_icon.svg", color: AppColors.appBlackColor, size: 20.0),
                 ],

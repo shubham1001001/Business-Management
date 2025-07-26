@@ -4,6 +4,7 @@ import 'package:sales/core/constants/colors.dart';
 import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../providers/vendor_comment_timeline/vendor_comment_timeline_provider.dart';
 
 class VendorTimelineScreen extends StatelessWidget {
@@ -12,7 +13,10 @@ class VendorTimelineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Comment"), leading: const BackButton()),
+      appBar: AppBar(
+        title: const Text("Comment", style: AppTextStyles.appBarBlackText),
+        leading: const BackButton(),
+      ),
       body: Consumer<VendorCommentTimelineProvider>(
         builder: (context, provider, _) {
           return Padding(
@@ -24,7 +28,10 @@ class VendorTimelineScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     vendorHeader(name: provider.name, number: provider.number),
-                    InkWell(onTap: () async {}, child: Icon(Icons.more_vert, size: 35)),
+                    InkWell(
+                      onTap: () async {},
+                      child: SvgPictureWidgets(svgString: "assets/svg_icons/more_vert_icon.svg", size: 40.0),
+                    ),
                   ],
                 ),
                 AppSpacing.mediumHeight,
@@ -99,7 +106,13 @@ class VendorTimelineScreen extends StatelessWidget {
                       onTap: () {
                         provider.sendMessage(context);
                       },
-                      child: Image.asset("assets/icons/chat_send_icon.png"),
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(color: AppColors.redColor, borderRadius: BorderRadius.circular(25)),
+                        height: 45,
+                        width: 45,
+                        child: SvgPictureWidgets(svgString: "assets/svg_icons/share_chat_icon.svg", size: 22.0),
+                      ),
                     ),
                   ],
                 ),

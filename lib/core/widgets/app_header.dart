@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sales/core/constants/colors.dart';
 
+import '../constants/text_styles.dart';
+
 class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final endicon;
@@ -25,15 +27,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                 )
               : SizedBox.shrink(),
           Flexible(
-            child: Text(
-              title,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: Colors.black, // Customize as needed
-                fontWeight: FontWeight.normal,
-                fontSize: 20,
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
+            child: Text(title, style: AppTextStyles.appBarBlackText, overflow: TextOverflow.ellipsis),
           ),
           const Spacer(),
           endicon

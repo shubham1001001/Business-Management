@@ -31,7 +31,7 @@ class _SetDistanceScreenState extends State<SetDistanceScreen> {
     final usableHeight = screenHeight - appBarHeight - statusBarHeight;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Set Distance"),
+        title: const Text("Set Distance", style: AppTextStyles.appBarBlackText),
         actions: [
           TextButton(
             onPressed: () {},
@@ -44,12 +44,13 @@ class _SetDistanceScreenState extends State<SetDistanceScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              AppSpacing.mediumHeight16,
               _buildFeetSelector(context),
-              AppSpacing.smallHeight10,
+              AppSpacing.mediumHeight16,
               _buildDropdowns(),
               AppSpacing.mediumHeight16,
               _buildTableHeaders(),
-              AppSpacing.extraSmallHeight,
+              AppSpacing.mediumHeight16,
               Consumer<SetDistanceProvider>(
                 builder: (_, provider, __) {
                   if (provider.isLoading) return _buildShimmerList();
@@ -146,16 +147,19 @@ class _SetDistanceScreenState extends State<SetDistanceScreen> {
           children: [
             Text("Collection point", style: AppTextStyles.greyBoldW500Text),
             AppSpacing.smallHeight10,
-            CustomInputField(
-              isEditable: true,
-              keyboardType: TextInputType.text,
-              hintText: 'Collection point',
-              prefixText: '',
-              isRequired: true, //
-              errorText: null,
-              onChanged: (value) {},
+            SizedBox(
+              height: 50,
+              child: CustomInputField(
+                isEditable: true,
+                keyboardType: TextInputType.text,
+                hintText: 'Collection point',
+                prefixText: '',
+                isRequired: true, //
+                errorText: null,
+                onChanged: (value) {},
+              ),
             ),
-            AppSpacing.smallHeight10,
+            AppSpacing.mediumHeight16,
             Text("delivery point", style: AppTextStyles.greyBoldW500Text),
             AppSpacing.smallHeight10,
             _buildSelectField(context, " delivery point", provider.selectedDeliveryPoint, provider.deliveryPoint, provider.setDeliveryPoint),
@@ -171,13 +175,15 @@ class _SetDistanceScreenState extends State<SetDistanceScreen> {
     return Row(
       children: const [
         Expanded(
-          flex: 6,
+          flex: 5,
           child: Text("Delivery point", style: AppTextStyles.greyBoldText, textAlign: TextAlign.center),
         ),
+        SizedBox(width: 15),
         Expanded(
-          flex: 5,
-          child: Text("Distance", style: AppTextStyles.greyBoldText, textAlign: TextAlign.center),
+          flex: 3,
+          child: Text("Distance", style: AppTextStyles.greyBoldText, textAlign: TextAlign.start),
         ),
+        SizedBox(width: 10),
         Expanded(
           flex: 5,
           child: Text("Amount", style: AppTextStyles.greyBoldText, textAlign: TextAlign.center),
@@ -220,14 +226,14 @@ Widget _buildSelectField(BuildContext context, String title, String? value, List
       );
     },
     child: Container(
-      height: 58,
+      height: 50,
       // Smaller height
       width: double.infinity,
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
-        borderRadius: AppSpacing.kMediumRadius10,
+        border: Border.all(color: AppColors.textFieldBorderColor),
+        borderRadius: AppSpacing.kMediumRadius,
         color: Colors.white,
       ),
       child: Text(value ?? "Select $title", style: AppTextStyles.greyText),

@@ -4,6 +4,7 @@ import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
 import '../../core/constants/colors.dart';
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../providers/vender_list_provider/vender_list_provider.dart';
 import '../../routes/app_routes_name.dart';
 
@@ -21,7 +22,7 @@ class VenderListScreen extends StatelessWidget {
         backgroundColor: AppColors.primary,
         elevation: 1,
 
-        title: Text("Vendor List"),
+        title: Text("Vendor List", style: AppTextStyles.appBarBlackText),
         actions: [
           TextButton(
             onPressed: () {
@@ -61,7 +62,10 @@ class VenderListScreen extends StatelessWidget {
                         }).toList(),
                       ),
                     ),
-                    Padding(padding: AppSpacing.allPadding8, child: Image.asset("assets/icons/Vector (3).png")),
+                    Padding(
+                      padding: AppSpacing.allPadding8,
+                      child: SvgPictureWidgets(size: 23.0, svgString: "assets/svg_icons/filter_v.svg"),
+                    ),
                   ],
                 ),
               );

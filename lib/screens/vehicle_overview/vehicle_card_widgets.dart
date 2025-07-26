@@ -36,7 +36,8 @@ class VehicleCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(vehicle.vehicleNo, style: AppTextStyles.redBoldText),
+                    Text(vehicle.vehicleNo, style: AppTextStyles.redW800Text),
+
                     Row(
                       children: [
                         const Icon(Icons.fiber_manual_record, size: 10, color: Colors.grey),
@@ -46,7 +47,7 @@ class VehicleCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                AppSpacing.extraSmallWidth,
+                AppSpacing.mediumHeight16,
                 Row(
                   children: [
                     SizedBox(
@@ -59,7 +60,7 @@ class VehicleCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                AppSpacing.extraSmallWidth,
+                AppSpacing.mediumHeight16,
                 Row(
                   children: [
                     SizedBox(
@@ -72,6 +73,7 @@ class VehicleCard extends StatelessWidget {
                     ),
                   ],
                 ),
+                AppSpacing.extraSmallHeight,
               ],
             ),
           ),
@@ -84,7 +86,8 @@ class VehicleCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: AppTextStyles.small),
+        Text(title, style: AppTextStyles.greySmallW600),
+        AppSpacing.extraSmallHeight,
         Text(value, style: AppTextStyles.titleListTile),
       ],
     );

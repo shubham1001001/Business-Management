@@ -17,127 +17,130 @@ class AddPurchaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(title: const Text("Add Purchase")),
-      body: Consumer<AddPurchaseProvider>(
-        builder: (context, provider, _) {
-          return SingleChildScrollView(
-            padding: AppSpacing.allPadding16,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: AppSpacing.allPadding16,
-                  decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: AppSpacing.kSmallRadius),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          SvgPictureWidgets(svgString: "assets/svg_icons/date_icon_svg.svg", size: 20.0),
-                          AppSpacing.extraSmallWidth,
-                          Text("12.02.2025", style: AppTextStyles.appRedText),
-                        ],
-                      ),
-                      Text("Vendor name", style: AppTextStyles.greyBoldW500Text),
-                      AppSpacing.smallHeight10,
-                      _buildSelectField(context, " Vendor", provider.selectedVendorName, provider.owners, provider.setVendorName),
+    return InkWell(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(title: const Text("Add Purchase", style: AppTextStyles.appBarBlackText)),
+        body: Consumer<AddPurchaseProvider>(
+          builder: (context, provider, _) {
+            return SingleChildScrollView(
+              padding: AppSpacing.allPadding16,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: AppSpacing.allPadding16,
+                    decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: AppSpacing.kSmallRadius),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppSpacing.mediumHeight,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SvgPictureWidgets(svgString: "assets/svg_icons/date_icon_svg.svg", size: 20.0),
+                            AppSpacing.extraSmallWidth,
+                            Text("12.02.2025", style: AppTextStyles.appRedText),
+                          ],
+                        ),
+                        AppSpacing.mediumHeight16,
+                        Text("Vendor name", style: AppTextStyles.greyBoldW500Text),
+                        AppSpacing.smallHeight10,
+                        _buildSelectField(context, "Vendor", provider.selectedVendorName, provider.vendors, provider.setVendorName),
 
-                      AppSpacing.smallHeight10,
-                      Text("Mobile number", style: AppTextStyles.greyBoldW500Text),
-                      AppSpacing.smallHeight10,
-                      CustomInputField(
-                        controller: provider.mobileNumberController,
-                        isEditable: true,
-                        keyboardType: TextInputType.phone,
-                        hintText: 'Mobile number',
-                        prefixText: "",
-                        isRequired: true,
-                        //
-                        errorText: null,
-                        onChanged: (value) {},
-                      ),
-                      AppSpacing.smallHeight10,
-                      Text("Purchase number", style: AppTextStyles.greyBoldW500Text),
-                      AppSpacing.smallHeight10,
-                      CustomInputField(
-                        controller: provider.purchaseNumberController,
-                        isEditable: true,
-                        keyboardType: TextInputType.number,
-                        hintText: 'Purchase number',
-                        prefixText: "",
-                        isRequired: true,
-                        //
-                        errorText: null,
-                        onChanged: (value) {},
-                      ),
-                      AppSpacing.smallHeight10,
-                      Text("Purchase date", style: AppTextStyles.greyBoldW500Text),
-                      AppSpacing.smallHeight10,
-                      GestureDetector(
-                        onTap: () async {
-                          final date = await CustomDatePicker.show(context: context, initialDate: provider.selectedDate ?? DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
-
-                          if (date != null) provider.setDate(date);
-                        },
-                        child: Container(
-                          height: 55,
-                          padding: AppSpacing.allPadding12,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.black),
-                            borderRadius: AppSpacing.kLargeRadius,
-                          ),
-                          child: Row(
-                            children: [
-                              SvgPictureWidgets(svgString: "assets/svg_icons/date_icon_svg.svg", size: 20.0),
-                              AppSpacing.smallWidth,
-                              Text(provider.selectedDate != null ? "${provider.selectedDate!.day.toString().padLeft(2, '0')}.${provider.selectedDate!.month.toString().padLeft(2, '0')}.${provider.selectedDate!.year}" : "Select date", style: const TextStyle(color: Colors.grey)),
-                            ],
+                        AppSpacing.mediumHeight16,
+                        Text("Mobile number", style: AppTextStyles.greyBoldW500Text),
+                        AppSpacing.smallHeight10,
+                        SizedBox(
+                          height: 50,
+                          child: CustomInputField(
+                            controller: provider.mobileNumberController,
+                            isEditable: true,
+                            keyboardType: TextInputType.phone,
+                            hintText: 'Mobile number',
+                            prefixText: "",
+                            isRequired: true,
+                            //
+                            errorText: null,
+                            onChanged: (value) {},
                           ),
                         ),
-                      ),
+                        AppSpacing.mediumHeight16,
+                        Text("Purchase number", style: AppTextStyles.greyBoldW500Text),
+                        AppSpacing.smallHeight10,
+                        SizedBox(
+                          height: 50,
+                          child: CustomInputField(
+                            controller: provider.purchaseNumberController,
+                            isEditable: true,
+                            keyboardType: TextInputType.number,
+                            hintText: 'Purchase number',
+                            prefixText: "",
+                            isRequired: true,
+                            //
+                            errorText: null,
+                            onChanged: (value) {},
+                          ),
+                        ),
+                        AppSpacing.mediumHeight16,
+                        Text("Purchase date", style: AppTextStyles.greyBoldW500Text),
+                        AppSpacing.smallHeight10,
+                        GestureDetector(
+                          onTap: () async {
+                            final date = await CustomDatePicker.show(context: context, initialDate: provider.selectedDate ?? DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
 
-                      AppSpacing.smallHeight10,
-                    ],
+                            if (date != null) provider.setDate(date);
+                          },
+                          child: Container(
+                            height: 49,
+                            padding: AppSpacing.allPadding12,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: AppColors.textFieldBorderColor),
+                              borderRadius: AppSpacing.kMediumRadius,
+                            ),
+                            child: Row(
+                              children: [
+                                SvgPictureWidgets(svgString: "assets/svg_icons/date_icon_svg.svg", size: 20.0, color: AppColors.greyLight),
+                                AppSpacing.smallWidth,
+                                Text(provider.selectedDate != null ? "${provider.selectedDate!.day.toString().padLeft(2, '0')}.${provider.selectedDate!.month.toString().padLeft(2, '0')}.${provider.selectedDate!.year}" : "Select date", style: const TextStyle(color: Colors.grey)),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        AppSpacing.smallHeight10,
+                      ],
+                    ),
                   ),
-                ),
 
-                AppSpacing.largeHeight,
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    color: Colors.white,
+                  AppSpacing.largeHeight,
+                  Align(
+                    alignment: Alignment.center,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Container(
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(6), color: AppColors.redColor),
-                          child: SizedBox(
-                            width: size.width * 0.45,
-                            child: OutlinedButton(
-                              onPressed: () {
-                                if (provider.validate()) {
-                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("successfully")));
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
-                                }
-                              },
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                padding: EdgeInsets.symmetric(vertical: 16),
-                                side: BorderSide(color: Colors.grey),
-                                shape: RoundedRectangleBorder(borderRadius: AppSpacing.kLargeRadius),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.add, size: 25),
-                                  Text("Add items", style: AppTextStyles.customButtonTextStyle),
-                                ],
-                              ),
+                        InkWell(
+                          onTap: () {
+                            if (provider.validate()) {
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("successfully")));
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
+                            }
+                          },
+                          child: Container(
+                            width: 170,
+                            height: 40,
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(6), color: AppColors.redColor),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.add, size: 25, color: Colors.white),
+                                Text("Add items", style: AppTextStyles.customButtonTextWhiteStyle),
+                              ],
                             ),
                           ),
                         ),
@@ -151,66 +154,72 @@ class AddPurchaseScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                ),
-                AppSpacing.largeHeight,
-                Container(
-                  padding: AppSpacing.allPadding16,
-                  decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: AppSpacing.kSmallRadius),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('Shirt', style: AppTextStyles.black87Text20),
-                      AppSpacing.smallHeight10,
-                      const Text(' vendor name', style: AppTextStyles.greyBoldW500Text),
-                      AppSpacing.smallHeight10,
-                      CustomInputField(
-                        isEditable: false,
-                        keyboardType: TextInputType.datetime,
-                        hintText: '',
-                        prefixText: "",
-                        isRequired: true,
-                        //
-                        errorText: null,
-                        onChanged: (value) {},
+                  AppSpacing.largeHeight,
+                  Container(
+                    padding: AppSpacing.allPadding16,
+                    decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: AppSpacing.kSmallRadius),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Shirt', style: AppTextStyles.black87Text20),
+                        AppSpacing.smallHeight10,
+                        const Text(' vendor name', style: AppTextStyles.greyBoldW500Text),
+                        AppSpacing.smallHeight10,
+                        SizedBox(
+                          height: 40,
+                          child: CustomInputField(
+                            isEditable: false,
+                            keyboardType: TextInputType.datetime,
+                            hintText: '',
+                            prefixText: "",
+                            isRequired: true,
+                            //
+                            errorText: null,
+                            onChanged: (value) {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+        bottomNavigationBar: Consumer<AddPurchaseProvider>(
+          builder: (context, provider, _) {
+            return Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.black, textColor: Colors.black, colors: Colors.white),
+                    ),
+                    AppSpacing.mediumWidth16,
+                    Flexible(
+                      child: CustomOutlinedButton(
+                        colors: AppColors.redColor,
+                        text: "Save",
+                        onPressed: () {
+                          if (provider.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Save successfully")));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
+                          }
+                        },
+
+                        textColor: Colors.white,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        },
-      ),
-      bottomNavigationBar: Consumer<AddPurchaseProvider>(
-        builder: (context, provider, _) {
-          return Container(
-            color: Colors.white,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Flexible(
-                  child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.grey, textColor: Colors.black, colors: Colors.white),
-                ),
-                AppSpacing.smallWidth10,
-                Flexible(
-                  child: CustomOutlinedButton(
-                    colors: AppColors.redColor,
-                    text: "Save",
-                    onPressed: () {
-                      if (provider.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Staff added successfully")));
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
-                      }
-                    },
-                    borderColor: Colors.grey,
-                    textColor: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -226,13 +235,13 @@ class AddPurchaseScreen extends StatelessWidget {
         );
       },
       child: Container(
-        height: 58,
+        height: 50,
         // Smaller height
         width: double.infinity,
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
+          border: Border.all(color: AppColors.textFieldBorderColor),
           borderRadius: AppSpacing.kMediumRadius10,
           color: Colors.white,
         ),
