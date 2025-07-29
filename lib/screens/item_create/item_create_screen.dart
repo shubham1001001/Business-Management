@@ -67,14 +67,19 @@ class ItemCreateScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                AppSpacing.mediumWidth,
+                AppSpacing.largeHeight,
                 InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, AppRoutesName.pricingPreferenceScreen);
                   },
-                  child: const Align(
+                  child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text("+ Pricing preference", style: TextStyle(color: Colors.red)),
+                    child: Row(
+                      children: [
+                        Icon(Icons.add, color: AppColors.redColor),
+                        Text("Pricing preference", style: AppTextStyles.redBoldText14),
+                      ],
+                    ),
                   ),
                 ),
                 AppSpacing.mediumWidth,
@@ -121,7 +126,7 @@ class ItemCreateScreen extends StatelessWidget {
   Widget _buildRadio(String title, bool value, ItemCreateProvider provider) {
     return Row(
       children: [
-        Radio<bool>(value: value, groupValue: provider.isProduct, fillColor: WidgetStateProperty.all(AppColors.redColor), onChanged: (val) => provider.setType(val!)),
+        Radio<bool>(value: value, groupValue: provider.isProduct, fillColor: WidgetStateProperty.all(Colors.black), onChanged: (val) => provider.setType(val!)),
         Text(title),
       ],
     );

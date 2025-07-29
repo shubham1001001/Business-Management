@@ -29,13 +29,11 @@ class GenerateCart extends StatelessWidget {
             children: [
               Padding(
                 padding: AppSpacing.allPadding5,
-                child:
-                    // label != "Item"
-                    //     ? label != "Alert"
-                    //           ? SvgPictureWidgets(svgString: icon, size: 30.0)
-                    //           : SvgPicture.string(SvgString.rawAlertSvg, width: 30, height: 30, semanticsLabel: 'My SVG Picture', clipBehavior: Clip.none)
-                    //     :
-                    SvgPictureWidgets(svgString: icon, size: 30.0),
+                child: label != "Item"
+                    ? label != "Alert"
+                          ? SvgPictureWidgets(svgString: icon, size: 30.0)
+                          : Image.asset(icon, fit: BoxFit.fitWidth)
+                    : Image.asset(icon, fit: BoxFit.fitWidth),
               ),
               // Image.asset(icon, fit: BoxFit.fitWidth), //
             ],

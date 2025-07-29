@@ -101,11 +101,12 @@ class AddVehicleScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                AppSpacing.largeHeight,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Capacity', style: AppTextStyles.textSize16),
-                    AppSpacing.mediumHeight,
+                    AppSpacing.mediumHeight16,
 
                     // Capacity Header Row
                     Container(

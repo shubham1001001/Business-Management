@@ -49,10 +49,15 @@ class _OtpScreenState extends State<EmailChangeScreenOtp> {
         body: Stack(
           children: [
             // Background image
-            SizedBox(
-              height: size.height * 0.45,
-              width: size.width,
-              child: Image.asset("assets/images/emialIcon.png", fit: BoxFit.cover),
+            Positioned(
+              top: size.height * 0.05,
+              left: 0,
+              right: 0,
+              child: SizedBox(
+                height: size.height * 0.2,
+                width: size.width * 0.2,
+                child: Image.asset("assets/images/emialIcon.png", fit: BoxFit.contain),
+              ),
             ),
 
             // Dark overlay

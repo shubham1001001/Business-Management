@@ -5,6 +5,7 @@ import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/screens/otp_screen/widgets/otp_widgets.dart';
 
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../core/widgets/Custom_message_widget.dart';
 import '../../core/widgets/app_header.dart';
 import '../../core/widgets/custom_auth_button.dart';
@@ -53,7 +54,7 @@ class _OtpScreenState extends State<ChangeNumberOtp> {
               child: SizedBox(
                 height: size.height * 0.4,
                 // width: size.width,
-                child: Image.asset("assets/images/change_numer_otp.png", fit: BoxFit.contain),
+                child: SvgPictureWidgets(svgString: "assets/svg_icons/change_number_hand.svg", size: 198.0),
               ),
             ),
 
@@ -86,7 +87,7 @@ class _OtpScreenState extends State<ChangeNumberOtp> {
                             ),
                           ),
 
-                          Text('Enter your OTP here', style: AppTextStyles.title16),
+                          Text('Enter your OTP here', style: AppTextStyles.titleBold16),
                           AppSpacing.extraSmallWidth,
                         ],
                       ),

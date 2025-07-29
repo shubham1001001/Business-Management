@@ -27,7 +27,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                 )
               : SizedBox.shrink(),
           Flexible(
-            child: Text(title, style: AppTextStyles.appBarBlackText, overflow: TextOverflow.ellipsis),
+            child: Text(title, style: AppTextStyles.appBarBlackText18, overflow: TextOverflow.ellipsis),
           ),
           const Spacer(),
           endicon

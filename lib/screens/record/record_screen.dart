@@ -16,7 +16,7 @@ class RecordScreen extends StatelessWidget {
 
   final List<TapsModel> tabs = [
     TapsModel(title: 'Sales', Images: "assets/svg_icons/sales_icons.svg"), //
-    TapsModel(title: 'Purchase', Images: "assets/svg_icons/purchase_icon.svg"),
+    TapsModel(title: 'Purchase', Images: "assets/svg_icons/Receipt_icon.png"),
     TapsModel(title: 'Bank', Images: "assets/svg_icons/g_bank_icon.svg"),
     TapsModel(title: 'Cash', Images: "assets/svg_icons/coin.svg.svg"),
     TapsModel(title: 'Expenses', Images: "assets/svg_icons/expenses_icon.svg"),
@@ -80,8 +80,9 @@ class RecordScreen extends StatelessWidget {
                                     duration: Duration(milliseconds: 200),
                                     builder: (context, scale, child) {
                                       return Transform.scale(
+                                        alignment: Alignment.center,
                                         scale: scale,
-                                        child: SvgPictureWidgets(size: screenWidth * 0.075, svgString: tabs[index].Images),
+                                        child: tabs[index].title == "Purchase" ? Image.asset(tabs[index].Images, fit: BoxFit.contain, width: screenWidth * 0.085) : SvgPictureWidgets(size: screenWidth * 0.075, svgString: tabs[index].Images),
                                       );
                                     },
                                   ),

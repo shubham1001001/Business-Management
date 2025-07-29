@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sales/core/constants/colors.dart';
 import 'package:sales/core/constants/spacing.dart';
+import 'package:sales/core/constants/text_styles.dart';
 
 import '../../../core/constants/svg_picture_widgets.dart';
 import '../../../providers/expense_details/expense_details_provider.dart';
@@ -46,10 +47,7 @@ class _AudioWaveformWidgetState extends State<AudioWaveformWidget> {
           // const Icon(Icons.graphic_eq_rounded, size: 40),
           AppSpacing.smallWidth10,
           // Duration
-          Text(
-            "${5.8} s",
-            style: const TextStyle(color: Colors.red, fontWeight: FontWeight.w600),
-          ),
+          Text("${5.8} s", style: AppTextStyles.appRedBoldText),
           AppSpacing.smallWidth,
 
           // Play/Pause Button

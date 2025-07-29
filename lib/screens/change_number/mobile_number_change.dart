@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../core/widgets/Custom_message_widget.dart';
 import '../../core/widgets/app_header.dart';
 import '../../core/widgets/custom_auth_button.dart';
@@ -27,6 +28,7 @@ class MobileNumberChange extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: AppHeader(title: 'Change Number', endicon: false, backbutton: true),
         body: SingleChildScrollView(
           child: Column(
@@ -35,11 +37,12 @@ class MobileNumberChange extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: SizedBox(
                   height: size.height * 0.45,
-                  width: size.width,
-                  child: Image.asset("assets/images/change_numer_otp.png", fit: BoxFit.fitWidth),
+                  // width: size.width,
+                  child: SvgPictureWidgets(svgString: "assets/svg_icons/change_number_hand.svg", size: 198.0),
                 ),
               ),
-              // Row(
+
+              // Row(change_number_hand
               //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //   children: [
               //     InkWell(

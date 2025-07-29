@@ -136,57 +136,8 @@ class GetStartScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-
-                      // Container(
-                      //   width: 218,
-                      //   height: 41,
-                      //   alignment: Alignment.center,
-                      //   decoration: BoxDecoration(
-                      //     color: const Color(0xFF2E2E2E), // Dark gray button color
-                      //     borderRadius: AppSpacing.kLargeRadius,
-                      //     boxShadow:
-                      //   ),
-                      //   child: Text('Get start', style: AppTextStyles.customButtonTextWhiteStyle),
-                      // ),
                     ),
                   ),
-                  // Center(
-                  //   child: SizedBox(
-                  //     width: size.width * 0.6,
-                  //     child: Container(
-                  //       decoration: BoxDecoration(color: AppColors.grey, borderRadius: BorderRadius.circular(6)),
-                  //       child: Padding(
-                  //         padding: const EdgeInsets.all(3.0),
-                  //         child: Container(
-                  //           decoration: BoxDecoration(
-                  //             color: AppColors.grey,
-                  //             borderRadius: BorderRadius.only(topLeft: Radius.circular(6), bottomLeft: Radius.circular(6)),
-                  //             boxShadow: [
-                  //               BoxShadow(
-                  //                 color: Colors.grey.shade700, // Shadow color
-                  //                 offset: Offset(-2, -2), // Top-left direction
-                  //                 blurRadius: 6,
-                  //                 blurStyle: BlurStyle.inner,
-                  //               ),
-                  //             ],
-                  //           ),
-                  //           child: ElevatedButton(
-                  //             onPressed: () {
-                  //               Navigator.of(context).pushNamed(AppRoutesName.signup);
-                  //             },
-                  //             style: ElevatedButton.styleFrom(
-                  //               elevation: 0, // Important: remove default shadow
-                  //               backgroundColor: Colors.transparent, // Let outer Container's color show
-                  //               padding: const EdgeInsets.symmetric(vertical: 16),
-                  //               shape: RoundedRectangleBorder(borderRadius: AppSpacing.kLargeRadius),
-                  //             ),
-                  //             child: const Text('Get Start'),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ),
               ),
             ),

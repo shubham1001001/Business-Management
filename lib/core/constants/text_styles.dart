@@ -54,6 +54,8 @@ class AppTextStyles {
   static const blueText = TextStyle(color: Colors.blue, fontFamily: 'OpenSans');
   static const white54BoldText40 = TextStyle(fontSize: 40, color: Colors.white54, fontWeight: FontWeight.w600, fontFamily: 'OpenSans');
   static const whiteTextW400 = TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w400, fontFamily: 'OpenSans');
+  static const whiteTextW800 = TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w800, fontFamily: 'OpenSans');
+  static const blackTextW800 = TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold, fontFamily: 'OpenSans');
   static const whiteTextSemiBold20 = TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w600, fontFamily: 'OpenSans');
   static const blackBoldText15 = TextStyle(fontSize: 15, fontWeight: FontWeight.w600, fontFamily: 'OpenSans');
   static const blackBoldTextW800 = TextStyle(fontSize: 15, fontWeight: FontWeight.w700, fontFamily: 'OpenSans');

@@ -8,7 +8,7 @@ import '../../routes/app_routes_name.dart';
 class GenerateBottomSheet extends StatelessWidget {
   GenerateBottomSheet({super.key});
   final items = [
-    {'label': 'Item', 'icon': "assets/svg_icons/item_icon.svg"},
+    {'label': 'Item', 'icon': "assets/svg_icons/item_svg.png"},
     {'label': 'Account', 'icon': "assets/svg_icons/generate_account_icon.svg"},
     {'label': 'Vehicle', 'icon': "assets/svg_icons/generate_vehicle_icon.svg"},
     {'label': 'Unit', 'icon': "assets/svg_icons/generate_unit_icon.svg"},
@@ -16,12 +16,12 @@ class GenerateBottomSheet extends StatelessWidget {
     {'label': 'Customer', 'icon': "assets/svg_icons/generate_customer_icon.svg"},
     {'label': 'Warehouse', 'icon': "assets/svg_icons/generate_warehouse_icon.svg"},
     {'label': 'Point', 'icon': "assets/svg_icons/generate_point_icon.svg"},
-    {'label': 'Alert', 'icon': "assets/svg_icons/warning3.svg"},
+    {'label': 'Alert', 'icon': "assets/svg_icons/Warning_svg.png"},
     {'label': 'Staff', 'icon': "assets/svg_icons/generate_staff_icon.svg"},
     {'label': 'Bank', 'icon': "assets/svg_icons/g_bank_icon.svg"},
     {'label': 'Cash', 'icon': "assets/svg_icons/coin.svg.svg"},
     // Add more if needed
-  ];
+  ]; //Warning_svg.png
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

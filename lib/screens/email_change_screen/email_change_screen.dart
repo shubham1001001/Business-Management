@@ -27,8 +27,8 @@ class EmailChangeScreen extends StatelessWidget {
             children: [
               SizedBox(
                 height: size.height * 0.45,
-                width: size.width,
-                child: Image.asset("assets/images/emialIcon.png", fit: BoxFit.cover),
+                width: size.width * 0.6,
+                child: Image.asset("assets/images/emialIcon.png", fit: BoxFit.fitWidth),
               ),
               Center(
                 child: Column(

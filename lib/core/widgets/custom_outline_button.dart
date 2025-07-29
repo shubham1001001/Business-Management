@@ -19,7 +19,7 @@ class CustomOutlinedButton extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(6), color: colors),
+      decoration: BoxDecoration(borderRadius: AppSpacing.kMediumRadius, color: colors),
       child: SizedBox(
         width: size.width * widthFactor,
         child: OutlinedButton(
