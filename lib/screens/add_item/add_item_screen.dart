@@ -60,14 +60,17 @@ class AddItemScreen extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(horizontal: 8),
                                   decoration: BoxDecoration(
                                     border: Border.all(color: AppColors.textFieldBorderColor),
-                                    borderRadius: AppSpacing.kMediumRadius10,
+                                    borderRadius: AppSpacing.kLargeRadius,
                                     color: Colors.white,
                                   ),
                                   child: CustomDropdown<String>(
                                     isExpanded: true,
                                     value: provider.unit,
                                     items: ['nos', 'kg', 'ltr', 'box'].map((unit) {
-                                      return DropdownMenuItem(value: unit, child: Text(unit));
+                                      return DropdownMenuItem(
+                                        value: unit,
+                                        child: Text(unit, style: AppTextStyles.greyBoldText),
+                                      );
                                     }).toList(),
                                     onChanged: (value) {
                                       if (value != null) provider.updateUnit(value);
@@ -127,7 +130,7 @@ class AddItemScreen extends StatelessWidget {
   Widget _buildLabel(String text) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
-      child: Text(text, style: AppTextStyles.backBoldText),
+      child: Text(text, style: AppTextStyles.greyBoldText),
     );
   }
 

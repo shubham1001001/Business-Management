@@ -34,7 +34,7 @@ class QuickLink extends StatelessWidget {
             Text(
               label,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 40), fontWeight: FontWeight.w600, fontFamily: 'OpenSans'),
+              style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 40), fontWeight: FontWeight.w700, fontFamily: 'OpenSans'),
             ),
           ],
         ),

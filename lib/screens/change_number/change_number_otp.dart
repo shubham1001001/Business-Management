@@ -46,7 +46,7 @@ class _OtpScreenState extends State<ChangeNumberOtp> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: AppHeader(title: "Change Email", endicon: false, backbutton: true),
+        appBar: AppHeader(title: "Change Number", endicon: false, backbutton: true),
         body: Stack(
           children: [
             Align(

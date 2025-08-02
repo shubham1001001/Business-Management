@@ -16,7 +16,10 @@ class VenderDetailScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Vendor Details'), leading: const BackButton()),
+      appBar: AppBar(
+        title: const Text('Vendor Details', style: AppTextStyles.appBarBlackText),
+        leading: const BackButton(),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 64, vertical: 16),
         child: Column(
@@ -154,7 +157,7 @@ class _PaymentItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: AppTextStyles.textSize16),
+        FittedBox(child: Text(title, style: AppTextStyles.textSize16)),
         AppSpacing.extraSmallHeight,
         RichText(
           text: TextSpan(

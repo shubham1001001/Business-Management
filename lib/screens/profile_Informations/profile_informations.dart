@@ -7,6 +7,7 @@ import '../../core/constants/colors.dart';
 import '../../core/constants/svg_picture_widgets.dart';
 import '../../core/widgets/custom_input_field.dart';
 import '../../providers/profile_information_provider/profile_information_provider.dart';
+import '../../routes/app_routes_name.dart';
 
 class ProfileInformations extends StatelessWidget {
   const ProfileInformations({super.key});
@@ -38,15 +39,33 @@ class ProfileInformations extends StatelessWidget {
           builder: (context, provider, _) {
             return SingleChildScrollView(
               child: Container(
-                decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: BorderRadius.circular(20)),
+                decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: BorderRadius.circular(8)),
                 child: Padding(
                   padding: AppSpacing.allPadding12,
                   child: Column(
                     children: [
                       buildEditableTextField(label: 'First name', value: 'Nandana', isEditable: provider.isEditingFirstName),
                       buildReadOnlyField('Last name', 'example text like this'),
-                      buildEditableField(label: 'Mobile number', value: '9876543210', actionLabel: 'Change number', isEditable: provider.isEditingMobile, onTap: provider.toggleMobileEditing),
-                      buildEditableField(label: 'Email id', value: 'nandana900@gmail.com', actionLabel: 'Change email', isEditable: provider.isEditingEmail, onTap: provider.toggleEmailEditing),
+                      buildEditableField(
+                        label: 'Mobile number',
+                        value: '9876543210',
+                        actionLabel: 'Change number',
+                        isEditable: provider.isEditingMobile,
+                        onTap: () {
+                          //  provider.toggleMobileEditing
+                          Navigator.of(context).pushNamed(AppRoutesName.mobileNumberChangeScreen);
+                        },
+                      ),
+                      buildEditableField(
+                        label: 'Email id',
+                        value: 'nandana900@gmail.com',
+                        actionLabel: 'Change email',
+                        isEditable: provider.isEditingEmail,
+                        onTap: () {
+                          // provider.toggleEmailEditing
+                          Navigator.of(context).pushNamed(AppRoutesName.emaiChangeScreen);
+                        },
+                      ),
                       buildReadOnlyField('Enterprise name', 'ABC company'),
                       buildReadOnlyField('Financial year', 'Select financial year'),
                       buildReadOnlyField('Address', 'Sample here'),
@@ -133,7 +152,7 @@ class ProfileInformations extends StatelessWidget {
               Text(label, style: AppTextStyles.textSize13),
               GestureDetector(
                 onTap: onTap,
-                child: Text(actionLabel, style: AppTextStyles.redText),
+                child: Text(actionLabel, style: AppTextStyles.robotoFontStyleTextNormal),
               ),
             ],
           ),

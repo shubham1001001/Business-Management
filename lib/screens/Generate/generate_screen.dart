@@ -19,7 +19,7 @@ class GenerateBottomSheet extends StatelessWidget {
     {'label': 'Alert', 'icon': "assets/svg_icons/Warning_svg.png"},
     {'label': 'Staff', 'icon': "assets/svg_icons/generate_staff_icon.svg"},
     {'label': 'Bank', 'icon': "assets/svg_icons/g_bank_icon.svg"},
-    {'label': 'Cash', 'icon': "assets/svg_icons/coin.svg.svg"},
+    {'label': 'Cash', 'icon': "assets/svg_icons/g_case_icon.svg"},
     // Add more if needed
   ]; //Warning_svg.png
   @override
@@ -46,7 +46,7 @@ class GenerateBottomSheet extends StatelessWidget {
 
           // PageView with 2-row layout
           SizedBox(
-            height: isLandscape ? size.height * 0.5 : size.height * 0.25,
+            height: isLandscape ? size.height * 0.5 : size.height * 0.26,
             child: PageView.builder(
               scrollDirection: Axis.horizontal,
               controller: controller,

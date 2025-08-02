@@ -6,6 +6,7 @@ import 'package:sales/screens/vehicle_details/widgets/shimmer_widget.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/svg_picture_widgets.dart';
+import '../../core/widgets/text_scale_widgets.dart';
 import '../../providers/vehicle_details/vehicle_details_provider.dart';
 
 class VehicleDetailsScreen extends StatefulWidget {
@@ -96,39 +97,45 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                             borderRadius: AppSpacing.kRadius25,
                             border: Border.all(color: Colors.black),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ChoiceChip(
-                                label: const Text("Trip "),
-                                showCheckmark: false,
-                                padding: EdgeInsets.symmetric(horizontal: media.width * 0.14, vertical: media.height * 0.01),
-                                selected: provider.isTripSelected,
-                                onSelected: (val) => provider.toggleTab(true),
-                                selectedColor: AppColors.redColor,
-                                backgroundColor: Colors.transparent,
-                                labelStyle: TextStyle(color: provider.isTripSelected ? Colors.white : AppColors.appBlackColor, fontWeight: FontWeight.w500),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: AppSpacing.kChipRadius,
-                                  side: BorderSide(color: Colors.white),
-                                ),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 6),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ChoiceChip(
+                                    label: const Text("Trip "),
+                                    showCheckmark: false,
+                                    padding: EdgeInsets.symmetric(horizontal: media.width * 0.14, vertical: media.height * 0.01),
+                                    selected: provider.isTripSelected,
+                                    onSelected: (val) => provider.toggleTab(true),
+                                    selectedColor: AppColors.redColor,
+                                    backgroundColor: Colors.transparent,
+                                    labelStyle: TextStyle(color: provider.isTripSelected ? Colors.white : AppColors.appBlackColor, fontWeight: FontWeight.w500),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: AppSpacing.kChipRadius,
+                                      side: BorderSide(color: Colors.white),
+                                    ),
+                                  ),
+                                  SizedBox(width: media.width * 0.06),
+                                  ChoiceChip(
+                                    label: const Text("Vehicle"),
+                                    showCheckmark: false,
+                                    padding: EdgeInsets.symmetric(horizontal: media.width * 0.13, vertical: media.height * 0.01),
+                                    selected: !provider.isTripSelected,
+                                    onSelected: (val) => provider.toggleTab(false),
+                                    selectedColor: AppColors.redColor,
+                                    backgroundColor: Colors.transparent,
+                                    labelStyle: TextStyle(color: !provider.isTripSelected ? Colors.white : AppColors.appBlackColor, fontWeight: FontWeight.w500),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      side: BorderSide(color: Colors.white),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              SizedBox(width: media.width * 0.06),
-                              ChoiceChip(
-                                label: const Text("Vehicle"),
-                                showCheckmark: false,
-                                padding: EdgeInsets.symmetric(horizontal: media.width * 0.14, vertical: media.height * 0.01),
-                                selected: !provider.isTripSelected,
-                                onSelected: (val) => provider.toggleTab(false),
-                                selectedColor: AppColors.redColor,
-                                backgroundColor: Colors.transparent,
-                                labelStyle: TextStyle(color: !provider.isTripSelected ? Colors.white : AppColors.appBlackColor, fontWeight: FontWeight.w500),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  side: BorderSide(color: Colors.white),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
@@ -257,9 +264,16 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: AppTextStyles.white60BoldText14),
+          //
+          Text(
+            title,
+            style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 50), fontWeight: FontWeight.w600, color: Colors.white60, fontFamily: 'OpenSans'),
+          ), //AppTextStyles.white60BoldText14),
           SizedBox(height: 15),
-          Text(value, style: AppTextStyles.whiteBoldText14),
+          Text(
+            value,
+            style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 50), fontWeight: FontWeight.w600, color: Colors.white, fontFamily: 'OpenSans'),
+          ),
         ],
       ),
     );

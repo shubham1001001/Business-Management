@@ -30,7 +30,12 @@ class ExpenseTopCard extends StatelessWidget {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [const Text('EX - 526', style: TextStyle(color: AppColors.redColor, fontSize: 18))],
+                  children: [
+                    const Text(
+                      'EX - 526',
+                      style: TextStyle(color: AppColors.redColor, fontSize: 18, fontWeight: FontWeight.w600),
+                    ),
+                  ],
                 ),
                 AppSpacing.extraSmallHeight,
                 Text("Expense account", style: AppTextStyles.smallW400),

@@ -34,43 +34,70 @@ class VendorTimelineScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                AppSpacing.mediumHeight,
+                AppSpacing.largeHeight37,
                 Flexible(
-                  child: ListView.separated(
-                    itemCount: provider.events.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 0),
-                    itemBuilder: (context, index) {
-                      final event = provider.events[index];
-                      return Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            children: [
-                              Container(
-                                height: 25,
-                                width: 25,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: AppColors.redColor, width: 3),
-                                  borderRadius: AppSpacing.kSmallRadius,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 12),
+                                child: ListView.separated(
+                                  itemCount: provider.events.length,
+                                  separatorBuilder: (_, __) => const SizedBox(height: 0),
+                                  itemBuilder: (context, index) {
+                                    final event = provider.events[index];
+                                    return Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Container(
+                                              height: 25,
+                                              width: 25,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(color: AppColors.redColor, width: 3),
+                                                borderRadius: AppSpacing.kSmallRadius,
+                                              ),
+                                            ),
+                                            if (index != provider.events.length - 1) Container(width: 1, height: 68, color: Colors.black),
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  },
                                 ),
                               ),
-                              if (index != provider.events.length - 1) Container(width: 1, height: 50, color: Colors.black),
-                            ],
-                          ),
-                          AppSpacing.mediumWidth16,
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(event.title, style: AppTextStyles.appBlackText18),
-                                AppSpacing.extraSmallHeight,
-                                Text("${event.date}   ${event.time}", style: AppTextStyles.greyText17),
-                              ],
                             ),
-                          ),
-                        ],
-                      );
-                    },
+                            Expanded(
+                              flex: 6,
+                              child: ListView.separated(
+                                itemCount: provider.events.length,
+                                separatorBuilder: (_, __) => const SizedBox(height: 0),
+                                itemBuilder: (context, index) {
+                                  final event = provider.events[index];
+                                  return Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(event.title, style: AppTextStyles.blackBoldText15),
+                                      AppSpacing.smallHeight10,
+                                      Text("${event.date}   ${event.time}", style: AppTextStyles.greyBoldText15),
+                                      AppSpacing.largeHeight40,
+                                    ],
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Row(
@@ -89,7 +116,7 @@ class VendorTimelineScreen extends StatelessWidget {
                                 controller: provider.controller,
                                 onSubmitted: (_) => provider.sendMessage(context),
                                 decoration: InputDecoration(
-                                  hintStyle: AppTextStyles.greyText,
+                                  hintStyle: AppTextStyles.greyTextW500,
                                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                                   hintText: "Type to add a comment",
                                   border: OutlineInputBorder(borderSide: BorderSide.none),
@@ -130,7 +157,7 @@ Widget vendorHeader({name, number}) {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(name, style: AppTextStyles.appBarRedBoldText),
-      AppSpacing.extraSmallHeight,
+      AppSpacing.smallHeight,
       Text(number, style: AppTextStyles.appBlackText18),
     ],
   );

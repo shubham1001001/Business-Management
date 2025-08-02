@@ -116,21 +116,19 @@ class ItemListScreen extends StatelessWidget {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                        Padding(
-                                          padding: AppSpacing.allPadding5,
-                                          child: Stack(
-                                            alignment: AlignmentDirectional.center,
-                                            children: [
-                                              Image.asset("assets/icons/user_icon.png"),
-                                              Padding(padding: AppSpacing.allPadding5, child: Image.asset("assets/icons/itemicon.png")),
-                                            ],
-                                          ),
+                                        Stack(
+                                          alignment: AlignmentDirectional.center,
+                                          children: [
+                                            Image.asset("assets/icons/user_icon.png"),
+                                            Padding(padding: AppSpacing.allPadding5, child: Image.asset("assets/icons/itemicon.png")),
+                                          ],
                                         ),
-                                        AppSpacing.smallWidth10,
+                                        AppSpacing.mediumWidth16,
                                         Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(order.customerName, style: AppTextStyles.backBoldText),
+                                            AppSpacing.extraSmallHeight,
                                             Text(order.description, style: AppTextStyles.greyBoldText),
                                           ],
                                         ),

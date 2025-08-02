@@ -6,6 +6,7 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../core/constants/text_styles.dart';
 import '../../core/widgets/custom_input_field.dart';
+import '../../core/widgets/text_scale_widgets.dart';
 import '../../providers/set_distance/set_distance_provider.dart';
 import '../pricing_preference/widgets/bottom_select_sheet_widget.dart';
 
@@ -123,7 +124,7 @@ class _SetDistanceScreenState extends State<SetDistanceScreen> {
                     child: ChoiceChip(
                       selectedShadowColor: AppColors.redColor,
                       showCheckmark: false,
-                      label: Text(e),
+                      label: Text(e, style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 50))),
                       selected: selected,
                       onSelected: (_) => provider.setSelectedFeet(e),
                       selectedColor: AppColors.redColor,
@@ -222,7 +223,7 @@ Widget _buildSelectField(BuildContext context, String title, String? value, List
         context: context,
         isScrollControlled: true,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: AppSpacing.rSmallRadius)),
-        builder: (_) => BottomSelectSheetPricing(title: title, options: options, onSelect: onSelected),
+        builder: (_) => BottomSelectSheetPricing(title: title, options: options, onSelect: onSelected, type: "Apply"),
       );
     },
     child: Container(

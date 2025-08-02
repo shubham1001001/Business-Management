@@ -29,7 +29,32 @@ class SetDistanceProvider with ChangeNotifier {
 
     await Future.delayed(Duration(seconds: 1));
     // You can filter data based on selectedFeet
-    distanceList = [DistanceItemModel(deliveryPoint: 'Kinfra IT park', distance: '160 KM', amount: '\$1100'), DistanceItemModel(deliveryPoint: 'Down town', distance: '260 KM', amount: '\$1300'), DistanceItemModel(deliveryPoint: 'Uphill', distance: '100 KM', amount: '\$1000'), DistanceItemModel(deliveryPoint: 'Malappuram', distance: '125 KM', amount: '\$1120'), DistanceItemModel(deliveryPoint: 'West hill', distance: '84 KM', amount: '\$600'), DistanceItemModel(deliveryPoint: 'Chungam', distance: '322 KM', amount: '\$2501')];
+    distanceList = [
+      DistanceItemModel(deliveryPoint: 'Kinfra IT park', distance: '160 KM', amount: '\$1100'),
+      DistanceItemModel(deliveryPoint: 'Down town', distance: '260 KM', amount: '\$1300'),
+      DistanceItemModel(deliveryPoint: 'Uphill', distance: '100 KM', amount: '\$1000'),
+      DistanceItemModel(deliveryPoint: 'Malappuram', distance: '125 KM', amount: '\$1120'),
+      DistanceItemModel(deliveryPoint: 'West hill', distance: '84 KM', amount: '\$600'),
+      DistanceItemModel(deliveryPoint: 'Chungam', distance: '322 KM', amount: '\$2501'),
+      DistanceItemModel(deliveryPoint: 'Kinfra IT park', distance: '160 KM', amount: '\$1100'),
+      DistanceItemModel(deliveryPoint: 'Down town', distance: '260 KM', amount: '\$1300'),
+      DistanceItemModel(deliveryPoint: 'Uphill', distance: '100 KM', amount: '\$1000'),
+      DistanceItemModel(deliveryPoint: 'Malappuram', distance: '125 KM', amount: '\$1120'),
+      DistanceItemModel(deliveryPoint: 'West hill', distance: '84 KM', amount: '\$600'),
+      DistanceItemModel(deliveryPoint: 'Chungam', distance: '322 KM', amount: '\$2501'),
+      DistanceItemModel(deliveryPoint: 'Kinfra IT park', distance: '160 KM', amount: '\$1100'),
+      DistanceItemModel(deliveryPoint: 'Down town', distance: '260 KM', amount: '\$1300'),
+      DistanceItemModel(deliveryPoint: 'Uphill', distance: '100 KM', amount: '\$1000'),
+      DistanceItemModel(deliveryPoint: 'Malappuram', distance: '125 KM', amount: '\$1120'),
+      DistanceItemModel(deliveryPoint: 'West hill', distance: '84 KM', amount: '\$600'),
+      DistanceItemModel(deliveryPoint: 'Chungam', distance: '322 KM', amount: '\$2501'),
+      DistanceItemModel(deliveryPoint: 'Kinfra IT park', distance: '160 KM', amount: '\$1100'),
+      DistanceItemModel(deliveryPoint: 'Down town', distance: '260 KM', amount: '\$1300'),
+      DistanceItemModel(deliveryPoint: 'Uphill', distance: '100 KM', amount: '\$1000'),
+      DistanceItemModel(deliveryPoint: 'Malappuram', distance: '125 KM', amount: '\$1120'),
+      DistanceItemModel(deliveryPoint: 'West hill', distance: '84 KM', amount: '\$600'),
+      DistanceItemModel(deliveryPoint: 'Chungam', distance: '322 KM', amount: '\$2501'),
+    ];
     isLoading = false;
     notifyListeners();
   }

@@ -176,7 +176,7 @@ class PricingPreferenceScreen extends StatelessWidget {
           context: context,
           isScrollControlled: true,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: AppSpacing.rSmallRadius)),
-          builder: (_) => BottomSelectSheetPricing(title: title, options: options, onSelect: onSelected),
+          builder: (_) => BottomSelectSheetPricing(title: title, options: options, onSelect: onSelected, type: "Apply"),
         );
       },
       child: Container(

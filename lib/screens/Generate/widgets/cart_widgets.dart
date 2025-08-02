@@ -20,10 +20,12 @@ class GenerateCart extends StatelessWidget {
     return Column(
       children: [
         Container(
+          alignment: Alignment.center,
           width: isLandscape ? screen.width * 0.06 : screen.width * 0.14,
           height: isLandscape ? screen.width * 0.06 : screen.width * 0.14,
           decoration: CustomDecorations.cardBoxDecoration,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

@@ -159,18 +159,20 @@ class RecordScreen extends StatelessWidget {
                                       }).toList(),
                                     )
                                   : Container(
-                                      height: 45, // Smaller height
+                                      height: 40,
+                                      width: provider.selectedFilter.name == "today" ? 90 : 120, // Smaller height
                                       padding: const EdgeInsets.symmetric(horizontal: 8),
                                       decoration: BoxDecoration(
                                         border: Border.all(color: Colors.black),
-                                        borderRadius: AppSpacing.kMediumRadius10,
+                                        borderRadius: AppSpacing.kLargeRadius,
                                         color: Colors.white,
                                       ),
                                       child: CustomDropdown<FilterDropItem>(
-                                        isExpanded: false,
+                                        isExpanded: true,
                                         value: provider.selectedFilter,
                                         items: provider.dropItem,
                                         onChanged: (filter) {
+                                          print(">>>>>>>>>>>>>>>>${provider.selectedFilter.toString().length}");
                                           if (filter != null) provider.setFilter(filter);
                                         },
                                       ),
@@ -224,9 +226,10 @@ class RecordScreen extends StatelessWidget {
                                           child: Padding(
                                             padding: AppSpacing.allPadding10,
                                             child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 Padding(
-                                                  padding: AppSpacing.allPadding8,
+                                                  padding: const EdgeInsets.symmetric(vertical: 5),
                                                   child: Stack(
                                                     alignment: Alignment.center,
                                                     children: [

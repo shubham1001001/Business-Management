@@ -4,9 +4,10 @@ class AddAccountProvider extends ChangeNotifier {
   final accountNameController = TextEditingController();
   final descriptionController = TextEditingController();
   final openingBalanceController = TextEditingController();
-
+  bool _allowCostCenter = false;
   String? _accountType;
   // String? get accountType => _accountType;
+  bool get allowCostCenter => _allowCostCenter;
 
   List<String> _accountTypeList = [];
   String? _selectedAccountType;
@@ -16,6 +17,11 @@ class AddAccountProvider extends ChangeNotifier {
 
   void setAccountType(String? value) {
     _selectedAccountType = value;
+    notifyListeners();
+  }
+
+  void toggleAllowCostCenter(bool? value) {
+    _allowCostCenter = value ?? false;
     notifyListeners();
   }
 

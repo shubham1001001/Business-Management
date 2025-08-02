@@ -112,7 +112,7 @@ Widget _buildSelectField(BuildContext context, String title, String? value, List
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.textFieldBorderColor),
-        borderRadius: AppSpacing.kMediumRadius10,
+        borderRadius: AppSpacing.kLargeRadius,
         color: Colors.white,
       ),
       child: Text(value ?? "Select $title", style: AppTextStyles.greyText),

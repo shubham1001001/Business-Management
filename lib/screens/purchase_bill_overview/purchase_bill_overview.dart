@@ -41,6 +41,7 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
                 return Row(
                   children: [
                     Image.asset("assets/icons/Vector (2).png"),
+                    AppSpacing.smallWidth,
                     Expanded(
                       child: Wrap(
                         children: ['All', 'Recently', 'Date'].map((filter) {

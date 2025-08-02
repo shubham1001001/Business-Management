@@ -33,20 +33,18 @@ class TripSummaryScreen extends StatelessWidget {
             child: Column(
               children: [
                 Container(
+                  alignment: Alignment.center,
                   decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: BorderRadius.circular(15)),
                   width: size.width * 0.4,
-                  child: Padding(
-                    padding: AppSpacing.allPadding5,
-                    child: CustomDropdown<String>(
-                      isExpanded: false,
-                      value: provider.selectedMonth,
-                      items: provider.months.map((month) => DropdownMenuItem(value: month, child: Text(month))).toList(),
-                      onChanged: (value) {
-                        if (value != null) {
-                          context.read<TripProvider>().changeMonth(value);
-                        }
-                      },
-                    ),
+                  child: CustomDropdown<String>(
+                    isExpanded: false,
+                    value: provider.selectedMonth,
+                    items: provider.months.map((month) => DropdownMenuItem(value: month, child: Text(month))).toList(),
+                    onChanged: (value) {
+                      if (value != null) {
+                        context.read<TripProvider>().changeMonth(value);
+                      }
+                    },
                   ),
                 ),
                 AppSpacing.mediumHeight16,

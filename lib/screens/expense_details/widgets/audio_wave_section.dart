@@ -1,12 +1,10 @@
 import 'package:audio_waveform_view/audio_waveform_view.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:sales/core/constants/colors.dart';
 import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
 import '../../../core/constants/svg_picture_widgets.dart';
-import '../../../providers/expense_details/expense_details_provider.dart';
 
 class AudioWaveformWidget extends StatefulWidget {
   final String audioUrl;
@@ -20,16 +18,14 @@ class _AudioWaveformWidgetState extends State<AudioWaveformWidget> {
   @override
   void initState() {
     super.initState();
-    final provider = Provider.of<ExpenseDetailProvider>(context, listen: false);
   }
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ExpenseDetailProvider>(context);
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(color: const Color(0xFFF4F4F4), borderRadius: BorderRadius.circular(18)),
+      decoration: BoxDecoration(color: const Color(0xFFF4F4F4), borderRadius: BorderRadius.circular(12)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

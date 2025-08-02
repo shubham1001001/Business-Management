@@ -12,6 +12,7 @@ class CustomDropdown<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButton<T>(
+      style: TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.w500),
       hint: hint,
       icon: Icon(Icons.keyboard_arrow_down),
       isDense: false,

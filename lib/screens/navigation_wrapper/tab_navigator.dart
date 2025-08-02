@@ -5,6 +5,10 @@ import 'package:sales/screens/profile_Informations/profile_informations.dart';
 import '../add_item/add_item_screen.dart';
 import '../add_purchase/add_purchase_screen.dart';
 import '../add_transportation/add_transportation_screen.dart';
+import '../change_number/change_number_otp.dart';
+import '../change_number/mobile_number_change.dart';
+import '../email_change_screen/email_change_screen.dart';
+import '../email_change_screen/email_change_screen_otp.dart';
 import '../expense_details/expense_details_screen.dart';
 import '../home_screen/home_screen.dart';
 import '../item_list/item_list_screen.dart';
@@ -96,6 +100,14 @@ class TabNavigator extends StatelessWidget {
           case '/vehicleOverviewScreen':
             builder = (_) => VehicleOverviewScreen();
             break;
+          case AppRoutesName.mobileNumberChangeScreen:
+            return MaterialPageRoute(builder: (_) => MobileNumberChange());
+          case AppRoutesName.emaiChangeScreen:
+            return MaterialPageRoute(builder: (_) => EmailChangeScreen());
+          case AppRoutesName.emailChangeScreenOtp:
+            return MaterialPageRoute(builder: (_) => EmailChangeScreenOtp(number: ''));
+          case AppRoutesName.changeNumberOtpscreen:
+            return MaterialPageRoute(builder: (_) => ChangeNumberOtp(number: ''));
           default:
             builder = (_) => const Scaffold(body: Text("Page not found"));
         }

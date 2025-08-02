@@ -18,6 +18,12 @@ class ExpenseDetailsScreen extends StatelessWidget {
     fontFamily: 'OpenSans',
     color: Colors.black.withOpacity(0.5), // 50% opacity
   );
+  final titleTextOpacity80 = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'OpenSans',
+    color: Colors.black.withOpacity(0.8), // 50% opacity
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +52,7 @@ class ExpenseDetailsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Items", style: titleTextOpacity50),
-                    Text("Amount", style: titleTextOpacity50),
+                    Text("Amount", style: titleTextOpacity80),
                   ],
                 ),
               ),
@@ -103,9 +109,9 @@ class ExpenseDetailsScreen extends StatelessWidget {
               ),
 
               AppSpacing.largeHeight40,
-              const Align(
+              Align(
                 alignment: Alignment.centerLeft,
-                child: Text("Note", style: AppTextStyles.titleListTile),
+                child: Text("Note", style: AppTextStyles.openSansFontStyleTextW400),
               ),
               AppSpacing.mediumHeight16,
 

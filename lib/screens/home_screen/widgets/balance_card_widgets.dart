@@ -28,22 +28,34 @@ class BalanceCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Flexible(
+            fit: FlexFit.tight,
             flex: 2,
-            child: SizedBox(
-              width: screen.width * 0.09,
-              height: screen.height * 0.05,
-              child: SvgPictureWidgets(svgString: icon),
-              // Image.asset(icon, fit: BoxFit.contain),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 5, top: 1),
+              child: SizedBox(
+                width: screen.width * 0.09,
+                height: screen.height * 0.05,
+                child: SvgPictureWidgets(svgString: icon),
+                // Image.asset(icon, fit: BoxFit.contain),
+              ),
             ),
           ),
           const Spacer(),
           Flexible(
             child: Text(label, style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 40))),
           ),
+          AppSpacing.extraSmallHeight,
           Flexible(
-            child: Text(
-              amount,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 40)),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPictureWidgets(svgString: "assets/svg_icons/rupee_icon_card.svg", size: 12.20),
+                AppSpacing.extraSmallWidth,
+                Text(
+                  amount,
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 42)),
+                ),
+              ],
             ),
           ),
         ],

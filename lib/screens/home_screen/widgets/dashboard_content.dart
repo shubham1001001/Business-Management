@@ -26,7 +26,10 @@ class DashboardContent extends StatelessWidget {
                 return Row(
                   children: List.generate(provider.balanceData.length, (index) {
                     final item = provider.balanceData[index];
-                    return BalanceCard(label: item["label"]!, amount: item["amount"]!, icon: item["icon"]!);
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 2),
+                      child: BalanceCard(label: item["label"]!, amount: item["amount"]!, icon: item["icon"]!),
+                    );
                   }),
                 );
               },
@@ -35,36 +38,46 @@ class DashboardContent extends StatelessWidget {
 
           SizedBox(height: size.height * 0.018),
 
-          Container(
-            padding: AppSpacing.allPadding16,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black12),
-              borderRadius: AppSpacing.kMediumRadius10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SalesInfo(title: "Sales order", amount: "₹ 00.00"),
-                Container(color: Colors.grey, height: size.height * 0.1, width: 2),
-                SalesInfo(title: "Total Sales", amount: "₹ 00.00"),
-                Container(color: Colors.grey, height: size.height * 0.1, width: 2),
-                SalesInfo(title: "Credit sales", amount: "₹ 00.00"),
-              ],
+          Padding(
+            padding: AppSpacing.allPadding5,
+            child: Container(
+              padding: AppSpacing.allPadding16,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black12),
+                borderRadius: AppSpacing.kMediumRadius10,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SalesInfo(title: "Sales order", amount: "00.00"),
+                  AppSpacing.extraSmallWidth,
+                  Container(color: Colors.grey, height: size.height * 0.1, width: 2),
+                  AppSpacing.extraSmallWidth,
+                  SalesInfo(title: "Total Sales", amount: "00.00"),
+                  AppSpacing.extraSmallWidth,
+                  Container(color: Colors.grey, height: size.height * 0.1, width: 2),
+                  AppSpacing.extraSmallWidth,
+                  SalesInfo(title: "Credit sales", amount: "00.00"),
+                ],
+              ),
             ),
           ),
           SizedBox(height: size.height * 0.02),
 
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 25,
-                  child: SvgPictureWidgets(svgString: "assets/svg_icons/quick_link.svg", color: AppColors.appBlackColor),
-                ),
-                AppSpacing.extraSmallWidth,
-                Text("Quick link", style: AppTextStyles.title16),
-              ],
+          Padding(
+            padding: AppSpacing.allPadding5,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 25,
+                    child: SvgPictureWidgets(svgString: "assets/svg_icons/quick_link.svg", color: AppColors.appBlackColor),
+                  ),
+                  AppSpacing.extraSmallWidth,
+                  Text("Quick link", style: AppTextStyles.titleBold16W700),
+                ],
+              ),
             ),
           ),
           SizedBox(height: size.height * 0.01),

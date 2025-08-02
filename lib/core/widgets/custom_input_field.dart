@@ -32,11 +32,11 @@ class CustomInputField extends StatelessWidget {
         errorText: errorText,
         contentPadding: const EdgeInsets.symmetric(vertical: 13, horizontal: 12),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: AppColors.textFieldBorderColor),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: AppColors.textFieldBorderColor, width: 1.5),
         ),
         border: OutlineInputBorder(borderRadius: AppSpacing.kMediumRadius),

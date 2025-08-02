@@ -126,7 +126,18 @@ class ItemCreateScreen extends StatelessWidget {
   Widget _buildRadio(String title, bool value, ItemCreateProvider provider) {
     return Row(
       children: [
-        Radio<bool>(value: value, groupValue: provider.isProduct, fillColor: WidgetStateProperty.all(Colors.black), onChanged: (val) => provider.setType(val!)),
+        Radio<bool>(
+          value: value,
+          groupValue: provider.isProduct,
+          fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+            if (states.contains(MaterialState.selected)) {
+              return AppColors.redColor;
+            }
+            return Colors.black;
+          }),
+          onChanged: (val) => provider.setType(val!),
+        ),
+
         Text(title),
       ],
     );
@@ -139,7 +150,7 @@ class ItemCreateScreen extends StatelessWidget {
           context: context,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           isScrollControlled: true,
-          builder: (_) => BottomSelectSheetPricing(title: title, options: options, onSelect: onSelected),
+          builder: (_) => BottomSelectSheetPricing(title: title, options: options, onSelect: onSelected, type: "Apply"),
         );
       },
       child: Container(

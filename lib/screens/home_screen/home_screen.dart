@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               index == 0 ? SvgPictureWidgets(svgString: "assets/svg_icons/dashboard_icon.svg", color: AppColors.appBlackColor) : SvgPicture.string(IconsSvgString.supportIcon, width: 16, height: 16),
               const SizedBox(width: 4),
-              Text(label, style: isSelected ? AppTextStyles.title16 : AppTextStyles.textSize16),
+              Text(label, style: isSelected ? AppTextStyles.title16 : AppTextStyles.titleBold16),
             ],
           ),
           AppSpacing.extraSmallHeight,

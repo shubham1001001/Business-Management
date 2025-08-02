@@ -63,7 +63,7 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                         }).toList(),
                       ),
                     ),
-                    SvgPictureWidgets(svgString: "assets/svg_icons/info_icon.svg", color: AppColors.appBlackColor, size: 26.0),
+                    SvgPictureWidgets(svgString: "assets/svg_icons/info_icon.svg", color: AppColors.appBlackColor, size: 23.0),
                   ],
                 ),
               );
@@ -153,7 +153,7 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                                 TextSpan(text: "₹", style: AppTextStyles.greyText20),
                                                 TextSpan(
                                                   text: " ${order.balance}",
-                                                  style: TextStyle(color: balanceColor, fontWeight: FontWeight.bold, fontSize: 17),
+                                                  style: TextStyle(color: balanceColor, fontWeight: FontWeight.bold, fontSize: 16),
                                                 ),
                                               ],
                                             ),

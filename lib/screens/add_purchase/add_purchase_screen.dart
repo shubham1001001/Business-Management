@@ -30,6 +30,7 @@ class AddPurchaseScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  AppSpacing.smallHeight10,
                   Container(
                     padding: AppSpacing.allPadding16,
                     decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: AppSpacing.kSmallRadius),
@@ -68,7 +69,7 @@ class AddPurchaseScreen extends StatelessWidget {
                           ),
                         ),
                         AppSpacing.mediumHeight16,
-                        Text("Purchase number", style: AppTextStyles.greyBoldW500Text),
+                        Text("Bill number", style: AppTextStyles.greyBoldW500Text),
                         AppSpacing.smallHeight10,
                         SizedBox(
                           height: 50,
@@ -76,7 +77,7 @@ class AddPurchaseScreen extends StatelessWidget {
                             controller: provider.purchaseNumberController,
                             isEditable: true,
                             keyboardType: TextInputType.number,
-                            hintText: 'Purchase number',
+                            hintText: 'Bill number',
                             prefixText: "",
                             isRequired: true,
                             //
@@ -85,7 +86,7 @@ class AddPurchaseScreen extends StatelessWidget {
                           ),
                         ),
                         AppSpacing.mediumHeight16,
-                        Text("Purchase date", style: AppTextStyles.greyBoldW500Text),
+                        Text("Bill date", style: AppTextStyles.greyBoldW500Text),
                         AppSpacing.smallHeight10,
                         GestureDetector(
                           onTap: () async {
@@ -99,13 +100,13 @@ class AddPurchaseScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(color: AppColors.textFieldBorderColor),
-                              borderRadius: AppSpacing.kMediumRadius,
+                              borderRadius: AppSpacing.kLargeRadius,
                             ),
                             child: Row(
                               children: [
                                 SvgPictureWidgets(svgString: "assets/svg_icons/date_icon_svg.svg", size: 20.0, color: AppColors.greyLight),
                                 AppSpacing.smallWidth,
-                                Text(provider.selectedDate != null ? "${provider.selectedDate!.day.toString().padLeft(2, '0')}.${provider.selectedDate!.month.toString().padLeft(2, '0')}.${provider.selectedDate!.year}" : "Select date", style: const TextStyle(color: Colors.grey)),
+                                Text(provider.selectedDate != null ? "${provider.selectedDate!.day.toString().padLeft(2, '0')}.${provider.selectedDate!.month.toString().padLeft(2, '0')}.${provider.selectedDate!.year}" : "Select date", style: provider.selectedDate != null ? TextStyle(color: AppColors.redColor) : AppTextStyles.greyText),
                               ],
                             ),
                           ),
@@ -161,23 +162,11 @@ class AddPurchaseScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Shirt', style: AppTextStyles.black87Text20),
+                        Text('Shirt', style: AppTextStyles.blackText20),
                         AppSpacing.smallHeight10,
-                        const Text(' vendor name', style: AppTextStyles.greyBoldW500Text),
+                        Text(' vendor name', style: AppTextStyles.openSansFontStyleTextW400),
                         AppSpacing.smallHeight10,
-                        SizedBox(
-                          height: 40,
-                          child: CustomInputField(
-                            isEditable: false,
-                            keyboardType: TextInputType.datetime,
-                            hintText: '',
-                            prefixText: "",
-                            isRequired: true,
-                            //
-                            errorText: null,
-                            onChanged: (value) {},
-                          ),
-                        ),
+                        SizedBox(width: double.infinity, height: 40, child: Text("")),
                       ],
                     ),
                   ),
@@ -191,7 +180,7 @@ class AddPurchaseScreen extends StatelessWidget {
             return Container(
               color: Colors.white,
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -242,7 +231,7 @@ class AddPurchaseScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.textFieldBorderColor),
-          borderRadius: AppSpacing.kMediumRadius10,
+          borderRadius: AppSpacing.kLargeRadius,
           color: Colors.white,
         ),
         child: Text(value ?? "Select $title", style: AppTextStyles.greyText),

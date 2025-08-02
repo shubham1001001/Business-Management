@@ -12,8 +12,9 @@ class BottomSelectSheetPricing extends StatelessWidget {
   final List<String> options;
   final Function(String) onSelect;
   final provider;
+  final type;
 
-  const BottomSelectSheetPricing({required this.title, required this.options, required this.onSelect, this.provider});
+  const BottomSelectSheetPricing({required this.title, required this.options, required this.onSelect, this.provider, this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class BottomSelectSheetPricing extends StatelessWidget {
                         width: 70,
                         height: 34,
                         decoration: BoxDecoration(color: AppColors.redColor, borderRadius: AppSpacing.kMediumRadius),
-                        child: const Text("Done", style: AppTextStyles.whiteBoldText14),
+                        child: Text(type == "Apply" ? "Apply" : "Done", style: AppTextStyles.whiteBoldText14),
                       ),
                     ),
                   ],
@@ -63,7 +64,8 @@ class BottomSelectSheetPricing extends StatelessWidget {
                   offstage: title != "Vendor",
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Icon(Icons.add, size: 20, color: AppColors.redColor),
                       SizedBox(width: 4),
@@ -71,52 +73,33 @@ class BottomSelectSheetPricing extends StatelessWidget {
                     ],
                   ),
                 ),
-                // SizedBox(
-                //   height: 47,
-                //   child: TextField(
-                //     cursorColor: Colors.black,
-                //     decoration: InputDecoration(
-                //       hintStyle: AppTextStyles.greyText,
-                //       hintText: "Select $title here",
-                //       prefixIcon: const Icon(Icons.search),
-                //       contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
-                //       enabledBorder: OutlineInputBorder(
-                //         borderRadius: AppSpacing.kLargeRadius,
-                //         borderSide: BorderSide(color: AppColors.textFieldBorderColor),
-                //       ),
-                //       focusedBorder: OutlineInputBorder(
-                //         borderRadius: AppSpacing.kLargeRadius,
-                //         borderSide: BorderSide(color: AppColors.textFieldBorderColor, width: 1.5),
-                //       ),
-                //       border: OutlineInputBorder(borderRadius: AppSpacing.kLargeRadius),
-                //       fillColor: Colors.white,
-                //       filled: true,
-                //     ),
-                //   ),
-                // ),
                 AppSpacing.smallHeight10,
-
                 // List of options
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: options.length,
-                    itemBuilder: (_, i) {
-                      final item = options[i];
-                      final isSelected = item == selected;
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: ListView.builder(
+                      itemCount: options.length,
+                      itemBuilder: (_, i) {
+                        final item = options[i];
+                        final isSelected = item == selected;
 
-                      return ListTile(
-                        title: Text(
-                          textAlign: TextAlign.start,
-                          item,
-                          style: TextStyle(color: isSelected ? AppColors.redColor : Colors.black, fontWeight: isSelected ? FontWeight.bold : FontWeight.normal),
-                        ),
-                        trailing: isSelected ? const Icon(Icons.check, color: AppColors.redColor) : null,
-                        onTap: () {
-                          provider.selectVendor(item);
-                          onSelect(item); // optional callback
-                        },
-                      );
-                    },
+                        return ListTile(
+                          contentPadding: EdgeInsetsGeometry.all(0),
+                          minTileHeight: 10,
+                          title: Text(
+                            textAlign: TextAlign.start,
+                            item,
+                            style: TextStyle(color: isSelected ? AppColors.redColor : Colors.black, fontWeight: isSelected ? FontWeight.bold : FontWeight.normal),
+                          ),
+                          trailing: isSelected ? const Icon(Icons.check, color: AppColors.redColor) : null,
+                          onTap: () {
+                            provider.selectVendor(item);
+                            onSelect(item); // optional callback
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],

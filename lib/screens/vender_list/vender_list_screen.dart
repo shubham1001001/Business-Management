@@ -51,7 +51,10 @@ class VenderListScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 6),
                             child: ChoiceChip(
                               showCheckmark: false,
-                              label: Text(filter, style: TextStyle(color: color)),
+                              label: Text(
+                                filter,
+                                style: TextStyle(color: color, fontWeight: FontWeight.normal),
+                              ),
                               selected: isSelected,
                               selectedColor: bgColor,
                               onSelected: (_) => provider.setFilter(filter),
@@ -64,7 +67,7 @@ class VenderListScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: AppSpacing.allPadding8,
-                      child: SvgPictureWidgets(size: 23.0, svgString: "assets/svg_icons/filter_v.svg"),
+                      child: SvgPictureWidgets(size: 22.0, svgString: "assets/svg_icons/filter_v.svg"),
                     ),
                   ],
                 ),
@@ -80,7 +83,7 @@ class VenderListScreen extends StatelessWidget {
                   padding: AppSpacing.allPadding12,
                   itemBuilder: (context, index) {
                     final order = provider.filteredOrders[index];
-                    final statusColor = order.status == 'Draft' ? AppColors.redColor : AppColors.redColor;
+                    final statusColor = order.status == 'Draft' ? Colors.red : Colors.red;
                     //    Navigator.of(context, rootNavigator: true).pushNamed(AppRoutesName.vehicleOverviewScreen);
                     return Padding(
                       padding: AppSpacing.allPadding5,
@@ -111,21 +114,19 @@ class VenderListScreen extends StatelessWidget {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                        Padding(
-                                          padding: AppSpacing.allPadding5,
-                                          child: Stack(
-                                            alignment: AlignmentDirectional.center,
-                                            children: [
-                                              Image.asset("assets/icons/user_icon.png"),
-                                              Padding(padding: const EdgeInsets.all(6.0), child: Icon(Icons.person_outline)),
-                                            ],
-                                          ),
+                                        Stack(
+                                          alignment: AlignmentDirectional.center,
+                                          children: [
+                                            Image.asset("assets/icons/user_icon.png"),
+                                            Padding(padding: const EdgeInsets.all(6.0), child: Icon(Icons.person_outline)),
+                                          ],
                                         ),
                                         SizedBox(width: size.width * 0.03),
                                         Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(order.customerName, style: AppTextStyles.backBoldText),
+                                            AppSpacing.smallWidth6,
                                             Text(order.description, style: AppTextStyles.greyBoldText),
                                           ],
                                         ),

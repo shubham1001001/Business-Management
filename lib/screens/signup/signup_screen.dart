@@ -37,7 +37,7 @@ class SignupScreen extends StatelessWidget {
                 SizedBox(
                   height: size.height * 0.50,
                   width: size.width,
-                  child: Image.asset("assets/images/signup_background.jpg", fit: BoxFit.cover),
+                  child: Image.asset("assets/images/signup_background.jpg", fit: BoxFit.fitWidth),
                 ),
 
                 // Overlay
