@@ -33,15 +33,18 @@ class AppSpacing {
   static const Widget extraSmallHeight = SizedBox(height: 5);
   static const Widget extraSmallWidth = SizedBox(width: 5);
   static const Widget smallHeight6 = SizedBox(height: 6);
+  static const Widget smallHeight7 = SizedBox(height: 7);
   static const Widget smallWidth6 = SizedBox(width: 6);
   static const Widget smallHeight = SizedBox(height: 8);
   static const Widget smallWidth = SizedBox(width: 8);
   static const Widget smallHeight10 = SizedBox(height: 10);
   static const Widget smallWidth10 = SizedBox(width: 10);
   static const Widget mediumHeight = SizedBox(height: 20);
+  static const Widget mediumHeight18 = SizedBox(height: 18);
   static const Widget mediumWidth = SizedBox(width: 20);
 
   static const Widget smallWidth12 = SizedBox(width: 12);
+  static const Widget smallHeight12 = SizedBox(height: 12);
 
   static const Widget mediumHeight16 = SizedBox(height: 16);
   static const Widget mediumWidth16 = SizedBox(width: 16);
@@ -50,7 +53,11 @@ class AppSpacing {
   static const Widget largeHeight = SizedBox(height: 25);
   static const Widget largeWidth = SizedBox(width: 25);
   static const Widget largeHeight40 = SizedBox(height: 40);
+  static const Widget largeHeight55 = SizedBox(height: 55);
   static const Widget largeWidth40 = SizedBox(width: 40);
+  static const Widget largeWidth45 = SizedBox(width: 45);
+  static const Widget largeHeight45 = SizedBox(height: 45);
+  static const Widget largeWidth50 = SizedBox(width: 50);
   static const Widget largeHeight30 = SizedBox(height: 40);
   static const Widget largeWidth30 = SizedBox(width: 40);
   static const Widget largeHeight50 = SizedBox(height: 50);
@@ -58,4 +65,5 @@ class AppSpacing {
   static const Widget largeWidth24 = SizedBox(width: 24);
   static const Widget largeHeight27 = SizedBox(height: 26);
   static const Widget largeHeight37 = SizedBox(height: 37);
+  static const Widget largeHeight31 = SizedBox(height: 31);
 }

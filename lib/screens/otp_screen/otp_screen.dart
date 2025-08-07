@@ -55,7 +55,7 @@ class _OtpScreenState extends State<OtpScreen> {
             Container(width: size.width, height: size.height, color: Colors.black.withOpacity(0.4)),
             // Slogan
             Positioned(
-              top: size.height * 0.1,
+              top: size.height * 0.13,
               left: size.width * 0.05,
               child: Text('Bridging miles with\nmeaning', style: AppTextStyles.heading1FontStyleText),
             ),
@@ -64,8 +64,7 @@ class _OtpScreenState extends State<OtpScreen> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: double.infinity,
-                height: size.height * 0.6,
-                padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
+                height: size.height * 0.62,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -75,22 +74,25 @@ class _OtpScreenState extends State<OtpScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
 
                     children: [
+                      AppSpacing.mediumHeight16,
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           InkWell(
                             onTap: () {
                               Navigator.of(context).pushNamed(AppRoutesName.signup);
                             },
-                            child: SvgPictureWidgets(svgString: "assets/svg_icons/back_button_svg.svg", size: 50.0),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 16),
+                              child: SvgPictureWidgets(svgString: "assets/svg_icons/back_button_svg.svg", size: 43.0),
+                            ),
                           ),
-
-                          Text('Enter your OTP here', style: AppTextStyles.title),
+                          AppSpacing.largeWidth45,
+                          Text('Enter your OTP here', style: AppTextStyles.title.copyWith(fontSize: 15, color: Colors.black.withOpacity(0.95))),
                           AppSpacing.extraSmallHeight,
                         ],
                       ),
-                      SizedBox(height: size.height * 0.025),
-                      Text('An OTP has been sent to +91 8521589658', style: AppTextStyles.blackBoldText15),
+                      SizedBox(height: size.height * 0.018),
+                      Text('An OTP has been sent to +91 8521589658', style: AppTextStyles.blackBoldText15.copyWith(color: Colors.black87.withOpacity(0.8))),
                       SizedBox(height: size.height * 0.025),
                       InkWell(
                         onTap: () {
@@ -99,10 +101,10 @@ class _OtpScreenState extends State<OtpScreen> {
                         child: Text('Change Mobile number', style: AppTextStyles.redBoldText14),
                       ),
 
-                      SizedBox(height: size.height * 0.025),
+                      SizedBox(height: size.height * 0.039),
                       // Mobile Input
                       OtpInputScreen(controllers: controllers),
-                      SizedBox(height: size.height * 0.025),
+                      SizedBox(height: size.height * 0.046),
                       // OTP Button
                       CustomAuthButton(
                         text: "Submit",
@@ -118,10 +120,11 @@ class _OtpScreenState extends State<OtpScreen> {
                         },
                       ),
 
-                      SizedBox(height: size.height * 0.025),
+                      SizedBox(height: size.height * 0.038),
                       Consumer<CountdownProvider>(
                         builder: (context, provider, child) {
-                          return Center(
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 16),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -132,7 +135,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           );
                         },
                       ),
-                      SizedBox(height: size.height * 0.025),
+                      SizedBox(height: size.height * 0.049),
                       // Google Sign-in
                       Center(
                         child: Row(
@@ -146,7 +149,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(height: size.height * 0.05),
+                      SizedBox(height: size.height * 0.035),
                       TermsAndPravacy(),
                     ],
                   ),

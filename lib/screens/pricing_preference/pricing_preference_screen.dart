@@ -32,22 +32,48 @@ class PricingPreferenceScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    AppSpacing.smallHeight10,
                     // Vendor
-                    Text("Select preferred vendor", style: AppTextStyles.greyBoldText),
+                    Text(
+                      "Select preferred vendor",
+                      style: AppTextStyles.greyBoldText.copyWith(fontWeight: FontWeight.w600, color: Colors.black87.withOpacity(0.6), fontSize: 15),
+                    ),
                     AppSpacing.smallHeight10,
                     _buildSelectField(context, " preferred vendor", provider.selectedVendor, vendors, provider.selectVendor),
                     AppSpacing.largeHeight,
 
                     // Price box
-                    _buildCard([AppSpacing.smallHeight10, const Text("Price", style: AppTextStyles.boldText), AppSpacing.largeHeight, Text("Selling price", style: AppTextStyles.greyBoldText), AppSpacing.extraSmallHeight, CustomInputField(isEditable: true, keyboardType: TextInputType.text, hintText: provider.sellingPrice, prefixText: '', isRequired: true, errorText: null, onChanged: provider.setSellingPrice), AppSpacing.mediumHeight, Text("Purchase price", style: AppTextStyles.greyBoldText), AppSpacing.smallHeight10, CustomInputField(isEditable: true, keyboardType: TextInputType.text, hintText: provider.purchasePrice, prefixText: '', isRequired: true, errorText: null, onChanged: provider.setPurchasePrice)]),
+                    _buildCard([
+                      AppSpacing.smallHeight10,
+                      Text("Price", style: AppTextStyles.boldText.copyWith(fontWeight: FontWeight.w800)),
+                      AppSpacing.largeHeight,
+                      Text(
+                        "Selling price",
+                        style: AppTextStyles.greyBoldText.copyWith(fontWeight: FontWeight.w600, color: Colors.black87.withOpacity(0.6), fontSize: 15),
+                      ),
+                      AppSpacing.extraSmallHeight,
+                      CustomInputField(isEditable: true, keyboardType: TextInputType.text, hintText: provider.sellingPrice, prefixText: '', isRequired: true, errorText: null, onChanged: provider.setSellingPrice),
+                      AppSpacing.mediumHeight,
+                      Text(
+                        "Purchase price",
+                        style: AppTextStyles.greyBoldText.copyWith(fontWeight: FontWeight.w600, color: Colors.black87.withOpacity(0.6), fontSize: 15),
+                      ),
+                      AppSpacing.smallHeight10,
+                      CustomInputField(isEditable: true, keyboardType: TextInputType.text, hintText: provider.purchasePrice, prefixText: '', isRequired: true, errorText: null, onChanged: provider.setPurchasePrice),
+                      AppSpacing.smallHeight,
+                    ]),
 
                     AppSpacing.mediumHeight,
 
                     // Opening Stock
                     _buildCard([
-                      const Text("Opening Stock", style: AppTextStyles.boldText),
-                      AppSpacing.mediumHeight16,
-                      Text("Date", style: AppTextStyles.greyBoldText),
+                      AppSpacing.smallHeight,
+                      Text("Opening Stock", style: AppTextStyles.boldText.copyWith(fontWeight: FontWeight.w800)),
+                      AppSpacing.mediumHeight18,
+                      Text(
+                        "Date",
+                        style: AppTextStyles.greyBoldText.copyWith(fontWeight: FontWeight.w600, color: Colors.black87.withOpacity(0.6), fontSize: 15),
+                      ),
                       AppSpacing.smallHeight10,
                       GestureDetector(
                         onTap: () async {
@@ -79,7 +105,10 @@ class PricingPreferenceScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Qty", style: AppTextStyles.backBoldText),
+                                Text(
+                                  "Qty",
+                                  style: AppTextStyles.backBoldText.copyWith(fontWeight: FontWeight.w600, color: Colors.black87.withOpacity(0.7), fontSize: 16),
+                                ),
                                 AppSpacing.extraSmallHeight,
                                 SizedBox(
                                   height: 47,
@@ -95,7 +124,10 @@ class PricingPreferenceScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("unit", style: AppTextStyles.backBoldText),
+                                Text(
+                                  "unit",
+                                  style: AppTextStyles.backBoldText.copyWith(fontWeight: FontWeight.w600, color: Colors.black87.withOpacity(0.7), fontSize: 16),
+                                ),
                                 AppSpacing.extraSmallHeight,
                                 SizedBox(
                                   height: 47,

@@ -22,6 +22,9 @@ class AccountDetailsProvider with ChangeNotifier {
     final response = {
       "balance": 250000.0,
       "transactions": [
+        {"name": "Lorem ipsum", "debit": 125, "credit": 0, "date": "07.08.2025"},
+        {"name": "Lorem ipsum", "debit": 125, "credit": 0, "date": "07.08.2025"},
+        {"name": "Lorem ipsum", "debit": 100, "credit": 0, "date": "07.08.2025"},
         {"name": "Lorem ipsum", "debit": 125, "credit": 0, "date": "02.08.2025"},
         {"name": "Lorem ipsum", "debit": 125, "credit": 0, "date": "02.08.2025"},
         {"name": "Lorem ipsum", "debit": 100, "credit": 0, "date": "02.08.2025"},

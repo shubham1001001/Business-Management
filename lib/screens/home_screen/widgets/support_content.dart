@@ -136,7 +136,7 @@ class _ChatInputFieldState extends State<_ChatInputField> {
                       controller: _controller,
                       onSubmitted: (_) => _sendMessage(context),
                       decoration: InputDecoration(
-                        hintStyle: AppTextStyles.greyText,
+                        hintStyle: AppTextStyles.greyText.copyWith(color: Colors.black87.withOpacity(0.6), fontWeight: FontWeight.w500),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                         hintText: "Type to chat",
                         border: OutlineInputBorder(borderSide: BorderSide.none),
@@ -174,6 +174,7 @@ class _ChatInputFieldState extends State<_ChatInputField> {
           const SizedBox(width: 6),
           CircleAvatar(
             backgroundColor: AppColors.redColor,
+            radius: 22,
             child: IconButton(
               icon: Icon(_isListening ? Icons.mic : Icons.mic_none, color: Colors.white),
               onPressed: _listen,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
+import '../../../core/constants/colors.dart';
 import '../../../core/constants/svg_picture_widgets.dart';
-import '../../../core/widgets/custom_decorations.dart';
 
 class GenerateCart extends StatelessWidget {
   final String icon;
@@ -23,7 +23,19 @@ class GenerateCart extends StatelessWidget {
           alignment: Alignment.center,
           width: isLandscape ? screen.width * 0.06 : screen.width * 0.14,
           height: isLandscape ? screen.width * 0.06 : screen.width * 0.14,
-          decoration: CustomDecorations.cardBoxDecoration,
+          decoration: BoxDecoration(
+            color: AppColors.cardColor,
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(color: Colors.grey.shade300, width: 1),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 6,
+                spreadRadius: 2,
+                offset: Offset(0, 4), // shadow below the box
+              ),
+            ],
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,7 +55,11 @@ class GenerateCart extends StatelessWidget {
         ),
         AppSpacing.extraSmallHeight,
         // SizedBox(height: screen.height * 0.01),
-        Text(label, textAlign: TextAlign.center, style: AppTextStyles.textSize11),
+        Text(
+          label,
+          textAlign: TextAlign.center,
+          style: AppTextStyles.textSize11.copyWith(fontWeight: FontWeight.w800, color: Colors.black87.withOpacity(0.8)),
+        ),
       ],
     );
   }

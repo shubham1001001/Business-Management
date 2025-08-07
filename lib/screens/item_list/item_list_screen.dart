@@ -18,6 +18,7 @@ class ItemListScreen extends StatelessWidget {
     return Scaffold(
       // backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
+        leadingWidth: 28,
         backgroundColor: AppColors.primary,
         elevation: 1,
 
@@ -40,6 +41,7 @@ class ItemListScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          AppSpacing.mediumHeight16,
           Consumer<ItemListProvider>(
             builder: (BuildContext context, ItemListProvider provider, Widget? child) {
               return Padding(
@@ -50,13 +52,16 @@ class ItemListScreen extends StatelessWidget {
                       child: Wrap(
                         children: ['All', 'Goods', 'Service'].map((filter) {
                           final isSelected = filter == provider.filter;
-                          final color = isSelected ? Colors.white : Colors.black;
+                          final color = isSelected ? Colors.white.withOpacity(0.9) : Colors.black.withOpacity(0.7);
                           final bgColor = isSelected ? AppColors.redColor : Colors.grey.shade200;
                           return Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 6),
                             child: ChoiceChip(
                               showCheckmark: false,
-                              label: Text(filter, style: TextStyle(color: color)),
+                              label: Text(
+                                filter,
+                                style: TextStyle(color: color, fontSize: 15, fontFamily: 'OpenSans', fontWeight: FontWeight.w600),
+                              ),
                               selected: isSelected,
                               selectedColor: bgColor,
                               onSelected: (_) => provider.setFilter(filter),
@@ -69,7 +74,7 @@ class ItemListScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: AppSpacing.allPadding8,
-                      child: SvgPictureWidgets(size: 25.0, svgString: "assets/svg_icons/filter_v.svg"),
+                      child: SvgPictureWidgets(size: 22.0, svgString: "assets/svg_icons/filter_v.svg"),
                     ),
                   ],
                 ),
@@ -88,7 +93,7 @@ class ItemListScreen extends StatelessWidget {
                     final statusColor = order.status == 'Draft' ? AppColors.redColor : AppColors.redColor;
                     //    Navigator.of(context, rootNavigator: true).pushNamed(AppRoutesName.vehicleOverviewScreen);
                     return Padding(
-                      padding: AppSpacing.allPadding5,
+                      padding: EdgeInsetsGeometry.symmetric(vertical: 7),
                       child: InkWell(
                         onTap: () {
                           Navigator.of(context, rootNavigator: true).pushNamed(AppRoutesName.venderDetailScreen);
@@ -127,9 +132,12 @@ class ItemListScreen extends StatelessWidget {
                                         Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Text(order.customerName, style: AppTextStyles.backBoldText),
+                                            Text(
+                                              order.customerName,
+                                              style: AppTextStyles.backBoldText.copyWith(fontWeight: FontWeight.w800, color: Colors.black.withOpacity(0.9)),
+                                            ),
                                             AppSpacing.extraSmallHeight,
-                                            Text(order.description, style: AppTextStyles.greyBoldText),
+                                            Text(order.description, style: AppTextStyles.greyBoldText.copyWith(fontWeight: FontWeight.w700)),
                                           ],
                                         ),
                                       ],

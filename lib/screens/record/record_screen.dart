@@ -21,7 +21,7 @@ class RecordScreen extends StatelessWidget {
     TapsModel(title: 'Cash', Images: "assets/svg_icons/coin.svg.svg"),
     TapsModel(title: 'Expenses', Images: "assets/svg_icons/expenses_icon.svg"),
   ];
-  final subTitleTextStyle = TextStyle(fontSize: 12, fontFamily: 'OpenSans', color: Colors.grey.shade800, fontWeight: FontWeight.w600);
+  final subTitleTextStyle = TextStyle(fontSize: 12, fontFamily: 'OpenSans', color: Colors.grey.shade500, fontWeight: FontWeight.w800);
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -30,7 +30,10 @@ class RecordScreen extends StatelessWidget {
     double _scale = 1.0;
 
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: true, backgroundColor: AppColors.primary, elevation: 1),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(30),
+        child: AppBar(automaticallyImplyLeading: true, backgroundColor: AppColors.primary, elevation: 1),
+      ),
 
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -45,7 +48,7 @@ class RecordScreen extends StatelessWidget {
                 Container(
                   alignment: Alignment.center,
                   width: double.infinity,
-                  height: isLandscape ? screenHeight * 0.5 : screenHeight * 0.15,
+                  height: isLandscape ? screenHeight * 0.7 : screenHeight * 0.195,
                   decoration: BoxDecoration(
                     color: AppColors.background,
                     borderRadius: AppSpacing.kSmallRadius,
@@ -69,27 +72,32 @@ class RecordScreen extends StatelessWidget {
                           },
                           child: Column(
                             children: [
+                              AppSpacing.extraSmallHeight,
                               Container(
+                                margin: EdgeInsetsGeometry.only(right: 2),
                                 alignment: Alignment.center,
                                 width: buttonSize,
                                 height: buttonSize,
-                                decoration: BoxDecoration(color: isSelected ? AppColors.redColor : Colors.grey.shade200, borderRadius: BorderRadius.circular(8)),
+                                decoration: BoxDecoration(color: isSelected ? AppColors.redColor : Colors.grey.shade200, borderRadius: BorderRadius.circular(5)),
                                 child: Center(
                                   child: TweenAnimationBuilder<double>(
                                     tween: Tween<double>(begin: 1.0, end: isSelected ? 1.5 : 1.0),
                                     duration: Duration(milliseconds: 200),
                                     builder: (context, scale, child) {
-                                      return Transform.scale(
-                                        alignment: Alignment.center,
-                                        scale: scale,
-                                        child: tabs[index].title == "Purchase" ? Image.asset(tabs[index].Images, fit: BoxFit.contain, width: screenWidth * 0.085) : SvgPictureWidgets(size: screenWidth * 0.075, svgString: tabs[index].Images),
+                                      return Padding(
+                                        padding: EdgeInsets.only(left: tabs[index].title == 'Expenses' ? 8 : 0),
+                                        child: Transform.scale(
+                                          alignment: Alignment.center,
+                                          scale: scale,
+                                          child: tabs[index].title == "Purchase" ? Image.asset(tabs[index].Images, fit: BoxFit.contain, width: screenWidth * 0.085) : SvgPictureWidgets(size: screenWidth * 0.075, svgString: tabs[index].Images),
+                                        ),
                                       );
                                     },
                                   ),
                                 ),
                               ),
                               AppSpacing.extraSmallHeight,
-                              Text(tabs[index].title, style: AppTextStyles.titleListTile),
+                              Text(tabs[index].title, style: AppTextStyles.titleRegularW700),
                             ],
                           ),
                         );
@@ -97,7 +105,7 @@ class RecordScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: screenHeight * 0.026),
+                SizedBox(height: screenHeight * 0.029),
 
                 // IF OVERVIEW (Sales, Purchase)
                 if (!showDetailedList)
@@ -106,8 +114,8 @@ class RecordScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: GridView.count(
                         crossAxisCount: screenWidth > 600 ? 3 : 2,
-                        mainAxisSpacing: 15,
-                        crossAxisSpacing: 15,
+                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 17,
                         childAspectRatio: 1.1,
                         children: provider.overviewItems.map((item) {
                           return InkWell(
@@ -119,7 +127,7 @@ class RecordScreen extends StatelessWidget {
                                 Navigator.of(context).pushNamed(route);
                               }
                             },
-                            child: buildCard(item),
+                            child: Padding(padding: const EdgeInsets.symmetric(vertical: 2), child: buildCard(item)),
                           );
                         }).toList(),
                       ),
@@ -134,7 +142,7 @@ class RecordScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(isExpenses ? "Overview" : "${provider.selectedTab} Overview", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                          Text(isExpenses ? "Overview" : "${provider.selectedTab} Overview", style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w800)),
                           AppSpacing.smallHeight10,
                           // Sub Filter Chips
                           Row(
@@ -184,7 +192,7 @@ class RecordScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: screenHeight * 0.026),
+                          SizedBox(height: screenHeight * 0.022),
                           // List Cards
                           Expanded(
                             child: ListView.separated(
@@ -211,7 +219,7 @@ class RecordScreen extends StatelessWidget {
                                     child: Container(
                                       decoration: BoxDecoration(
                                         color: AppColors.cardClip,
-                                        borderRadius: BorderRadius.only(bottomRight: Radius.circular(10), topRight: Radius.circular(10), topLeft: Radius.circular(13), bottomLeft: Radius.circular(10)),
+                                        borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8), topLeft: Radius.circular(10), bottomLeft: Radius.circular(8)),
                                         border: Border.all(color: Colors.grey),
                                       ),
 
@@ -220,11 +228,11 @@ class RecordScreen extends StatelessWidget {
                                         child: Container(
                                           decoration: BoxDecoration(
                                             color: Colors.white,
-                                            borderRadius: BorderRadius.only(bottomRight: Radius.circular(10), topRight: Radius.circular(10), topLeft: Radius.circular(1), bottomLeft: Radius.circular(1)),
+                                            borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8), topLeft: Radius.circular(1), bottomLeft: Radius.circular(1)),
                                             border: Border.all(color: Colors.white),
                                           ),
                                           child: Padding(
-                                            padding: AppSpacing.allPadding10,
+                                            padding: AppSpacing.allPadding12,
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
@@ -233,12 +241,12 @@ class RecordScreen extends StatelessWidget {
                                                   child: Stack(
                                                     alignment: Alignment.center,
                                                     children: [
-                                                      SvgPictureWidgets(size: 37.0, svgString: "assets/svg_icons/bg_icon.svg"),
+                                                      SvgPictureWidgets(size: 37.0, svgString: "assets/svg_icons/bg_icon.svg", color: AppColors.cardmainColor),
                                                       SvgPictureWidgets(size: 18.0, svgString: item.icon),
                                                     ],
                                                   ),
                                                 ),
-                                                AppSpacing.smallWidth10,
+                                                AppSpacing.mediumWidth16,
                                                 Expanded(
                                                   child: Column(
                                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -276,10 +284,15 @@ class RecordScreen extends StatelessWidget {
           final showDetailedList = ['Expenses'].contains(provider.selectedTab);
           print(showDetailedList);
           return showDetailedList
-              ? FloatingActionButton(
-                  backgroundColor: AppColors.redColor,
-                  onPressed: () {},
-                  child: const SvgPictureWidgets(size: 30.0, svgString: "assets/svg_icons/add_icon.svg", color: Colors.white),
+              ? SizedBox(
+                  width: 60,
+                  height: 60,
+                  child: FloatingActionButton(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(8)),
+                    backgroundColor: AppColors.redColor,
+                    onPressed: () {},
+                    child: const SvgPictureWidgets(size: 30.0, svgString: "assets/svg_icons/add_icon.svg", color: Colors.white),
+                  ),
                 )
               : SizedBox.shrink();
         },
@@ -302,6 +315,7 @@ class RecordScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(item.title, style: AppTextStyles.title),
+          AppSpacing.smallHeight,
           Text("${item.count} items", style: AppTextStyles.backText),
           Spacer(),
           Align(

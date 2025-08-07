@@ -4,7 +4,7 @@ import 'package:sales/core/constants/spacing.dart';
 
 import '../constants/text_styles.dart';
 
-class CustomInputField extends StatelessWidget {
+class CustomTextFieldGrayText extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType keyboardType;
   final String hintText;
@@ -14,7 +14,7 @@ class CustomInputField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final bool isEditable;
   final int? maxLines;
-  const CustomInputField({Key? key, this.controller, required this.keyboardType, required this.hintText, this.prefixText, this.errorText, this.isRequired = false, required this.onChanged, required this.isEditable, this.maxLines}) : super(key: key);
+  const CustomTextFieldGrayText({Key? key, this.controller, required this.keyboardType, required this.hintText, this.prefixText, this.errorText, this.isRequired = false, required this.onChanged, required this.isEditable, this.maxLines}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class CustomInputField extends StatelessWidget {
       keyboardType: keyboardType,
       onChanged: onChanged,
       decoration: InputDecoration(
-        hintStyle: AppTextStyles.greyTextW500,
+        hintStyle: AppTextStyles.greyText.copyWith(fontWeight: FontWeight.w600),
         hintText: isRequired ? "$hintText" : hintText,
         prefix: Text(prefixText ?? 'test', style: const TextStyle(color: Colors.black)),
         errorText: errorText,

@@ -18,6 +18,7 @@ class AddItemScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 28,
         title: const Text("Add Item", style: AppTextStyles.appBarBlackText),
         leading: const BackButton(),
       ),

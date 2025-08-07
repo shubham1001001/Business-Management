@@ -20,7 +20,7 @@ class QuickLink extends StatelessWidget {
       // height: isLandscape ? screen.height * 0.35 : screen.height * 0.10,
       decoration: BoxDecoration(
         color: AppColors.cardColor,
-        borderRadius: AppSpacing.kMediumRadius10,
+        borderRadius: AppSpacing.kLargeRadius,
         boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 4))],
       ),
       child: Padding(
@@ -34,7 +34,7 @@ class QuickLink extends StatelessWidget {
             Text(
               label,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 40), fontWeight: FontWeight.w700, fontFamily: 'OpenSans'),
+              style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 44), fontWeight: FontWeight.w800, fontFamily: 'OpenSans'),
             ),
           ],
         ),

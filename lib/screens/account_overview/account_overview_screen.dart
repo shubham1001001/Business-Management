@@ -33,6 +33,7 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 28,
         title: const Text("Account Overview", style: AppTextStyles.appBarBlackText),
         leading: const BackButton(),
         actions: [
@@ -45,28 +46,9 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
       body: Consumer<AccountOverviewProvider>(
         builder: (context, provider, _) {
           return Padding(
-            // <<<<<<< Updated upstream
-            //             padding: EdgeInsets.all(size.width * 0.04),
-            //             child: CustomScrollView(
-            //               slivers: [
-            //                 // Table Header
-            //                 const SliverToBoxAdapter(
-            //                   child: Row(
-            //                     children: [
-            //                       Expanded(flex: 4, child: Text("Assets", style: AppTextStyles.backBoldText)),
-            //                       Expanded(flex: 2, child: Text("Debit", style: AppTextStyles.backBoldText)),
-            //                       Expanded(flex: 2, child: Text("Credit", style: AppTextStyles.backBoldText)),
-            //                     ],
-            //                   ),
-            //                 ),
-            //                 const SliverToBoxAdapter(child: SizedBox(height: 10)),
-            //
-            //                 // Shimmer or List
-            // =======
-            padding: EdgeInsets.all(screenWidth * 0.04),
+            padding: EdgeInsets.all(screenWidth * 0.06),
             child: CustomScrollView(
               slivers: [
-                // Table Header
                 SliverToBoxAdapter(
                   child: Row(
                     children: [
@@ -74,30 +56,32 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                         flex: 4,
                         child: Text(
                           "Assets",
-                          style: AppTextStyles.backBoldText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                          style: AppTextStyles.backBoldTextW600.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 57), fontWeight: FontWeight.w700),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Expanded(
                         flex: 2,
                         child: Text(
+                          textAlign: TextAlign.center,
                           "Debit",
-                          style: AppTextStyles.backBoldText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                          style: AppTextStyles.backBoldTextW600.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 57), fontWeight: FontWeight.w700),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Expanded(
                         flex: 2,
                         child: Text(
-                          "Credit",
-                          style: AppTextStyles.backBoldText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                          textAlign: TextAlign.end,
+                          " Credit",
+                          style: AppTextStyles.backBoldTextW600.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 57), fontWeight: FontWeight.w700),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
                   ),
                 ),
-                SliverToBoxAdapter(child: AppSpacing.smallHeight10),
+                SliverToBoxAdapter(child: AppSpacing.mediumHeight16),
 
                 // Loading Shimmer or Content
                 if (provider.isLoading)
@@ -118,76 +102,99 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                               Expanded(
                                 flex: 4,
                                 child: Text(
-                                  category,
-                                  style: AppTextStyles.titleListTile.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                                  textAlign: TextAlign.start,
+                                  "   $category",
+                                  style: AppTextStyles.titleListTile.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 50), fontWeight: FontWeight.w800, color: Colors.black87.withOpacity(0.8)),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                 ),
                               ),
-                              Expanded(flex: 2, child: Text(debitTotal.toStringAsFixed(0), overflow: TextOverflow.ellipsis, maxLines: 1)),
-                              const Expanded(flex: 2, child: Text("00.00", overflow: TextOverflow.ellipsis, maxLines: 1)),
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  textAlign: TextAlign.center,
+                                  debitTotal.toStringAsFixed(0),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: AppTextStyles.titleListTile.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 49), fontWeight: FontWeight.w800, color: Colors.black87.withOpacity(0.8)),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  textAlign: TextAlign.end,
+                                  "00.00",
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: AppTextStyles.titleListTile.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 49), fontWeight: FontWeight.w800, color: Colors.black87.withOpacity(0.8)),
+                                ),
+                              ),
                             ],
                           ),
                           AppSpacing.extraSmallHeight,
 
                           ...items.map(
-                            (item) => Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.pushNamed(context, AppRoutesName.accountDetailsScreen);
-                                },
-                                child: Row(
-                                  children: [
-                                    Expanded(flex: 1, child: Text("")),
-                                    Expanded(
-                                      flex: 9,
-                                      child: Text(
-                                        item.name,
-                                        style: AppTextStyles.blueText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                      ),
+                            (item) => Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 8),
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.pushNamed(context, AppRoutesName.accountDetailsScreen);
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Expanded(flex: 1, child: Text("")),
+                                        Expanded(
+                                          flex: 9,
+                                          child: Text(
+                                            textAlign: TextAlign.start,
+                                            item.name,
+                                            style: AppTextStyles.blueBoldTextIndigo.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 52), color: Color(0xFF0000EE).withOpacity(0.8)),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 5,
+                                          child: Text(
+                                            textAlign: TextAlign.center,
+                                            item.debit.toStringAsFixed(0),
+                                            style: AppTextStyles.appRedBoldText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 54), color: AppColors.redColor.withOpacity(0.8), fontWeight: FontWeight.w600),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 5,
+                                          child: Text(
+                                            textAlign: TextAlign.end,
+                                            item.credit.toStringAsFixed(2),
+                                            style: AppTextStyles.appRedBoldText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 54), color: AppColors.redColor.withOpacity(0.8), fontWeight: FontWeight.w600),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    Expanded(
-                                      flex: 5,
-                                      child: Text(
-                                        item.debit.toStringAsFixed(0),
-                                        style: AppTextStyles.appRedText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 5,
-                                      child: Text(
-                                        item.credit.toStringAsFixed(2),
-                                        style: AppTextStyles.appRedText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
 
-                          AppSpacing.smallHeight10,
+                          AppSpacing.largeHeight31,
                         ],
                       );
                     }, childCount: provider.categorizedData.length),
                   ),
-
-                // Divider
-                const SliverToBoxAdapter(child: AppSpacing.mediumWidth),
 
                 if (!provider.isLoading)
                   SliverToBoxAdapter(
                     child: Row(
                       children: [
                         const Expanded(flex: 4, child: SizedBox()),
-                        Expanded(flex: 4, child: Divider(thickness: 1, color: AppColors.grey)),
+                        Expanded(flex: 4, child: Divider(thickness: 1.8, color: AppColors.grey.withOpacity(0.2))),
                       ],
                     ),
                   ),
@@ -202,19 +209,28 @@ class _AccountOverviewScreenState extends State<AccountOverviewScreen> {
                         Expanded(
                           flex: 4,
                           child: Text(
+                            textAlign: TextAlign.start,
                             "Total",
-                            style: AppTextStyles.backBoldText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                            style: AppTextStyles.appBarBlackText18.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60), fontWeight: FontWeight.w800, color: Colors.black87.withOpacity(0.8)),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
                         ),
                         Expanded(
                           flex: 2,
-                          child: Text(provider.totalDebit.toStringAsFixed(0), style: AppTextStyles.backBoldText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60))),
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            provider.totalDebit.toStringAsFixed(0),
+                            style: AppTextStyles.appBarBlackText18.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60), color: Colors.black87.withOpacity(0.8)),
+                          ),
                         ),
                         Expanded(
                           flex: 2,
-                          child: Text(provider.totalCredit.toStringAsFixed(2), style: AppTextStyles.backBoldText.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60))),
+                          child: Text(
+                            textAlign: TextAlign.end,
+                            provider.totalCredit.toStringAsFixed(2),
+                            style: AppTextStyles.appBarBlackText18.copyWith(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60), color: Colors.black87.withOpacity(0.8)),
+                          ),
                         ),
                       ],
                     ),

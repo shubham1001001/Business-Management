@@ -32,13 +32,14 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 28,
         title: const Text("Account Details", style: AppTextStyles.appBarBlackText),
         leading: const BackButton(),
       ),
       body: Consumer<AccountDetailsProvider>(
         builder: (context, provider, _) {
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
+            padding: EdgeInsets.symmetric(horizontal: size.width * 0.04, vertical: 14),
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(child: const SizedBox(height: 12)),
@@ -47,19 +48,21 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                     clipBehavior: Clip.none,
                     children: [
                       _infoCard(size: size),
-                      Positioned(bottom: -25, left: 0, right: 0, child: Center(child: _balanceCard(provider.balanceAmount, size))),
+                      AppSpacing.mediumHeight,
+                      Positioned(bottom: -45, left: 0, right: 0, child: Center(child: _balanceCard(provider.balanceAmount, size))),
                     ],
                   ),
                 ),
-                const SliverToBoxAdapter(child: SizedBox(height: 40)),
+                const SliverToBoxAdapter(child: SizedBox(height: 66)),
 
                 SliverToBoxAdapter(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const Text("Transaction", style: AppTextStyles.title),
+                      const Text("Transaction", style: AppTextStyles.titleW700),
                       Padding(
-                        padding: const EdgeInsets.only(right: 20),
+                        padding: const EdgeInsets.only(right: 20, top: 10),
                         child: SvgPictureWidgets(svgString: "assets/svg_icons/download_icon_svg.svg", size: 26.0),
                       ),
                     ],
@@ -99,50 +102,83 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
 
                           // Custom Date Picker Row
                           if (provider.selectedFilter == TransactionFilter.custom)
-                            Row(
-                              children: [
-                                // FROM
-                                Expanded(
-                                  child: InkWell(
-                                    onTap: () async {
-                                      final picked = await CustomDatePicker.show(context: context, initialDate: provider.customFromDate ?? DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Row(
+                                children: [
+                                  // FROM
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () async {
+                                        final picked = await CustomDatePicker.show(context: context, initialDate: provider.customFromDate ?? DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
 
-                                      if (picked != null && provider.customToDate != null) {
-                                        provider.setCustomRange(picked, provider.customToDate!);
-                                      } else if (picked != null) {
-                                        provider.setCustomRange(picked, picked);
-                                      }
-                                    },
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                                      decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8)),
-                                      child: Row(children: [const Icon(Icons.calendar_today, size: 18), const SizedBox(width: 6), Text(provider.customFromDate != null ? "${provider.customFromDate!.day.toString().padLeft(2, '0')}.${provider.customFromDate!.month.toString().padLeft(2, '0')}.${provider.customFromDate!.year}" : "From")]),
+                                        if (picked != null && provider.customToDate != null) {
+                                          provider.setCustomRange(picked, provider.customToDate!);
+                                        } else if (picked != null) {
+                                          provider.setCustomRange(picked, picked);
+                                        }
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: AppColors.textFieldBorderColor),
+                                          borderRadius: BorderRadius.circular(8),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.calendar_today, size: 18, color: AppColors.textFieldBorderColor),
+                                            const SizedBox(width: 6),
+                                            Text(
+                                              provider.customFromDate != null ? "${provider.customFromDate!.day.toString().padLeft(2, '0')}.${provider.customFromDate!.month.toString().padLeft(2, '0')}.${provider.customFromDate!.year}" : "From",
+                                              style: AppTextStyles.greyTextW500.copyWith(fontWeight: FontWeight.w800, color: Colors.black26),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const Padding(padding: EdgeInsets.symmetric(horizontal: 8), child: Text("To")),
-                                // TO
-                                Expanded(
-                                  child: InkWell(
-                                    onTap: () async {
-                                      final picked = await CustomDatePicker.show(context: context, initialDate: provider.customToDate ?? DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
-
-                                      if (picked != null && provider.customFromDate != null) {
-                                        provider.setCustomRange(provider.customFromDate!, picked);
-                                      } else if (picked != null) {
-                                        provider.setCustomRange(picked, picked);
-                                      }
-                                    },
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-
-                                      decoration: BoxDecoration(border: Border.all(), borderRadius: AppSpacing.kMediumRadius),
-
-                                      child: Row(children: [const Icon(Icons.calendar_today, size: 18), const SizedBox(width: 6), Text(provider.customToDate != null ? "${provider.customToDate!.day.toString().padLeft(2, '0')}.${provider.customToDate!.month.toString().padLeft(2, '0')}.${provider.customToDate!.year}" : "To")]),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 8),
+                                    child: Text(
+                                      "To",
+                                      style: AppTextStyles.backBoldText.copyWith(fontWeight: FontWeight.w800, color: Colors.black26.withOpacity(0.7)),
                                     ),
                                   ),
-                                ),
-                              ],
+                                  // TO
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () async {
+                                        final picked = await CustomDatePicker.show(context: context, initialDate: provider.customToDate ?? DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
+
+                                        if (picked != null && provider.customFromDate != null) {
+                                          provider.setCustomRange(provider.customFromDate!, picked);
+                                        } else if (picked != null) {
+                                          provider.setCustomRange(picked, picked);
+                                        }
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: AppColors.textFieldBorderColor),
+                                          borderRadius: AppSpacing.kMediumRadius,
+                                        ),
+
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.calendar_today, size: 18, color: AppColors.textFieldBorderColor),
+                                            const SizedBox(width: 6),
+                                            Text(
+                                              provider.customToDate != null ? "${provider.customToDate!.day.toString().padLeft(2, '0')}.${provider.customToDate!.month.toString().padLeft(2, '0')}.${provider.customToDate!.year}" : "To",
+                                              style: AppTextStyles.greyTextW500.copyWith(fontWeight: FontWeight.w800, color: Colors.black26),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                         ],
                       );
@@ -153,12 +189,21 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                 const SliverToBoxAdapter(child: AppSpacing.smallHeight),
 
                 //  Table Header
-                const SliverToBoxAdapter(
+                SliverToBoxAdapter(
                   child: Row(
                     children: [
-                      Expanded(flex: 4, child: Text("Asset name", style: AppTextStyles.appRedText)),
-                      Expanded(flex: 2, child: Text("Debit", style: AppTextStyles.appRedText)),
-                      Expanded(flex: 2, child: Text("Credit", style: AppTextStyles.appRedText)),
+                      Expanded(
+                        flex: 4,
+                        child: Text("Asset name", style: AppTextStyles.appRedTextBold.copyWith(color: AppColors.redColor.withOpacity(0.9))),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text("Debit", style: AppTextStyles.appRedTextBold.copyWith(color: AppColors.redColor.withOpacity(0.9))),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text("Credit", style: AppTextStyles.appRedTextBold.copyWith(color: AppColors.redColor.withOpacity(0.9))),
+                      ),
                     ],
                   ),
                 ),
@@ -173,28 +218,43 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                           final tx = provider.filteredTransactions[index];
                           return Padding(
                             padding: const EdgeInsets.symmetric(vertical: 6),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
-                                Expanded(
-                                  flex: 4,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(tx.name),
-                                      AppSpacing.extraSmallHeight,
-                                      Text(tx.date, style: AppTextStyles.textSize11),
-                                    ],
-                                  ),
+                                index == 0 ? Divider(color: Colors.black26, thickness: 1.0) : SizedBox.shrink(),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      flex: 4,
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(tx.name, style: AppTextStyles.greyBoldText.copyWith(color: Colors.black87.withOpacity(0.8))),
+                                          AppSpacing.smallHeight,
+                                          Text(
+                                            tx.date,
+                                            style: AppTextStyles.greyTextW500.copyWith(fontWeight: FontWeight.w600, color: Colors.black45),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(tx.debit.toStringAsFixed(0), style: AppTextStyles.greyBoldText.copyWith(color: Colors.black87.withOpacity(0.8))),
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(tx.credit.toStringAsFixed(2), style: AppTextStyles.greyBoldText.copyWith(color: Colors.black87.withOpacity(0.8))),
+                                    ),
+                                  ],
                                 ),
-                                Expanded(flex: 2, child: Text(tx.debit.toStringAsFixed(0))),
-                                Expanded(flex: 2, child: Text(tx.credit.toStringAsFixed(2))),
+                                Divider(color: Colors.black26, thickness: 1.0),
                               ],
                             ),
                           );
                         }, childCount: provider.filteredTransactions.length),
                       ),
-
                 // Total Row
                 if (!provider.isLoading) SliverToBoxAdapter(child: _buildTotalRow(provider)),
               ],
@@ -248,23 +308,25 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
       child: Column(
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Lorem ipsum', style: AppTextStyles.blackBoldText15),
+                  Text('Lorem ipsum', style: AppTextStyles.blackBoldText15W800.copyWith(fontSize: 18, color: Colors.black87.withOpacity(0.8))),
                   AppSpacing.extraSmallHeight,
                   Text("12.02.2025", style: AppTextStyles.textSize16),
                 ],
               ),
+
               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppSpacing.mediumHeight,
-
-                  IconButton(
-                    icon: SvgPictureWidgets(svgString: "assets/svg_icons/delete_svg_icon.svg", size: 22.0),
-                    onPressed: () {
+                  InkWell(
+                    onTap: () {
                       showDialog(
                         context: context,
                         builder: (_) => DeleteConfirmationDialog(
@@ -274,6 +336,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
                         ),
                       );
                     },
+                    child: SvgPictureWidgets(svgString: "assets/svg_icons/delete_svg_icon.svg", size: 20.0),
                   ),
 
                   AppSpacing.largeWidth24,
@@ -283,7 +346,7 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
               ),
             ],
           ),
-          SizedBox(height: size.height * 0.06),
+          SizedBox(height: size.height * 0.075),
         ],
       ),
     );
@@ -291,18 +354,48 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
 
   Widget _balanceCard(double amount, size) {
     return Center(
-      child: Card(
-        elevation: 6,
-
-        shape: RoundedRectangleBorder(borderRadius: AppSpacing.kSmallRadius),
-
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: AppSpacing.kLargeRadius,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              offset: const Offset(0, -2), // top shadow
+              blurRadius: 6,
+              spreadRadius: 1,
+            ),
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              offset: const Offset(0, 3), // bottom shadow
+              blurRadius: 6,
+              spreadRadius: 1,
+            ),
+          ],
+        ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: size.width * 0.15, vertical: 12),
+          padding: EdgeInsets.symmetric(horizontal: size.width * 0.19, vertical: 9),
           child: Column(
             children: [
-              const Text("Balance amount", style: AppTextStyles.textSize13),
-              const SizedBox(height: 4),
-              Text("₹ ${amount.toStringAsFixed(0)}", style: AppTextStyles.appRedText18),
+              Text(
+                "Balance amount",
+                style: AppTextStyles.textSize.copyWith(fontWeight: FontWeight.w700, color: Colors.black87.withOpacity(0.8)),
+              ),
+              AppSpacing.smallHeight10,
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '₹',
+                      style: TextStyle(color: AppColors.redColor, fontSize: 22, fontFamily: 'OpenSans'), // Or your preferred style for ₹
+                    ),
+                    TextSpan(
+                      text: ' ${amount.toStringAsFixed(0)}',
+                      style: AppTextStyles.appRedText18Bold.copyWith(color: AppColors.redColor.withOpacity(0.9)),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -313,12 +406,19 @@ class _AccountDetailsScreenState extends State<AccountDetailsScreen> {
   Widget _buildTotalRow(AccountDetailsProvider provider) {
     return Column(
       children: [
-        const Divider(thickness: 1),
         Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Expanded(flex: 4, child: Text("")),
-            Expanded(flex: 2, child: Text(provider.totalDebit.toStringAsFixed(0), style: AppTextStyles.backBoldText)),
-            Expanded(flex: 2, child: Text(provider.totalCredit.toStringAsFixed(2), style: AppTextStyles.backBoldText)),
+            Expanded(flex: 4, child: Text("")),
+            Expanded(
+              flex: 2,
+              child: Text(provider.totalDebit.toStringAsFixed(0), style: AppTextStyles.appBarBlackText18.copyWith(color: Colors.black87.withOpacity(0.8), fontSize: 17)),
+            ),
+            Expanded(
+              flex: 2,
+              child: Text(provider.totalCredit.toStringAsFixed(2), style: AppTextStyles.appBarBlackText18.copyWith(color: Colors.black87.withOpacity(0.8), fontSize: 17)),
+            ),
           ],
         ),
       ],

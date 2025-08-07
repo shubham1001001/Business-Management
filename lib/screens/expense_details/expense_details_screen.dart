@@ -16,15 +16,17 @@ class ExpenseDetailsScreen extends StatelessWidget {
     fontSize: 18,
     fontWeight: FontWeight.w500,
     fontFamily: 'OpenSans',
-    color: Colors.black.withOpacity(0.5), // 50% opacity
+    color: Colors.black.withOpacity(0.6), // 50% opacity
   );
   final titleTextOpacity80 = TextStyle(
     fontSize: 18,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
     fontFamily: 'OpenSans',
-    color: Colors.black.withOpacity(0.8), // 50% opacity
+    color: Colors.black.withOpacity(0.6), // 50% opacity
   );
 
+  final appBlackText18W400 = TextStyle(fontSize: 20, fontFamily: 'OpenSans', fontWeight: FontWeight.w600, color: Colors.black.withOpacity(0.8));
+  static final openSansSemiBold = TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.w600, fontSize: 18, color: Colors.black.withOpacity(0.8));
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -32,6 +34,7 @@ class ExpenseDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 27,
         title: const Text("Expense Details", style: AppTextStyles.appBarBlackText),
         leading: const BackButton(),
       ),
@@ -67,14 +70,14 @@ class ExpenseDetailsScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Flexible(child: Text(e.name)),
+                            Flexible(child: Text(e.name, style: openSansSemiBold)),
                             Flexible(
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   SvgPictureWidgets(svgString: "assets/svg_icons/rupee_icon_card.svg", color: AppColors.appBlackColor, size: 11.0),
                                   AppSpacing.extraSmallWidth,
-                                  Text(e.amount.toStringAsFixed(2)),
+                                  Text(e.amount.toStringAsFixed(2), style: openSansSemiBold),
                                 ],
                               ),
                             ),
@@ -94,14 +97,14 @@ class ExpenseDetailsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AppSpacing.mediumWidth16,
-                    const Text("Total amount", style: AppTextStyles.appBlackText18),
+                    Text("Total amount", style: appBlackText18W400),
 
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SvgPictureWidgets(svgString: "assets/svg_icons/rupee_icon_card.svg", color: AppColors.appBlackColor, size: 15.0),
                         AppSpacing.extraSmallWidth,
-                        Text("${total.toStringAsFixed(2)}", style: AppTextStyles.openSansRegular20),
+                        Text("${total.toStringAsFixed(2)}", style: appBlackText18W400),
                       ],
                     ),
                   ],

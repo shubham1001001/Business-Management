@@ -20,22 +20,31 @@ class SalesOrderOverviewScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         elevation: 1,
-
-        title: const Text("Sales Order Overview", style: AppTextStyles.appBarBlackText18),
+        leadingWidth: 27,
+        title: const Text("Sales Order Overview", style: AppTextStyles.appBarBlackText),
         actions: [
           TextButton(
             onPressed: () {},
-            child: const Text("+ Add", style: AppTextStyles.appBarRedBoldText),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 2),
+                  child: Icon(Icons.add, color: AppColors.redColor, size: 24),
+                ),
+                const Text("Add", style: AppTextStyles.appBarRedBoldText),
+              ],
+            ),
           ),
         ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          AppSpacing.mediumHeight16,
           Consumer<SalesOrderProvider>(
             builder: (BuildContext context, SalesOrderProvider provider, Widget? child) {
               return Padding(
-                padding: AppSpacing.screenPadding,
+                padding: EdgeInsetsGeometry.symmetric(horizontal: 16.0),
                 child: Row(
                   children: [
                     SvgPictureWidgets(size: 27.0, svgString: "assets/svg_icons/filert_1.svg"),
@@ -45,14 +54,17 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                       child: Wrap(
                         children: ['All', 'Pending', 'Closed'].map((filter) {
                           final isSelected = filter == provider.filter;
-                          final color = isSelected ? Colors.white : Colors.black;
+                          final color = isSelected ? Colors.white.withOpacity(0.9) : Colors.black.withOpacity(0.6);
                           final bgColor = isSelected ? AppColors.redColor : Colors.grey.shade200;
 
                           return Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 6),
                             child: ChoiceChip(
                               showCheckmark: false,
-                              label: Text(filter, style: TextStyle(color: color)),
+                              label: Text(
+                                filter,
+                                style: TextStyle(color: color, fontSize: 15, fontFamily: 'OpenSans', fontWeight: FontWeight.w600),
+                              ),
                               selected: isSelected,
                               selectedColor: bgColor,
                               onSelected: (_) => provider.setFilter(filter),
@@ -69,7 +81,6 @@ class SalesOrderOverviewScreen extends StatelessWidget {
               );
             },
           ),
-
           Consumer<SalesOrderProvider>(
             builder: (context, provider, child) {
               return Expanded(
@@ -91,9 +102,9 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                         ),
 
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 10),
+                          padding: const EdgeInsets.only(left: 12),
                           child: Container(
-                            height: 145,
+                            height: 150,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(bottomRight: Radius.circular(12), topRight: Radius.circular(12), topLeft: Radius.circular(3), bottomLeft: Radius.circular(3)),
@@ -112,20 +123,26 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                         children: [
                                           const Text("Customer name", style: AppTextStyles.blackBoldTextW800),
                                           AppSpacing.extraSmallHeight,
-                                          Text(order.customerName, style: AppTextStyles.greyBoldText),
+                                          Text(order.customerName, style: AppTextStyles.greyBoldText.copyWith(fontWeight: FontWeight.w800, fontSize: 13)),
                                         ],
                                       ),
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
-                                          const Text("Total amount", style: AppTextStyles.blackBoldTextW800),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 10),
+                                            child: const Text("Total amount", style: AppTextStyles.blackBoldTextW800),
+                                          ),
                                           AppSpacing.extraSmallHeight,
                                           Text.rich(
                                             TextSpan(
                                               children: [
                                                 TextSpan(text: "₹", style: AppTextStyles.greyText20),
-                                                TextSpan(text: " 100", style: AppTextStyles.greyBoldText17),
+                                                TextSpan(
+                                                  text: " 100250",
+                                                  style: AppTextStyles.greyBoldText17.copyWith(fontWeight: FontWeight.w800, fontSize: 13),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -133,7 +150,7 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                       ),
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.end,
-                                        children: [Text(DateFormat('dd.MM.yyyy').format(order.date), style: AppTextStyles.greyBoldText15)],
+                                        children: [Text(DateFormat('dd.MM.yyyy').format(order.date), style: AppTextStyles.greyBoldText15.copyWith(fontWeight: FontWeight.w800, fontSize: 13, decorationThickness: 10))],
                                       ),
                                     ],
                                   ),
@@ -153,7 +170,7 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                                 TextSpan(text: "₹", style: AppTextStyles.greyText20),
                                                 TextSpan(
                                                   text: " ${order.balance}",
-                                                  style: TextStyle(color: balanceColor, fontWeight: FontWeight.bold, fontSize: 16),
+                                                  style: TextStyle(color: balanceColor, fontWeight: FontWeight.bold, fontSize: 14),
                                                 ),
                                               ],
                                             ),
@@ -167,7 +184,7 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                           children: [
                                             Text(
                                               order.status,
-                                              style: TextStyle(color: statusColor, fontWeight: FontWeight.bold),
+                                              style: TextStyle(color: statusColor, fontWeight: FontWeight.w700, fontSize: 15),
                                             ),
                                           ],
                                         ),
@@ -179,7 +196,7 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                           if (order.status != 'Draft')
                                             Text(
                                               order.status,
-                                              style: TextStyle(color: statusColor, fontWeight: FontWeight.bold),
+                                              style: TextStyle(color: statusColor, fontWeight: FontWeight.w700, fontSize: 15),
                                             ),
                                           AppSpacing.smallHeight10,
                                           if (order.status == 'Draft')
@@ -191,7 +208,7 @@ class SalesOrderOverviewScreen extends StatelessWidget {
                                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
                                                 padding: const EdgeInsets.symmetric(horizontal: 17),
                                               ),
-                                              child: const Text("Process"),
+                                              child: const Text("Process", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
                                             ),
                                         ],
                                       ),

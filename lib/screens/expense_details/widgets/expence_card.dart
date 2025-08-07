@@ -7,6 +7,7 @@ import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/delete_confirmation_dialog_widget.dart';
 
 class ExpenseTopCard extends StatelessWidget {
+  static final openSansSemiBold = TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.w600, fontSize: 14, color: Colors.black.withOpacity(0.8));
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -33,14 +34,14 @@ class ExpenseTopCard extends StatelessWidget {
                   children: [
                     const Text(
                       'EX - 526',
-                      style: TextStyle(color: AppColors.redColor, fontSize: 18, fontWeight: FontWeight.w600),
+                      style: TextStyle(color: AppColors.redColor, fontSize: 19, fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
-                AppSpacing.extraSmallHeight,
-                Text("Expense account", style: AppTextStyles.smallW400),
+                AppSpacing.smallHeight,
+                Text("Expense account", style: AppTextStyles.small14W400),
                 AppSpacing.mediumHeight21,
-                Text('Lorem ipsum', style: AppTextStyles.openSansRegular),
+                Text('Lorem ipsum', style: openSansSemiBold),
                 AppSpacing.extraSmallHeight,
                 Row(children: [Text("12.02.20250", style: AppTextStyles.openSansRegular)]),
               ],
@@ -52,7 +53,7 @@ class ExpenseTopCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SvgPictureWidgets(svgString: "assets/svg_icons/edit_icon.svg", color: AppColors.appBlackColor, size: 15.0),
+                    SvgPictureWidgets(svgString: "assets/svg_icons/edit_icon.svg", color: AppColors.appBlackColor, size: 18.0),
                     AppSpacing.largeWidth,
                     InkWell(
                       onTap: () {
@@ -61,10 +62,10 @@ class ExpenseTopCard extends StatelessWidget {
                           builder: (_) => DeleteConfirmationDialog(onConfirm: () {}),
                         );
                       },
-                      child: SvgPictureWidgets(svgString: "assets/svg_icons/delete_svg_icon.svg", size: 17.0),
+                      child: SvgPictureWidgets(svgString: "assets/svg_icons/delete_svg_icon.svg", size: 19.0),
                     ),
                     AppSpacing.largeWidth,
-                    InkWell(onTap: () async {}, child: Image.asset("assets/icons/share_button.png", width: 15)),
+                    InkWell(onTap: () async {}, child: Image.asset("assets/icons/share_button.png", width: 19, height: 19)),
                   ],
                 ),
                 AppSpacing.largeHeight50,
@@ -96,10 +97,12 @@ class _PaymentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final openSansSemiBold = TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.w600, fontSize: 14, color: Colors.black.withOpacity(0.8));
+    final BlackText = TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.w600, fontSize: 22, color: Colors.black.withOpacity(0.8));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: AppTextStyles.openSansRegular),
+        Text(title, style: openSansSemiBold),
         AppSpacing.extraSmallHeight,
         Row(
           children: [
@@ -107,8 +110,7 @@ class _PaymentItem extends StatelessWidget {
             AppSpacing.smallWidth6,
             RichText(
               text: TextSpan(
-                style: const TextStyle(color: Colors.black),
-                children: [TextSpan(text: amount, style: AppTextStyles.openSansRegular20)],
+                children: [TextSpan(text: amount, style: BlackText)],
               ),
             ),
           ],

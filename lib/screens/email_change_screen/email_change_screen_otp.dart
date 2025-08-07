@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sales/core/constants/colors.dart';
 import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/core/widgets/app_header.dart';
 import 'package:sales/screens/otp_screen/widgets/otp_widgets.dart';
 
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../core/widgets/Custom_message_widget.dart';
 import '../../core/widgets/custom_auth_button.dart';
 import '../../providers/otp_provider/countdown_provider.dart';
@@ -45,113 +45,105 @@ class _OtpScreenState extends State<EmailChangeScreenOtp> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: AppHeader(title: "Change Email", endicon: false, backbutton: true),
-        body: Stack(
-          children: [
-            // Background image
-            Positioned(
-              top: size.height * 0.05,
-              left: 0,
-              right: 0,
-              child: SizedBox(
-                height: size.height * 0.2,
-                width: size.width * 0.2,
-                child: Image.asset("assets/images/emialIcon.png", fit: BoxFit.contain),
+        appBar: AppHeader(title: "Change Number", endicon: false, backbutton: true),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Background image
+              SizedBox(
+                height: size.height * 0.3,
+                width: size.width * 0.4,
+                child: Image.asset("assets/images/emialIcon.png", fit: BoxFit.fitWidth),
               ),
-            ),
+              SizedBox(height: 40),
+              // Dark overlay
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: double.infinity,
+                  height: size.height * 0.6,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(top: AppSpacing.rRadius20),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
 
-            // Dark overlay
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: double.infinity,
-                height: size.height * 0.6,
-                padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.vertical(top: AppSpacing.rRadius20),
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.of(context).pushNamed(AppRoutesName.home);
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(color: AppColors.grey100, borderRadius: BorderRadius.all(AppSpacing.rMediumRadius10)),
-                              child: Padding(padding: AppSpacing.allPadding16, child: Icon(Icons.arrow_back, size: 20)),
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).pushNamed(AppRoutesName.emaiChangeScreen);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 16),
+                                child: SvgPictureWidgets(svgString: "assets/svg_icons/back_button_svg.svg", size: 44.0),
+                              ),
                             ),
-                          ),
-
-                          Text('Enter your OTP here', style: AppTextStyles.title16),
-                          AppSpacing.extraSmallWidth,
-                        ],
-                      ),
-                      SizedBox(height: size.height * 0.025),
-                      Text('An OTP has been sent to ${widget.number}', style: AppTextStyles.blackBoldText15),
-                      SizedBox(height: size.height * 0.025),
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).pushNamed(AppRoutesName.mobileNumberChangeScreen);
-                        },
-                        child: Text('Change Email ID', style: AppTextStyles.redBoldText14),
-                      ),
-
-                      SizedBox(height: size.height * 0.025),
-                      // Mobile Input
-                      OtpInputScreen(controllers: controllers),
-                      SizedBox(height: size.height * 0.025),
-                      // OTP Button
-                      Center(
-                        child: CustomAuthButton(
-                          text: "Submit",
+                            AppSpacing.largeWidth50,
+                            Text(
+                              'Enter your OTP here',
+                              style: AppTextStyles.title.copyWith(fontSize: 15, color: Colors.black.withOpacity(0.8), fontWeight: FontWeight.w800),
+                            ),
+                            AppSpacing.extraSmallHeight,
+                          ],
+                        ),
+                        SizedBox(height: size.height * 0.025),
+                        Text('An OTP has been sent to newlorem@gmail.com', style: AppTextStyles.customButtonTextStyle),
+                        SizedBox(height: size.height * 0.025),
+                        InkWell(
                           onTap: () {
-                            String otp = controllers.map((controller) => controller.text).join();
-                            if (otp.length == 4) {
-                              Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesName.home, (route) => false);
-                              CustomSnackbar.show(context, message: "success", type: MessageType.success);
-                              print(otp);
-                            } else {
-                              CustomSnackbar.show(context, message: "Please Inter OTP", type: MessageType.error);
-                            }
+                            Navigator.of(context).pushNamed(AppRoutesName.mobileNumberChangeScreen);
+                          },
+                          child: Text('Change Email ID', style: AppTextStyles.redBoldText14),
+                        ),
+
+                        SizedBox(height: size.height * 0.025),
+                        // Mobile Input
+                        OtpInputScreen(controllers: controllers),
+                        SizedBox(height: 45),
+                        // OTP Button
+                        Center(
+                          child: CustomAuthButton(
+                            text: "Submit",
+                            onTap: () {
+                              String otp = controllers.map((controller) => controller.text).join();
+                              if (otp.length == 4) {
+                                Navigator.of(context).pushNamedAndRemoveUntil(AppRoutesName.home, (route) => false);
+                                CustomSnackbar.show(context, message: "success", type: MessageType.success);
+                                print(otp);
+                              } else {
+                                CustomSnackbar.show(context, message: "Please Inter OTP", type: MessageType.error);
+                              }
+                            },
+                          ),
+                        ),
+                        AppSpacing.largeHeight30,
+                        Consumer<CountdownProvider>(
+                          builder: (context, provider, child) {
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 16),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text("Resend OTP ", style: AppTextStyles.appLightRedBoldText),
+                                  Text("in ${provider.remainingTime}s", style: AppTextStyles.blackBoldText13),
+                                ],
+                              ),
+                            );
                           },
                         ),
-                      ),
-
-                      SizedBox(height: size.height * 0.025),
-                      Row(
-                        children: [
-                          Expanded(child: Divider(color: Colors.grey)),
-                          Padding(padding: EdgeInsets.symmetric(horizontal: 10), child: Text('OR')),
-                          Expanded(child: Divider(color: Colors.grey)),
-                        ],
-                      ),
-                      Consumer<CountdownProvider>(
-                        builder: (context, provider, child) {
-                          return Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text("Resend OTP ", style: AppTextStyles.appRedBoldText13),
-                                Text("in ${provider.remainingTime}s", style: AppTextStyles.blackBoldText13),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                      SizedBox(height: size.height * 0.025),
-                    ],
+                        SizedBox(height: size.height * 0.025),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

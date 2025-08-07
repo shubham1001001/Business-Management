@@ -12,11 +12,12 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leadingWidth: 28,
       backgroundColor: AppColors.backgroundColor, // or your desired color
       elevation: 0,
-
       automaticallyImplyLeading: false,
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           backbutton
               ? InkWell(
@@ -27,7 +28,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                 )
               : SizedBox.shrink(),
           Flexible(
-            child: Text(title, style: AppTextStyles.appBarBlackText18, overflow: TextOverflow.ellipsis),
+            child: Text(title, style: AppTextStyles.appBarBlackText, overflow: TextOverflow.ellipsis),
           ),
           const Spacer(),
           endicon

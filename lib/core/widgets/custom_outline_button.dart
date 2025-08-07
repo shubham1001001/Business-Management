@@ -25,12 +25,12 @@ class CustomOutlinedButton extends StatelessWidget {
         child: OutlinedButton(
           onPressed: onPressed,
           style: OutlinedButton.styleFrom(
-            foregroundColor: textColor,
+            foregroundColor: textColor.withOpacity(0.8),
             padding: EdgeInsets.symmetric(vertical: verticalPadding),
             side: BorderSide(color: borderColor),
             shape: RoundedRectangleBorder(borderRadius: AppSpacing.kMediumRadius),
           ),
-          child: Text(text, style: AppTextStyles.customButtonTextStyle),
+          child: Text(text, style: AppTextStyles.customButtonTextStyle.copyWith(fontWeight: FontWeight.w800)),
         ),
       ),
     );

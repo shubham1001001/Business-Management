@@ -17,6 +17,7 @@ class VenderDetailScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 28,
         title: const Text('Vendor Details', style: AppTextStyles.appBarBlackText),
         leading: const BackButton(),
       ),
@@ -27,105 +28,124 @@ class VenderDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Info Card
+            AppSpacing.smallHeight12,
             Container(
-              padding: AppSpacing.allPadding16,
+              padding: EdgeInsetsGeometry.only(top: 3, left: 16, right: 16, bottom: 16),
               decoration: BoxDecoration(
+                color: AppColors.cardmainColor,
                 border: Border.all(color: Colors.grey),
                 borderRadius: AppSpacing.kMediumRadius,
-                color: AppColors.cardmainColor,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Left info
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [const Text('Vendor name', style: TextStyle(color: AppColors.redColor, fontSize: 20))],
-                      ),
-                      Text("+91 8152369874", style: AppTextStyles.textSize16),
-                      AppSpacing.mediumHeight16,
-                      const Text('Payable', style: TextStyle(color: AppColors.greyText)),
-                      Row(
-                        children: [
-                          Text("₹ ", style: TextStyle(fontSize: 20, color: AppColors.greyText)),
-                          Text("00.00"),
-                        ],
-                      ),
-                    ],
-                  ),
-                  // Right info
-                  SizedBox(width: size.width * 0.2),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          SvgPictureWidgets(svgString: "assets/svg_icons/edit_icon.svg", color: AppColors.appBlackColor, size: 20.0),
-                          AppSpacing.largeWidth,
-                          InkWell(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (_) => DeleteConfirmationDialog(onConfirm: () {}),
-                              );
-                            },
-                            child: SvgPictureWidgets(svgString: "assets/svg_icons/delete_svg_icon.svg", size: 20.0),
-                          ),
-                          AppSpacing.largeWidth,
-                          InkWell(
-                            onTap: () async {
-                              final selected = await showMenu<String>(
-                                context: context,
-                                position: RelativeRect.fromLTRB(1000, 170, 10, 100), // Adjust based on screen size
-                                items: [_buildMenuItem('comment', Icons.comment, 'Comment'), _buildMenuItem('statement', Icons.receipt_long, 'Customer statement'), _buildMenuItem('lorem1', Icons.public, 'Lorem ipsum'), _buildMenuItem('lorem2', Icons.public, 'Lorem ipsum')],
-                              );
-
-                              // ✅ Check for null
-                              if (selected != null) {
-                                switch (selected) {
-                                  case 'comment':
-                                    Navigator.pushNamed(context, AppRoutesName.vendorTimelineScreen);
-                                    break;
-                                  case 'statement':
-                                    // Handle statement
-                                    break;
-                                  // etc.
-                                }
-                              }
-                            },
-                            child: Icon(Icons.more_vert, size: 25),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: size.height * 0.04),
-                      // const Text('Outstanding', style: TextStyle(color: AppColors.greyText)),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: const [_PaymentItem(title: "Outstanding", amount: "00.00")],
-                      ),
-                      // Row(
-                      //   children: [
-                      //     Text("₹ ", style: TextStyle(fontSize: 20, color: AppColors.greyText)),
-                      //     Text("00.00"),
-                      //   ],
-                      // ),
-                    ],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.25), // soft shadow
+                    blurRadius: 6, // spread of the blur
+                    offset: Offset(0, 6), // vertical movement of shadow
                   ),
                 ],
               ),
+
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 9),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Left info
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Vendor name',
+                              style: TextStyle(color: AppColors.redColor.withOpacity(0.8), fontSize: 20, fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
+                        Text("+91 8152369874", style: AppTextStyles.textSize16),
+                        AppSpacing.mediumHeight16,
+                        Text('Payable', style: AppTextStyles.textSize16),
+                        Row(
+                          children: [
+                            Text("₹ ", style: AppTextStyles.textSize16),
+                            Text("00.00", style: const TextStyle(fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                      ],
+                    ),
+                    // Right info
+                    SizedBox(width: size.width * 0.2),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            SvgPictureWidgets(svgString: "assets/svg_icons/edit_icon.svg", color: AppColors.appBlackColor, size: 20.0),
+                            AppSpacing.largeWidth,
+                            InkWell(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => DeleteConfirmationDialog(onConfirm: () {}),
+                                );
+                              },
+                              child: SvgPictureWidgets(svgString: "assets/svg_icons/delete_svg_icon.svg", size: 20.0),
+                            ),
+                            AppSpacing.largeWidth,
+                            InkWell(
+                              onTap: () async {
+                                final selected = await showMenu<String>(
+                                  context: context,
+                                  position: RelativeRect.fromLTRB(1000, 170, 10, 100), // Adjust based on screen size
+                                  items: [_buildMenuItem('comment', Icons.comment, 'Comment'), _buildMenuItem('statement', Icons.receipt_long, 'Customer statement'), _buildMenuItem('lorem1', Icons.public, 'Lorem ipsum'), _buildMenuItem('lorem2', Icons.public, 'Lorem ipsum')],
+                                );
+
+                                // ✅ Check for null
+                                if (selected != null) {
+                                  switch (selected) {
+                                    case 'comment':
+                                      Navigator.pushNamed(context, AppRoutesName.vendorTimelineScreen);
+                                      break;
+                                    case 'statement':
+                                      // Handle statement
+                                      break;
+                                    // etc.
+                                  }
+                                }
+                              },
+                              child: Icon(Icons.more_vert, size: 25),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: size.height * 0.053),
+                        // const Text('Outstanding', style: TextStyle(color: AppColors.greyText)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: const [_PaymentItem(title: "Outstanding", amount: "00.00")],
+                        ),
+                        // Row(
+                        //   children: [
+                        //     Text("₹ ", style: TextStyle(fontSize: 20, color: AppColors.greyText)),
+                        //     Text("00.00"),
+                        //   ],
+                        // ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
 
-            SizedBox(height: size.height * 0.025),
+            AppSpacing.largeHeight,
 
-            Text("Address"),
-            SizedBox(height: size.height * 0.01),
-            Text("House no: 222, uphill,street - 45, majortown (po)Kottayam, 600015, Kerala", style: TextStyle(color: AppColors.greyText)),
-            SizedBox(height: size.height * 0.01),
-            Text("Description"),
-            Text("is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sstandard dummy text ever since the 1500s", style: TextStyle(color: AppColors.greyText)),
+            Text("Address", style: AppTextStyles.blackBoldText15.copyWith(color: Colors.black87.withOpacity(0.8))),
+            AppSpacing.smallHeight10,
+            Text("House no: 222, uphill,\nstreet - 45 majortown (po)\nKottayam 600015, Kerala", style: AppTextStyles.greyBoldTextItalic),
+            AppSpacing.largeHeight,
+            Text("Description", style: AppTextStyles.blackBoldText15.copyWith(color: Colors.black87.withOpacity(0.8))),
+            AppSpacing.smallHeight10,
+            Text("is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'sstandard dummy text ever since the 1500s", style: AppTextStyles.greyBoldTextW700),
           ],
         ),
       ),
@@ -163,7 +183,10 @@ class _PaymentItem extends StatelessWidget {
           text: TextSpan(
             style: const TextStyle(color: Colors.black),
             children: [
-              const TextSpan(text: "₹ "),
+              const TextSpan(
+                text: "₹ ",
+                style: TextStyle(fontSize: 20, color: AppColors.greyText),
+              ),
               TextSpan(
                 text: amount,
                 style: const TextStyle(fontWeight: FontWeight.bold),

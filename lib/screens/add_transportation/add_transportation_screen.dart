@@ -4,8 +4,7 @@ import 'package:sales/core/constants/text_styles.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
-import '../../core/widgets/custom_input_field.dart';
-import '../../core/widgets/custom_outline_button.dart';
+import '../../core/widgets/custom_text_field_gray_text.dart';
 import '../../providers/add_transportation/add_transportation_provider.dart';
 import '../pricing_preference/widgets/bottom_select_sheet_widget.dart';
 
@@ -15,7 +14,7 @@ class AddTransportationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Add Transportation", style: AppTextStyles.appBarBlackText)),
+      appBar: AppBar(leadingWidth: 28, title: const Text("Add Transportation", style: AppTextStyles.appBarBlackText)),
       body: Consumer<AddTransportationProvider>(
         builder: (context, provider, _) {
           return SingleChildScrollView(
@@ -23,6 +22,7 @@ class AddTransportationScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                AppSpacing.smallHeight10,
                 Container(
                   padding: AppSpacing.allPadding16,
                   decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: AppSpacing.kSmallRadius),
@@ -33,24 +33,24 @@ class AddTransportationScreen extends StatelessWidget {
                       AppSpacing.smallHeight10,
                       _buildSelectField(context, "collection point", provider.selectedCollectionPoint, provider.owners, provider.setCollectionPoint),
 
-                      AppSpacing.smallHeight10,
+                      AppSpacing.mediumHeight16,
                       Text("Delivery point", style: AppTextStyles.greyBoldW500Text),
                       AppSpacing.smallHeight10,
                       _buildSelectField(context, "delivery point", provider.selectedDeliveryPoint, provider.owners, provider.setDeliveryPoint),
-                      AppSpacing.smallHeight10,
+                      AppSpacing.mediumHeight16,
                       Text("Vehicle number", style: AppTextStyles.greyBoldW500Text),
                       AppSpacing.smallHeight10,
                       _buildSelectField(context, "Vehicle number", provider.selectedVehicleNumber, provider.owners, provider.setVehicleNumber),
-                      AppSpacing.smallHeight10,
+                      AppSpacing.mediumHeight16,
                       Text("Driver", style: AppTextStyles.greyBoldW500Text),
                       AppSpacing.smallHeight10,
                       _buildSelectField(context, "Driver", provider.selectedDriver, provider.owners, provider.setDriver),
-                      AppSpacing.smallHeight10,
+                      AppSpacing.mediumHeight16,
                       Text("Rent", style: AppTextStyles.greyBoldW500Text),
                       AppSpacing.smallHeight10,
                       SizedBox(
                         height: 49,
-                        child: CustomInputField(
+                        child: CustomTextFieldGrayText(
                           controller: provider.rentAmountController,
                           isEditable: true,
                           keyboardType: TextInputType.text,
@@ -69,20 +69,20 @@ class AddTransportationScreen extends StatelessWidget {
                 AppSpacing.largeHeight,
                 Align(
                   alignment: Alignment.center,
-                  child: Container(
-                    color: Colors.white,
-                    child: CustomOutlinedButton(
-                      colors: AppColors.redColor,
-                      text: "Ok",
-                      onPressed: () {
-                        if (provider.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("successfully")));
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
-                        }
-                      },
-
-                      textColor: Colors.white,
+                  child: InkWell(
+                    onTap: () {
+                      if (provider.validate()) {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("successfully")));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
+                      }
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(color: AppColors.redColor, borderRadius: BorderRadius.circular(8)),
+                      height: 40,
+                      width: 130,
+                      alignment: Alignment.center,
+                      child: Text("Ok", style: AppTextStyles.customButtonTextWhiteStyle),
                     ),
                   ),
                 ),
@@ -115,7 +115,7 @@ Widget _buildSelectField(BuildContext context, String title, String? value, List
         borderRadius: AppSpacing.kLargeRadius,
         color: Colors.white,
       ),
-      child: Text(value ?? "Select $title", style: AppTextStyles.greyText),
+      child: Text(value ?? "Select $title", style: AppTextStyles.greyText.copyWith(fontWeight: FontWeight.w600)),
     ),
   );
 }

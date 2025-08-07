@@ -59,7 +59,7 @@ class RecordProvider extends ChangeNotifier {
       allItems = List.generate(7, (_) => RecordSection(date: "25.07.2025", title: "Petty Cash", count: 10, icon: "assets/svg_icons/rupee_icon.svg"));
       setFilter(selectedFilter);
     } else if (_selectedTab == 'Expenses') {
-      allItems = [RecordSection(date: "25.07.2025", title: "Lorem ipsum 1", count: 12, icon: "assets/svg_icons/expenses_item_icon.svg"), RecordSection(date: "25.07.2025", title: "Lorem ipsum 22", count: 90, icon: "assets/svg_icons/expenses_item_icon.svg")];
+      allItems = [RecordSection(date: "25.07.2025", title: "Lorem ipsum 1", count: 12, icon: "assets/svg_icons/expenses_item_icon.svg"), RecordSection(date: "25.07.2025", title: "Lorem ipsum 22", count: 90, icon: "assets/svg_icons/expenses_item_icon.svg"), RecordSection(date: "25.07.2025", title: "Lorem ipsum 33", count: 90, icon: "assets/svg_icons/expenses_item_icon.svg"), RecordSection(date: "25.07.2025", title: "Lorem ipsum", count: 90, icon: "assets/svg_icons/expenses_item_icon.svg")];
     }
 
     dropItemSelect = allItems;
@@ -112,7 +112,7 @@ class RecordProvider extends ChangeNotifier {
 
   List<String> get subFilters {
     if (_selectedTab == 'Bank' || _selectedTab == 'Cash' || _selectedTab == 'Expenses') {
-      return ['All', 'lorem'];
+      return ['All', 'lorem', 'lorem'];
     }
     return [];
   }

@@ -14,6 +14,7 @@ class VendorTimelineScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 28,
         title: const Text("Comment", style: AppTextStyles.appBarBlackText),
         leading: const BackButton(),
       ),
@@ -59,8 +60,8 @@ class VendorTimelineScreen extends StatelessWidget {
                                         Column(
                                           children: [
                                             Container(
-                                              height: 25,
-                                              width: 25,
+                                              height: 23,
+                                              width: 23,
                                               decoration: BoxDecoration(
                                                 border: Border.all(color: AppColors.redColor, width: 3),
                                                 borderRadius: AppSpacing.kSmallRadius,
@@ -85,9 +86,9 @@ class VendorTimelineScreen extends StatelessWidget {
                                   return Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(event.title, style: AppTextStyles.blackBoldText15),
+                                      Text(event.title, style: AppTextStyles.blackBoldText15.copyWith(color: AppColors.greyText.withOpacity(0.8), fontSize: 15)),
                                       AppSpacing.smallHeight10,
-                                      Text("${event.date}   ${event.time}", style: AppTextStyles.greyBoldText15),
+                                      Text("${event.date}   ${event.time}", style: AppTextStyles.greyBoldText15.copyWith(color: AppColors.greyText.withOpacity(0.5), fontSize: 13)),
                                       AppSpacing.largeHeight40,
                                     ],
                                   );
@@ -156,9 +157,9 @@ Widget vendorHeader({name, number}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(name, style: AppTextStyles.appBarRedBoldText),
+      Text(name, style: AppTextStyles.appBarRedBoldText.copyWith(color: AppColors.redColor.withOpacity(0.9))),
       AppSpacing.smallHeight,
-      Text(number, style: AppTextStyles.appBlackText18),
+      Text(number, style: AppTextStyles.appBlackText18.copyWith(fontSize: 16)),
     ],
   );
 }

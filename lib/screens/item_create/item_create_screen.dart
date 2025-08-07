@@ -18,25 +18,37 @@ class ItemCreateScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Create", style: AppTextStyles.appBarBlackText)),
+      appBar: AppBar(leadingWidth: 28, title: const Text("Create", style: AppTextStyles.appBarBlackText)),
       body: Consumer<ItemCreateProvider>(
         builder: (context, provider, _) {
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
+                AppSpacing.smallHeight10,
                 Container(
                   padding: AppSpacing.allPadding16,
                   decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(12)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Select type"),
                       AppSpacing.extraSmallHeight,
-                      Row(children: [_buildRadio("Product", true, provider), const SizedBox(width: 20), _buildRadio("Service", false, provider)]),
-                      AppSpacing.mediumWidth,
-                      Text('Item name', style: AppTextStyles.greyBoldW500Text),
+                      Text(
+                        "Select type",
+                        style: AppTextStyles.greyBoldText.copyWith(color: Colors.black87.withOpacity(0.6), fontWeight: FontWeight.w800),
+                      ),
                       AppSpacing.extraSmallHeight,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          _buildRadio("Product", true, provider),
+                          const SizedBox(width: 25),
+                          Padding(padding: const EdgeInsets.only(left: 20), child: _buildRadio("Service", false, provider)),
+                        ],
+                      ),
+                      AppSpacing.mediumHeight16,
+                      Text('Item name', style: AppTextStyles.greyBoldW500Text.copyWith(fontWeight: FontWeight.w700, fontSize: 14)),
+                      AppSpacing.smallHeight10,
                       // Item Name
                       SizedBox(
                         child: CustomInputField(
@@ -50,24 +62,24 @@ class ItemCreateScreen extends StatelessWidget {
                           onChanged: provider.validateForm,
                         ),
                       ),
+                      AppSpacing.mediumHeight,
+                      Text('Unit', style: AppTextStyles.greyBoldW500Text.copyWith(fontWeight: FontWeight.w700, fontSize: 14)),
                       AppSpacing.smallHeight10,
-                      Text('Unit', style: AppTextStyles.greyBoldW500Text),
-                      AppSpacing.extraSmallHeight,
 
                       _buildSelectField(context, title: "Unit", value: provider.selectedUnit, options: provider.itemSelect, onSelected: (val) => provider.setSelectedUnit(val)),
                       // _buildSelectField(context, title: "Select unit", value: provider.unit, options: List.generate(8, (i) => "Unit ${i + 1}"), onSelected: provider.setUnit),
+                      AppSpacing.mediumHeight,
+                      Text('Sales account', style: AppTextStyles.greyBoldW500Text.copyWith(fontWeight: FontWeight.w700, fontSize: 14)),
                       AppSpacing.smallHeight10,
-                      AppSpacing.extraSmallHeight,
-                      Text('Sales account', style: AppTextStyles.greyBoldW500Text),
-                      _buildSelectField(context, title: "Sales account", value: provider.selectedSalesAccount, options: provider.itemSelect, onSelected: (val) => provider.setSelectedSalesAccount(val)),
+                      _buildSelectField(context, title: "", value: provider.selectedSalesAccount, options: provider.itemSelect, onSelected: (val) => provider.setSelectedSalesAccount(val)),
+                      AppSpacing.mediumHeight,
+                      Text('Purchase account', style: AppTextStyles.greyBoldW500Text.copyWith(fontWeight: FontWeight.w700, fontSize: 14)),
                       AppSpacing.smallHeight10,
-                      AppSpacing.extraSmallHeight,
-                      Text('Purchase account', style: AppTextStyles.greyBoldW500Text),
-                      _buildSelectField(context, title: "Purchase account", value: provider.selectedPurchaseAccount, options: provider.itemSelect, onSelected: (val) => provider.setPurchaseAccount(val)),
+                      _buildSelectField(context, title: "", value: provider.selectedPurchaseAccount, options: provider.itemSelect, onSelected: (val) => provider.setPurchaseAccount(val)),
                     ],
                   ),
                 ),
-                AppSpacing.largeHeight,
+                AppSpacing.largeHeight27,
                 InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, AppRoutesName.pricingPreferenceScreen);
@@ -76,8 +88,9 @@ class ItemCreateScreen extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Row(
                       children: [
-                        Icon(Icons.add, color: AppColors.redColor),
-                        Text("Pricing preference", style: AppTextStyles.redBoldText14),
+                        Icon(Icons.add, color: AppColors.redColor, size: 26),
+                        SizedBox(width: 3),
+                        Text("Pricing preference", style: AppTextStyles.redBoldText14.copyWith(fontWeight: FontWeight.w700, fontSize: 14)),
                       ],
                     ),
                   ),
@@ -103,7 +116,7 @@ class ItemCreateScreen extends StatelessWidget {
                 Flexible(
                   child: CustomOutlinedButton(
                     colors: AppColors.redColor,
-                    text: "Submit",
+                    text: "Save",
                     onPressed: () {
                       if (provider.isValid) {
                         provider.submitForm();
@@ -138,7 +151,10 @@ class ItemCreateScreen extends StatelessWidget {
           onChanged: (val) => provider.setType(val!),
         ),
 
-        Text(title),
+        Text(
+          title,
+          style: AppTextStyles.greyBoldText.copyWith(color: Colors.black87.withOpacity(0.6), fontWeight: FontWeight.w800),
+        ),
       ],
     );
   }
@@ -161,7 +177,7 @@ class ItemCreateScreen extends StatelessWidget {
           border: Border.all(color: Colors.grey.shade400),
           borderRadius: BorderRadius.circular(6),
         ),
-        child: Text(value ?? "Select $title", style: const TextStyle(color: Colors.grey)),
+        child: Text(value ?? "Select $title", style: TextStyle(color: Colors.grey, fontSize: 16)),
       ),
     );
   }

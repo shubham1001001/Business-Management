@@ -19,6 +19,7 @@ class VenderListScreen extends StatelessWidget {
     return Scaffold(
       // backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
+        leadingWidth: 28,
         backgroundColor: AppColors.primary,
         elevation: 1,
 
@@ -28,7 +29,7 @@ class VenderListScreen extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(context, AppRoutesName.addVehicleScreen);
             },
-            child: Text("Add Vendor", style: AppTextStyles.appBarRedBoldText),
+            child: Text("Add Vendor", style: AppTextStyles.appBarRedBoldText.copyWith(fontSize: 19)),
           ),
         ],
       ),
@@ -80,7 +81,7 @@ class VenderListScreen extends StatelessWidget {
               return Expanded(
                 child: ListView.builder(
                   itemCount: provider.filteredOrders.length,
-                  padding: AppSpacing.allPadding12,
+                  // padding: AppSpacing.allPadding12,
                   itemBuilder: (context, index) {
                     final order = provider.filteredOrders[index];
                     final statusColor = order.status == 'Draft' ? Colors.red : Colors.red;
@@ -91,54 +92,57 @@ class VenderListScreen extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context, rootNavigator: true).pushNamed(AppRoutesName.venderDetailScreen);
                         },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.cardClip,
-                            borderRadius: BorderRadius.only(bottomRight: Radius.circular(12), topRight: Radius.circular(12), topLeft: Radius.circular(15), bottomLeft: Radius.circular(12)),
-                            border: Border.all(color: Colors.grey),
-                          ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 6),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: AppColors.cardClip,
+                              borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8), topLeft: Radius.circular(10), bottomLeft: Radius.circular(8)),
+                              border: Border.all(color: Colors.grey),
+                            ),
 
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(bottomRight: Radius.circular(12), topRight: Radius.circular(12), topLeft: Radius.circular(3), bottomLeft: Radius.circular(3)),
-                                border: Border.all(color: Colors.white),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.all(screenWidth * 0.025),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Stack(
-                                          alignment: AlignmentDirectional.center,
-                                          children: [
-                                            Image.asset("assets/icons/user_icon.png"),
-                                            Padding(padding: const EdgeInsets.all(6.0), child: Icon(Icons.person_outline)),
-                                          ],
-                                        ),
-                                        SizedBox(width: size.width * 0.03),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(order.customerName, style: AppTextStyles.backBoldText),
-                                            AppSpacing.smallWidth6,
-                                            Text(order.description, style: AppTextStyles.greyBoldText),
-                                          ],
-                                        ),
-                                        Spacer(),
-                                        Text(
-                                          "₹${order.balance}",
-                                          style: TextStyle(color: statusColor, fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(width: size.width * 0.03),
-                                  ],
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8), topLeft: Radius.circular(3), bottomLeft: Radius.circular(3)),
+                                  border: Border.all(color: Colors.white),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(screenWidth * 0.028),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Stack(
+                                            alignment: AlignmentDirectional.center,
+                                            children: [
+                                              Image.asset("assets/icons/user_icon.png"),
+                                              Padding(padding: const EdgeInsets.all(6.0), child: Icon(Icons.person_outline)),
+                                            ],
+                                          ),
+                                          SizedBox(width: size.width * 0.03),
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(order.customerName, style: AppTextStyles.backBoldText),
+                                              AppSpacing.smallHeight,
+                                              Text(order.description, style: AppTextStyles.greyBoldText),
+                                            ],
+                                          ),
+                                          Spacer(),
+                                          Text(
+                                            "₹${order.balance}",
+                                            style: TextStyle(color: statusColor, fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(width: size.width * 0.03),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

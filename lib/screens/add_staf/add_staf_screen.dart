@@ -30,7 +30,7 @@ class AddStaffScreen extends StatelessWidget {
     final isWide = size.width > 600;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Add Staff', style: AppTextStyles.appBarBlackText)),
+      appBar: AppBar(leadingWidth: 28, title: const Text('Add Staff', style: AppTextStyles.appBarBlackText)),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -38,7 +38,7 @@ class AddStaffScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Image upload section
+                AppSpacing.smallHeight10,
                 Container(
                   padding: AppSpacing.allPadding16,
                   decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(12)),
@@ -104,7 +104,7 @@ class AddStaffScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      AppSpacing.mediumHeight,
+                      AppSpacing.largeHeight45,
 
                       // Staff name
                       Column(
@@ -130,7 +130,7 @@ class AddStaffScreen extends StatelessWidget {
                         ],
                       ),
 
-                      AppSpacing.mediumHeight16,
+                      AppSpacing.mediumHeight18,
 
                       // Mobile number
                       Column(
@@ -156,7 +156,7 @@ class AddStaffScreen extends StatelessWidget {
                         ],
                       ),
 
-                      AppSpacing.mediumHeight16,
+                      AppSpacing.mediumHeight18,
 
                       // Address
                       Column(
@@ -170,7 +170,7 @@ class AddStaffScreen extends StatelessWidget {
                               return CustomInputField(
                                 controller: provider.addressController,
                                 isEditable: true,
-                                maxLines: 3,
+                                maxLines: 4,
                                 keyboardType: TextInputType.text,
                                 hintText: 'Address',
                                 prefixText: "",

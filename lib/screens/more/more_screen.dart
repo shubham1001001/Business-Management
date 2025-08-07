@@ -21,6 +21,7 @@ class MoreScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              AppSpacing.extraSmallHeight,
               CardWidget(
                 child: [
                   Text("Account Setting", style: AppTextStyles.greyBoldText),
@@ -38,7 +39,7 @@ class MoreScreen extends StatelessWidget {
                       trailing: Icon(Icons.keyboard_arrow_right, color: AppColors.greyLight),
                     ),
                   ),
-                  AppSpacing.extraSmallHeight,
+                  AppSpacing.smallHeight,
                   InkWell(
                     onTap: () {
                       Navigator.of(context).pushNamed(AppRoutesName.subscriptionPlanScreen);
@@ -54,6 +55,7 @@ class MoreScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              AppSpacing.smallHeight,
               CardWidget(
                 child: [
                   Text("Costing", style: AppTextStyles.greyBoldText),
@@ -82,6 +84,7 @@ class MoreScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              AppSpacing.smallHeight,
               CardWidget(
                 child: [
                   Text("Utilities", style: AppTextStyles.greyBoldText),
@@ -105,6 +108,7 @@ class MoreScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              AppSpacing.smallHeight,
               CardWidget(
                 child: [
                   Text("Other", style: AppTextStyles.greyBoldText),

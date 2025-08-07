@@ -23,46 +23,50 @@ class DashboardContent extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Consumer<HomeProvider>(
               builder: (context, provider, child) {
-                return Row(
-                  children: List.generate(provider.balanceData.length, (index) {
-                    final item = provider.balanceData[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 2),
-                      child: BalanceCard(label: item["label"]!, amount: item["amount"]!, icon: item["icon"]!),
-                    );
-                  }),
+                return Padding(
+                  padding: const EdgeInsets.only(right: 7),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: List.generate(provider.balanceData.length, (index) {
+                      final item = provider.balanceData[index];
+                      return BalanceCard(label: item["label"]!, amount: item["amount"]!, icon: item["icon"]!);
+                    }),
+                  ),
                 );
               },
             ),
           ),
 
-          SizedBox(height: size.height * 0.018),
+          SizedBox(height: size.height * 0.013),
 
           Padding(
             padding: AppSpacing.allPadding5,
             child: Container(
               padding: AppSpacing.allPadding16,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black12),
+                border: Border.all(color: Colors.black26),
                 borderRadius: AppSpacing.kMediumRadius10,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SalesInfo(title: "Sales order", amount: "00.00"),
-                  AppSpacing.extraSmallWidth,
-                  Container(color: Colors.grey, height: size.height * 0.1, width: 2),
-                  AppSpacing.extraSmallWidth,
-                  SalesInfo(title: "Total Sales", amount: "00.00"),
-                  AppSpacing.extraSmallWidth,
-                  Container(color: Colors.grey, height: size.height * 0.1, width: 2),
-                  AppSpacing.extraSmallWidth,
-                  SalesInfo(title: "Credit sales", amount: "00.00"),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 22),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SalesInfo(title: "Sales order", amount: "00.00"),
+                    AppSpacing.extraSmallWidth,
+                    Container(color: Colors.grey, height: size.height * 0.1, width: 2),
+                    AppSpacing.extraSmallWidth,
+                    SalesInfo(title: "Total Sales", amount: "00.00"),
+                    AppSpacing.extraSmallWidth,
+                    Container(color: Colors.grey, height: size.height * 0.1, width: 2),
+                    AppSpacing.extraSmallWidth,
+                    SalesInfo(title: "Credit sales", amount: "00.00"),
+                  ],
+                ),
               ),
             ),
           ),
-          SizedBox(height: size.height * 0.02),
+          SizedBox(height: size.height * 0.01),
 
           Padding(
             padding: AppSpacing.allPadding5,

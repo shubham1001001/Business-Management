@@ -41,7 +41,9 @@ class GenerateBottomSheet extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Row(children: [Text("Generate", style: AppTextStyles.title)]),
+          Row(
+            children: [Text("Generate", style: AppTextStyles.title.copyWith(color: Colors.black87.withOpacity(0.8)))],
+          ),
           SizedBox(height: size.height * 0.04),
 
           // PageView with 2-row layout
@@ -114,7 +116,7 @@ class GenerateBottomSheet extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 4),
       height: 6,
       width: 18,
-      decoration: BoxDecoration(color: active ? Colors.black : Colors.grey, borderRadius: BorderRadius.circular(4)),
+      decoration: BoxDecoration(color: active ? Colors.black.withOpacity(0.5) : Colors.grey.withOpacity(0.7), borderRadius: BorderRadius.circular(4)),
     );
   }
 }

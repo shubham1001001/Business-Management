@@ -16,6 +16,7 @@ class ProfileInformations extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 27,
         title: const Text('Profile Information', style: AppTextStyles.appBarBlackText),
         leading: const BackButton(),
         actions: [
@@ -44,8 +45,11 @@ class ProfileInformations extends StatelessWidget {
                   padding: AppSpacing.allPadding12,
                   child: Column(
                     children: [
+                      AppSpacing.smallHeight10,
                       buildEditableTextField(label: 'First name', value: 'Nandana', isEditable: provider.isEditingFirstName),
+                      AppSpacing.smallHeight10,
                       buildReadOnlyField('Last name', 'example text like this'),
+                      AppSpacing.smallHeight10,
                       buildEditableField(
                         label: 'Mobile number',
                         value: '9876543210',
@@ -56,6 +60,7 @@ class ProfileInformations extends StatelessWidget {
                           Navigator.of(context).pushNamed(AppRoutesName.mobileNumberChangeScreen);
                         },
                       ),
+                      AppSpacing.smallHeight10,
                       buildEditableField(
                         label: 'Email id',
                         value: 'nandana900@gmail.com',
@@ -66,8 +71,11 @@ class ProfileInformations extends StatelessWidget {
                           Navigator.of(context).pushNamed(AppRoutesName.emaiChangeScreen);
                         },
                       ),
+                      AppSpacing.smallHeight10,
                       buildReadOnlyField('Enterprise name', 'ABC company'),
+                      AppSpacing.smallHeight10,
                       buildReadOnlyField('Financial year', 'Select financial year'),
+                      AppSpacing.smallHeight10,
                       buildReadOnlyField('Address', 'Sample here'),
                     ],
                   ),
@@ -88,7 +96,7 @@ class ProfileInformations extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: [Text(label, style: AppTextStyles.textSize13)],
+            children: [Text(label, style: AppTextStyles.textSize14)],
           ),
           AppSpacing.smallHeight10,
           CustomInputField(
@@ -149,17 +157,45 @@ class ProfileInformations extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(label, style: AppTextStyles.textSize13),
+              Text(label, style: AppTextStyles.textSize14),
               GestureDetector(
                 onTap: onTap,
-                child: Text(actionLabel, style: AppTextStyles.robotoFontStyleTextNormal),
+                child: Text(actionLabel, style: AppTextStyles.textSize14red),
               ),
             ],
           ),
           AppSpacing.smallHeight10,
           Consumer<ProfileInformationProvider>(
             builder: (context, provider, child) {
-              return CustomInputField(
+              return TextField(
+                cursorColor: Colors.black,
+                enabled: isEditable,
+                keyboardType: "Mobile number" == label ? TextInputType.phone : TextInputType.emailAddress,
+                onChanged: "Mobile number" == label ? provider.updatePhone : provider.updateEmail,
+                decoration: InputDecoration(
+                  hintStyle: AppTextStyles.backText,
+                  hintText: value,
+                  errorText: "Mobile number" == label
+                      ? provider.phone.isEmpty || provider.isPhoneValid
+                            ? null
+                            : 'Enter valid 10-digit number'
+                      : provider.emailError,
+
+                  contentPadding: const EdgeInsets.symmetric(vertical: 13, horizontal: 12),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: AppColors.textFieldBorderColor),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: AppColors.textFieldBorderColor, width: 1.5),
+                  ),
+                  border: OutlineInputBorder(borderRadius: AppSpacing.kMediumRadius),
+                  fillColor: Colors.white,
+                  filled: true,
+                ),
+              );
+              CustomInputField(
                 isEditable: isEditable,
                 keyboardType: "Mobile number" == label ? TextInputType.phone : TextInputType.emailAddress,
                 hintText: value,

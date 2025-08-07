@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(
           "L company name",
-          style: AppTextStyles.title, // TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 75), fontWeight: FontWeight.w600),
+          style: AppTextStyles.appBarBlackText.copyWith(fontWeight: FontWeight.w700), // TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 75), fontWeight: FontWeight.w600),
         ),
         actions: [
           const SvgPictureWidgets(svgString: "assets/svg_icons/noti_2.svg", color: AppColors.appBlackColor, size: 25.0),
@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            AppSpacing.mediumWidth16,
             SizedBox(height: size.height * 0.02),
             Row(children: [buildTab(context, 0, "Dashboard"), AppSpacing.largeHeight, buildTab(context, 1, "Support")]),
             SizedBox(height: size.height * 0.017),
@@ -72,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               index == 0 ? SvgPictureWidgets(svgString: "assets/svg_icons/dashboard_icon.svg", color: AppColors.appBlackColor) : SvgPicture.string(IconsSvgString.supportIcon, width: 16, height: 16),
               const SizedBox(width: 4),
-              Text(label, style: isSelected ? AppTextStyles.title16 : AppTextStyles.titleBold16),
+              Text(label, style: isSelected ? AppTextStyles.title16 : AppTextStyles.titleBold16.copyWith(fontWeight: FontWeight.w700)),
             ],
           ),
           AppSpacing.extraSmallHeight,

@@ -11,7 +11,7 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Card(
         elevation: 4.0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

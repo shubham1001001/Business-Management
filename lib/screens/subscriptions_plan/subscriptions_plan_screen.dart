@@ -17,6 +17,7 @@ class SubscriptionPlanScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 27,
         title: const Text('Subscription Plan', style: AppTextStyles.appBarBlackText),
         leading: const BackButton(),
         actions: const [
@@ -26,7 +27,7 @@ class SubscriptionPlanScreen extends StatelessWidget {
               children: [
                 SvgPictureWidgets(svgString: "assets/svg_icons/info_icon.svg", color: AppColors.redColor, size: 20.0),
                 SizedBox(width: 4),
-                Text('Plan info', style: AppTextStyles.appBarRedBoldText),
+                Text('Plan info', style: AppTextStyles.appBarRedBoldText16),
               ],
             ),
           ),
@@ -57,7 +58,7 @@ class SubscriptionPlanScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Image.asset("assets/icons/bluetik.png", height: size.height * 0.05),
-                                  Text('Your subscription is active', style: AppTextStyles.titleBold20W800),
+                                  Expanded(child: Text('Your subscription is active', style: AppTextStyles.titleBold20W800)),
                                 ],
                               ),
                               SizedBox(height: size.height * 0.02),
@@ -72,12 +73,15 @@ class SubscriptionPlanScreen extends StatelessWidget {
                                   SizedBox(
                                     width: 70,
                                     height: 70,
-                                    child: CircularProgressIndicator(value: provider.daysLeft / 30, strokeWidth: 6, valueColor: AlwaysStoppedAnimation<Color>(AppColors.proccessIndicatorColor), backgroundColor: Colors.grey.shade300),
+                                    child: RotatedBox(
+                                      quarterTurns: 10,
+                                      child: CircularProgressIndicator(value: provider.daysLeft / 15, strokeWidth: 6, valueColor: AlwaysStoppedAnimation<Color>(AppColors.proccessIndicatorColor), backgroundColor: Colors.grey.shade300),
+                                    ),
                                   ),
                                   Column(
                                     children: [
                                       Text('${provider.daysLeft}', style: AppTextStyles.title16),
-                                      const Text('Days left', style: AppTextStyles.textSize11),
+                                      const Text('Days left', style: AppTextStyles.textSize11W600),
                                     ],
                                   ),
                                 ],
@@ -94,8 +98,8 @@ class SubscriptionPlanScreen extends StatelessWidget {
                           return Container(
                             padding: EdgeInsets.all(size.width * 0.030),
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.grey.shade400, width: 1.5),
+                              borderRadius: BorderRadius.circular(10),
                               color: AppColors.cardmainColor,
                             ),
                             child: Padding(
@@ -116,7 +120,7 @@ class SubscriptionPlanScreen extends StatelessWidget {
                                     ],
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       const Text('Billing cycle', style: AppTextStyles.greyBoldW500Text),
                                       AppSpacing.extraSmallHeight,
@@ -172,7 +176,7 @@ class SubscriptionPlanScreen extends StatelessWidget {
                           Expanded(
                             // Makes the left divider take available space
                             child: Divider(
-                              color: Colors.grey[300],
+                              color: Colors.grey[400],
                               thickness: 1, // Optional: Adjust thickness
                             ),
                           ),
@@ -183,7 +187,7 @@ class SubscriptionPlanScreen extends StatelessWidget {
                           Expanded(
                             // Makes the right divider take available space
                             child: Divider(
-                              color: Colors.grey[300],
+                              color: Colors.grey[400],
                               thickness: 1, // Optional: Adjust thickness
                             ),
                           ),
@@ -200,7 +204,7 @@ class SubscriptionPlanScreen extends StatelessWidget {
                           Text("+91 8891900365", style: AppTextStyles.robotoFontStyleTextNormal),
                         ],
                       ),
-                      Divider(color: Colors.grey[300]),
+                      Divider(color: Colors.grey[400]),
                       const SizedBox(height: 16),
                     ],
                   ),

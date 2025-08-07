@@ -18,16 +18,25 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
     return Scaffold(
       // backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
+        leadingWidth: 27,
         backgroundColor: AppColors.primary,
         elevation: 1,
 
-        title: Text("Purchase Bill Overview", style: AppTextStyles.appBarBlackText18),
+        title: Text("Purchase Bill Overview", style: AppTextStyles.appBarBlackText),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pushNamed(context, AppRoutesName.addPurchaseScreen);
             },
-            child: Text("+ Add", style: AppTextStyles.appBarRedBoldText),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 2),
+                  child: Icon(Icons.add, color: AppColors.redColor, size: 24),
+                ),
+                Text("Add", style: AppTextStyles.appBarRedBoldText),
+              ],
+            ),
           ),
         ],
       ),
@@ -36,23 +45,27 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            AppSpacing.mediumHeight16,
             Consumer<PurchaseBillOverviewProvider>(
               builder: (BuildContext context, PurchaseBillOverviewProvider provider, Widget? child) {
                 return Row(
                   children: [
                     Image.asset("assets/icons/Vector (2).png"),
-                    AppSpacing.smallWidth,
+                    AppSpacing.smallWidth10,
                     Expanded(
                       child: Wrap(
                         children: ['All', 'Recently', 'Date'].map((filter) {
                           final isSelected = filter == provider.filter;
-                          final color = isSelected ? Colors.white : Colors.black;
+                          final color = isSelected ? Colors.white.withOpacity(0.9) : Colors.black.withOpacity(0.6);
                           final bgColor = isSelected ? AppColors.redColor : Colors.grey.shade200;
                           return Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 6),
                             child: ChoiceChip(
                               showCheckmark: false,
-                              label: Text(filter, style: TextStyle(color: color)),
+                              label: Text(
+                                filter,
+                                style: TextStyle(color: color, fontSize: 16, fontFamily: 'OpenSans'),
+                              ),
                               selected: isSelected,
                               selectedColor: bgColor,
                               onSelected: (_) => provider.setFilter(filter),
@@ -67,7 +80,7 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
                 );
               },
             ),
-            AppSpacing.smallHeight,
+            AppSpacing.smallHeight7,
             Consumer<PurchaseBillOverviewProvider>(
               builder: (BuildContext context, PurchaseBillOverviewProvider provider, Widget? child) {
                 return Expanded(
@@ -75,23 +88,23 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
                     itemCount: provider.filteredOrders.length,
                     itemBuilder: (context, index) {
                       final order = provider.filteredOrders[index];
-                      final statusColor = order.status == 'Draft' ? AppColors.redColor : Colors.red;
+                      final statusColor = order.status == 'Draft' ? Colors.red : Colors.red;
 
                       return Padding(
                         padding: EdgeInsetsGeometry.symmetric(vertical: 8, horizontal: 0),
                         child: Container(
                           decoration: BoxDecoration(
                             color: AppColors.cardClip,
-                            borderRadius: BorderRadius.only(bottomRight: Radius.circular(12), topRight: Radius.circular(12), topLeft: Radius.circular(15), bottomLeft: Radius.circular(12)),
+                            borderRadius: BorderRadius.only(bottomRight: Radius.circular(10), topRight: Radius.circular(10), topLeft: Radius.circular(13), bottomLeft: Radius.circular(10)),
                             border: Border.all(color: Colors.grey),
                           ),
 
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
+                            padding: const EdgeInsets.only(left: 13),
                             child: Container(
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.only(bottomRight: Radius.circular(12), topRight: Radius.circular(12), topLeft: Radius.circular(3), bottomLeft: Radius.circular(3)),
+                                borderRadius: BorderRadius.only(bottomRight: Radius.circular(10), topRight: Radius.circular(10), topLeft: Radius.circular(3), bottomLeft: Radius.circular(3)),
                                 border: Border.all(color: Colors.white),
                               ),
                               child: Padding(
@@ -105,9 +118,9 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
                                         Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            const Text("Vendor name", style: AppTextStyles.blackBoldTextW800),
+                                            Text("Vendor name", style: AppTextStyles.blackBoldTextW800),
                                             AppSpacing.extraSmallHeight,
-                                            Text(order.customerName, style: AppTextStyles.greyBoldText),
+                                            Text(order.customerName, style: AppTextStyles.greyBoldText.copyWith(fontWeight: FontWeight.w700)),
                                           ],
                                         ),
                                         Column(
@@ -121,7 +134,10 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
                                                 children: [
                                                   TextSpan(text: "₹", style: AppTextStyles.greyText17),
 
-                                                  TextSpan(text: " 100", style: AppTextStyles.greyBoldText15),
+                                                  TextSpan(
+                                                    text: " 100250",
+                                                    style: AppTextStyles.greyBoldText15.copyWith(fontWeight: FontWeight.w700, fontSize: 14),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -129,11 +145,11 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
                                         ),
                                         Column(
                                           crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [Text(DateFormat('dd.MM.yyyy').format(order.date), style: AppTextStyles.greyBoldText15)],
+                                          children: [Text(DateFormat('dd.MM.yyyy').format(order.date), style: AppTextStyles.greyBoldText15.copyWith(fontWeight: FontWeight.w700))],
                                         ),
                                       ],
                                     ),
-                                    AppSpacing.largeHeight37,
+                                    AppSpacing.largeHeight27,
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
@@ -149,7 +165,7 @@ class PurchaseBillOverviewScreen extends StatelessWidget {
                                                   TextSpan(text: "₹", style: AppTextStyles.greyText20),
                                                   TextSpan(
                                                     text: " ${order.balance}",
-                                                    style: TextStyle(color: statusColor, fontWeight: FontWeight.w600, fontSize: 17),
+                                                    style: TextStyle(color: statusColor, fontWeight: FontWeight.w700, fontSize: 15),
                                                   ),
                                                 ],
                                               ),

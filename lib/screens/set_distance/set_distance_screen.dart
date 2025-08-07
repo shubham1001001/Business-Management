@@ -32,6 +32,7 @@ class _SetDistanceScreenState extends State<SetDistanceScreen> {
     final usableHeight = screenHeight - appBarHeight - statusBarHeight;
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 28,
         title: const Text("Set Distance", style: AppTextStyles.appBarBlackText),
         actions: [
           TextButton(
@@ -45,7 +46,7 @@ class _SetDistanceScreenState extends State<SetDistanceScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              AppSpacing.mediumHeight16,
+              AppSpacing.smallHeight12,
               _buildFeetSelector(context),
               AppSpacing.mediumHeight16,
               _buildDropdowns(),
@@ -60,28 +61,38 @@ class _SetDistanceScreenState extends State<SetDistanceScreen> {
                     height: usableHeight * 0.5,
                     child: ListView.separated(
                       itemCount: provider.distanceList.length,
-                      separatorBuilder: (_, __) => const Divider(height: 1),
+                      separatorBuilder: (_, __) => SizedBox.shrink(),
                       itemBuilder: (_, index) {
                         final item = provider.distanceList[index];
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: Row(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Expanded(
-                                flex: 1,
-                                child: Text("", textAlign: TextAlign.left, style: AppTextStyles.boldText),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Text("", textAlign: TextAlign.left, style: AppTextStyles.backBoldTextW600),
+                                  ),
+                                  Expanded(
+                                    flex: 5,
+                                    child: Text(item.deliveryPoint, textAlign: TextAlign.left, style: AppTextStyles.backBoldTextW600),
+                                  ),
+                                  Expanded(
+                                    flex: 6,
+                                    child: Text(item.distance, textAlign: TextAlign.center, style: AppTextStyles.backBoldTextW600),
+                                  ),
+                                  Expanded(
+                                    flex: 6,
+                                    child: Text(item.amount, textAlign: TextAlign.center, style: AppTextStyles.backBoldTextW600),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                flex: 4,
-                                child: Text(item.deliveryPoint, textAlign: TextAlign.left, style: AppTextStyles.boldText),
-                              ),
-                              Expanded(
-                                flex: 6,
-                                child: Text(item.distance, textAlign: TextAlign.center, style: AppTextStyles.boldText),
-                              ),
-                              Expanded(
-                                flex: 6,
-                                child: Text(item.amount, textAlign: TextAlign.center, style: AppTextStyles.boldText),
+                              AppSpacing.extraSmallHeight3,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 23),
+                                child: Divider(color: Colors.black12, thickness: 2.0),
                               ),
                             ],
                           ),
@@ -128,7 +139,7 @@ class _SetDistanceScreenState extends State<SetDistanceScreen> {
                       selected: selected,
                       onSelected: (_) => provider.setSelectedFeet(e),
                       selectedColor: AppColors.redColor,
-                      labelStyle: TextStyle(color: selected ? Colors.white : Colors.black),
+                      labelStyle: TextStyle(color: selected ? Colors.white : Colors.black, fontWeight: FontWeight.w800),
                     ),
                   ),
                 ),
@@ -146,7 +157,10 @@ class _SetDistanceScreenState extends State<SetDistanceScreen> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Collection point", style: AppTextStyles.greyBoldW500Text),
+            Text(
+              "Collection point",
+              style: AppTextStyles.greyBoldW500Text.copyWith(fontWeight: FontWeight.w700, color: Colors.grey),
+            ),
             AppSpacing.smallHeight10,
             SizedBox(
               height: 50,
@@ -161,7 +175,10 @@ class _SetDistanceScreenState extends State<SetDistanceScreen> {
               ),
             ),
             AppSpacing.mediumHeight16,
-            Text("delivery point", style: AppTextStyles.greyBoldW500Text),
+            Text(
+              "delivery point",
+              style: AppTextStyles.greyBoldW500Text.copyWith(fontWeight: FontWeight.w700, color: Colors.grey),
+            ),
             AppSpacing.smallHeight10,
             _buildSelectField(context, " delivery point", provider.selectedDeliveryPoint, provider.deliveryPoint, provider.setDeliveryPoint),
 
@@ -174,20 +191,32 @@ class _SetDistanceScreenState extends State<SetDistanceScreen> {
 
   Widget _buildTableHeaders() {
     return Row(
-      children: const [
+      children: [
         Expanded(
           flex: 5,
-          child: Text("Delivery point", style: AppTextStyles.greyBoldText, textAlign: TextAlign.center),
+          child: Text(
+            "Delivery point",
+            style: AppTextStyles.greyBoldText.copyWith(fontWeight: FontWeight.w700, color: Colors.grey),
+            textAlign: TextAlign.center,
+          ),
         ),
         SizedBox(width: 15),
         Expanded(
           flex: 3,
-          child: Text("Distance", style: AppTextStyles.greyBoldText, textAlign: TextAlign.start),
+          child: Text(
+            "Distance",
+            style: AppTextStyles.greyBoldText.copyWith(fontWeight: FontWeight.w700, color: Colors.grey),
+            textAlign: TextAlign.start,
+          ),
         ),
         SizedBox(width: 10),
         Expanded(
           flex: 5,
-          child: Text("Amount", style: AppTextStyles.greyBoldText, textAlign: TextAlign.center),
+          child: Text(
+            "Amount",
+            style: AppTextStyles.greyBoldText.copyWith(fontWeight: FontWeight.w700, color: Colors.grey),
+            textAlign: TextAlign.center,
+          ),
         ),
       ],
     );
@@ -201,13 +230,18 @@ class _SetDistanceScreenState extends State<SetDistanceScreen> {
         child: Shimmer.fromColors(
           baseColor: Colors.grey[300]!,
           highlightColor: Colors.grey[100]!,
-          child: Row(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(flex: 4, child: Container(height: 20, color: Colors.white)),
-              SizedBox(width: 10),
-              Expanded(flex: 3, child: Container(height: 20, color: Colors.white)),
-              SizedBox(width: 10),
-              Expanded(flex: 3, child: Container(height: 20, color: Colors.white)),
+              Row(
+                children: [
+                  Expanded(flex: 4, child: Container(height: 20, color: Colors.white)),
+                  SizedBox(width: 10),
+                  Expanded(flex: 3, child: Container(height: 20, color: Colors.white)),
+                  SizedBox(width: 10),
+                  Expanded(flex: 3, child: Container(height: 20, color: Colors.white)),
+                ],
+              ),
             ],
           ),
         ),

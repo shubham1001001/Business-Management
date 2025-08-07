@@ -10,9 +10,15 @@ class TermsAndPravacy extends StatelessWidget {
       child: Text.rich(
         TextSpan(
           children: [
-            TextSpan(text: 'Terms and condition', style: AppTextStyles.robotoFontStyleText),
+            TextSpan(
+              text: 'Terms and condition',
+              style: AppTextStyles.robotoFontStyleText.copyWith(fontWeight: FontWeight.w600),
+            ),
             TextSpan(text: '   |   '),
-            TextSpan(text: 'Privacy policy', style: AppTextStyles.robotoFontStyleText),
+            TextSpan(
+              text: 'Privacy policy',
+              style: AppTextStyles.robotoFontStyleText.copyWith(fontWeight: FontWeight.w600),
+            ),
           ],
         ),
         textAlign: TextAlign.center,

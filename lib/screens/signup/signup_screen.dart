@@ -45,7 +45,7 @@ class SignupScreen extends StatelessWidget {
 
                 // Slogan
                 Positioned(
-                  top: size.height * 0.1,
+                  top: size.height * 0.15,
                   left: size.width * 0.05,
                   child: Column(children: [Text('Bridging miles with\nmeaning', style: AppTextStyles.heading1FontStyleText)]),
                 ),
@@ -55,8 +55,8 @@ class SignupScreen extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     width: double.infinity,
-                    height: size.height * 0.6,
-                    padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
+                    height: size.height * 0.55,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -64,17 +64,23 @@ class SignupScreen extends StatelessWidget {
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              SvgPictureWidgets(svgString: "assets/svg_icons/company_icons_svg.svg", size: 18.0),
-                              AppSpacing.extraSmallWidth,
-                              Text('Company Name', style: AppTextStyles.openSansFontStyleTextW400),
-                            ],
+                          AppSpacing.mediumHeight16,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 2),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SvgPictureWidgets(svgString: "assets/svg_icons/company_icons_svg.svg", size: 16.0),
+                                AppSpacing.extraSmallWidth,
+                                Text('Company Name', style: AppTextStyles.openSansFontStyleTextW400),
+                              ],
+                            ),
                           ),
 
-                          SizedBox(height: size.height * 0.025),
+                          SizedBox(height: size.height * 0.022),
 
                           /// Dynamic Country Dropdown
                           Consumer<AuthProvider>(
@@ -99,7 +105,7 @@ class SignupScreen extends StatelessWidget {
                             },
                           ),
 
-                          SizedBox(height: size.height * 0.025),
+                          SizedBox(height: size.height * 0.021),
 
                           /// Mobile Number Field
                           MobileNumberField(errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number', onChanged: provider.updatePhone),
@@ -120,18 +126,21 @@ class SignupScreen extends StatelessWidget {
                             ),
                           ),
 
-                          SizedBox(height: size.height * 0.04),
+                          SizedBox(height: size.height * 0.052),
 
                           /// OR Divider
                           Row(
-                            children: const [
-                              Expanded(child: Divider(color: Colors.grey)),
-                              Padding(padding: EdgeInsets.symmetric(horizontal: 10), child: Text('OR')),
-                              Expanded(child: Divider(color: Colors.grey)),
+                            children: [
+                              Expanded(child: Divider(color: Colors.black87)),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                child: Text('OR', style: AppTextStyles.backBoldText.copyWith(fontWeight: FontWeight.w800)),
+                              ),
+                              Expanded(child: Divider(color: Colors.black87)),
                             ],
                           ),
 
-                          SizedBox(height: size.height * 0.025),
+                          SizedBox(height: size.height * 0.028),
 
                           /// Google Sign-in
                           Center(

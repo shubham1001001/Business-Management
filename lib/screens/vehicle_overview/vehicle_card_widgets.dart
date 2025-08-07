@@ -17,7 +17,7 @@ class VehicleCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.cardClip,
-        borderRadius: BorderRadius.only(bottomRight: Radius.circular(12), topRight: Radius.circular(12), topLeft: Radius.circular(15), bottomLeft: Radius.circular(12)),
+        borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8), topLeft: Radius.circular(11), bottomLeft: Radius.circular(10)),
         border: Border.all(color: Colors.grey),
       ),
       child: Padding(
@@ -25,7 +25,7 @@ class VehicleCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.only(bottomRight: Radius.circular(12), topRight: Radius.circular(12), topLeft: Radius.circular(3), bottomLeft: Radius.circular(3)),
+            borderRadius: BorderRadius.only(bottomRight: Radius.circular(8), topRight: Radius.circular(8), topLeft: Radius.circular(3), bottomLeft: Radius.circular(3)),
             border: Border.all(color: Colors.white),
           ),
           child: Padding(
@@ -33,21 +33,24 @@ class VehicleCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(vehicle.vehicleNo, style: AppTextStyles.redW800Text),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(vehicle.vehicleNo, style: AppTextStyles.redW800Text.copyWith(color: AppColors.redColor.withOpacity(0.85))),
 
-                    Row(
-                      children: [
-                        const Icon(Icons.fiber_manual_record, size: 10, color: Colors.grey),
-                        AppSpacing.extraSmallWidth,
-                        Text(vehicle.distance, style: AppTextStyles.textSize13),
-                      ],
-                    ),
-                  ],
+                      Row(
+                        children: [
+                          Icon(Icons.fiber_manual_record, size: 15, color: Colors.grey.shade300),
+                          AppSpacing.extraSmallWidth,
+                          Text(vehicle.distance, style: AppTextStyles.greySmallW600),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                AppSpacing.mediumHeight16,
+                AppSpacing.largeHeight,
                 Row(
                   children: [
                     SizedBox(
@@ -87,7 +90,7 @@ class VehicleCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title, style: AppTextStyles.greySmallW600),
-        AppSpacing.extraSmallHeight,
+        AppSpacing.smallHeight,
         Text(value, style: AppTextStyles.titleListTile),
       ],
     );
