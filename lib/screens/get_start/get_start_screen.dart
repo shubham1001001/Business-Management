@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
@@ -24,6 +25,10 @@ class GetStartScreen extends StatelessWidget {
             //   fit: BoxFit.cover,
             // ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SvgPicture.asset('assets/svg_icons/warning.svg', width: 24, height: 24, fit: BoxFit.contain, color: Colors.white),
+          ),
           // Dark overlay
           Container(width: size.width, height: size.height, color: Colors.black.withOpacity(0.4)),
           // Slogan
@@ -40,16 +45,16 @@ class GetStartScreen extends StatelessWidget {
                       Text.rich(
                         TextSpan(
                           children: [
-                            TextSpan(text: 'B', style: AppTextStyles.headingBaskervVilleFontStyleTextBig),
-                            TextSpan(text: 'RIDGING', style: AppTextStyles.headingBaskervVilleFontStyleText),
+                            TextSpan(text: 'B', style: AppTextStyles.headingBaskervVilleFontStyleTextBig.copyWith(fontSize: 45)),
+                            TextSpan(text: 'RIDGING', style: AppTextStyles.headingBaskervVilleFontStyleText.copyWith(fontSize: 31)),
                           ],
                         ),
                       ),
                       Text.rich(
                         TextSpan(
                           children: [
-                            TextSpan(text: ' M', style: AppTextStyles.headingBaskervVilleFontStyleTextBig),
-                            TextSpan(text: 'ILES', style: AppTextStyles.headingBaskervVilleFontStyleText),
+                            TextSpan(text: ' M', style: AppTextStyles.headingBaskervVilleFontStyleTextBig.copyWith(fontSize: 45)),
+                            TextSpan(text: 'ILES', style: AppTextStyles.headingBaskervVilleFontStyleText.copyWith(fontSize: 31)),
                           ],
                         ),
                       ),
@@ -58,16 +63,16 @@ class GetStartScreen extends StatelessWidget {
                   Text.rich(
                     TextSpan(
                       children: [
-                        TextSpan(text: 'W', style: AppTextStyles.headingBaskervVilleFontStyleText),
-                        TextSpan(text: 'ITH', style: AppTextStyles.headingBaskervVilleFontStyleText20),
+                        TextSpan(text: 'W', style: AppTextStyles.headingBaskervVilleFontStyleText.copyWith(fontSize: 25)),
+                        TextSpan(text: 'ITH', style: AppTextStyles.headingBaskervVilleFontStyleText20.copyWith(fontSize: 20)),
                       ],
                     ),
                   ),
                   Text.rich(
                     TextSpan(
                       children: [
-                        TextSpan(text: 'M', style: AppTextStyles.headingBaskervVilleFontStyleTextBig),
-                        TextSpan(text: 'EANING', style: AppTextStyles.headingBaskervVilleFontStyleText),
+                        TextSpan(text: 'M', style: AppTextStyles.headingBaskervVilleFontStyleTextBig.copyWith(fontSize: 45)),
+                        TextSpan(text: 'EANING', style: AppTextStyles.headingBaskervVilleFontStyleText.copyWith(fontSize: 31)),
                       ],
                     ),
                   ),
@@ -78,71 +83,59 @@ class GetStartScreen extends StatelessWidget {
 
           // White card
           Positioned(
+            top: size.height * 0.81,
             bottom: 0,
             left: 0,
             right: 0,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: size.height * 0.1),
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamed(AppRoutesName.signup);
-                },
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
-                  decoration: const BoxDecoration(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-                  child: Center(
-                    child: CustomPaint(
-                      painter: InnerShadowPainter(blur: 5, color: Colors.white, offset: const Offset(2, 4), radius: 5), //const Color(0xFFFFFFFF)
-                      child: Container(
-                        width: 218,
-                        height: 41,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF2E2E2E), // Dark gray button color
-                          borderRadius: AppSpacing.kLargeRadius,
-                        ),
-                        child: Text('Get start', style: AppTextStyles.customButtonTextWhiteStyle),
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).pushNamed(AppRoutesName.signup);
+              },
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
+                decoration: const BoxDecoration(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+                child: Center(
+                  child: CustomPaint(
+                    painter: InnerShadowPainter(blur: 5, color: Colors.white, offset: const Offset(2, 4), radius: 5), //const Color(0xFFFFFFFF)
+                    child: Container(
+                      width: 227,
+                      height: 41,
+                      child: Stack(
+                        children: [
+                          // Gradient background with rounded corners
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: AppSpacing.kLargeRadius,
+                              gradient: LinearGradient(
+                                begin: Alignment(-1.0, -1.0), // Left-Center-Top
+                                end: Alignment(-1.0, 1.0),
+                                colors: [
+                                  Colors.grey.shade800,
+                                  Color(0xFF3A3A3A), //Color(0xFF3A3A3A), // Lighter at top (20%)
+                                  Color(0xFF2E2E2E), // Full dark at bottom
+                                ],
+                                stops: [0.1, 0.2, 1.0],
+                              ),
+                            ),
+                          ),
+                          // Inner shadow using blend mode
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: AppSpacing.kLargeRadius,
+                              boxShadow: const [BoxShadow(color: Colors.black26, offset: Offset(2, 4), blurRadius: 5, spreadRadius: 0)],
+                            ),
+                            foregroundDecoration: BoxDecoration(
+                              borderRadius: AppSpacing.kLargeRadius,
+                              gradient: const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Colors.black12, Colors.transparent]),
+                            ),
+                          ),
+                          // Button label centered
+                          Center(child: Text('Get start', style: AppTextStyles.customButtonTextWhiteStyle)),
+                        ],
                       ),
                     ),
                   ),
-                  // Center(
-                  //   child: SizedBox(
-                  //     width: size.width * 0.6,
-                  //     child: Container(
-                  //       decoration: BoxDecoration(color: AppColors.grey, borderRadius: BorderRadius.circular(6)),
-                  //       child: Padding(
-                  //         padding: const EdgeInsets.all(3.0),
-                  //         child: Container(
-                  //           decoration: BoxDecoration(
-                  //             color: AppColors.grey,
-                  //             borderRadius: BorderRadius.only(topLeft: Radius.circular(6), bottomLeft: Radius.circular(6)),
-                  //             boxShadow: [
-                  //               BoxShadow(
-                  //                 color: Colors.grey.shade700, // Shadow color
-                  //                 offset: Offset(-2, -2), // Top-left direction
-                  //                 blurRadius: 6,
-                  //                 blurStyle: BlurStyle.inner,
-                  //               ),
-                  //             ],
-                  //           ),
-                  //           child: ElevatedButton(
-                  //             onPressed: () {
-                  //               Navigator.of(context).pushNamed(AppRoutesName.signup);
-                  //             },
-                  //             style: ElevatedButton.styleFrom(
-                  //               elevation: 0, // Important: remove default shadow
-                  //               backgroundColor: Colors.transparent, // Let outer Container's color show
-                  //               padding: const EdgeInsets.symmetric(vertical: 16),
-                  //               shape: RoundedRectangleBorder(borderRadius: AppSpacing.kLargeRadius),
-                  //             ),
-                  //             child: const Text('Get Start'),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                 ),
               ),
             ),

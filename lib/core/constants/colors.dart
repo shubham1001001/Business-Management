@@ -7,18 +7,21 @@ class AppColors {
   static const Color lightAppRedColor = Color(0xFFFFCDD2);
   static const Color warningRedColor = Colors.red;
   static const Color appBlackColor = Colors.black;
+  static Color textFieldBorderColor = Colors.grey.shade500;
   static const Color background = Colors.white;
   static const Color draft = Color(0xFFF9E2A2F);
   static const Color sold = Colors.green;
   static const Color greyText = Colors.black54;
   static const Color accent = Color(0xFF4CAF50);
   static Color grey100 = Colors.grey.shade100;
+  static Color greyLight = Colors.grey.shade700;
   static Color grey = const Color(0xFF2C2C2C);
   static Color backgroundColor = const Color(0xFFe2dede);
   static Color cardColor = const Color(0xFFefeded);
   static Color cardmainColor = const Color(0xFFededed);
   static Color playButtonColor = const Color(0xFFD9D9D9);
   static Color headerTitleColor = const Color(0xFFDFD8D8);
+  static Color proccessIndicatorColor = const Color(0xFFF24E1E);
 }
 
 // class AppColors {

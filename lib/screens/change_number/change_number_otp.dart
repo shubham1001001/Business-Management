@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sales/core/constants/colors.dart';
 import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/screens/otp_screen/widgets/otp_widgets.dart';
 
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../core/widgets/Custom_message_widget.dart';
-import '../../core/widgets/app_header.dart';
 import '../../core/widgets/custom_auth_button.dart';
 import '../../providers/otp_provider/countdown_provider.dart';
 import '../../routes/app_routes_name.dart';
@@ -45,15 +44,18 @@ class _OtpScreenState extends State<ChangeNumberOtp> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: AppHeader(title: "Change Email", endicon: false, backbutton: true),
+        appBar: AppBar(leadingWidth: 28, title: const Text("Change Number", style: AppTextStyles.appBarBlackText)),
         body: Stack(
           children: [
             Align(
               alignment: Alignment.topRight,
-              child: SizedBox(
-                height: size.height * 0.4,
-                // width: size.width,
-                child: Image.asset("assets/images/change_numer_otp.png", fit: BoxFit.contain),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 35),
+                child: SizedBox(
+                  height: size.height * 0.4,
+                  // width: size.width,
+                  child: SvgPictureWidgets(svgString: "assets/svg_icons/change_number_hand.svg", size: 230.0),
+                ),
               ),
             ),
 
@@ -62,7 +64,7 @@ class _OtpScreenState extends State<ChangeNumberOtp> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: double.infinity,
-                height: size.height * 0.53,
+                height: size.height * 0.49,
                 padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
                 decoration: const BoxDecoration(
                   color: Colors.white,
@@ -70,28 +72,29 @@ class _OtpScreenState extends State<ChangeNumberOtp> {
                 ),
                 child: SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           InkWell(
                             onTap: () {
                               Navigator.of(context).pushNamed(AppRoutesName.home);
                             },
-                            child: Container(
-                              decoration: BoxDecoration(color: AppColors.grey100, borderRadius: BorderRadius.all(AppSpacing.rMediumRadius10)),
-                              child: Padding(padding: AppSpacing.allPadding16, child: Icon(Icons.arrow_back, size: 20)),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 0),
+                              child: SvgPictureWidgets(svgString: "assets/svg_icons/back_button_svg.svg", size: 43.0),
                             ),
                           ),
-
-                          Text('Enter your OTP here', style: AppTextStyles.title16),
-                          AppSpacing.extraSmallWidth,
+                          AppSpacing.largeWidth45,
+                          Text(
+                            'Enter your OTP here',
+                            style: AppTextStyles.title.copyWith(fontSize: 15, color: Colors.black.withOpacity(0.8), fontWeight: FontWeight.w800),
+                          ),
+                          AppSpacing.extraSmallHeight,
                         ],
                       ),
-                      SizedBox(height: size.height * 0.025),
-                      Text('An OTP has been sent to ${widget.number}', style: AppTextStyles.blackBoldText15),
+                      SizedBox(height: size.height * 0.018),
+                      Text('An OTP has been sent to +91 8521589658', style: AppTextStyles.blackBoldText15.copyWith(color: Colors.black87.withOpacity(0.8))),
                       SizedBox(height: size.height * 0.025),
                       InkWell(
                         onTap: () {
@@ -100,10 +103,10 @@ class _OtpScreenState extends State<ChangeNumberOtp> {
                         child: Text('Change Mobile number', style: AppTextStyles.redBoldText14),
                       ),
 
-                      SizedBox(height: size.height * 0.025),
+                      SizedBox(height: size.height * 0.041),
                       // Mobile Input
                       OtpInputScreen(controllers: controllers),
-                      SizedBox(height: size.height * 0.025),
+                      SizedBox(height: size.height * 0.046),
                       // OTP Button
                       Center(
                         child: CustomAuthButton(
@@ -121,28 +124,21 @@ class _OtpScreenState extends State<ChangeNumberOtp> {
                         ),
                       ),
 
-                      SizedBox(height: size.height * 0.025),
-                      Row(
-                        children: [
-                          Expanded(child: Divider(color: Colors.grey)),
-                          Padding(padding: EdgeInsets.symmetric(horizontal: 10), child: Text('OR')),
-                          Expanded(child: Divider(color: Colors.grey)),
-                        ],
-                      ),
+                      SizedBox(height: size.height * 0.041),
                       Consumer<CountdownProvider>(
                         builder: (context, provider, child) {
-                          return Center(
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 2),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text("Resend OTP ", style: AppTextStyles.appRedBoldText13),
+                                Text("Resend OTP ", style: AppTextStyles.appLightRedBoldText),
                                 Text("in ${provider.remainingTime}s", style: AppTextStyles.blackBoldText13),
                               ],
                             ),
                           );
                         },
                       ),
-                      SizedBox(height: size.height * 0.025),
                     ],
                   ),
                 ),

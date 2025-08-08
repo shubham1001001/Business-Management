@@ -4,6 +4,7 @@ import 'package:sales/core/constants/colors.dart';
 import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../providers/vendor_comment_timeline/vendor_comment_timeline_provider.dart';
 
 class VendorTimelineScreen extends StatelessWidget {
@@ -12,7 +13,11 @@ class VendorTimelineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Comment"), leading: const BackButton()),
+      appBar: AppBar(
+        leadingWidth: 28,
+        title: const Text("Comment", style: AppTextStyles.appBarBlackText),
+        leading: const BackButton(),
+      ),
       body: Consumer<VendorCommentTimelineProvider>(
         builder: (context, provider, _) {
           return Padding(
@@ -24,46 +29,76 @@ class VendorTimelineScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     vendorHeader(name: provider.name, number: provider.number),
-                    InkWell(onTap: () async {}, child: Icon(Icons.more_vert, size: 35)),
+                    InkWell(
+                      onTap: () async {},
+                      child: SvgPictureWidgets(svgString: "assets/svg_icons/more_vert_icon.svg", size: 40.0),
+                    ),
                   ],
                 ),
-                AppSpacing.mediumHeight,
+                AppSpacing.largeHeight37,
                 Flexible(
-                  child: ListView.separated(
-                    itemCount: provider.events.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 0),
-                    itemBuilder: (context, index) {
-                      final event = provider.events[index];
-                      return Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            children: [
-                              Container(
-                                height: 25,
-                                width: 25,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: AppColors.redColor, width: 3),
-                                  borderRadius: AppSpacing.kSmallRadius,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 12),
+                                child: ListView.separated(
+                                  itemCount: provider.events.length,
+                                  separatorBuilder: (_, __) => const SizedBox(height: 0),
+                                  itemBuilder: (context, index) {
+                                    final event = provider.events[index];
+                                    return Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Container(
+                                              height: 23,
+                                              width: 23,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(color: AppColors.redColor, width: 3),
+                                                borderRadius: AppSpacing.kSmallRadius,
+                                              ),
+                                            ),
+                                            if (index != provider.events.length - 1) Container(width: 1, height: 68, color: Colors.black),
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  },
                                 ),
                               ),
-                              if (index != provider.events.length - 1) Container(width: 1, height: 50, color: Colors.black),
-                            ],
-                          ),
-                          AppSpacing.mediumWidth16,
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(event.title, style: AppTextStyles.appBlackText18),
-                                AppSpacing.extraSmallHeight,
-                                Text("${event.date}   ${event.time}", style: AppTextStyles.greyText17),
-                              ],
                             ),
-                          ),
-                        ],
-                      );
-                    },
+                            Expanded(
+                              flex: 6,
+                              child: ListView.separated(
+                                itemCount: provider.events.length,
+                                separatorBuilder: (_, __) => const SizedBox(height: 0),
+                                itemBuilder: (context, index) {
+                                  final event = provider.events[index];
+                                  return Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(event.title, style: AppTextStyles.blackBoldText15.copyWith(color: AppColors.greyText.withOpacity(0.8), fontSize: 15)),
+                                      AppSpacing.smallHeight10,
+                                      Text("${event.date}   ${event.time}", style: AppTextStyles.greyBoldText15.copyWith(color: AppColors.greyText.withOpacity(0.5), fontSize: 13)),
+                                      AppSpacing.largeHeight40,
+                                    ],
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Row(
@@ -82,7 +117,7 @@ class VendorTimelineScreen extends StatelessWidget {
                                 controller: provider.controller,
                                 onSubmitted: (_) => provider.sendMessage(context),
                                 decoration: InputDecoration(
-                                  hintStyle: AppTextStyles.greyText,
+                                  hintStyle: AppTextStyles.greyTextW500,
                                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                                   hintText: "Type to add a comment",
                                   border: OutlineInputBorder(borderSide: BorderSide.none),
@@ -99,7 +134,13 @@ class VendorTimelineScreen extends StatelessWidget {
                       onTap: () {
                         provider.sendMessage(context);
                       },
-                      child: Image.asset("assets/icons/chat_send_icon.png"),
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(color: AppColors.redColor, borderRadius: BorderRadius.circular(25)),
+                        height: 45,
+                        width: 45,
+                        child: SvgPictureWidgets(svgString: "assets/svg_icons/share_chat_icon.svg", size: 22.0),
+                      ),
                     ),
                   ],
                 ),
@@ -116,9 +157,9 @@ Widget vendorHeader({name, number}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(name, style: AppTextStyles.appBarRedBoldText),
-      AppSpacing.extraSmallHeight,
-      Text(number, style: AppTextStyles.appBlackText18),
+      Text(name, style: AppTextStyles.appBarRedBoldText.copyWith(color: AppColors.redColor.withOpacity(0.9))),
+      AppSpacing.smallHeight,
+      Text(number, style: AppTextStyles.appBlackText18.copyWith(fontSize: 16)),
     ],
   );
 }

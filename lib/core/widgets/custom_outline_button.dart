@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sales/core/constants/spacing.dart';
 
 import '../constants/text_styles.dart';
 
@@ -18,18 +19,18 @@ class CustomOutlinedButton extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(6), color: colors),
+      decoration: BoxDecoration(borderRadius: AppSpacing.kMediumRadius, color: colors),
       child: SizedBox(
         width: size.width * widthFactor,
         child: OutlinedButton(
           onPressed: onPressed,
           style: OutlinedButton.styleFrom(
-            foregroundColor: textColor,
+            foregroundColor: textColor.withOpacity(0.8),
             padding: EdgeInsets.symmetric(vertical: verticalPadding),
             side: BorderSide(color: borderColor),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+            shape: RoundedRectangleBorder(borderRadius: AppSpacing.kMediumRadius),
           ),
-          child: Text(text, style: AppTextStyles.customButtonTextStyle),
+          child: Text(text, style: AppTextStyles.customButtonTextStyle.copyWith(fontWeight: FontWeight.w800)),
         ),
       ),
     );

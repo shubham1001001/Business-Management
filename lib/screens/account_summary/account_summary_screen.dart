@@ -20,43 +20,57 @@ class AccountSummaryScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Account Summary'),
+        leadingWidth: 28,
+        title: const Text('Account Summary', style: AppTextStyles.appBarBlackText),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pushNamed(context, AppRoutesName.addAccountScreen);
             },
-            child: const Text('Add Account', style: AppTextStyles.appBarRedBoldText),
+            child: Text('Add Account', style: AppTextStyles.appBarRedBoldText.copyWith(fontWeight: FontWeight.w900, fontSize: 19)),
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.all(size.width * 0.025),
-        child: Consumer<AccountSummaryProvider>(
-          builder: (context, provider, _) {
-            return Container(
-              padding: EdgeInsets.all(size.width * 0.030),
-              decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: AppSpacing.kMediumRadius10),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [SvgPictureWidgets(svgString: "assets/svg_icons/share_icon_svg.svg", size: 25.0)],
-                    ),
-                    _buildSection('Assets', provider.assets, isMobile, "Debit", "Credit", size.height, size.width, context),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            AppSpacing.largeHeight,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Consumer<AccountSummaryProvider>(
+                builder: (context, provider, _) {
+                  return Container(
+                    decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: AppSpacing.kMediumRadius10),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppSpacing.extraSmallHeight3,
+                          Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [SvgPictureWidgets(svgString: "assets/svg_icons/share_icon_svg.svg", size: 25.0)],
+                            ),
+                          ),
+                          AppSpacing.mediumHeight16,
+                          _buildSection('Assets', provider.assets, isMobile, "Debit", "Credit", size.height, size.width, context),
 
-                    AppSpacing.mediumHeight16,
-                    _buildSection('Liabilities', provider.liabilities, isMobile, '', '', size.height, size.width, context),
-                    AppSpacing.mediumHeight16,
-                    _buildSection('Income', provider.income, isMobile, '', '', size.height, size.width, context),
-                    SizedBox(height: size.height * 0.04),
-                  ],
-                ),
+                          AppSpacing.mediumHeight16,
+                          _buildSection('Liabilities', provider.liabilities, isMobile, '', '', size.height, size.width, context),
+                          AppSpacing.mediumHeight16,
+                          _buildSection('Income', provider.income, isMobile, '', '', size.height, size.width, context),
+                          AppSpacing.mediumHeight16,
+                          _buildSection('Expenses', provider.income, isMobile, '', '', size.height, size.width, context),
+                          SizedBox(height: size.height * 0.04),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
-            );
-          },
+            ),
+          ],
         ),
       ),
     );
@@ -66,60 +80,95 @@ class AccountSummaryScreen extends StatelessWidget {
     double totalDebit = items.fold(0, (sum, item) => sum + item.debit);
     double totalCredit = items.fold(0, (sum, item) => sum + item.credit);
 
-    return Row(
+    return Column(
       children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Row(
             children: [
-              Row(
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(color: AppColors.appBlackColor, fontWeight: FontWeight.bold, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
-                  ), //
-                  SizedBox(width: width * 0.37),
-                  // Expanded(flex: 2, child: Text('')),
-                  Expanded(
-                    child: Text(
-                      Debit,
-                      style: TextStyle(color: AppColors.appBlackColor, fontWeight: FontWeight.bold, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      Credit,
-                      style: TextStyle(color: AppColors.appBlackColor, fontWeight: FontWeight.bold, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: size * 0.01),
-              Row(children: []),
-              SizedBox(height: size * 0.01),
-              ...items.map(
-                (e) => Row(
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      flex: 2,
-                      child: Text(
-                        e.title,
-                        style: TextStyle(color: AppColors.appBlackColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            title,
+                            style: TextStyle(color: AppColors.appBlackColor, fontWeight: FontWeight.w500, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                          ),
+                        ), //
+                        // SizedBox(width: width * 0.30),
+                        Expanded(flex: 1, child: Text('')),
+                        Expanded(
+                          child: Text(
+                            Debit,
+                            style: TextStyle(color: AppColors.appBlackColor, fontWeight: FontWeight.w500, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                          ),
+                        ),
+
+                        Expanded(
+                          child: Text(
+                            Credit,
+                            style: TextStyle(color: AppColors.appBlackColor, fontWeight: FontWeight.w500, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 60)),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: size * 0.01),
+                    Row(children: []),
+                    SizedBox(height: size * 0.01),
+                    ...items.map(
+                      (e) => Padding(
+                        padding: AppSpacing.allPadding8,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Text(
+                                e.title,
+                                style: TextStyle(color: AppColors.appBlackColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
+                              ),
+                            ),
+
+                            Expanded(
+                              child: Text(
+                                e.debit.toStringAsFixed(2),
+                                style: TextStyle(color: AppColors.appBlackColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
+                              ),
+                            ),
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    e.credit.toStringAsFixed(2),
+                                    style: TextStyle(color: AppColors.appBlackColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    Expanded(
-                      child: Text(
-                        e.debit.toStringAsFixed(2),
-                        style: TextStyle(color: AppColors.appBlackColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
-                      ),
-                    ),
-                    Expanded(
+                    AppSpacing.smallWidth12,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            e.credit.toStringAsFixed(2),
-                            style: TextStyle(color: AppColors.appBlackColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
+                          const Expanded(flex: 2, child: SizedBox()),
+                          Expanded(
+                            child: Text(
+                              totalDebit.toStringAsFixed(2),
+                              style: TextStyle(color: AppColors.redColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55), fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              totalCredit.toStringAsFixed(2),
+                              style: TextStyle(color: AppColors.redColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55), fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ],
                       ),
@@ -127,33 +176,17 @@ class AccountSummaryScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: size * 0.01),
-              Row(
-                children: [
-                  const Expanded(flex: 2, child: SizedBox()),
-                  Expanded(
-                    child: Text(
-                      totalDebit.toStringAsFixed(2),
-                      style: TextStyle(color: AppColors.appBlackColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      totalCredit.toStringAsFixed(2),
-                      style: TextStyle(color: AppColors.appBlackColor, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 55)),
-                    ),
-                  ),
-                ],
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutesName.accountOverviewScreen);
+                },
+                child: SvgPictureWidgets(svgString: "assets/svg_icons/right_arrow_icon_svg.svg", size: 25.0),
               ),
             ],
           ),
         ),
-        InkWell(
-          onTap: () {
-            Navigator.pushNamed(context, AppRoutesName.accountOverviewScreen);
-          },
-          child: SvgPictureWidgets(svgString: "assets/svg_icons/right_arrow_icon_svg.svg", size: 25.0),
-        ),
+        AppSpacing.mediumHeight16,
+        Container(height: 0.5, width: double.infinity, color: Colors.black54),
       ],
     );
   }

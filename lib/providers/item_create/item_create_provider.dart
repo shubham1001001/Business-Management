@@ -57,7 +57,7 @@ class ItemCreateProvider extends ChangeNotifier {
   }
 
   void setPurchaseAccount(String? value) {
-    purchaseAccount = value;
+    selectedPurchaseAccount = value;
     notifyListeners();
   }
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sales/core/constants/spacing.dart';
+import 'package:sales/core/constants/text_styles.dart';
 
 import '../../../core/constants/colors.dart';
+import '../../../core/widgets/custom_input_field.dart';
 import '../../../providers/pricing_preference/pricing_preference_provider.dart';
 
 class BottomSelectSheetPricing extends StatelessWidget {
@@ -10,8 +12,9 @@ class BottomSelectSheetPricing extends StatelessWidget {
   final List<String> options;
   final Function(String) onSelect;
   final provider;
+  final type;
 
-  const BottomSelectSheetPricing({required this.title, required this.options, required this.onSelect, this.provider});
+  const BottomSelectSheetPricing({required this.title, required this.options, required this.onSelect, this.provider, this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -33,44 +36,70 @@ class BottomSelectSheetPricing extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-                    ElevatedButton(
-                      onPressed: () {
+                    Text(title, style: AppTextStyles.appBlackTextW40018),
+                    InkWell(
+                      onTap: () {
                         Navigator.pop(context);
                       },
-                      style: ElevatedButton.styleFrom(backgroundColor: AppColors.redColor),
-                      child: const Text("Apply"),
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: 70,
+                        height: 34,
+                        decoration: BoxDecoration(color: AppColors.redColor, borderRadius: AppSpacing.kMediumRadius),
+                        child: Text(type == "Apply" ? "Apply" : "Done", style: AppTextStyles.whiteBoldText14),
+                      ),
                     ),
                   ],
                 ),
-                AppSpacing.smallHeight10,
+                AppSpacing.mediumHeight16,
 
                 // Search bar
-                TextField(
-                  decoration: InputDecoration(hintText: "Select $title here", prefixIcon: const Icon(Icons.search), border: const OutlineInputBorder()),
+                Container(
+                  alignment: Alignment.center,
+                  height: 47,
+                  child: CustomInputField(isEditable: true, keyboardType: TextInputType.text, hintText: "Search ${title.toLowerCase()}", prefixText: "", isRequired: true, errorText: null, onChanged: (value) {}),
                 ),
                 AppSpacing.smallHeight10,
-
+                Offstage(
+                  offstage: title != "Vendor",
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(Icons.add, size: 20, color: AppColors.redColor),
+                      SizedBox(width: 4),
+                      Text("Add a ${title.toLowerCase()}", style: AppTextStyles.appRedTextW60018),
+                    ],
+                  ),
+                ),
+                AppSpacing.smallHeight10,
                 // List of options
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: options.length,
-                    itemBuilder: (_, i) {
-                      final item = options[i];
-                      final isSelected = item == selected;
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: ListView.builder(
+                      itemCount: options.length,
+                      itemBuilder: (_, i) {
+                        final item = options[i];
+                        final isSelected = item == selected;
 
-                      return ListTile(
-                        title: Text(
-                          item,
-                          style: TextStyle(color: isSelected ? AppColors.redColor : Colors.black, fontWeight: isSelected ? FontWeight.bold : FontWeight.normal),
-                        ),
-                        trailing: isSelected ? const Icon(Icons.check, color: AppColors.redColor) : null,
-                        onTap: () {
-                          provider.selectVendor(item);
-                          onSelect(item); // optional callback
-                        },
-                      );
-                    },
+                        return ListTile(
+                          contentPadding: EdgeInsetsGeometry.all(0),
+                          minTileHeight: 10,
+                          title: Text(
+                            textAlign: TextAlign.start,
+                            item,
+                            style: TextStyle(color: isSelected ? AppColors.redColor : Colors.black, fontWeight: isSelected ? FontWeight.bold : FontWeight.normal),
+                          ),
+                          trailing: isSelected ? const Icon(Icons.check, color: AppColors.redColor) : null,
+                          onTap: () {
+                            provider.selectVendor(item);
+                            onSelect(item); // optional callback
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],

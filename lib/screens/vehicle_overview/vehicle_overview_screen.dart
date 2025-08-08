@@ -5,6 +5,8 @@ import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/routes/app_routes_name.dart';
 import 'package:sales/screens/vehicle_overview/vehicle_card_widgets.dart';
 
+import '../../core/constants/colors.dart';
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../providers/vehicle_overview_provider.dart';
 
 class VehicleOverviewScreen extends StatelessWidget {
@@ -17,31 +19,51 @@ class VehicleOverviewScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Vehicle Overview'),
+        leadingWidth: 28,
+        title: const Text('Vehicle Overview', style: AppTextStyles.appBarBlackText),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pushNamed(context, AppRoutesName.addVehicleScreen);
             },
-            child: const Text('Add Vehicle', style: AppTextStyles.appBarRedBoldText),
+            child: Text('Add Vehicle', style: AppTextStyles.appBarRedBoldText.copyWith(fontSize: 19, fontWeight: FontWeight.w900)),
           ),
         ],
       ),
       body: Consumer<VehicleOverviewProvider>(
         builder: (BuildContext context, VehicleOverviewProvider provider, Widget? child) {
           return Padding(
-            padding: EdgeInsets.all(screenWidth * 0.027),
+            padding: EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               children: [
-                TextField(
-                  onChanged: provider.setSearchQuery,
-                  decoration: InputDecoration(
-                    hintText: 'Search terms',
-                    suffixIcon: Image.asset("assets/icons/Vector (3).png"),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                AppSpacing.largeHeight,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: TextField(
+                    onChanged: provider.setSearchQuery,
+                    decoration: InputDecoration(
+                      hintStyle: AppTextStyles.textSize13.copyWith(fontWeight: FontWeight.w700, color: AppColors.greyText.withOpacity(0.6), fontSize: 14),
+                      hintText: 'Search terms',
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(14),
+                        child: SvgPictureWidgets(svgString: "assets/svg_icons/filter_v.svg", size: 10.0),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 13, horizontal: 12),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: AppSpacing.kMediumRadius,
+                        borderSide: BorderSide(color: AppColors.textFieldBorderColor),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: AppSpacing.kMediumRadius,
+                        borderSide: BorderSide(color: AppColors.textFieldBorderColor, width: 1.5),
+                      ),
+                      border: OutlineInputBorder(borderRadius: AppSpacing.kMediumRadius),
+                      fillColor: Colors.white,
+                      filled: true,
+                    ),
                   ),
                 ),
-                SizedBox(height: screenHeight * 0.03),
+                AppSpacing.smallHeight,
                 Expanded(
                   child: ListView.builder(
                     itemCount: provider.filteredVehicles.length,
@@ -53,12 +75,16 @@ class VehicleOverviewScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.pushNamed(context, AppRoutesName.vehicleDetailsScreen);
                           },
-                          child: VehicleCard(vehicle: vehicle),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 3),
+                            child: VehicleCard(vehicle: vehicle),
+                          ),
                         ),
                       );
                     },
                   ),
                 ),
+                AppSpacing.smallHeight,
               ],
             ),
           );

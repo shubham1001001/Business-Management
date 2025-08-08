@@ -9,6 +9,7 @@ import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 import 'package:sales/core/widgets/custom_outline_button.dart';
 
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../core/widgets/custom_input_field.dart';
 import '../../providers/add_staf/add_staf_provider.dart';
 
@@ -29,7 +30,7 @@ class AddStaffScreen extends StatelessWidget {
     final isWide = size.width > 600;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Add Staff')),
+      appBar: AppBar(leadingWidth: 28, title: const Text('Add Staff', style: AppTextStyles.appBarBlackText)),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -37,7 +38,7 @@ class AddStaffScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Image upload section
+                AppSpacing.smallHeight10,
                 Container(
                   padding: AppSpacing.allPadding16,
                   decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(12)),
@@ -65,8 +66,8 @@ class AddStaffScreen extends StatelessWidget {
                                       : Column(
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: const [
-                                            Icon(Icons.person, size: 40),
-                                            Text('Upload', style: AppTextStyles.appRedText),
+                                            SvgPictureWidgets(svgString: "assets/svg_icons/user_profile.svg", size: 45.0),
+                                            Text('Upload', style: AppTextStyles.redW800Text),
                                           ],
                                         ),
                                 ),
@@ -103,7 +104,7 @@ class AddStaffScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      AppSpacing.mediumHeight,
+                      AppSpacing.largeHeight45,
 
                       // Staff name
                       Column(
@@ -129,7 +130,7 @@ class AddStaffScreen extends StatelessWidget {
                         ],
                       ),
 
-                      AppSpacing.mediumHeight16,
+                      AppSpacing.mediumHeight18,
 
                       // Mobile number
                       Column(
@@ -155,7 +156,7 @@ class AddStaffScreen extends StatelessWidget {
                         ],
                       ),
 
-                      AppSpacing.mediumHeight16,
+                      AppSpacing.mediumHeight18,
 
                       // Address
                       Column(
@@ -169,7 +170,7 @@ class AddStaffScreen extends StatelessWidget {
                               return CustomInputField(
                                 controller: provider.addressController,
                                 isEditable: true,
-                                maxLines: 3,
+                                maxLines: 4,
                                 keyboardType: TextInputType.text,
                                 hintText: 'Address',
                                 prefixText: "",
@@ -233,7 +234,7 @@ class AddStaffScreen extends StatelessWidget {
               child: Row(
                 children: [
                   Flexible(
-                    child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.grey, textColor: Colors.black, colors: Colors.white),
+                    child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.black, textColor: Colors.black, colors: Colors.white),
                   ),
                   AppSpacing.smallWidth10,
                   Consumer<AddStafProvider>(
@@ -250,7 +251,7 @@ class AddStaffScreen extends StatelessWidget {
                               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
                             }
                           },
-                          borderColor: Colors.grey,
+
                           textColor: Colors.white,
                         ),
                       );

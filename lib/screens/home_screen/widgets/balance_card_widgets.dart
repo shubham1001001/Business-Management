@@ -18,7 +18,7 @@ class BalanceCard extends StatelessWidget {
     final isLandscape = screen.width > screen.height;
 
     return Container(
-      width: isLandscape ? screen.width * 0.2 : screen.width * 0.2,
+      width: isLandscape ? screen.width * 0.2 : screen.width * 0.21,
       height: isLandscape ? screen.height * 0.39 : screen.height * 0.14,
       margin: AppSpacing.allPadding5,
       padding: EdgeInsets.symmetric(vertical: screen.height * 0.01, horizontal: screen.width * 0.02),
@@ -28,22 +28,37 @@ class BalanceCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Flexible(
+            fit: FlexFit.tight,
             flex: 2,
-            child: SizedBox(
-              width: screen.width * 0.09,
-              height: screen.height * 0.05,
-              child: SvgPictureWidgets(svgString: icon),
-              // Image.asset(icon, fit: BoxFit.contain),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 5, top: 1),
+              child: SizedBox(
+                width: screen.width * 0.09,
+                height: screen.height * 0.05,
+                child: SvgPictureWidgets(svgString: icon),
+                // Image.asset(icon, fit: BoxFit.contain),
+              ),
             ),
           ),
           const Spacer(),
           Flexible(
-            child: Text(label, style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 40))),
-          ),
-          Flexible(
             child: Text(
-              amount,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 40)),
+              label,
+              style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 45), fontWeight: FontWeight.w500),
+            ),
+          ),
+          AppSpacing.smallHeight6,
+          Flexible(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPictureWidgets(svgString: "assets/svg_icons/rupee_icon_card.svg", size: 12.20),
+                AppSpacing.extraSmallWidth,
+                Text(
+                  amount,
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 42)),
+                ),
+              ],
             ),
           ),
         ],

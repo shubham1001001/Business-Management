@@ -7,6 +7,7 @@ import '../../core/constants/spacing.dart';
 import '../../core/constants/svg_picture_widgets.dart';
 import '../../core/widgets/custom_input_field.dart';
 import '../../core/widgets/custom_outline_button.dart';
+import '../../core/widgets/custome_text_field2.dart';
 import '../../providers/add_vehicle/add_vehicle_provider.dart';
 import '../pricing_preference/widgets/bottom_select_sheet_widget.dart';
 
@@ -16,7 +17,7 @@ class AddVehicleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Add Vehicle")),
+      appBar: AppBar(leadingWidth: 28, title: const Text("Add Vehicle", style: AppTextStyles.appBarBlackText)),
       body: Consumer<AddVehicleProvider>(
         builder: (context, provider, _) {
           return SingleChildScrollView(
@@ -24,6 +25,7 @@ class AddVehicleScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                AppSpacing.smallHeight10,
                 Container(
                   padding: AppSpacing.allPadding16,
                   decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: AppSpacing.kSmallRadius),
@@ -32,7 +34,7 @@ class AddVehicleScreen extends StatelessWidget {
                     children: [
                       Text("Vehicle number", style: AppTextStyles.greyBoldW500Text),
                       AppSpacing.smallHeight10,
-                      CustomInputField(
+                      CustomeTextField2(
                         controller: provider.vehicleNumberController,
                         isEditable: true,
                         keyboardType: TextInputType.text,
@@ -46,7 +48,7 @@ class AddVehicleScreen extends StatelessWidget {
                       AppSpacing.smallHeight10,
                       Text("Vehicle name", style: AppTextStyles.greyBoldW500Text),
                       AppSpacing.smallHeight10,
-                      CustomInputField(
+                      CustomeTextField2(
                         controller: provider.vehicleNameController,
                         isEditable: true,
                         keyboardType: TextInputType.text,
@@ -64,9 +66,8 @@ class AddVehicleScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                AppSpacing.largeHeight,
+                AppSpacing.largeHeight37,
 
-                // Employee Type Dropdown
                 Container(
                   padding: AppSpacing.allPadding16,
                   decoration: BoxDecoration(color: AppColors.cardmainColor, borderRadius: AppSpacing.kSmallRadius),
@@ -79,16 +80,19 @@ class AddVehicleScreen extends StatelessWidget {
                           AppSpacing.smallWidth10,
                           Row(
                             children: [
-                              SvgPictureWidgets(svgString: "assets/svg_icons/date_icon_svg.svg", size: 20.0),
+                              SvgPictureWidgets(svgString: "assets/svg_icons/date_icon_svg.svg", size: 17.0),
                               AppSpacing.extraSmallWidth,
-                              Text("12.02.2025", style: AppTextStyles.appRedText),
+                              Text(
+                                "12.02.2025",
+                                style: AppTextStyles.appRedText.copyWith(fontWeight: FontWeight.w600, color: AppColors.redColor.withOpacity(0.8)),
+                              ),
                             ],
                           ),
                         ],
                       ),
                       const Text('Opening balance', style: AppTextStyles.greyBoldW500Text),
                       AppSpacing.smallHeight10,
-                      CustomInputField(
+                      CustomeTextField2(
                         controller: provider.openingBalanceController,
                         isEditable: true,
                         keyboardType: TextInputType.text,
@@ -101,11 +105,12 @@ class AddVehicleScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                AppSpacing.largeHeight27,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Capacity', style: AppTextStyles.textSize16),
-                    AppSpacing.mediumHeight,
+                    AppSpacing.mediumHeight16,
 
                     // Capacity Header Row
                     Container(
@@ -179,7 +184,7 @@ class AddVehicleScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Flexible(
-                          child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.grey, textColor: Colors.black, colors: Colors.white),
+                          child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.black, textColor: Colors.black, colors: Colors.white),
                         ),
                         AppSpacing.smallWidth10,
                         Flexible(
@@ -193,7 +198,7 @@ class AddVehicleScreen extends StatelessWidget {
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
                               }
                             },
-                            borderColor: Colors.grey,
+
                             textColor: Colors.white,
                           ),
                         ),
@@ -232,11 +237,11 @@ Widget _buildSelectField(BuildContext context, String title, String? value, List
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
-        borderRadius: AppSpacing.kMediumRadius10,
+        border: Border.all(color: AppColors.textFieldBorderColor),
+        borderRadius: AppSpacing.kLargeRadius,
         color: Colors.white,
       ),
-      child: Text(value ?? "Select $title", style: AppTextStyles.greyText),
+      child: Text(value ?? "Select $title", style: AppTextStyles.greyText.copyWith(fontSize: 16)),
     ),
   );
 }

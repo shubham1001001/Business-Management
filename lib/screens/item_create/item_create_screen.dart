@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sales/routes/app_routes_name.dart';
-import 'package:sales/screens/item_create/widgets/bottom_select_sheet_widget.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/spacing.dart';
@@ -9,6 +8,7 @@ import '../../core/constants/text_styles.dart';
 import '../../core/widgets/custom_input_field.dart';
 import '../../core/widgets/custom_outline_button.dart';
 import '../../providers/item_create/item_create_provider.dart';
+import '../pricing_preference/widgets/bottom_select_sheet_widget.dart';
 
 class ItemCreateScreen extends StatelessWidget {
   const ItemCreateScreen({super.key});
@@ -18,94 +18,114 @@ class ItemCreateScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Create")),
+      appBar: AppBar(leadingWidth: 28, title: const Text("Create", style: AppTextStyles.appBarBlackText)),
       body: Consumer<ItemCreateProvider>(
         builder: (context, provider, _) {
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
+                AppSpacing.smallHeight10,
                 Container(
                   padding: AppSpacing.allPadding16,
                   decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(12)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Select type"),
                       AppSpacing.extraSmallHeight,
-                      Row(children: [_buildRadio("Product", true, provider), const SizedBox(width: 20), _buildRadio("Service", false, provider)]),
-                      AppSpacing.mediumWidth,
-                      Text('Item name', style: AppTextStyles.greyBoldW500Text),
-                      AppSpacing.extraSmallHeight,
-                      // Item Name
-                      CustomInputField(
-                        controller: provider.itemNameController,
-                        isEditable: true,
-                        keyboardType: TextInputType.text,
-                        hintText: 'Item name',
-                        prefixText: "",
-                        isRequired: true, //
-                        errorText: provider.itemNameError,
-                        onChanged: provider.validateForm,
+                      Text(
+                        "Select type",
+                        style: AppTextStyles.greyBoldText.copyWith(color: Colors.black87.withOpacity(0.6), fontWeight: FontWeight.w800),
                       ),
-                      AppSpacing.smallHeight10,
-                      Text('Unit', style: AppTextStyles.greyBoldW500Text),
                       AppSpacing.extraSmallHeight,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          _buildRadio("Product", true, provider),
+                          const SizedBox(width: 25),
+                          Padding(padding: const EdgeInsets.only(left: 20), child: _buildRadio("Service", false, provider)),
+                        ],
+                      ),
+                      AppSpacing.mediumHeight16,
+                      Text('Item name', style: AppTextStyles.greyBoldW500Text.copyWith(fontWeight: FontWeight.w700, fontSize: 14)),
+                      AppSpacing.smallHeight10,
+                      // Item Name
+                      SizedBox(
+                        child: CustomInputField(
+                          controller: provider.itemNameController,
+                          isEditable: true,
+                          keyboardType: TextInputType.text,
+                          hintText: 'Item name',
+                          prefixText: "",
+                          isRequired: true, //
+                          errorText: provider.itemNameError,
+                          onChanged: provider.validateForm,
+                        ),
+                      ),
+                      AppSpacing.mediumHeight,
+                      Text('Unit', style: AppTextStyles.greyBoldW500Text.copyWith(fontWeight: FontWeight.w700, fontSize: 14)),
+                      AppSpacing.smallHeight10,
 
                       _buildSelectField(context, title: "Unit", value: provider.selectedUnit, options: provider.itemSelect, onSelected: (val) => provider.setSelectedUnit(val)),
                       // _buildSelectField(context, title: "Select unit", value: provider.unit, options: List.generate(8, (i) => "Unit ${i + 1}"), onSelected: provider.setUnit),
+                      AppSpacing.mediumHeight,
+                      Text('Sales account', style: AppTextStyles.greyBoldW500Text.copyWith(fontWeight: FontWeight.w700, fontSize: 14)),
                       AppSpacing.smallHeight10,
-                      AppSpacing.extraSmallHeight,
-                      Text('Sales account', style: AppTextStyles.greyBoldW500Text),
-                      _buildSelectField(context, title: "Sales account", value: provider.selectedSalesAccount, options: provider.itemSelect, onSelected: (val) => provider.setSelectedSalesAccount(val)),
+                      _buildSelectField(context, title: "", value: provider.selectedSalesAccount, options: provider.itemSelect, onSelected: (val) => provider.setSelectedSalesAccount(val)),
+                      AppSpacing.mediumHeight,
+                      Text('Purchase account', style: AppTextStyles.greyBoldW500Text.copyWith(fontWeight: FontWeight.w700, fontSize: 14)),
                       AppSpacing.smallHeight10,
-                      AppSpacing.extraSmallHeight,
-                      Text('Purchase account', style: AppTextStyles.greyBoldW500Text),
-                      _buildSelectField(context, title: "Purchase account", value: provider.selectedPurchaseAccount, options: provider.itemSelect, onSelected: (val) => provider.setPurchaseAccount(val)),
+                      _buildSelectField(context, title: "", value: provider.selectedPurchaseAccount, options: provider.itemSelect, onSelected: (val) => provider.setPurchaseAccount(val)),
                     ],
                   ),
                 ),
-                AppSpacing.mediumWidth,
+                AppSpacing.largeHeight27,
                 InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, AppRoutesName.pricingPreferenceScreen);
                   },
-                  child: const Align(
+                  child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text("+ Pricing preference", style: TextStyle(color: Colors.red)),
+                    child: Row(
+                      children: [
+                        Icon(Icons.add, color: AppColors.redColor, size: 26),
+                        SizedBox(width: 3),
+                        Text("Pricing preference", style: AppTextStyles.redBoldText14.copyWith(fontWeight: FontWeight.w700, fontSize: 14)),
+                      ],
+                    ),
                   ),
                 ),
                 AppSpacing.mediumWidth,
                 AppSpacing.smallHeight10,
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    color: Colors.white,
-                    padding: AppSpacing.allPadding16,
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.grey, textColor: Colors.black, colors: Colors.white),
-                        ),
-                        AppSpacing.smallWidth10,
-                        Flexible(
-                          child: CustomOutlinedButton(
-                            colors: AppColors.redColor,
-                            text: "Submit",
-                            onPressed: () {
-                              if (provider.isValid) {
-                                provider.submitForm();
-                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Item added successfully")));
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
-                              }
-                            },
-                            borderColor: Colors.grey,
-                            textColor: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
+              ],
+            ),
+          );
+        },
+      ),
+      bottomNavigationBar: Consumer<ItemCreateProvider>(
+        builder: (context, provider, child) {
+          return Container(
+            color: Colors.white,
+            padding: AppSpacing.allPadding16,
+            child: Row(
+              children: [
+                Flexible(
+                  child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.black, textColor: Colors.black, colors: Colors.white),
+                ),
+                AppSpacing.smallWidth10,
+                Flexible(
+                  child: CustomOutlinedButton(
+                    colors: AppColors.redColor,
+                    text: "Save",
+                    onPressed: () {
+                      if (provider.isValid) {
+                        provider.submitForm();
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Item added successfully")));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
+                      }
+                    },
+                    textColor: Colors.white,
                   ),
                 ),
               ],
@@ -119,8 +139,22 @@ class ItemCreateScreen extends StatelessWidget {
   Widget _buildRadio(String title, bool value, ItemCreateProvider provider) {
     return Row(
       children: [
-        Radio<bool>(value: value, groupValue: provider.isProduct, fillColor: WidgetStateProperty.all(AppColors.redColor), onChanged: (val) => provider.setType(val!)),
-        Text(title),
+        Radio<bool>(
+          value: value,
+          groupValue: provider.isProduct,
+          fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+            if (states.contains(MaterialState.selected)) {
+              return AppColors.redColor;
+            }
+            return Colors.black;
+          }),
+          onChanged: (val) => provider.setType(val!),
+        ),
+
+        Text(
+          title,
+          style: AppTextStyles.greyBoldText.copyWith(color: Colors.black87.withOpacity(0.6), fontWeight: FontWeight.w800),
+        ),
       ],
     );
   }
@@ -132,7 +166,7 @@ class ItemCreateScreen extends StatelessWidget {
           context: context,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           isScrollControlled: true,
-          builder: (_) => BottomSelectSheetItem(title: title, options: options, onSelect: onSelected),
+          builder: (_) => BottomSelectSheetPricing(title: title, options: options, onSelect: onSelected, type: "Apply"),
         );
       },
       child: Container(
@@ -143,7 +177,7 @@ class ItemCreateScreen extends StatelessWidget {
           border: Border.all(color: Colors.grey.shade400),
           borderRadius: BorderRadius.circular(6),
         ),
-        child: Text(value ?? "Select $title", style: const TextStyle(color: Colors.grey)),
+        child: Text(value ?? "Select $title", style: TextStyle(color: Colors.grey, fontSize: 16)),
       ),
     );
   }

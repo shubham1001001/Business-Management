@@ -6,6 +6,7 @@ import 'package:sales/screens/vehicle_details/widgets/shimmer_widget.dart';
 
 import '../../core/constants/colors.dart';
 import '../../core/constants/svg_picture_widgets.dart';
+import '../../core/widgets/text_scale_widgets.dart';
 import '../../providers/vehicle_details/vehicle_details_provider.dart';
 
 class VehicleDetailsScreen extends StatefulWidget {
@@ -33,6 +34,7 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
     return Scaffold(
       backgroundColor: AppColors.redColor,
       appBar: AppBar(
+        leadingWidth: 28,
         title: const Text("Vehicle Details", style: AppTextStyles.appBarWhiteText),
         backgroundColor: AppColors.redColor,
         foregroundColor: Colors.white,
@@ -42,44 +44,48 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
           return SingleChildScrollView(
             child: Column(
               children: [
-                Container(
-                  width: double.infinity,
-                  color: AppColors.redColor,
-                  padding: AppSpacing.allPadding16,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("KL 11 B 1040", style: AppTextStyles.whiteTextSemiBold20),
-                              SizedBox(height: media.height * 0.014),
-                              const Text("Vehicle name", style: AppTextStyles.whiteTextW400),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Image.asset("assets/icons/edit_icons.png", height: 25, width: 25),
-                                  SizedBox(width: media.width * 0.1),
-                                  Padding(padding: const EdgeInsets.only(right: 10), child: Image.asset("assets/icons/delete_icon.png", height: 25, width: 25)),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: media.height * 0.038),
-                      Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [_infoText("Owner name", "Ramu"), _infoText("Contact number", "+91 8156066227"), _infoText("Category", "Lorem ipsum")]),
-                    ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Container(
+                    width: double.infinity,
+                    color: AppColors.redColor,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("KL 11 B 1040", style: AppTextStyles.whiteTextSemiBold20),
+                                AppSpacing.smallHeight,
+                                const Text("Vehicle name", style: AppTextStyles.whiteTextW400),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Image.asset("assets/icons/edit_icons.png", height: 25, width: 25),
+                                    SizedBox(width: media.width * 0.1),
+                                    Padding(padding: const EdgeInsets.only(right: 10), child: Image.asset("assets/icons/delete_icon.png", height: 25, width: 25)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        AppSpacing.mediumHeight,
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [_infoText("Owner name", "Ramu"), _infoText("Contact number", "+91 8156066227"), _infoText("Category", "Lorem ipsum")]),
+                        AppSpacing.largeHeight27,
+                        AppSpacing.extraSmallHeight,
+                      ],
+                    ),
                   ),
                 ),
                 Container(
@@ -96,39 +102,45 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                             borderRadius: AppSpacing.kRadius25,
                             border: Border.all(color: Colors.black),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ChoiceChip(
-                                label: const Text("Trip "),
-                                showCheckmark: false,
-                                padding: EdgeInsets.symmetric(horizontal: media.width * 0.14, vertical: media.height * 0.01),
-                                selected: provider.isTripSelected,
-                                onSelected: (val) => provider.toggleTab(true),
-                                selectedColor: AppColors.redColor,
-                                backgroundColor: Colors.transparent,
-                                labelStyle: TextStyle(color: provider.isTripSelected ? Colors.white : AppColors.appBlackColor, fontWeight: FontWeight.w500),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: AppSpacing.kChipRadius,
-                                  side: BorderSide(color: Colors.white),
-                                ),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 6),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ChoiceChip(
+                                    label: const Text("Trip "),
+                                    showCheckmark: false,
+                                    padding: EdgeInsets.symmetric(horizontal: media.width * 0.14, vertical: media.height * 0.01),
+                                    selected: provider.isTripSelected,
+                                    onSelected: (val) => provider.toggleTab(true),
+                                    selectedColor: AppColors.redColor,
+                                    backgroundColor: Colors.transparent,
+                                    labelStyle: TextStyle(color: provider.isTripSelected ? Colors.white : AppColors.appBlackColor, fontWeight: FontWeight.w500),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: AppSpacing.kChipRadius,
+                                      side: BorderSide(color: Colors.white),
+                                    ),
+                                  ),
+                                  SizedBox(width: media.width * 0.06),
+                                  ChoiceChip(
+                                    label: const Text("Vehicle"),
+                                    showCheckmark: false,
+                                    padding: EdgeInsets.symmetric(horizontal: media.width * 0.13, vertical: media.height * 0.01),
+                                    selected: !provider.isTripSelected,
+                                    onSelected: (val) => provider.toggleTab(false),
+                                    selectedColor: AppColors.redColor,
+                                    backgroundColor: Colors.transparent,
+                                    labelStyle: TextStyle(color: !provider.isTripSelected ? Colors.white : AppColors.appBlackColor, fontWeight: FontWeight.w500),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      side: BorderSide(color: Colors.white),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              SizedBox(width: media.width * 0.06),
-                              ChoiceChip(
-                                label: const Text("Vehicle"),
-                                showCheckmark: false,
-                                padding: EdgeInsets.symmetric(horizontal: media.width * 0.14, vertical: media.height * 0.01),
-                                selected: !provider.isTripSelected,
-                                onSelected: (val) => provider.toggleTab(false),
-                                selectedColor: AppColors.redColor,
-                                backgroundColor: Colors.transparent,
-                                labelStyle: TextStyle(color: !provider.isTripSelected ? Colors.white : AppColors.appBlackColor, fontWeight: FontWeight.w500),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  side: BorderSide(color: Colors.white),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
@@ -170,9 +182,12 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                           children: [
-                            const Text("RXX BB 40080050", style: AppTextStyles.backText),
-                            SvgPictureWidgets(svgString: "assets/svg_icons/download_icon.svg", color: AppColors.redColor),
+                            Text(
+                              "RXX BB 40080050",
+                              style: AppTextStyles.backText.copyWith(fontWeight: FontWeight.w600, color: Colors.black87),
+                            ),
                           ],
                         ),
                       ),
@@ -180,15 +195,22 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                         padding: EdgeInsets.symmetric(horizontal: 16.0),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("12.02.2025 - 12.02.2025", style: TextStyle(fontSize: 12)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("12.02.2025 - 12.02.2025", style: TextStyle(fontSize: 14)),
+                              SvgPictureWidgets(svgString: "assets/svg_icons/download_icon.svg", color: AppColors.redColor),
+                            ],
+                          ),
                         ),
                       ),
-                      SizedBox(height: media.height * 0.038),
+                      AppSpacing.largeHeight,
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Container(
                           width: media.width * 0.93,
-                          height: media.height * 0.06,
+                          height: media.height * 0.05,
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(color: AppColors.headerTitleColor, borderRadius: BorderRadius.circular(5)),
                           child: Row(
@@ -201,7 +223,6 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                           ),
                         ),
                       ),
-                      const Divider(),
                       SizedBox(
                         height: usableHeight * 0.5,
                         child: provider.isLoading
@@ -211,9 +232,10 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                 itemBuilder: (context, index) {
                                   final item = provider.tripList[index];
                                   return Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+                                        padding: const EdgeInsets.only(right: 20, left: 20, bottom: 10),
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
@@ -227,7 +249,10 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                                 TextSpan(
                                                   children: [
                                                     TextSpan(text: "₹ ", style: AppTextStyles.black87Text20),
-                                                    TextSpan(text: "${item.amount}", style: AppTextStyles.backText),
+                                                    TextSpan(
+                                                      text: "${item.amount}",
+                                                      style: AppTextStyles.backText.copyWith(fontWeight: FontWeight.w600, color: Colors.black87.withOpacity(0.8)),
+                                                    ),
                                                   ],
                                                 ),
                                               ),
@@ -257,9 +282,16 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: AppTextStyles.white60BoldText14),
+          //
+          Text(
+            title,
+            style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 50), fontWeight: FontWeight.w700, color: Colors.white70, fontFamily: 'OpenSans'),
+          ), //AppTextStyles.white60BoldText14),
           SizedBox(height: 15),
-          Text(value, style: AppTextStyles.whiteBoldText14),
+          Text(
+            value,
+            style: TextStyle(fontSize: TextScaleSize.textScaleFactor(context, maxTextScaleFactor: 50), fontWeight: FontWeight.w600, color: Colors.white, fontFamily: 'OpenSans'),
+          ),
         ],
       ),
     );

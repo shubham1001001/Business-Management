@@ -7,7 +7,7 @@ class AddTransportationProvider extends ChangeNotifier {
   String? selectedDeliveryPoint;
   String? selectedVehicleNumber;
   String? selectedDriver;
-  List<String> owners = [' data 1', 'data 2', ' data 3', 'data 4'];
+  List<String> owners = ['data 1', 'data 2', 'data 3', 'data 4'];
 
   void setCollectionPoint(String value) {
     selectedCollectionPoint = value;

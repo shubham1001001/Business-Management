@@ -7,7 +7,7 @@ class AddPurchaseProvider extends ChangeNotifier {
   String? rendAmountError;
   String? selectedVendorName;
   DateTime? selectedDate;
-  List<String> owners = [' data 1', 'data 2', ' data 3', 'data 4'];
+  List<String> vendors = ['vendor 1', 'vendor 2', 'vendor 3', 'vendor 4'];
 
   void setVendorName(String value) {
     selectedVendorName = value;
@@ -21,7 +21,11 @@ class AddPurchaseProvider extends ChangeNotifier {
   }
 
   void mobileNumber() {
-    mobileNumberController.text = "91 8512458963 ";
+    mobileNumberController.value = TextEditingValue(
+      text: "98512458963",
+      selection: TextSelection.collapsed(offset: "98512458963".length),
+    );
+    // mobileNumberController.selection = TextSelection.fromPosition(TextPosition(offset: mobileNumberController.text.length));
     notifyListeners();
   }
 

@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
-
 class RecordSection {
   final String title;
   final int count;
-  final IconData icon;
+  final String icon;
+  final String? date;
 
-  RecordSection({required this.title, required this.count, required this.icon});
+  RecordSection({required this.title, required this.count, required this.icon, this.date});
 }

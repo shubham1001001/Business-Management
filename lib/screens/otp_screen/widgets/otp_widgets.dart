@@ -38,23 +38,23 @@ class _OtpInputScreenState extends State<OtpInputScreen> {
 
     return Center(
       child: SizedBox(
-        width: screenWidth * 0.8,
+        width: screenWidth * 1.5,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: List.generate(4, (index) {
             return SizedBox(
-              width: 60,
+              width: screenWidth * 0.19,
               child: TextField(
                 controller: widget.controllers[index],
                 focusNode: _focusNodes[index],
                 maxLength: 1,
                 keyboardType: TextInputType.number,
                 textAlign: TextAlign.center,
-                style: AppTextStyles.blackBoldText24,
+                style: AppTextStyles.blackBoldText24.copyWith(fontSize: 30, fontWeight: FontWeight.w500),
                 decoration: InputDecoration(
                   counterText: '',
-                  enabledBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-                  focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.black, width: 2)),
+                  enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black.withOpacity(0.5), width: 1.8)),
+                  focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black.withOpacity(0.7), width: 1.5)),
                 ),
                 onChanged: (value) => _onChanged(value, index),
               ),

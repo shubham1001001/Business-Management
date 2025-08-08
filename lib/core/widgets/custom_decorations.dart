@@ -7,7 +7,7 @@ import '../constants/colors.dart';
 class CustomDecorations {
   static BoxDecoration cardBoxDecoration = BoxDecoration(
     color: AppColors.cardColor,
-    borderRadius: BorderRadius.circular(12),
+    borderRadius: BorderRadius.circular(5),
     border: Border.all(color: Colors.grey.shade300, width: 1),
     boxShadow: [
       BoxShadow(

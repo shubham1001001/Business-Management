@@ -3,12 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:sales/core/constants/spacing.dart';
 import 'package:sales/core/constants/text_styles.dart';
 
+import '../../core/constants/svg_picture_widgets.dart';
 import '../../core/widgets/Custom_message_widget.dart';
-import '../../core/widgets/app_header.dart';
 import '../../core/widgets/custom_auth_button.dart';
 import '../../core/widgets/custom_textfield_numder.dart';
-import '../../core/widgets/dropdown_widgets.dart';
-import '../../core/widgets/shimmer_widget_dropdown.dart';
 import '../../providers/auth_provider/number_change_provider/change_number_provider.dart';
 import '../../routes/app_routes_name.dart';
 
@@ -27,106 +25,68 @@ class MobileNumberChange extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: AppHeader(title: 'Change Number', endicon: false, backbutton: true),
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(leadingWidth: 28, title: const Text("Change Number", style: AppTextStyles.appBarBlackText)),
         body: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              AppSpacing.largeHeight30,
               Align(
                 alignment: Alignment.topRight,
-                child: SizedBox(
-                  height: size.height * 0.45,
-                  width: size.width,
-                  child: Image.asset("assets/images/change_numer_otp.png", fit: BoxFit.fitWidth),
-                ),
+                child: SizedBox(height: 200, child: SvgPictureWidgets(svgString: "assets/svg_icons/change_number_hand.svg", size: 200.0)),
               ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     InkWell(
-              //       onTap: () {
-              //         Navigator.of(context).pushNamed(AppRoutesName.home);
-              //       },
-              //       child: Container(
-              //         decoration: BoxDecoration(color: AppColors.grey100, borderRadius: BorderRadius.all(Radius.circular(10))),
-              //         child: Padding(padding: const EdgeInsets.all(15.0), child: Icon(Icons.arrow_back, size: 20)),
-              //       ),
-              //     ),
-              //
-              //     Text('Enter your OTP here', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-              //     SizedBox(width: 6),
-              //   ],
-              // ),
+
+              /// This should now work correctly
+              SizedBox(height: size.height * 0.21),
+
               Center(
                 child: Column(
                   children: [
-                    Text("Enter your phone number", style: AppTextStyles.appBlackText18),
+                    Text("Enter your phone number", style: AppTextStyles.appBlackText18.copyWith(fontWeight: FontWeight.w700, fontSize: 15)),
                     SizedBox(height: size.height * 0.02),
-                    Text("+911234567890 is Your existing mobile number", style: AppTextStyles.greyText17),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: FittedBox(
+                        child: Text("+911234567890 is Your existing mobile number", style: AppTextStyles.greyText17.copyWith(fontWeight: FontWeight.w700)),
+                      ),
+                    ),
                   ],
                 ),
               ),
+              AppSpacing.smallHeight,
               Consumer<ChangeNumberProvider>(
                 builder: (context, provider, child) {
-                  return Align(
-                    alignment: Alignment.bottomCenter,
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.vertical(top: AppSpacing.rRadius20),
                       ),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Flexible(
-                                  child: Consumer<ChangeNumberProvider>(
-                                    builder: (context, auth, _) {
-                                      final countries = auth.countries;
-                                      if (countries.isEmpty) {
-                                        return ShimmerDropdownPlaceholder(width: size.width, height: size.height);
-                                        ;
-                                      }
-                                      return CountryDropdown(
-                                        value: auth.countryCode,
-                                        countries: countries,
-                                        height: size.height,
-                                        width: size.width,
-                                        onChanged: (value) {
-                                          if (value != null) {
-                                            print(value);
-                                            auth.updateCountryCode(value.toString());
-                                          }
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: size.height * 0.025),
+                          MobileNumberField(errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number', onChanged: provider.updatePhone),
+                          SizedBox(height: size.height * 0.025),
+                          AppSpacing.mediumHeight16,
+                          Center(
+                            child: CustomAuthButton(
+                              width: 185,
+                              text: "Get OTP",
+                              onTap: () {
+                                if (provider.phone.length >= 10) {
+                                  Navigator.of(context).pushNamed(AppRoutesName.changeNumberOtpscreen, arguments: provider.phone);
+                                  CustomSnackbar.show(context, message: "Sent OTP", type: MessageType.success);
+                                } else {
+                                  CustomSnackbar.show(context, message: "Please Inter Mobile Number", type: MessageType.error);
+                                }
+                              },
                             ),
-                            SizedBox(height: size.height * 0.025),
-                            MobileNumberField(errorText: provider.phone.isEmpty || provider.isPhoneValid ? null : 'Enter valid 10-digit number', onChanged: provider.updatePhone),
-                            SizedBox(height: size.height * 0.025),
-                            // OTP Button
-                            Center(
-                              child: CustomAuthButton(
-                                text: "Get OTP",
-                                onTap: () {
-                                  if (provider.phone.length >= 10) {
-                                    Navigator.of(context).pushNamed(AppRoutesName.changeNumberOtpscreen, arguments: provider.phone);
-                                    CustomSnackbar.show(context, message: "Sent OTP", type: MessageType.success);
-                                  } else {
-                                    CustomSnackbar.show(context, message: "Please Inter Mobile Number", type: MessageType.error);
-                                  }
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   );

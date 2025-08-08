@@ -21,7 +21,7 @@ class PricingPreferenceScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Pricing Preference")),
+      appBar: AppBar(title: const Text("Pricing Preference", style: AppTextStyles.appBarBlackText)),
       body: Padding(
         padding: EdgeInsets.all(size.width * 0.04),
         child: Consumer<PricingPreferenceProvider>(
@@ -32,33 +32,49 @@ class PricingPreferenceScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    AppSpacing.smallHeight10,
                     // Vendor
-                    Text("Select preferred vendor", style: AppTextStyles.greyText),
-                    AppSpacing.extraSmallHeight,
+                    Text(
+                      "Select preferred vendor",
+                      style: AppTextStyles.greyBoldText.copyWith(fontWeight: FontWeight.w600, color: Colors.black87.withOpacity(0.6), fontSize: 15),
+                    ),
+                    AppSpacing.smallHeight10,
                     _buildSelectField(context, " preferred vendor", provider.selectedVendor, vendors, provider.selectVendor),
-                    AppSpacing.mediumHeight,
+                    AppSpacing.largeHeight,
 
                     // Price box
                     _buildCard([
-                      const Text("Price", style: AppTextStyles.boldText), AppSpacing.smallHeight10,
-                      Text("Selling price", style: AppTextStyles.greyText),
+                      AppSpacing.smallHeight10,
+                      Text("Price", style: AppTextStyles.boldText.copyWith(fontWeight: FontWeight.w800)),
+                      AppSpacing.largeHeight,
+                      Text(
+                        "Selling price",
+                        style: AppTextStyles.greyBoldText.copyWith(fontWeight: FontWeight.w600, color: Colors.black87.withOpacity(0.6), fontSize: 15),
+                      ),
                       AppSpacing.extraSmallHeight,
                       CustomInputField(isEditable: true, keyboardType: TextInputType.text, hintText: provider.sellingPrice, prefixText: '', isRequired: true, errorText: null, onChanged: provider.setSellingPrice),
-
+                      AppSpacing.mediumHeight,
+                      Text(
+                        "Purchase price",
+                        style: AppTextStyles.greyBoldText.copyWith(fontWeight: FontWeight.w600, color: Colors.black87.withOpacity(0.6), fontSize: 15),
+                      ),
                       AppSpacing.smallHeight10,
-                      Text("Purchase price", style: AppTextStyles.greyText),
-                      AppSpacing.extraSmallHeight, //
                       CustomInputField(isEditable: true, keyboardType: TextInputType.text, hintText: provider.purchasePrice, prefixText: '', isRequired: true, errorText: null, onChanged: provider.setPurchasePrice),
+                      AppSpacing.smallHeight,
                     ]),
 
                     AppSpacing.mediumHeight,
 
                     // Opening Stock
                     _buildCard([
-                      const Text("Opening Stock", style: AppTextStyles.boldText),
+                      AppSpacing.smallHeight,
+                      Text("Opening Stock", style: AppTextStyles.boldText.copyWith(fontWeight: FontWeight.w800)),
+                      AppSpacing.mediumHeight18,
+                      Text(
+                        "Date",
+                        style: AppTextStyles.greyBoldText.copyWith(fontWeight: FontWeight.w600, color: Colors.black87.withOpacity(0.6), fontSize: 15),
+                      ),
                       AppSpacing.smallHeight10,
-                      Text("Date", style: AppTextStyles.greyText),
-                      AppSpacing.extraSmallHeight,
                       GestureDetector(
                         onTap: () async {
                           final date = await CustomDatePicker.show(context: context, initialDate: provider.selectedDate ?? DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
@@ -66,11 +82,11 @@ class PricingPreferenceScreen extends StatelessWidget {
                           if (date != null) provider.setDate(date);
                         },
                         child: Container(
-                          height: 55,
+                          height: 50,
                           padding: AppSpacing.allPadding12,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: Colors.black),
+                            border: Border.all(color: AppColors.textFieldBorderColor),
                             borderRadius: AppSpacing.kLargeRadius,
                           ),
                           child: Row(
@@ -82,16 +98,22 @@ class PricingPreferenceScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      AppSpacing.smallHeight10,
+                      AppSpacing.mediumHeight16,
                       Row(
                         children: [
                           Flexible(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Qty"),
+                                Text(
+                                  "Qty",
+                                  style: AppTextStyles.backBoldText.copyWith(fontWeight: FontWeight.w600, color: Colors.black87.withOpacity(0.7), fontSize: 16),
+                                ),
                                 AppSpacing.extraSmallHeight,
-                                CustomInputField(isEditable: true, keyboardType: TextInputType.number, hintText: provider.openingQty, prefixText: '', isRequired: true, errorText: null, onChanged: provider.setQty),
+                                SizedBox(
+                                  height: 47,
+                                  child: CustomInputField(isEditable: true, keyboardType: TextInputType.number, hintText: provider.openingQty, prefixText: '', isRequired: true, errorText: null, onChanged: provider.setQty),
+                                ),
                                 //   _buildTextField(hint: "Qty", initial: provider.openingQty, onChanged: provider.setQty, inputType: TextInputType.number),
                               ],
                             ),
@@ -102,9 +124,15 @@ class PricingPreferenceScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("unit"),
+                                Text(
+                                  "unit",
+                                  style: AppTextStyles.backBoldText.copyWith(fontWeight: FontWeight.w600, color: Colors.black87.withOpacity(0.7), fontSize: 16),
+                                ),
                                 AppSpacing.extraSmallHeight,
-                                CustomInputField(isEditable: true, keyboardType: TextInputType.number, hintText: provider.selectedUnit, prefixText: '', isRequired: true, errorText: null, onChanged: provider.selectUnit),
+                                SizedBox(
+                                  height: 47,
+                                  child: CustomInputField(isEditable: true, keyboardType: TextInputType.number, hintText: provider.selectedUnit, prefixText: '', isRequired: true, errorText: null, onChanged: provider.selectUnit),
+                                ),
                                 //_buildSelectField(context, "unit", provider.selectedUnit, units, provider.selectUnit)])),
                               ],
                             ),
@@ -114,44 +142,43 @@ class PricingPreferenceScreen extends StatelessWidget {
                         ],
                       ),
                     ]),
-                    AppSpacing.largeHeight,
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        color: Colors.white,
-                        padding: AppSpacing.allPadding16,
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.grey, textColor: Colors.black, colors: Colors.white),
-                            ),
-                            AppSpacing.smallWidth10,
-                            Flexible(
-                              child: CustomOutlinedButton(
-                                colors: AppColors.redColor,
-                                text: "Save",
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    provider.submitForm();
-                                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Staff added successfully")));
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
-                                  }
-                                },
-                                borderColor: Colors.grey,
-                                textColor: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
             );
           },
         ),
+      ),
+      bottomNavigationBar: Consumer<PricingPreferenceProvider>(
+        builder: (context, provider, child) {
+          return Container(
+            color: Colors.white,
+            padding: AppSpacing.allPadding16,
+            child: Row(
+              children: [
+                Flexible(
+                  child: CustomOutlinedButton(text: "Cancel", onPressed: () => Navigator.pop(context), borderColor: Colors.black, textColor: Colors.black, colors: Colors.white),
+                ),
+                AppSpacing.mediumWidth,
+                Flexible(
+                  child: CustomOutlinedButton(
+                    colors: AppColors.redColor,
+                    text: "Save",
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        provider.submitForm();
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Staff added successfully")));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all fields")));
+                      }
+                    },
+                    textColor: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
@@ -181,14 +208,14 @@ class PricingPreferenceScreen extends StatelessWidget {
           context: context,
           isScrollControlled: true,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: AppSpacing.rSmallRadius)),
-          builder: (_) => BottomSelectSheetPricing(title: title, options: options, onSelect: onSelected),
+          builder: (_) => BottomSelectSheetPricing(title: title, options: options, onSelect: onSelected, type: "Apply"),
         );
       },
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey.shade400),
+          border: Border.all(color: AppColors.textFieldBorderColor),
           borderRadius: AppSpacing.kLargeRadius,
         ),
         child: Text(value ?? "Select $title", style: const TextStyle(color: Colors.grey)),

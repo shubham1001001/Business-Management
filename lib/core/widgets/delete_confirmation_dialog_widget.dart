@@ -17,7 +17,7 @@ class DeleteConfirmationDialog extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset("assets/icons/info_icon_delete.png"),
+              Image.asset("assets/icons/info_icon_delete_2.png", height: 25),
               SizedBox(width: 8),
               Text("Delete Data", style: AppTextStyles.title16),
             ],

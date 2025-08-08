@@ -7,6 +7,7 @@ import '../../../core/constants/text_styles.dart';
 import '../../../core/widgets/delete_confirmation_dialog_widget.dart';
 
 class ExpenseTopCard extends StatelessWidget {
+  static final openSansSemiBold = TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.w600, fontSize: 14, color: Colors.black.withOpacity(0.8));
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -16,63 +17,73 @@ class ExpenseTopCard extends StatelessWidget {
         border: Border.all(color: Colors.grey),
         borderRadius: AppSpacing.kMediumRadius,
         color: AppColors.cardmainColor,
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.3), blurRadius: 6, offset: Offset(0, 4))],
+        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.3), blurRadius: 3, offset: Offset(0, 4))],
       ),
 
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // Left info
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [const Text('EX - 526', style: TextStyle(color: AppColors.redColor, fontSize: 20))],
-              ),
-              Text("Expense account", style: AppTextStyles.textSize16),
-              AppSpacing.mediumHeight16,
-              const Text('Lorem ipsum', style: TextStyle(color: AppColors.greyText)),
-              Row(children: [Text("12.02.20250")]),
-            ],
-          ),
-          // Right info
-          SizedBox(width: size.width * 0.2),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  SvgPictureWidgets(svgString: "assets/svg_icons/edit_icon.svg", color: AppColors.appBlackColor, size: 20.0),
-                  AppSpacing.largeWidth,
-                  InkWell(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (_) => DeleteConfirmationDialog(onConfirm: () {}),
-                      );
-                    },
-                    child: Image.asset("assets/icons/delete_icon2.png", width: 22),
-                  ),
-                  AppSpacing.largeWidth,
-                  InkWell(onTap: () async {}, child: Image.asset("assets/icons/share_button.png", width: 22)),
-                ],
-              ),
-              SizedBox(height: size.height * 0.04),
-              // const Text('Outstanding', style: TextStyle(color: AppColors.greyText)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: const [_PaymentItem(title: "Total amount", amount: "150.00")],
-              ),
-              // Row(
-              //   children: [
-              //     Text("₹ ", style: TextStyle(fontSize: 20, color: AppColors.greyText)),
-              //     Text("00.00"),
-              //   ],
-              // ),
-            ],
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // Left info
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'EX - 526',
+                      style: TextStyle(color: AppColors.redColor, fontSize: 19, fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+                AppSpacing.smallHeight,
+                Text("Expense account", style: AppTextStyles.small14W400),
+                AppSpacing.mediumHeight21,
+                Text('Lorem ipsum', style: openSansSemiBold),
+                AppSpacing.extraSmallHeight,
+                Row(children: [Text("12.02.20250", style: AppTextStyles.openSansRegular)]),
+              ],
+            ),
+            // Right info
+            SizedBox(width: size.width * 0.2),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    SvgPictureWidgets(svgString: "assets/svg_icons/edit_icon.svg", color: AppColors.appBlackColor, size: 18.0),
+                    AppSpacing.largeWidth,
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => DeleteConfirmationDialog(onConfirm: () {}),
+                        );
+                      },
+                      child: SvgPictureWidgets(svgString: "assets/svg_icons/delete_svg_icon.svg", size: 19.0),
+                    ),
+                    AppSpacing.largeWidth,
+                    InkWell(onTap: () async {}, child: Image.asset("assets/icons/share_button.png", width: 19, height: 19)),
+                  ],
+                ),
+                AppSpacing.largeHeight50,
+                // const Text('Outstanding', style: TextStyle(color: AppColors.greyText)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [_PaymentItem(title: "Total amount", amount: "150.00")],
+                ),
+                // Row(
+                //   children: [
+                //     Text("₹ ", style: TextStyle(fontSize: 20, color: AppColors.greyText)),
+                //     Text("00.00"),
+                //   ],
+                // ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -86,19 +97,23 @@ class _PaymentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final openSansSemiBold = TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.w600, fontSize: 14, color: Colors.black.withOpacity(0.8));
+    final BlackText = TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.w600, fontSize: 22, color: Colors.black.withOpacity(0.8));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: AppTextStyles.textSize16),
+        Text(title, style: openSansSemiBold),
         AppSpacing.extraSmallHeight,
-        RichText(
-          text: TextSpan(
-            style: const TextStyle(color: Colors.black),
-            children: [
-              const TextSpan(text: "₹ "),
-              TextSpan(text: amount, style: AppTextStyles.black87Text20),
-            ],
-          ),
+        Row(
+          children: [
+            SvgPictureWidgets(svgString: "assets/svg_icons/rupee_icon_card.svg", color: AppColors.appBlackColor, size: 15.0),
+            AppSpacing.smallWidth6,
+            RichText(
+              text: TextSpan(
+                children: [TextSpan(text: amount, style: BlackText)],
+              ),
+            ),
+          ],
         ),
       ],
     );
